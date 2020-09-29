@@ -1,2 +1,2 @@
-# SDis
+# SDisGit
 SDis Lecture
