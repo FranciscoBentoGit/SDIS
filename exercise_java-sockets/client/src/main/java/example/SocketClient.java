@@ -1,7 +1,12 @@
 package example;
 
 import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+import java.util.Date;
 
 public class SocketClient {
 
@@ -27,6 +32,13 @@ public class SocketClient {
 				sb.append(" ");
 			}
 		}
+		
+		Date data = new Date();
+		
+		sb.append(" ");
+		sb.append(data.toString());
+		sb.append(" ");
+		
 		final String text = sb.toString();
 
 		// Create client socket
@@ -41,19 +53,18 @@ public class SocketClient {
 		out.writeBytes("\n");
 		System.out.println("Sent text: " + text);
 		
-		// Create buffered stream to receive data from server, one line at a time
+		// Create buffered stream to receive data from client, one line at a time
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		// Receive data until client closes the connection
-		String serverConfirmationMessage;
 		
+		String confirmation;
 		while (true) {
 			// Read a line of text.
 			// A line ends with a line feed ('\n').
-			serverConfirmationMessage = in.readLine();
-			if (serverConfirmationMessage == null) {
+			confirmation = in.readLine();
+			if (confirmation == null) {
 				break;
 			}
-			System.out.printf("Confirmation Message from Server: '%s'%n", serverConfirmationMessage);
+			System.out.printf("Received message with content: '%s'%n", confirmation);
 			break;
 		}
 

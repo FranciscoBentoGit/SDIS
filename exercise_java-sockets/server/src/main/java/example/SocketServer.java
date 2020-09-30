@@ -29,13 +29,16 @@ public class SocketServer {
 
 		// Create buffered stream to receive data from client, one line at a time
 		BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-		// Receive data until client closes the connection
 		
-		// Create stream to send data to server
+		// Create stream to send data to client
 		DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
-		
+				
+		// Receive data until client closes the connection
 		String response;
+		String[] splited;
+		String newInt;
+		int inteiro;
+		
 		while (true) {
 			// Read a line of text.
 			// A line ends with a line feed ('\n').
@@ -45,10 +48,16 @@ public class SocketServer {
 			}
 			System.out.printf("Received message with content: '%s'%n", response);
 			
-			// Send text to client as bytes with confirmation
-			out.writeBytes("I got your previous message\n");
+			splited = response.split(" ");
+			
+			inteiro = Integer.parseInt(splited[1]) + 1;
+			
+			newInt= String.valueOf(inteiro);
+			
+			out.writeBytes(newInt);
+			out.writeBytes("\n");
+
 		}
-		
 
 		// Close connection to current client
 		clientSocket.close();
@@ -58,5 +67,5 @@ public class SocketServer {
 		serverSocket.close();
 		System.out.println("Closed server socket");
 	}
-
+	
 }
