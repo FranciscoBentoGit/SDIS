@@ -13,17 +13,13 @@ Start at the [server](server/README.md) and then go to the [client](client/READM
 
 ## Authors
 
-**Group ...**
+**Group 11**
 
-*(fill-in line above with group identifier e.g. A07 or T22; and then delete this line)*
 
-... [...](mailto:...@tecnico.ulisboa.pt)
 
-... [...](mailto:...@tecnico.ulisboa.pt)
+93581 [Francisco Bento](mailto:francisco.bento@tecnico.ulisboa.pt)
 
-... [...](mailto:...@tecnico.ulisboa.pt)
-
-*(fill-in lines above with student number, name, and email; and then delete this line)*
+93588 [João Lopes](mailto:joaopedrolopes00@tecnico.ulisboa.pt)
 
 
 ----
