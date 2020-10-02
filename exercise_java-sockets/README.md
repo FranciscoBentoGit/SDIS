@@ -17,9 +17,9 @@ Start at the [server](server/README.md) and then go to the [client](client/READM
 
 
 
-93581 [Francisco Bento](mailto:francisco.bento@tecnico.ulisboa.pt)
+93581 Francisco Bento francisco.bento@tecnico.ulisboa.pt
 
-93588 [João Lopes](mailto:joaopedrolopes00@tecnico.ulisboa.pt)
+93588 João Lopes joaopedrolopes00@tecnico.ulisboa.pt
 
 
 ----
