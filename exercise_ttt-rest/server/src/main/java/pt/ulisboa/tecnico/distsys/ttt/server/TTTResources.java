@@ -69,4 +69,14 @@ public class TTTResources {
     	return game.play(pR.getRow(), pR.getColumn(), pR.getPlayer());
     }
     
+    @GET
+    @Path("play/{row}/{column}/{player}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PlayResult play(@PathParam("row") int row, @PathParam("column") int column, @PathParam("player") int player) {
+    	PlayRequest pR = new PlayRequest();
+    	pR.setRow(row);
+    	pR.setColumn(column);
+    	pR.setPlayer(player);
+    	return game.play(pR.getRow(), pR.getColumn(), pR.getPlayer());
+    }
 }

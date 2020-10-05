@@ -27,7 +27,7 @@ public class TTTPlayer {
 	 * flag to true to play using a POST with a body. Set flag to false to use a GET
 	 * with arguments.
 	 */
-	private static final boolean USE_POST_TO_PLAY_FLAG = true;
+	private static final boolean USE_POST_TO_PLAY_FLAG = false;
 
 	/** Main method. */
 	public static void main(String[] args) {
