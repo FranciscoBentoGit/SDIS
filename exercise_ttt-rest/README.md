@@ -14,17 +14,13 @@ See the README for each module. Start at contract, then go to server, and finall
 
 ## Authors
 
-**Group ...**
+**Group 11**
 
-*(fill-in line above with group identifier e.g. A07 or T22; and then delete this line)*
 
-... [...](mailto:...@tecnico.ulisboa.pt)
 
-... [...](mailto:...@tecnico.ulisboa.pt)
+93581 Francisco Bento francisco.bento@tecnico.ulisboa.pt
 
-... [...](mailto:...@tecnico.ulisboa.pt)
-
-*(fill-in lines above with student number, name, and email; and then delete this line)*
+93588 João Lopes joaopedrolopes00@tecnico.ulisboa.pt
 
 
 ----
