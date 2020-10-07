@@ -94,7 +94,7 @@ public class TTTGame {
 	    return result; 
 
 	}
-	
+ 	
 	public void resetBoard() {
 		board = new char[][] {
 			{'1', '2', '3'},
