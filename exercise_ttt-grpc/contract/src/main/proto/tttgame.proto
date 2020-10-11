@@ -26,15 +26,16 @@ message PlayRequest {
   int32 player = 3;
 }
 
+enum PlayResult {
+  UNKNOWN = 0;
+  OUT_OF_BOUNDS = 1;
+  SQUARE_TAKEN = 2;
+  WRONG_TURN = 3;
+  GAME_FINISHED = 4;
+  SUCCESS = 5;
+};
+
 message PlayResponse {
-  enum PlayResult {
-    UNKNOWN = 0;
-    OUT_OF_BOUNDS = 1;
-    SQUARE_TAKEN = 2;
-    WRONG_TURN = 3;
-    GAME_FINISHED = 4;
-    SUCCESS = 5;
-  }
   PlayResult playResult = 1;
 }
 

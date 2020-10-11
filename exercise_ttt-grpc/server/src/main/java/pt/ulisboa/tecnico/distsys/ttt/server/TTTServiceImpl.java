@@ -21,4 +21,29 @@ public class TTTServiceImpl extends TTTGrpc.TTTImplBase {
 		responseObserver.onCompleted();
 	}
 
+	@Override
+	public void play(PlayRequest request, StreamObserver<PlayResponse> responseObserver) {
+		// StreamObserver is used to represent the gRPC stream between the server and
+		// client in order to send the appropriate responses (or errors, if any occur).
+
+		PlayResponse response = PlayResponse.newBuilder().setPlayResult(ttt.play(request.getRow(),request.getColumn(),request.getPlayer())).build();
+
+		// Send a single response through the stream.
+		responseObserver.onNext(response);
+		// Notify the client that the operation has been completed.
+		responseObserver.onCompleted();
+	}
+
+@Override
+	public void checkWinner(CheckWinnerRequest request, StreamObserver<CheckWinnerResponse> responseObserver) {
+		// StreamObserver is used to represent the gRPC stream between the server and
+		// client in order to send the appropriate responses (or errors, if any occur).
+
+		CheckWinnerResponse response = CheckWinnerResponse.newBuilder().setResult(ttt.checkWinner()).build();
+
+		// Send a single response through the stream.
+		responseObserver.onNext(response);
+		// Notify the client that the operation has been completed.
+		responseObserver.onCompleted();
+	}
 }

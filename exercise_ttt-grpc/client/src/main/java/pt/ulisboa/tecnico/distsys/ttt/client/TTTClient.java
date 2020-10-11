@@ -86,6 +86,7 @@ public class TTTClient {
 									+ "where you want to place your %c (or 0 to refresh the board): ",
 							player, (player == 1) ? 'X' : 'O');
 					go = scanner.nextInt();
+
 					debug("go = " + go);
 
 					if (go == 0) {
@@ -100,7 +101,10 @@ public class TTTClient {
 					debug("row = " + row + ", column = " + column);
 
 					// TODO call play and set the proper play result
-					play_res = PlayResult.UNKNOWN;
+
+					PlayRequest request = PlayRequest.newBuilder().setRow(row).setColumn(column).setPlayer(player).build();
+					play_res = stub.play(request).getPlayResult();
+					//play_res = PlayResult.UNKNOWN;
 					if (play_res != PlayResult.SUCCESS) {
 						displayResult(play_res);
 					}
@@ -108,6 +112,7 @@ public class TTTClient {
 				} while (play_res != PlayResult.SUCCESS);
 
 				// TODO call check winner and set the winning player.
+				winner = stub.checkWinner(CheckWinnerRequest.getDefaultInstance()).getResult();
 
 				/* Select next player. */
 				player = (player + 1) % 2;
