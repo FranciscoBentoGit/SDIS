@@ -11,9 +11,6 @@ option java_multiple_files = true;
 
 message CurrentBoardRequest {
   // No arguments for this request.
-  repeated string currentBoard = 1;
-  int32 play = 2;
-  int32 checkWinner = 3;
 }
 
 message CurrentBoardResponse {
@@ -23,18 +20,35 @@ message CurrentBoardResponse {
 
 // play operation
 
-enum PlayResult {
-  UNKNOWN = 0;
-  OUT_OF_BOUNDS = 1;
-  SQUARE_TAKEN = 2;
-  WRONG_TURN = 3;
-  GAME_FINISHED = 4;
-  SUCCESS = 5;
-};
+message PlayRequest {
+  int32 row = 1;
+  int32 column = 2;
+  int32 player = 3;
+}
+
+message PlayResponse {
+  enum PlayResult {
+    UNKNOWN = 0;
+    OUT_OF_BOUNDS = 1;
+    SQUARE_TAKEN = 2;
+    WRONG_TURN = 3;
+    GAME_FINISHED = 4;
+    SUCCESS = 5;
+  }
+  PlayResult playResult = 1;
+}
 
 // TODO request and response
 
 // check winner operation
+
+message CheckWinnerRequest {
+  // No arguments for this request.
+}
+
+message CheckWinnerResponse {
+  int32 result = 1;
+}
 
 // TODO
 
@@ -43,4 +57,6 @@ enum PlayResult {
 
 service TTT {
   rpc CurrentBoard(CurrentBoardRequest) returns (CurrentBoardResponse);
+  rpc Play(PlayRequest) returns (PlayResponse);
+  rpc CheckWinner(CheckWinnerRequest) returns (CheckWinnerResponse);
 }
