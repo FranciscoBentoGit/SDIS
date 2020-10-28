@@ -1,0 +1,17 @@
+//
+// Protocol buffers definition for gRPC testing
+//
+syntax = "proto3";
+package pt.tecnico.testing.grpc;
+
+message PingRequest {
+	string text = 1;
+}
+
+message PingResponse {
+	string text = 1;
+}
+
+service Testing {
+	rpc ctrl_ping(PingRequest) returns (PingResponse);
+}
