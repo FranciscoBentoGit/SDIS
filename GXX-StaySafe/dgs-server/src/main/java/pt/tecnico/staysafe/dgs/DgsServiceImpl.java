@@ -4,7 +4,6 @@ import io.grpc.stub.StreamObserver;
 import pt.tecnico.staysafe.dgs.grpc.DgsGrpc;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import com.google.protobuf.Timestamp;
-import java.text.ParseException;
 
 import static io.grpc.Status.INVALID_ARGUMENT;
 
@@ -23,6 +22,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	    if (name.length() < 5 || name.length() > 30) {
 	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: invalid name!").asRuntimeException());
 		}
+
 
 	    String address = request.getAddress();
 	    if (address == null || address.isBlank()) {

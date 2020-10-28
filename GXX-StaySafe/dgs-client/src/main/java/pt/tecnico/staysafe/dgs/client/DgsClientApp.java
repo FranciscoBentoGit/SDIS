@@ -18,10 +18,17 @@ public class DgsClientApp {
 			System.out.printf("arg[%d] = %s%n", i, args[i]);
 		}
 
+		// check arguments
+		if (args.length < 2) {
+			System.out.println("Argument(s) missing!");
+			System.out.printf("Usage: java %s host port%n", TTTClient.class.getName());
+			return;
+		}
+
 		final String host = args[0];
 		final int port = Integer.parseInt(args[1]);
 		
-		DgsFrontend frontend = new DgsFrontend(host,port);
+		//DgsFrontend frontend = new DgsFrontend(host,port);
 	}
 	
 }

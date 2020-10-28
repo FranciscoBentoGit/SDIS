@@ -18,6 +18,8 @@
 		<!-- see parent POM for more properties -->
 
 		<mainclass>pt.tecnico.staysafe.sniffer.SnifferApp</mainclass>
+		<server.host>localhost</server.host>
+		<server.port>8080</server.port>
 	</properties>
 
 	<dependencies>
@@ -61,7 +63,8 @@
 				<configuration>
 					<mainClass>${mainclass}</mainClass>
 					<arguments>
-
+						<argument>${server.host}</argument>
+						<argument>${server.port}</argument>
 					</arguments>
 				</configuration>
 			</plugin>
