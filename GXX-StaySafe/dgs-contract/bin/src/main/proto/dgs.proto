@@ -1,0 +1,49 @@
+//
+// Protocol buffers definition for dgs server
+//
+syntax = "proto3";
+package pt.tecnico.staysafe.dgs.grpc;
+
+import "google/protobuf/timestamp.proto";
+
+
+//function sniffer_join
+//
+message SnifferJoinRequest {
+	string name = 1;
+	string address = 2;
+}
+
+message SnifferJoinResponse {
+	string success = 1;
+}
+
+
+//function sniffer_info
+//
+message SnifferInfoRequest {
+	string name = 1;
+}
+
+message SnifferInfoResponse {
+	string nameAddress = 1;
+}
+
+
+//function report
+//
+message ReportRequest {
+	string name = 1;
+	string observations = 2;
+	google.protobuf.Timestamp time = 3;
+}
+
+message ReportResponse {
+	string success = 1;
+}
+
+
+service dgs {
+	rpc sniffer_join(SnifferJoinRequest) returns (SnifferJoinResponse);
+	rpc sniffer_info(SnifferInfoRequest) returns (SnifferInfoResponse);
+}
