@@ -5,8 +5,7 @@ import pt.tecnico.staysafe.dgs.grpc.*;
 import com.google.protobuf.Timestamp;
 
 import java.util.*;
-import java.text.SimpleDateFormat;  
-import java.lang.*;
+import io.grpc.StatusRuntimeException;
 
 public class SnifferApp {
 
@@ -41,46 +40,98 @@ public class SnifferApp {
 			address += args[j];
 		}
 		
-		System.out.printf("Address: %s", address);
+		System.out.printf("Address: %s%n", address);
 
-		execSniffer(host,port,name,address);
+		execSniffer(host, port, name, address);
 	}
 
 	private static void execSniffer(String host, int port, String snifferName, String address) {
+		DgsClientApp client = new DgsClientApp();
 		DgsFrontend frontend = new DgsFrontend(host,port);
 		String go;
-
-		SnifferJoinRequest request = SnifferJoinRequest.newBuilder().setName(snifferName).setAddress(address).build();
-		frontend.sniffer_join(request);
+		
+		try {
+			SnifferJoinResponse responseJoin;
+			responseJoin = client.sniffer_join(frontend, snifferName, address);
+			System.out.printf("%s%n", responseJoin);
+		} catch (StatusRuntimeException e) {
+			System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+		}
+		
 
 		try (Scanner scanner = new Scanner(System.in)) {
+			int exit = 0;
 			do {
 				go = scanner.nextLine();
 
-				String goSplited[] = go.split(",", 4);
-
-				if ((goSplited.length == 1) && (goSplited.equals("getInfo"))) {
-					SnifferInfoRequest request = SnifferInfoRequest.newBuilder().setName(snifferName).build();
-					frontend.sniffer_info(request);
+				if (go.equals("") || go.equals("exitSniffer")) {
+					exit = 1;
 				}
 
-				if ((goSplited.length == 2) && (goSplited.equals("sleep"))) {
-					int sleepTime = Integer.parseInt(goSplited[1]);
+				String goSplited[] = go.split(",", 4);
+
+				if ((goSplited.length == 1) && (goSplited[0].equals("getInfo"))) {
 					try {
-					    Thread.sleep(sleepTime * 1000);
-					} catch (InterruptedException ie) {
-					    Thread.currentThread().interrupt();
+						SnifferInfoResponse responseInfo;
+						responseInfo = client.sniffer_info(frontend, snifferName);
+						System.out.printf("%s%n", responseInfo);
+					} catch (StatusRuntimeException e) {
+						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 					}
 				}
 
-				if ((goSplited.length == 4) && (goSplited.equals("infetado") || goSplited.equals("nao-infetado"))) {
-					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-					Date date = new Date(System.currentTimeMillis());
-					ReportRequest request = ReportRequest.newBuilder().setName(snifferName).setObservations(go).setTime(date).build();
-					frontend.sniffer_info(request);
+				if ((goSplited.length == 2) && (goSplited[0].equals("sleep"))) {
+					int sleepTime = Integer.parseInt(goSplited[1]);
+					client.sleep_request(sleepTime);
 				}
 
-			} while (!scanner.equals("exitSniffer"));
+				if ((goSplited.length == 4) && (goSplited[0].equals("infetado") || goSplited[0].equals("nao-infetado"))) {
+					int flag = 0;
+					String obsGo;
+					ArrayList<String> addObs = new ArrayList<String>();
+					addObs.add(go);
+					do {
+						System.out.printf("---Do not have more observations to report? Press ENTER.%n");
+						obsGo = scanner.nextLine();
+						String obsSplited[] = obsGo.split(",", 4);
+						if ((obsSplited.length == 4) && (obsSplited[0].equals("infetado") || obsSplited[0].equals("nao-infetado"))) {
+							addObs.add(obsGo);
+						}
+						if (obsGo.equals("") || obsGo.equals("exitSniffer")) {
+							flag = 1;
+						}
+					} while (flag != 1);
+
+					for (int i = 0; i < addObs.size(); i++) {
+						long millis = System.currentTimeMillis();
+						Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis/1000).build();
+						try {
+							ReportResponse responseReport;
+							responseReport = client.sniffer_report(frontend, snifferName, addObs.get(i), timestamp);
+							System.out.printf("%s%n", responseReport);
+						} catch (StatusRuntimeException e) {
+							System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+						}						
+					}//eficiencia???
+
+					if (obsGo.equals("exitSniffer")) {
+						exit = 1;
+					}
+				}
+
+				if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
+					System.out.printf("Invalid command: do not have permission to execute that command.");
+				}
+
+				if ((goSplited.length == 1) && (goSplited[0].equals("percentiles"))) {
+					System.out.printf("Invalid command: do not have permission to execute that command.");
+				}
+
+				if ((goSplited.length > 1) && (goSplited[0].equals("single_prob"))) {
+					System.out.printf("Invalid command: do not have permission to execute that command.");
+				}
+
+			} while (exit != 1);
 		}
 	}
 

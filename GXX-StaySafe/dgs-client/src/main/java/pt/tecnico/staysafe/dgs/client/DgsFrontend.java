@@ -2,6 +2,7 @@ package pt.tecnico.staysafe.dgs.client;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import com.google.protobuf.Timestamp;
 
 import pt.tecnico.staysafe.dgs.grpc.DgsGrpc;
 import pt.tecnico.staysafe.dgs.grpc.*;
@@ -18,25 +19,19 @@ public class DgsFrontend {
 
 	public SnifferJoinResponse sniffer_join(SnifferJoinRequest request) {
 		SnifferJoinResponse response;
-
 		response = _stub.snifferJoin(request);
-
 		return response;
 	}
 
 	public SnifferInfoResponse sniffer_info(SnifferInfoRequest request) {
 		SnifferInfoResponse response;
-
 		response = _stub.snifferInfo(request);
-
 		return response;
 	}
 
 	public ReportResponse report(ReportRequest request) {
 		ReportResponse response;
-
 		response = _stub.report(request);
-
 		return response;
 	}
 }

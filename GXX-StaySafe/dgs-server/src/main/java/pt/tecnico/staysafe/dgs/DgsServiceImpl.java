@@ -23,16 +23,16 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: invalid name!").asRuntimeException());
 		}
 
-
 	    String address = request.getAddress();
 	    if (address == null || address.isBlank()) {
 	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Address: input cannot be empty!").asRuntimeException());
 	    }
 
-	    SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setSuccess(dService.sniffer_join(name, address)).build();
-
-	    responseObserver.onNext(response);
-	    responseObserver.onCompleted();
+	    else {
+	    	SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setSuccess(dService.sniffer_join(name, address)).build();
+		    responseObserver.onNext(response);
+		    responseObserver.onCompleted();
+	    }
 	}
 
 	@Override
@@ -41,12 +41,13 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		String name = request.getName();
 		if (name == null || name.isBlank()) {
 	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: input cannot be empty!").asRuntimeException());
-	    }
+	    } 
 
-	    SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setNameAddress(dService.sniffer_info(name)).build();
-	    
-	    responseObserver.onNext(response);
-	    responseObserver.onCompleted();
+	    else {
+	    	SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setNameAddress(dService.sniffer_info(name)).build();
+		    responseObserver.onNext(response);
+		    responseObserver.onCompleted();
+	    }  
 	}
 
 	@Override
@@ -67,10 +68,10 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("Time: invalid input time!").asRuntimeException());
 	    }
 
-	    ReportResponse response = ReportResponse.newBuilder().setSuccess(dService.report(name,observations,time)).build();
-	    
-	    responseObserver.onNext(response);
-	    responseObserver.onCompleted();
+	    else {
+	    	ReportResponse response = ReportResponse.newBuilder().setSuccess(dService.report(name,observations,time)).build();
+		    responseObserver.onNext(response);
+		    responseObserver.onCompleted();
+	    }   
 	}
-
 }

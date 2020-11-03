@@ -21,14 +21,41 @@ public class DgsClientApp {
 		// check arguments
 		if (args.length < 2) {
 			System.out.println("Argument(s) missing!");
-			System.out.printf("Usage: java %s host port%n", TTTClient.class.getName());
+			System.out.printf("Usage: java %s host port%n", DgsClientApp.class.getName());
 			return;
 		}
 
 		final String host = args[0];
 		final int port = Integer.parseInt(args[1]);
-		
-		//DgsFrontend frontend = new DgsFrontend(host,port);
 	}
 	
+	public static SnifferJoinResponse sniffer_join(DgsFrontend frontend, String snifferName, String address) {
+		SnifferJoinResponse response;
+		SnifferJoinRequest request = SnifferJoinRequest.newBuilder().setName(snifferName).setAddress(address).build();
+		response = frontend.sniffer_join(request);
+		return response;
+	}
+
+	public static SnifferInfoResponse sniffer_info(DgsFrontend frontend, String snifferName) {
+		SnifferInfoResponse response;
+		SnifferInfoRequest request = SnifferInfoRequest.newBuilder().setName(snifferName).build();
+		response = frontend.sniffer_info(request);
+		return response;
+	}
+
+	public static void sleep_request(int sleepTime) {
+		try {
+		    Thread.sleep(sleepTime * 1000);
+		} catch (InterruptedException ie) {
+		    Thread.currentThread().interrupt();
+		}
+	}
+
+	public static ReportResponse sniffer_report(DgsFrontend frontend, String snifferName, String observation, Timestamp timestamp) {
+		ReportResponse response;
+		ReportRequest request = ReportRequest.newBuilder().setName(snifferName).setObservations(observation).setTime(timestamp).build();
+		response = frontend.report(request);
+		return response;
+	}
+
 }

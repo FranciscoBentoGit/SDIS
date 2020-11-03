@@ -14,21 +14,21 @@ public class DgsServices {
 	private CopyOnWriteArrayList<ObservationsData> obsList= new CopyOnWriteArrayList<ObservationsData>();
 
 	public synchronized String sniffer_join(String name, String address) {
-		if (snifferHash.contains(name)) {
-			if (snifferHash.get(name) != address) {
+		if (snifferHash.containsKey(name)) {
+			if (!(snifferHash.get(name).equals(address))) {
 				return "Failed to join sniffer: invalid address for that name.";
 			} else {
 				snifferHash.put(name, address);
 				return "Success to join sniffer.";
 			}
 		}
-
+		
 		snifferHash.put(name, address);
 		return "Success to join sniffer.";
 	}
 
 	public synchronized String sniffer_info(String name) {
-		if (!(snifferHash.contains(name)) || (name.equals(""))) { 
+		if (!(snifferHash.containsKey(name))) { 
 			return "Failed to find the address: name does not exist.";
 		}
 
@@ -37,7 +37,7 @@ public class DgsServices {
 	}
 
     public synchronized String report(String name, String observations, com.google.protobuf.Timestamp time) {
-        if (!(snifferHash.contains(name))) {
+        if (!(snifferHash.containsKey(name))) {
             return "Failed to report: invalid name.";
         }
 
