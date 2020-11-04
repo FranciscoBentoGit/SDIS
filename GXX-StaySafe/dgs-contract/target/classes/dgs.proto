@@ -36,8 +36,10 @@ message SnifferInfoResponse {
 //
 message ReportRequest {
 	string name = 1;
-	string observations = 2;
-	google.protobuf.Timestamp time = 3;
+	string infection = 2;
+	int64 id = 3;
+	google.protobuf.Timestamp timeIn = 4;
+	google.protobuf.Timestamp timeOut = 5;
 }
 
 message ReportResponse {

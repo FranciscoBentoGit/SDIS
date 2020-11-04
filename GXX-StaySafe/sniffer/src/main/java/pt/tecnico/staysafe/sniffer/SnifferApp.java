@@ -3,9 +3,12 @@ package pt.tecnico.staysafe.sniffer;
 import pt.tecnico.staysafe.dgs.client.*;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import com.google.protobuf.Timestamp;
+import com.google.protobuf.util.Timestamps;
+import pt.tecnico.staysafe.sniffer.AddObs;
 
 import java.util.*;
 import io.grpc.StatusRuntimeException;
+import java.text.ParseException;
 
 public class SnifferApp {
 
@@ -46,6 +49,7 @@ public class SnifferApp {
 	}
 
 	private static void execSniffer(String host, int port, String snifferName, String address) {
+		ArrayList<AddObs> addObs= new ArrayList<AddObs>();
 		DgsClientApp client = new DgsClientApp();
 		DgsFrontend frontend = new DgsFrontend(host,port);
 		String go;
@@ -85,38 +89,75 @@ public class SnifferApp {
 					client.sleep_request(sleepTime);
 				}
 
-				if ((goSplited.length == 4) && (goSplited[0].equals("infetado") || goSplited[0].equals("nao-infetado"))) {
+				
+				if (goSplited.length == 4) {
+					System.out.printf("1%n");
+					String infection = goSplited[0];
+					System.out.printf("%s%n", infection);
+					if (!(infection.equals("infetado")) && !(infection.equals("nao-infetado"))) {
+						System.out.printf("1,5%n");
+						continue;
+					}
+					long id = Long.parseLong(goSplited[1]);
+					com.google.protobuf.Timestamp timeIn = null;
+					com.google.protobuf.Timestamp timeOut = null;
+					try {
+						timeIn = Timestamps.parse(goSplited[2]);
+						timeOut = Timestamps.parse(goSplited[3]);
+					} catch (ParseException e) {
+		                e.printStackTrace();
+		            }
+					
 					int flag = 0;
-					String obsGo;
-					ArrayList<String> addObs = new ArrayList<String>();
-					addObs.add(go);
+
+					AddObs data = new AddObs(infection,id,timeIn,timeOut);
+				    addObs.add(data);
+
+				    String obsGo;
+				    System.out.printf("1,9%n");
 					do {
+						System.out.printf("2%n");
 						System.out.printf("---Do not have more observations to report? Press ENTER.%n");
 						obsGo = scanner.nextLine();
 						String obsSplited[] = obsGo.split(",", 4);
-						if ((obsSplited.length == 4) && (obsSplited[0].equals("infetado") || obsSplited[0].equals("nao-infetado"))) {
-							addObs.add(obsGo);
+
+						String infectionObs = obsSplited[0];
+						long idObs = Long.parseLong(obsSplited[1]);
+						com.google.protobuf.Timestamp timeInObs = null;
+						com.google.protobuf.Timestamp timeOutObs = null;
+						try {
+							timeInObs = Timestamps.parse(obsSplited[2]);
+							timeOutObs = Timestamps.parse(obsSplited[3]);
+						} catch (ParseException e) {
+			                e.printStackTrace();
+			            }
+
+						if ((obsSplited.length == 4) && (infectionObs.equals("infetado") || infectionObs.equals("nao-infetado"))) {
+							AddObs dataObs = new AddObs(infectionObs,idObs,timeInObs,timeOutObs);
+				    		addObs.add(dataObs);
 						}
 						if (obsGo.equals("") || obsGo.equals("exitSniffer")) {
 							flag = 1;
 						}
 					} while (flag != 1);
 
-					for (int i = 0; i < addObs.size(); i++) {
-						long millis = System.currentTimeMillis();
-						Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis/1000).build();
+					Iterator<AddObs> iter = addObs.iterator();
+
+					while (iter.hasNext()) {
+						AddObs element = iter.next();
 						try {
 							ReportResponse responseReport;
-							responseReport = client.sniffer_report(frontend, snifferName, addObs.get(i), timestamp);
+							responseReport = client.sniffer_report(frontend, snifferName, element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut());
 							System.out.printf("%s%n", responseReport);
 						} catch (StatusRuntimeException e) {
 							System.out.println("Caught exception with description: " + e.getStatus().getDescription());
-						}						
-					}//eficiencia???
+						}	
+					}
 
 					if (obsGo.equals("exitSniffer")) {
 						exit = 1;
 					}
+
 				}
 
 				if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {

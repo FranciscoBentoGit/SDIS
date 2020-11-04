@@ -21,7 +21,7 @@ private static final long serialVersionUID = 0L;
   }
   private ReportRequest() {
     name_ = "";
-    observations_ = "";
+    infection_ = "";
   }
 
   @java.lang.Override
@@ -63,18 +63,36 @@ private static final long serialVersionUID = 0L;
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            observations_ = s;
+            infection_ = s;
             break;
           }
-          case 26: {
+          case 24: {
+
+            id_ = input.readInt64();
+            break;
+          }
+          case 34: {
             com.google.protobuf.Timestamp.Builder subBuilder = null;
-            if (time_ != null) {
-              subBuilder = time_.toBuilder();
+            if (timeIn_ != null) {
+              subBuilder = timeIn_.toBuilder();
             }
-            time_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
+            timeIn_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
             if (subBuilder != null) {
-              subBuilder.mergeFrom(time_);
-              time_ = subBuilder.buildPartial();
+              subBuilder.mergeFrom(timeIn_);
+              timeIn_ = subBuilder.buildPartial();
+            }
+
+            break;
+          }
+          case 42: {
+            com.google.protobuf.Timestamp.Builder subBuilder = null;
+            if (timeOut_ != null) {
+              subBuilder = timeOut_.toBuilder();
+            }
+            timeOut_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(timeOut_);
+              timeOut_ = subBuilder.buildPartial();
             }
 
             break;
@@ -147,63 +165,96 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int OBSERVATIONS_FIELD_NUMBER = 2;
-  private volatile java.lang.Object observations_;
+  public static final int INFECTION_FIELD_NUMBER = 2;
+  private volatile java.lang.Object infection_;
   /**
-   * <code>string observations = 2;</code>
-   * @return The observations.
+   * <code>string infection = 2;</code>
+   * @return The infection.
    */
-  public java.lang.String getObservations() {
-    java.lang.Object ref = observations_;
+  public java.lang.String getInfection() {
+    java.lang.Object ref = infection_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      observations_ = s;
+      infection_ = s;
       return s;
     }
   }
   /**
-   * <code>string observations = 2;</code>
-   * @return The bytes for observations.
+   * <code>string infection = 2;</code>
+   * @return The bytes for infection.
    */
   public com.google.protobuf.ByteString
-      getObservationsBytes() {
-    java.lang.Object ref = observations_;
+      getInfectionBytes() {
+    java.lang.Object ref = infection_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      observations_ = b;
+      infection_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int TIME_FIELD_NUMBER = 3;
-  private com.google.protobuf.Timestamp time_;
+  public static final int ID_FIELD_NUMBER = 3;
+  private long id_;
   /**
-   * <code>.google.protobuf.Timestamp time = 3;</code>
-   * @return Whether the time field is set.
+   * <code>int64 id = 3;</code>
+   * @return The id.
    */
-  public boolean hasTime() {
-    return time_ != null;
+  public long getId() {
+    return id_;
+  }
+
+  public static final int TIMEIN_FIELD_NUMBER = 4;
+  private com.google.protobuf.Timestamp timeIn_;
+  /**
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
+   * @return Whether the timeIn field is set.
+   */
+  public boolean hasTimeIn() {
+    return timeIn_ != null;
   }
   /**
-   * <code>.google.protobuf.Timestamp time = 3;</code>
-   * @return The time.
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
+   * @return The timeIn.
    */
-  public com.google.protobuf.Timestamp getTime() {
-    return time_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : time_;
+  public com.google.protobuf.Timestamp getTimeIn() {
+    return timeIn_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timeIn_;
   }
   /**
-   * <code>.google.protobuf.Timestamp time = 3;</code>
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
    */
-  public com.google.protobuf.TimestampOrBuilder getTimeOrBuilder() {
-    return getTime();
+  public com.google.protobuf.TimestampOrBuilder getTimeInOrBuilder() {
+    return getTimeIn();
+  }
+
+  public static final int TIMEOUT_FIELD_NUMBER = 5;
+  private com.google.protobuf.Timestamp timeOut_;
+  /**
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+   * @return Whether the timeOut field is set.
+   */
+  public boolean hasTimeOut() {
+    return timeOut_ != null;
+  }
+  /**
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+   * @return The timeOut.
+   */
+  public com.google.protobuf.Timestamp getTimeOut() {
+    return timeOut_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timeOut_;
+  }
+  /**
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+   */
+  public com.google.protobuf.TimestampOrBuilder getTimeOutOrBuilder() {
+    return getTimeOut();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -223,11 +274,17 @@ private static final long serialVersionUID = 0L;
     if (!getNameBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
     }
-    if (!getObservationsBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, observations_);
+    if (!getInfectionBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, infection_);
     }
-    if (time_ != null) {
-      output.writeMessage(3, getTime());
+    if (id_ != 0L) {
+      output.writeInt64(3, id_);
+    }
+    if (timeIn_ != null) {
+      output.writeMessage(4, getTimeIn());
+    }
+    if (timeOut_ != null) {
+      output.writeMessage(5, getTimeOut());
     }
     unknownFields.writeTo(output);
   }
@@ -241,12 +298,20 @@ private static final long serialVersionUID = 0L;
     if (!getNameBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
     }
-    if (!getObservationsBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, observations_);
+    if (!getInfectionBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, infection_);
     }
-    if (time_ != null) {
+    if (id_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(3, getTime());
+        .computeInt64Size(3, id_);
+    }
+    if (timeIn_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, getTimeIn());
+    }
+    if (timeOut_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(5, getTimeOut());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -265,12 +330,19 @@ private static final long serialVersionUID = 0L;
 
     if (!getName()
         .equals(other.getName())) return false;
-    if (!getObservations()
-        .equals(other.getObservations())) return false;
-    if (hasTime() != other.hasTime()) return false;
-    if (hasTime()) {
-      if (!getTime()
-          .equals(other.getTime())) return false;
+    if (!getInfection()
+        .equals(other.getInfection())) return false;
+    if (getId()
+        != other.getId()) return false;
+    if (hasTimeIn() != other.hasTimeIn()) return false;
+    if (hasTimeIn()) {
+      if (!getTimeIn()
+          .equals(other.getTimeIn())) return false;
+    }
+    if (hasTimeOut() != other.hasTimeOut()) return false;
+    if (hasTimeOut()) {
+      if (!getTimeOut()
+          .equals(other.getTimeOut())) return false;
     }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
@@ -285,11 +357,18 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + NAME_FIELD_NUMBER;
     hash = (53 * hash) + getName().hashCode();
-    hash = (37 * hash) + OBSERVATIONS_FIELD_NUMBER;
-    hash = (53 * hash) + getObservations().hashCode();
-    if (hasTime()) {
-      hash = (37 * hash) + TIME_FIELD_NUMBER;
-      hash = (53 * hash) + getTime().hashCode();
+    hash = (37 * hash) + INFECTION_FIELD_NUMBER;
+    hash = (53 * hash) + getInfection().hashCode();
+    hash = (37 * hash) + ID_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getId());
+    if (hasTimeIn()) {
+      hash = (37 * hash) + TIMEIN_FIELD_NUMBER;
+      hash = (53 * hash) + getTimeIn().hashCode();
+    }
+    if (hasTimeOut()) {
+      hash = (37 * hash) + TIMEOUT_FIELD_NUMBER;
+      hash = (53 * hash) + getTimeOut().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -430,13 +509,21 @@ private static final long serialVersionUID = 0L;
       super.clear();
       name_ = "";
 
-      observations_ = "";
+      infection_ = "";
 
-      if (timeBuilder_ == null) {
-        time_ = null;
+      id_ = 0L;
+
+      if (timeInBuilder_ == null) {
+        timeIn_ = null;
       } else {
-        time_ = null;
-        timeBuilder_ = null;
+        timeIn_ = null;
+        timeInBuilder_ = null;
+      }
+      if (timeOutBuilder_ == null) {
+        timeOut_ = null;
+      } else {
+        timeOut_ = null;
+        timeOutBuilder_ = null;
       }
       return this;
     }
@@ -465,11 +552,17 @@ private static final long serialVersionUID = 0L;
     public pt.tecnico.staysafe.dgs.grpc.ReportRequest buildPartial() {
       pt.tecnico.staysafe.dgs.grpc.ReportRequest result = new pt.tecnico.staysafe.dgs.grpc.ReportRequest(this);
       result.name_ = name_;
-      result.observations_ = observations_;
-      if (timeBuilder_ == null) {
-        result.time_ = time_;
+      result.infection_ = infection_;
+      result.id_ = id_;
+      if (timeInBuilder_ == null) {
+        result.timeIn_ = timeIn_;
       } else {
-        result.time_ = timeBuilder_.build();
+        result.timeIn_ = timeInBuilder_.build();
+      }
+      if (timeOutBuilder_ == null) {
+        result.timeOut_ = timeOut_;
+      } else {
+        result.timeOut_ = timeOutBuilder_.build();
       }
       onBuilt();
       return result;
@@ -523,12 +616,18 @@ private static final long serialVersionUID = 0L;
         name_ = other.name_;
         onChanged();
       }
-      if (!other.getObservations().isEmpty()) {
-        observations_ = other.observations_;
+      if (!other.getInfection().isEmpty()) {
+        infection_ = other.infection_;
         onChanged();
       }
-      if (other.hasTime()) {
-        mergeTime(other.getTime());
+      if (other.getId() != 0L) {
+        setId(other.getId());
+      }
+      if (other.hasTimeIn()) {
+        mergeTimeIn(other.getTimeIn());
+      }
+      if (other.hasTimeOut()) {
+        mergeTimeOut(other.getTimeOut());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -635,199 +734,348 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object observations_ = "";
+    private java.lang.Object infection_ = "";
     /**
-     * <code>string observations = 2;</code>
-     * @return The observations.
+     * <code>string infection = 2;</code>
+     * @return The infection.
      */
-    public java.lang.String getObservations() {
-      java.lang.Object ref = observations_;
+    public java.lang.String getInfection() {
+      java.lang.Object ref = infection_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        observations_ = s;
+        infection_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string observations = 2;</code>
-     * @return The bytes for observations.
+     * <code>string infection = 2;</code>
+     * @return The bytes for infection.
      */
     public com.google.protobuf.ByteString
-        getObservationsBytes() {
-      java.lang.Object ref = observations_;
+        getInfectionBytes() {
+      java.lang.Object ref = infection_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        observations_ = b;
+        infection_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string observations = 2;</code>
-     * @param value The observations to set.
+     * <code>string infection = 2;</code>
+     * @param value The infection to set.
      * @return This builder for chaining.
      */
-    public Builder setObservations(
+    public Builder setInfection(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      observations_ = value;
+      infection_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string observations = 2;</code>
+     * <code>string infection = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearObservations() {
+    public Builder clearInfection() {
       
-      observations_ = getDefaultInstance().getObservations();
+      infection_ = getDefaultInstance().getInfection();
       onChanged();
       return this;
     }
     /**
-     * <code>string observations = 2;</code>
-     * @param value The bytes for observations to set.
+     * <code>string infection = 2;</code>
+     * @param value The bytes for infection to set.
      * @return This builder for chaining.
      */
-    public Builder setObservationsBytes(
+    public Builder setInfectionBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      observations_ = value;
+      infection_ = value;
       onChanged();
       return this;
     }
 
-    private com.google.protobuf.Timestamp time_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timeBuilder_;
+    private long id_ ;
     /**
-     * <code>.google.protobuf.Timestamp time = 3;</code>
-     * @return Whether the time field is set.
+     * <code>int64 id = 3;</code>
+     * @return The id.
      */
-    public boolean hasTime() {
-      return timeBuilder_ != null || time_ != null;
+    public long getId() {
+      return id_;
     }
     /**
-     * <code>.google.protobuf.Timestamp time = 3;</code>
-     * @return The time.
+     * <code>int64 id = 3;</code>
+     * @param value The id to set.
+     * @return This builder for chaining.
      */
-    public com.google.protobuf.Timestamp getTime() {
-      if (timeBuilder_ == null) {
-        return time_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : time_;
+    public Builder setId(long value) {
+      
+      id_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int64 id = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearId() {
+      
+      id_ = 0L;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.Timestamp timeIn_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timeInBuilder_;
+    /**
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
+     * @return Whether the timeIn field is set.
+     */
+    public boolean hasTimeIn() {
+      return timeInBuilder_ != null || timeIn_ != null;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
+     * @return The timeIn.
+     */
+    public com.google.protobuf.Timestamp getTimeIn() {
+      if (timeInBuilder_ == null) {
+        return timeIn_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timeIn_;
       } else {
-        return timeBuilder_.getMessage();
+        return timeInBuilder_.getMessage();
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp time = 3;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
-    public Builder setTime(com.google.protobuf.Timestamp value) {
-      if (timeBuilder_ == null) {
+    public Builder setTimeIn(com.google.protobuf.Timestamp value) {
+      if (timeInBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        time_ = value;
+        timeIn_ = value;
         onChanged();
       } else {
-        timeBuilder_.setMessage(value);
+        timeInBuilder_.setMessage(value);
       }
 
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp time = 3;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
-    public Builder setTime(
+    public Builder setTimeIn(
         com.google.protobuf.Timestamp.Builder builderForValue) {
-      if (timeBuilder_ == null) {
-        time_ = builderForValue.build();
+      if (timeInBuilder_ == null) {
+        timeIn_ = builderForValue.build();
         onChanged();
       } else {
-        timeBuilder_.setMessage(builderForValue.build());
+        timeInBuilder_.setMessage(builderForValue.build());
       }
 
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp time = 3;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
-    public Builder mergeTime(com.google.protobuf.Timestamp value) {
-      if (timeBuilder_ == null) {
-        if (time_ != null) {
-          time_ =
-            com.google.protobuf.Timestamp.newBuilder(time_).mergeFrom(value).buildPartial();
+    public Builder mergeTimeIn(com.google.protobuf.Timestamp value) {
+      if (timeInBuilder_ == null) {
+        if (timeIn_ != null) {
+          timeIn_ =
+            com.google.protobuf.Timestamp.newBuilder(timeIn_).mergeFrom(value).buildPartial();
         } else {
-          time_ = value;
+          timeIn_ = value;
         }
         onChanged();
       } else {
-        timeBuilder_.mergeFrom(value);
+        timeInBuilder_.mergeFrom(value);
       }
 
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp time = 3;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
-    public Builder clearTime() {
-      if (timeBuilder_ == null) {
-        time_ = null;
+    public Builder clearTimeIn() {
+      if (timeInBuilder_ == null) {
+        timeIn_ = null;
         onChanged();
       } else {
-        time_ = null;
-        timeBuilder_ = null;
+        timeIn_ = null;
+        timeInBuilder_ = null;
       }
 
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp time = 3;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
-    public com.google.protobuf.Timestamp.Builder getTimeBuilder() {
+    public com.google.protobuf.Timestamp.Builder getTimeInBuilder() {
       
       onChanged();
-      return getTimeFieldBuilder().getBuilder();
+      return getTimeInFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.protobuf.Timestamp time = 3;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
-    public com.google.protobuf.TimestampOrBuilder getTimeOrBuilder() {
-      if (timeBuilder_ != null) {
-        return timeBuilder_.getMessageOrBuilder();
+    public com.google.protobuf.TimestampOrBuilder getTimeInOrBuilder() {
+      if (timeInBuilder_ != null) {
+        return timeInBuilder_.getMessageOrBuilder();
       } else {
-        return time_ == null ?
-            com.google.protobuf.Timestamp.getDefaultInstance() : time_;
+        return timeIn_ == null ?
+            com.google.protobuf.Timestamp.getDefaultInstance() : timeIn_;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp time = 3;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-        getTimeFieldBuilder() {
-      if (timeBuilder_ == null) {
-        timeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+        getTimeInFieldBuilder() {
+      if (timeInBuilder_ == null) {
+        timeInBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                getTime(),
+                getTimeIn(),
                 getParentForChildren(),
                 isClean());
-        time_ = null;
+        timeIn_ = null;
       }
-      return timeBuilder_;
+      return timeInBuilder_;
+    }
+
+    private com.google.protobuf.Timestamp timeOut_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timeOutBuilder_;
+    /**
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+     * @return Whether the timeOut field is set.
+     */
+    public boolean hasTimeOut() {
+      return timeOutBuilder_ != null || timeOut_ != null;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+     * @return The timeOut.
+     */
+    public com.google.protobuf.Timestamp getTimeOut() {
+      if (timeOutBuilder_ == null) {
+        return timeOut_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timeOut_;
+      } else {
+        return timeOutBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+     */
+    public Builder setTimeOut(com.google.protobuf.Timestamp value) {
+      if (timeOutBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        timeOut_ = value;
+        onChanged();
+      } else {
+        timeOutBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+     */
+    public Builder setTimeOut(
+        com.google.protobuf.Timestamp.Builder builderForValue) {
+      if (timeOutBuilder_ == null) {
+        timeOut_ = builderForValue.build();
+        onChanged();
+      } else {
+        timeOutBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+     */
+    public Builder mergeTimeOut(com.google.protobuf.Timestamp value) {
+      if (timeOutBuilder_ == null) {
+        if (timeOut_ != null) {
+          timeOut_ =
+            com.google.protobuf.Timestamp.newBuilder(timeOut_).mergeFrom(value).buildPartial();
+        } else {
+          timeOut_ = value;
+        }
+        onChanged();
+      } else {
+        timeOutBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+     */
+    public Builder clearTimeOut() {
+      if (timeOutBuilder_ == null) {
+        timeOut_ = null;
+        onChanged();
+      } else {
+        timeOut_ = null;
+        timeOutBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+     */
+    public com.google.protobuf.Timestamp.Builder getTimeOutBuilder() {
+      
+      onChanged();
+      return getTimeOutFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getTimeOutOrBuilder() {
+      if (timeOutBuilder_ != null) {
+        return timeOutBuilder_.getMessageOrBuilder();
+      } else {
+        return timeOut_ == null ?
+            com.google.protobuf.Timestamp.getDefaultInstance() : timeOut_;
+      }
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+        getTimeOutFieldBuilder() {
+      if (timeOutBuilder_ == null) {
+        timeOutBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                getTimeOut(),
+                getParentForChildren(),
+                isClean());
+        timeOut_ = null;
+      }
+      return timeOutBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

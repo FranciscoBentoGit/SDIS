@@ -20,29 +20,50 @@ public interface ReportRequestOrBuilder extends
       getNameBytes();
 
   /**
-   * <code>string observations = 2;</code>
-   * @return The observations.
+   * <code>string infection = 2;</code>
+   * @return The infection.
    */
-  java.lang.String getObservations();
+  java.lang.String getInfection();
   /**
-   * <code>string observations = 2;</code>
-   * @return The bytes for observations.
+   * <code>string infection = 2;</code>
+   * @return The bytes for infection.
    */
   com.google.protobuf.ByteString
-      getObservationsBytes();
+      getInfectionBytes();
 
   /**
-   * <code>.google.protobuf.Timestamp time = 3;</code>
-   * @return Whether the time field is set.
+   * <code>int64 id = 3;</code>
+   * @return The id.
    */
-  boolean hasTime();
+  long getId();
+
   /**
-   * <code>.google.protobuf.Timestamp time = 3;</code>
-   * @return The time.
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
+   * @return Whether the timeIn field is set.
    */
-  com.google.protobuf.Timestamp getTime();
+  boolean hasTimeIn();
   /**
-   * <code>.google.protobuf.Timestamp time = 3;</code>
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
+   * @return The timeIn.
    */
-  com.google.protobuf.TimestampOrBuilder getTimeOrBuilder();
+  com.google.protobuf.Timestamp getTimeIn();
+  /**
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getTimeInOrBuilder();
+
+  /**
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+   * @return Whether the timeOut field is set.
+   */
+  boolean hasTimeOut();
+  /**
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+   * @return The timeOut.
+   */
+  com.google.protobuf.Timestamp getTimeOut();
+  /**
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getTimeOutOrBuilder();
 }

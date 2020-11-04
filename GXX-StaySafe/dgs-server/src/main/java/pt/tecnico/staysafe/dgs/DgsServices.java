@@ -36,24 +36,15 @@ public class DgsServices {
 		return address;
 	}
 
-    public synchronized String report(String name, String observations, com.google.protobuf.Timestamp time) {
+    public synchronized String report(String name, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
         if (!(snifferHash.containsKey(name))) {
             return "Failed to report: invalid name.";
         }
 
-        String[] observationsSplited = observations.split(",",4);
-
-        if (observationsSplited.length != 4) {
-            return "Failed to report: invalid observation input.";
-        }
-
-        String state = observationsSplited[0];
-        int id = Integer.parseInt(observationsSplited[1]);
-
-        String tIn = observationsSplited[2]; 
-        String tOut = observationsSplited[3];
+        long millis = System.currentTimeMillis();
+		Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis/1000).build();
         
-        ObservationsData data = new ObservationsData(name,state,id,tIn,tOut,time);
+        ObservationsData data = new ObservationsData(name,infection,id,timeIn,timeOut,timestamp);
 
         obsList.add(data);
 

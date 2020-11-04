@@ -58,18 +58,26 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: input cannot be empty!").asRuntimeException());
 	    }
 
-	    String observations = request.getObservations();
-		if (observations == null || observations.isBlank()) {
-	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Observations: input cannot be empty!").asRuntimeException());
+	    String infection = request.getInfection();
+		if (infection == null || infection.isBlank()) {
+	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Infection: input cannot be empty!").asRuntimeException());
 	    }
 
-	    com.google.protobuf.Timestamp time = request.getTime();
-	    if (!(time.isInitialized())) {
-	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("Time: invalid input time!").asRuntimeException());
+	    long id = request.getId();
+	    //verificar id
+
+	    com.google.protobuf.Timestamp timeIn = request.getTimeIn();
+	    if (!(timeIn.isInitialized())) {
+	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("TimeIn: invalid input time!").asRuntimeException());
+	    }
+
+	    com.google.protobuf.Timestamp timeOut = request.getTimeOut();
+	    if (!(timeOut.isInitialized())) {
+	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("TimeOut: invalid input time!").asRuntimeException());
 	    }
 
 	    else {
-	    	ReportResponse response = ReportResponse.newBuilder().setSuccess(dService.report(name,observations,time)).build();
+	    	ReportResponse response = ReportResponse.newBuilder().setSuccess(dService.report(name,infection,id,timeIn,timeOut)).build();
 		    responseObserver.onNext(response);
 		    responseObserver.onCompleted();
 	    }   

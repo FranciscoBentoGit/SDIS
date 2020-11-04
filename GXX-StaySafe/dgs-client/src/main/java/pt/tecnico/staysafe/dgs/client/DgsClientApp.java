@@ -51,9 +51,9 @@ public class DgsClientApp {
 		}
 	}
 
-	public static ReportResponse sniffer_report(DgsFrontend frontend, String snifferName, String observation, Timestamp timestamp) {
+	public static ReportResponse sniffer_report(DgsFrontend frontend, String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
 		ReportResponse response;
-		ReportRequest request = ReportRequest.newBuilder().setName(snifferName).setObservations(observation).setTime(timestamp).build();
+		ReportRequest request = ReportRequest.newBuilder().setName(snifferName).setInfection(infection).setId(id).setTimeIn(timeIn).setTimeOut(timeOut).build();
 		response = frontend.report(request);
 		return response;
 	}

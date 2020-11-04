@@ -69,21 +69,22 @@ public final class DgsOuterClass {
       "s\030\002 \001(\t\"&\n\023SnifferJoinResponse\022\017\n\007succes" +
       "s\030\001 \001(\t\"\"\n\022SnifferInfoRequest\022\014\n\004name\030\001 " +
       "\001(\t\"*\n\023SnifferInfoResponse\022\023\n\013nameAddres" +
-      "s\030\001 \001(\t\"]\n\rReportRequest\022\014\n\004name\030\001 \001(\t\022\024" +
-      "\n\014observations\030\002 \001(\t\022(\n\004time\030\003 \001(\0132\032.goo" +
-      "gle.protobuf.Timestamp\"!\n\016ReportResponse" +
-      "\022\017\n\007success\030\001 \001(\t\"#\n\025IndividualProbReque" +
-      "st\022\n\n\002id\030\001 \001(\003\"&\n\026IndividualProbResponse" +
-      "\022\014\n\004prob\030\001 \001(\0022\324\002\n\003Dgs\022s\n\014sniffer_join\0220" +
-      ".pt.tecnico.staysafe.dgs.grpc.SnifferJoi" +
-      "nRequest\0321.pt.tecnico.staysafe.dgs.grpc." +
-      "SnifferJoinResponse\022s\n\014sniffer_info\0220.pt" +
-      ".tecnico.staysafe.dgs.grpc.SnifferInfoRe" +
-      "quest\0321.pt.tecnico.staysafe.dgs.grpc.Sni" +
-      "fferInfoResponse\022c\n\006report\022+.pt.tecnico." +
-      "staysafe.dgs.grpc.ReportRequest\032,.pt.tec" +
-      "nico.staysafe.dgs.grpc.ReportResponseB\002P" +
-      "\001b\006proto3"
+      "s\030\001 \001(\t\"\225\001\n\rReportRequest\022\014\n\004name\030\001 \001(\t\022" +
+      "\021\n\tinfection\030\002 \001(\t\022\n\n\002id\030\003 \001(\003\022*\n\006timeIn" +
+      "\030\004 \001(\0132\032.google.protobuf.Timestamp\022+\n\007ti" +
+      "meOut\030\005 \001(\0132\032.google.protobuf.Timestamp\"" +
+      "!\n\016ReportResponse\022\017\n\007success\030\001 \001(\t\"#\n\025In" +
+      "dividualProbRequest\022\n\n\002id\030\001 \001(\003\"&\n\026Indiv" +
+      "idualProbResponse\022\014\n\004prob\030\001 \001(\0022\324\002\n\003Dgs\022" +
+      "s\n\014sniffer_join\0220.pt.tecnico.staysafe.dg" +
+      "s.grpc.SnifferJoinRequest\0321.pt.tecnico.s" +
+      "taysafe.dgs.grpc.SnifferJoinResponse\022s\n\014" +
+      "sniffer_info\0220.pt.tecnico.staysafe.dgs.g" +
+      "rpc.SnifferInfoRequest\0321.pt.tecnico.stay" +
+      "safe.dgs.grpc.SnifferInfoResponse\022c\n\006rep" +
+      "ort\022+.pt.tecnico.staysafe.dgs.grpc.Repor" +
+      "tRequest\032,.pt.tecnico.staysafe.dgs.grpc." +
+      "ReportResponseB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -119,7 +120,7 @@ public final class DgsOuterClass {
     internal_static_pt_tecnico_staysafe_dgs_grpc_ReportRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pt_tecnico_staysafe_dgs_grpc_ReportRequest_descriptor,
-        new java.lang.String[] { "Name", "Observations", "Time", });
+        new java.lang.String[] { "Name", "Infection", "Id", "TimeIn", "TimeOut", });
     internal_static_pt_tecnico_staysafe_dgs_grpc_ReportResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_pt_tecnico_staysafe_dgs_grpc_ReportResponse_fieldAccessorTable = new
