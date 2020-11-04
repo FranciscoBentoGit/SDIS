@@ -72,7 +72,7 @@ public class SnifferApp {
 					exit = 1;
 				}
 
-				String goSplited[] = go.split(",", 4);
+				String[] goSplited = go.split(",", 4);
 
 				if ((goSplited.length == 1) && (goSplited[0].equals("getInfo"))) {
 					try {
@@ -91,19 +91,23 @@ public class SnifferApp {
 
 				
 				if (goSplited.length == 4) {
-					System.out.printf("1%n");
 					String infection = goSplited[0];
-					System.out.printf("%s%n", infection);
 					if (!(infection.equals("infetado")) && !(infection.equals("nao-infetado"))) {
-						System.out.printf("1,5%n");
 						continue;
 					}
 					long id = Long.parseLong(goSplited[1]);
+
+					String[] auxIn = goSplited[2].split(" ",2);
+					String timestampIn = auxIn[0] + "T" + auxIn[1] + "Z";
+
+					String[] auxOut = goSplited[3].split(" ",2);
+					String timestampOut = auxOut[0] + "T" + auxOut[1] + "Z";
+
 					com.google.protobuf.Timestamp timeIn = null;
 					com.google.protobuf.Timestamp timeOut = null;
 					try {
-						timeIn = Timestamps.parse(goSplited[2]);
-						timeOut = Timestamps.parse(goSplited[3]);
+						timeIn = Timestamps.parse(timestampIn);
+						timeOut = Timestamps.parse(timestampOut);
 					} catch (ParseException e) {
 		                e.printStackTrace();
 		            }
@@ -114,20 +118,34 @@ public class SnifferApp {
 				    addObs.add(data);
 
 				    String obsGo;
-				    System.out.printf("1,9%n");
 					do {
-						System.out.printf("2%n");
 						System.out.printf("---Do not have more observations to report? Press ENTER.%n");
 						obsGo = scanner.nextLine();
-						String obsSplited[] = obsGo.split(",", 4);
+						if (obsGo.equals("") || obsGo.equals("exitSniffer")) {
+							flag = 1;
+							continue;
+						}
+
+						String[] obsSplited = obsGo.split(",", 4);
 
 						String infectionObs = obsSplited[0];
+						if (!(infectionObs.equals("infetado")) && !(infectionObs.equals("nao-infetado"))) {
+							continue;
+						}
+
 						long idObs = Long.parseLong(obsSplited[1]);
+			
+						String[] auxInObs = obsSplited[2].split(" ",2);
+						String timestampInObs = auxInObs[0] + "T" + auxInObs[1] + "Z";
+
+						String[] auxOutObs = goSplited[3].split(" ",2);
+						String timestampOutObs = auxOutObs[0] + "T" + auxOutObs[1] + "Z";
+
 						com.google.protobuf.Timestamp timeInObs = null;
 						com.google.protobuf.Timestamp timeOutObs = null;
 						try {
-							timeInObs = Timestamps.parse(obsSplited[2]);
-							timeOutObs = Timestamps.parse(obsSplited[3]);
+							timeInObs = Timestamps.parse(timestampInObs);
+							timeOutObs = Timestamps.parse(timestampOutObs);
 						} catch (ParseException e) {
 			                e.printStackTrace();
 			            }
@@ -135,9 +153,6 @@ public class SnifferApp {
 						if ((obsSplited.length == 4) && (infectionObs.equals("infetado") || infectionObs.equals("nao-infetado"))) {
 							AddObs dataObs = new AddObs(infectionObs,idObs,timeInObs,timeOutObs);
 				    		addObs.add(dataObs);
-						}
-						if (obsGo.equals("") || obsGo.equals("exitSniffer")) {
-							flag = 1;
 						}
 					} while (flag != 1);
 
@@ -153,6 +168,8 @@ public class SnifferApp {
 							System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 						}	
 					}
+
+					addObs.removeAll(addObs); 
 
 					if (obsGo.equals("exitSniffer")) {
 						exit = 1;
