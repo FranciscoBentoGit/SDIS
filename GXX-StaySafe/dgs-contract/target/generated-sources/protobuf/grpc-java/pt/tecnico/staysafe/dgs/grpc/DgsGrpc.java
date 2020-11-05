@@ -120,6 +120,68 @@ public final class DgsGrpc {
     return getReportMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.PingRequest,
+      pt.tecnico.staysafe.dgs.grpc.PingResponse> getCtrlPingMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ctrl_ping",
+      requestType = pt.tecnico.staysafe.dgs.grpc.PingRequest.class,
+      responseType = pt.tecnico.staysafe.dgs.grpc.PingResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.PingRequest,
+      pt.tecnico.staysafe.dgs.grpc.PingResponse> getCtrlPingMethod() {
+    io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.PingRequest, pt.tecnico.staysafe.dgs.grpc.PingResponse> getCtrlPingMethod;
+    if ((getCtrlPingMethod = DgsGrpc.getCtrlPingMethod) == null) {
+      synchronized (DgsGrpc.class) {
+        if ((getCtrlPingMethod = DgsGrpc.getCtrlPingMethod) == null) {
+          DgsGrpc.getCtrlPingMethod = getCtrlPingMethod =
+              io.grpc.MethodDescriptor.<pt.tecnico.staysafe.dgs.grpc.PingRequest, pt.tecnico.staysafe.dgs.grpc.PingResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ctrl_ping"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.PingRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.PingResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DgsMethodDescriptorSupplier("ctrl_ping"))
+              .build();
+        }
+      }
+    }
+    return getCtrlPingMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.ClearRequest,
+      pt.tecnico.staysafe.dgs.grpc.ClearResponse> getCtrlClearMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ctrl_clear",
+      requestType = pt.tecnico.staysafe.dgs.grpc.ClearRequest.class,
+      responseType = pt.tecnico.staysafe.dgs.grpc.ClearResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.ClearRequest,
+      pt.tecnico.staysafe.dgs.grpc.ClearResponse> getCtrlClearMethod() {
+    io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.ClearRequest, pt.tecnico.staysafe.dgs.grpc.ClearResponse> getCtrlClearMethod;
+    if ((getCtrlClearMethod = DgsGrpc.getCtrlClearMethod) == null) {
+      synchronized (DgsGrpc.class) {
+        if ((getCtrlClearMethod = DgsGrpc.getCtrlClearMethod) == null) {
+          DgsGrpc.getCtrlClearMethod = getCtrlClearMethod =
+              io.grpc.MethodDescriptor.<pt.tecnico.staysafe.dgs.grpc.ClearRequest, pt.tecnico.staysafe.dgs.grpc.ClearResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ctrl_clear"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.ClearRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.ClearResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DgsMethodDescriptorSupplier("ctrl_clear"))
+              .build();
+        }
+      }
+    }
+    return getCtrlClearMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -189,6 +251,20 @@ public final class DgsGrpc {
       asyncUnimplementedUnaryCall(getReportMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void ctrlPing(pt.tecnico.staysafe.dgs.grpc.PingRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.PingResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getCtrlPingMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void ctrlClear(pt.tecnico.staysafe.dgs.grpc.ClearRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.ClearResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getCtrlClearMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -212,6 +288,20 @@ public final class DgsGrpc {
                 pt.tecnico.staysafe.dgs.grpc.ReportRequest,
                 pt.tecnico.staysafe.dgs.grpc.ReportResponse>(
                   this, METHODID_REPORT)))
+          .addMethod(
+            getCtrlPingMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pt.tecnico.staysafe.dgs.grpc.PingRequest,
+                pt.tecnico.staysafe.dgs.grpc.PingResponse>(
+                  this, METHODID_CTRL_PING)))
+          .addMethod(
+            getCtrlClearMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pt.tecnico.staysafe.dgs.grpc.ClearRequest,
+                pt.tecnico.staysafe.dgs.grpc.ClearResponse>(
+                  this, METHODID_CTRL_CLEAR)))
           .build();
     }
   }
@@ -253,6 +343,22 @@ public final class DgsGrpc {
       asyncUnaryCall(
           getChannel().newCall(getReportMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void ctrlPing(pt.tecnico.staysafe.dgs.grpc.PingRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.PingResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getCtrlPingMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void ctrlClear(pt.tecnico.staysafe.dgs.grpc.ClearRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.ClearResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getCtrlClearMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -288,6 +394,20 @@ public final class DgsGrpc {
     public pt.tecnico.staysafe.dgs.grpc.ReportResponse report(pt.tecnico.staysafe.dgs.grpc.ReportRequest request) {
       return blockingUnaryCall(
           getChannel(), getReportMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public pt.tecnico.staysafe.dgs.grpc.PingResponse ctrlPing(pt.tecnico.staysafe.dgs.grpc.PingRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getCtrlPingMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public pt.tecnico.staysafe.dgs.grpc.ClearResponse ctrlClear(pt.tecnico.staysafe.dgs.grpc.ClearRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getCtrlClearMethod(), getCallOptions(), request);
     }
   }
 
@@ -328,11 +448,29 @@ public final class DgsGrpc {
       return futureUnaryCall(
           getChannel().newCall(getReportMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pt.tecnico.staysafe.dgs.grpc.PingResponse> ctrlPing(
+        pt.tecnico.staysafe.dgs.grpc.PingRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCtrlPingMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pt.tecnico.staysafe.dgs.grpc.ClearResponse> ctrlClear(
+        pt.tecnico.staysafe.dgs.grpc.ClearRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCtrlClearMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_SNIFFER_JOIN = 0;
   private static final int METHODID_SNIFFER_INFO = 1;
   private static final int METHODID_REPORT = 2;
+  private static final int METHODID_CTRL_PING = 3;
+  private static final int METHODID_CTRL_CLEAR = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -362,6 +500,14 @@ public final class DgsGrpc {
         case METHODID_REPORT:
           serviceImpl.report((pt.tecnico.staysafe.dgs.grpc.ReportRequest) request,
               (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.ReportResponse>) responseObserver);
+          break;
+        case METHODID_CTRL_PING:
+          serviceImpl.ctrlPing((pt.tecnico.staysafe.dgs.grpc.PingRequest) request,
+              (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.PingResponse>) responseObserver);
+          break;
+        case METHODID_CTRL_CLEAR:
+          serviceImpl.ctrlClear((pt.tecnico.staysafe.dgs.grpc.ClearRequest) request,
+              (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.ClearResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -427,6 +573,8 @@ public final class DgsGrpc {
               .addMethod(getSnifferJoinMethod())
               .addMethod(getSnifferInfoMethod())
               .addMethod(getReportMethod())
+              .addMethod(getCtrlPingMethod())
+              .addMethod(getCtrlClearMethod())
               .build();
         }
       }

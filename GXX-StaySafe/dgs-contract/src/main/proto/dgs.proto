@@ -58,9 +58,32 @@ message IndividualProbResponse {
 }
 
 
+//function ctrlPing
+//
+message PingRequest {
+	//No arguments needed??
+	string text = 1;
+}
+
+message PingResponse {
+	string text = 1;
+}
+
+
+//function ctrlClear
+//
+message ClearRequest {
+	//No arguments needed
+}
+
+message ClearResponse {
+	string success = 1;
+}
 
 service Dgs {
 	rpc sniffer_join(SnifferJoinRequest) returns (SnifferJoinResponse);
 	rpc sniffer_info(SnifferInfoRequest) returns (SnifferInfoResponse);
 	rpc report(ReportRequest) returns (ReportResponse);
+	rpc ctrl_ping(PingRequest) returns (PingResponse);
+	rpc ctrl_clear(ClearRequest) returns (ClearResponse);
 }

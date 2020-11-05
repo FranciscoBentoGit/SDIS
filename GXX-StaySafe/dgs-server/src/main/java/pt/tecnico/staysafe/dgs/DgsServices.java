@@ -1,6 +1,5 @@
 package pt.tecnico.staysafe.dgs;
 
-
 import java.util.*; 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -49,6 +48,12 @@ public class DgsServices {
         obsList.add(data);
 
         return "Success to report.";
+    }
+
+    public synchronized String ctrl_clear() {
+    	snifferHash.clear();
+    	obsList.removeAll(obsList);
+    	return "All observtions removed successfully.";
     }
 
 }

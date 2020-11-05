@@ -82,4 +82,27 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		    responseObserver.onCompleted();
 	    }   
 	}
+
+	@Override
+	public void ctrlPing(PingRequest request, StreamObserver<PingResponse> responseObserver) {
+
+	    String input = request.getText();
+	    if (input == null || input.isBlank()) {
+	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Input cannot be empty!").asRuntimeException());
+	    }
+	    
+	    else {
+	    	String output = "Hello " + input + "!";
+		    PingResponse response = PingResponse.newBuilder().setText(output).build();
+		    responseObserver.onNext(response);
+		    responseObserver.onCompleted();
+	    }
+	}
+
+	@Override
+	public void ctrlClear(ClearRequest request, StreamObserver<ClearResponse> responseObserver) {
+		ClearResponse response = ClearResponse.newBuilder().setSuccess(dService.ctrl_clear()).build();
+	    responseObserver.onNext(response);
+	    responseObserver.onCompleted();
+	}
 }

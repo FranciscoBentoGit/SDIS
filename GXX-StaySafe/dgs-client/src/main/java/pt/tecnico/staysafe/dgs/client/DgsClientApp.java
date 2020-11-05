@@ -27,6 +27,37 @@ public class DgsClientApp {
 
 		final String host = args[0];
 		final int port = Integer.parseInt(args[1]);
+
+		execClient(host, port);
+	}
+
+	private static void execClient(String host, int port) {
+		DgsFrontend frontend = new DgsFrontend(host, port);
+		String go;
+		int flag = 0;
+		try (Scanner scanner = new Scanner(System.in)) {
+			do {
+				go = scanner.nextLine();
+				if (go.equals("") || go.equals("exitClient")) {
+					flag = 1;
+				}
+
+				if (go.equals("ping")) {
+					PingResponse response;
+					PingRequest request = PingRequest.newBuilder().setText("friend").build();
+					response = frontend.ctrl_ping(request);
+					System.out.printf("%s%n", response);
+				}
+
+				if (go.equals("clear")) {
+					ClearResponse response;
+					ClearRequest request = ClearRequest.getDefaultInstance();
+					response = frontend.ctrl_clear(request);
+					System.out.printf("%s%n", response);
+				}
+
+			} while (flag != 1);
+		}
 	}
 	
 	public static SnifferJoinResponse sniffer_join(DgsFrontend frontend, String snifferName, String address) {

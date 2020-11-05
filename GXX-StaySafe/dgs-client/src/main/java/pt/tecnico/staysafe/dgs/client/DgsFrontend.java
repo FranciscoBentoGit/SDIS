@@ -34,4 +34,16 @@ public class DgsFrontend {
 		response = _stub.report(request);
 		return response;
 	}
+
+	public PingResponse ctrl_ping(PingRequest request) {
+		PingResponse response;
+		response = _stub.ctrlPing(request);
+		return response;
+	}
+
+	public ClearResponse ctrl_clear(ClearRequest request) {
+		ClearResponse response;
+		response = _stub.ctrlClear(request);
+		return response;
+	}
 }
