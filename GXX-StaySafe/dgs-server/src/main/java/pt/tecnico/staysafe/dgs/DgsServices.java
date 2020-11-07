@@ -50,6 +50,48 @@ public class DgsServices {
         return "Success to report.";
     }
 
+    public synchronized float individual_infection_probability(int id){
+        Iterator iter = obsList.iterator();
+        int foundID = 0;
+        ArrayList<ObservationsData> matchedSniffers = new ArrayList<ObservationsData>();
+        int xValue ;
+        float probability;
+
+        //Verifica se o id se encontra na lista de observaçoes
+        while (iter.hasNext()){
+            ObservationsData obs = (ObservationsData)iter.next();
+            if ((obs.getId() == id) && (obs.getInfection().equals("nao-infetado"))){
+                foundID = 1;
+                matchedSniffers.add(obs);
+            }
+            if ((obs.getId() == id) && (obs.getInfection().equals("infetado"))){
+                return 1;
+            }
+        }
+        //Se não encontra o ID, retornamos 2.00 para que posteriormente possamos verificar o valor e lançar o erro de ID nao encontrado
+        if(foundID == 0){
+            return 0;
+        }
+
+        Iterator iter2 = obsList.iterator();
+        while (iter2.hasNext()){
+            ObservationsData obs = (ObservationsData)iter2.next();
+            Iterator iter3 = matchedSniffers.iterator();
+
+            while (iter3.hasNext()){
+                ObservationsData toCompare = (ObservationsData)iter3.next();
+
+                if ((toCompare.getSnifferName().equals(obs.getSnifferName())) && (toCompare.getId() != obs.getId())  && obs.getInfection().equals("infetado")){
+                    continue;
+                }
+            }
+
+        }
+
+        return 0;
+
+    }
+
     public synchronized String ctrl_init(String snifferName, String address, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
     	String message;
     	message = sniffer_join(snifferName,address);

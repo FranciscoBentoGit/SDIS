@@ -18,5 +18,25 @@ public class ObservationsData{
         _timeIn = timeIn;
         _timeOut = timeOut;
         _timestamp = timestamp;
-    } 
+    }
+
+    public String getSnifferName() {
+        return _snifferName;
+    }
+
+    public String getInfection() {
+        return _infection;
+    }
+
+    public long getId() {
+        return _id;
+    }
+
+    public com.google.protobuf.Timestamp getTimeIn() {
+        return _timeIn;
+    }
+
+    public com.google.protobuf.Timestamp getTimeOut() {
+        return _timeOut;
+    }
 }

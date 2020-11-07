@@ -100,6 +100,7 @@ service Dgs {
 	rpc sniffer_join(SnifferJoinRequest) returns (SnifferJoinResponse);
 	rpc sniffer_info(SnifferInfoRequest) returns (SnifferInfoResponse);
 	rpc report(ReportRequest) returns (ReportResponse);
+	rpc individual_infection_probability(IndividualProbRequest) returns (IndividualProbResponse);
 	rpc ctrl_ping(PingRequest) returns (PingResponse);
 	rpc ctrl_init(InitRequest) returns (InitResponse);
 	rpc ctrl_clear(ClearRequest) returns (ClearResponse);

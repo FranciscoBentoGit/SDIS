@@ -113,7 +113,7 @@ public final class DgsOuterClass {
       ".protobuf.Timestamp\022+\n\007timeOut\030\006 \001(\0132\032.g" +
       "oogle.protobuf.Timestamp\"\037\n\014InitResponse" +
       "\022\017\n\007success\030\001 \001(\t\"\016\n\014ClearRequest\" \n\rCle" +
-      "arResponse\022\017\n\007success\030\001 \001(\t2\203\005\n\003Dgs\022s\n\014s" +
+      "arResponse\022\017\n\007success\030\001 \001(\t2\223\006\n\003Dgs\022s\n\014s" +
       "niffer_join\0220.pt.tecnico.staysafe.dgs.gr" +
       "pc.SnifferJoinRequest\0321.pt.tecnico.stays" +
       "afe.dgs.grpc.SnifferJoinResponse\022s\n\014snif" +
@@ -122,15 +122,18 @@ public final class DgsOuterClass {
       ".dgs.grpc.SnifferInfoResponse\022c\n\006report\022" +
       "+.pt.tecnico.staysafe.dgs.grpc.ReportReq" +
       "uest\032,.pt.tecnico.staysafe.dgs.grpc.Repo" +
-      "rtResponse\022b\n\tctrl_ping\022).pt.tecnico.sta" +
-      "ysafe.dgs.grpc.PingRequest\032*.pt.tecnico." +
-      "staysafe.dgs.grpc.PingResponse\022b\n\tctrl_i" +
-      "nit\022).pt.tecnico.staysafe.dgs.grpc.InitR" +
-      "equest\032*.pt.tecnico.staysafe.dgs.grpc.In" +
-      "itResponse\022e\n\nctrl_clear\022*.pt.tecnico.st" +
-      "aysafe.dgs.grpc.ClearRequest\032+.pt.tecnic" +
-      "o.staysafe.dgs.grpc.ClearResponseB\002P\001b\006p" +
-      "roto3"
+      "rtResponse\022\215\001\n individual_infection_prob" +
+      "ability\0223.pt.tecnico.staysafe.dgs.grpc.I" +
+      "ndividualProbRequest\0324.pt.tecnico.staysa" +
+      "fe.dgs.grpc.IndividualProbResponse\022b\n\tct" +
+      "rl_ping\022).pt.tecnico.staysafe.dgs.grpc.P" +
+      "ingRequest\032*.pt.tecnico.staysafe.dgs.grp" +
+      "c.PingResponse\022b\n\tctrl_init\022).pt.tecnico" +
+      ".staysafe.dgs.grpc.InitRequest\032*.pt.tecn" +
+      "ico.staysafe.dgs.grpc.InitResponse\022e\n\nct" +
+      "rl_clear\022*.pt.tecnico.staysafe.dgs.grpc." +
+      "ClearRequest\032+.pt.tecnico.staysafe.dgs.g" +
+      "rpc.ClearResponseB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

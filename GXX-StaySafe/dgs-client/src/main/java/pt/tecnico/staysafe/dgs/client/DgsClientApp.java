@@ -43,11 +43,7 @@ public class DgsClientApp {
 					flag = 1;
 				}
 
-				String[] goSplited = go.split(",", 7);
-
-				if ((goSplited.length == 7) && (goSplited[0].equals("init:"))) {
-					continue;
-				}
+				String[] goSplited = go.split(" ", 2);  //init snifferName,address,... -- possivel init
 
 				if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
 					try {
@@ -57,8 +53,7 @@ public class DgsClientApp {
 						System.out.printf("%s%n", response);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
-					}
-					
+					}	
 				}
 
 				if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
