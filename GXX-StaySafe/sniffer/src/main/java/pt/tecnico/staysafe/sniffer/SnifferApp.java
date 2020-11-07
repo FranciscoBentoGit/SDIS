@@ -41,8 +41,9 @@ public class SnifferApp {
 
 		for (j = 3; j < i; j++) {
 			address += args[j];
+			address += " ";
 		}
-		
+		//tirar print
 		System.out.printf("Address: %s%n", address);
 
 		execSniffer(host, port, name, address);

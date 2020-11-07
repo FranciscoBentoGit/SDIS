@@ -8,19 +8,11 @@ public interface PingRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <pre>
-   *No arguments needed??
-   * </pre>
-   *
    * <code>string text = 1;</code>
    * @return The text.
    */
   java.lang.String getText();
   /**
-   * <pre>
-   *No arguments needed??
-   * </pre>
-   *
    * <code>string text = 1;</code>
    * @return The bytes for text.
    */

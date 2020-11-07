@@ -2,6 +2,7 @@ package pt.tecnico.staysafe.dgs.client;
 
 import java.util.Scanner;
 import com.google.protobuf.Timestamp;
+import io.grpc.StatusRuntimeException;
 
 import pt.tecnico.staysafe.dgs.grpc.DgsGrpc;
 import pt.tecnico.staysafe.dgs.grpc.*;
@@ -42,18 +43,29 @@ public class DgsClientApp {
 					flag = 1;
 				}
 
-				if (go.equals("ping")) {
-					PingResponse response;
-					PingRequest request = PingRequest.newBuilder().setText("friend").build();
-					response = frontend.ctrl_ping(request);
-					System.out.printf("%s%n", response);
+				String[] goSplited = go.split(",", 7);
+
+				if ((goSplited.length == 7) && (goSplited[0].equals("init:"))) {
+					continue;
 				}
 
-				if (go.equals("clear")) {
-					ClearResponse response;
-					ClearRequest request = ClearRequest.getDefaultInstance();
-					response = frontend.ctrl_clear(request);
-					System.out.printf("%s%n", response);
+				if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
+					try {
+						PingResponse response;
+						PingRequest request = PingRequest.newBuilder().setText("friend").build();
+						response = frontend.ctrl_ping(request);
+						System.out.printf("%s%n", response);
+					} catch (StatusRuntimeException e) {
+						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+					}
+					
+				}
+
+				if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
+						ClearResponse response;
+						ClearRequest request = ClearRequest.getDefaultInstance();
+						response = frontend.ctrl_clear(request);
+						System.out.printf("%s%n", response);
 				}
 
 			} while (flag != 1);

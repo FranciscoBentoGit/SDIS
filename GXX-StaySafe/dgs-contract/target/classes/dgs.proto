@@ -61,12 +61,28 @@ message IndividualProbResponse {
 //function ctrlPing
 //
 message PingRequest {
-	//No arguments needed??
 	string text = 1;
 }
 
 message PingResponse {
 	string text = 1;
+}
+
+
+//function ctrlInit
+//
+message InitRequest {
+	string snifferName = 1;
+	string address = 2;
+	string infection = 3;
+	int64 id = 4;
+	google.protobuf.Timestamp timeIn = 5;
+	google.protobuf.Timestamp timeOut = 6;
+
+}
+
+message InitResponse {
+	string success = 1;
 }
 
 
@@ -85,5 +101,6 @@ service Dgs {
 	rpc sniffer_info(SnifferInfoRequest) returns (SnifferInfoResponse);
 	rpc report(ReportRequest) returns (ReportResponse);
 	rpc ctrl_ping(PingRequest) returns (PingResponse);
+	rpc ctrl_init(InitRequest) returns (InitResponse);
 	rpc ctrl_clear(ClearRequest) returns (ClearResponse);
 }

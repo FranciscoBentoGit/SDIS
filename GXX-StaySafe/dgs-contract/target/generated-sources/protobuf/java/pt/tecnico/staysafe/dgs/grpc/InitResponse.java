@@ -4,30 +4,26 @@
 package pt.tecnico.staysafe.dgs.grpc;
 
 /**
- * <pre>
- *function ctrlPing
- * </pre>
- *
- * Protobuf type {@code pt.tecnico.staysafe.dgs.grpc.PingRequest}
+ * Protobuf type {@code pt.tecnico.staysafe.dgs.grpc.InitResponse}
  */
-public  final class PingRequest extends
+public  final class InitResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:pt.tecnico.staysafe.dgs.grpc.PingRequest)
-    PingRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:pt.tecnico.staysafe.dgs.grpc.InitResponse)
+    InitResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use PingRequest.newBuilder() to construct.
-  private PingRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use InitResponse.newBuilder() to construct.
+  private InitResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private PingRequest() {
-    text_ = "";
+  private InitResponse() {
+    success_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new PingRequest();
+    return new InitResponse();
   }
 
   @java.lang.Override
@@ -35,7 +31,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private PingRequest(
+  private InitResponse(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -56,7 +52,7 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            text_ = s;
+            success_ = s;
             break;
           }
           default: {
@@ -80,47 +76,47 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return pt.tecnico.staysafe.dgs.grpc.DgsOuterClass.internal_static_pt_tecnico_staysafe_dgs_grpc_PingRequest_descriptor;
+    return pt.tecnico.staysafe.dgs.grpc.DgsOuterClass.internal_static_pt_tecnico_staysafe_dgs_grpc_InitResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return pt.tecnico.staysafe.dgs.grpc.DgsOuterClass.internal_static_pt_tecnico_staysafe_dgs_grpc_PingRequest_fieldAccessorTable
+    return pt.tecnico.staysafe.dgs.grpc.DgsOuterClass.internal_static_pt_tecnico_staysafe_dgs_grpc_InitResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            pt.tecnico.staysafe.dgs.grpc.PingRequest.class, pt.tecnico.staysafe.dgs.grpc.PingRequest.Builder.class);
+            pt.tecnico.staysafe.dgs.grpc.InitResponse.class, pt.tecnico.staysafe.dgs.grpc.InitResponse.Builder.class);
   }
 
-  public static final int TEXT_FIELD_NUMBER = 1;
-  private volatile java.lang.Object text_;
+  public static final int SUCCESS_FIELD_NUMBER = 1;
+  private volatile java.lang.Object success_;
   /**
-   * <code>string text = 1;</code>
-   * @return The text.
+   * <code>string success = 1;</code>
+   * @return The success.
    */
-  public java.lang.String getText() {
-    java.lang.Object ref = text_;
+  public java.lang.String getSuccess() {
+    java.lang.Object ref = success_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      text_ = s;
+      success_ = s;
       return s;
     }
   }
   /**
-   * <code>string text = 1;</code>
-   * @return The bytes for text.
+   * <code>string success = 1;</code>
+   * @return The bytes for success.
    */
   public com.google.protobuf.ByteString
-      getTextBytes() {
-    java.lang.Object ref = text_;
+      getSuccessBytes() {
+    java.lang.Object ref = success_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      text_ = b;
+      success_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -141,8 +137,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getTextBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, text_);
+    if (!getSuccessBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, success_);
     }
     unknownFields.writeTo(output);
   }
@@ -153,8 +149,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getTextBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, text_);
+    if (!getSuccessBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, success_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -166,13 +162,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof pt.tecnico.staysafe.dgs.grpc.PingRequest)) {
+    if (!(obj instanceof pt.tecnico.staysafe.dgs.grpc.InitResponse)) {
       return super.equals(obj);
     }
-    pt.tecnico.staysafe.dgs.grpc.PingRequest other = (pt.tecnico.staysafe.dgs.grpc.PingRequest) obj;
+    pt.tecnico.staysafe.dgs.grpc.InitResponse other = (pt.tecnico.staysafe.dgs.grpc.InitResponse) obj;
 
-    if (!getText()
-        .equals(other.getText())) return false;
+    if (!getSuccess()
+        .equals(other.getSuccess())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -184,76 +180,76 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + TEXT_FIELD_NUMBER;
-    hash = (53 * hash) + getText().hashCode();
+    hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
+    hash = (53 * hash) + getSuccess().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseFrom(
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseFrom(
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseFrom(
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseFrom(
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseFrom(byte[] data)
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseFrom(
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseFrom(java.io.InputStream input)
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseFrom(
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseDelimitedFrom(java.io.InputStream input)
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseDelimitedFrom(
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseFrom(
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest parseFrom(
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -266,7 +262,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(pt.tecnico.staysafe.dgs.grpc.PingRequest prototype) {
+  public static Builder newBuilder(pt.tecnico.staysafe.dgs.grpc.InitResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -282,30 +278,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * <pre>
-   *function ctrlPing
-   * </pre>
-   *
-   * Protobuf type {@code pt.tecnico.staysafe.dgs.grpc.PingRequest}
+   * Protobuf type {@code pt.tecnico.staysafe.dgs.grpc.InitResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:pt.tecnico.staysafe.dgs.grpc.PingRequest)
-      pt.tecnico.staysafe.dgs.grpc.PingRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:pt.tecnico.staysafe.dgs.grpc.InitResponse)
+      pt.tecnico.staysafe.dgs.grpc.InitResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return pt.tecnico.staysafe.dgs.grpc.DgsOuterClass.internal_static_pt_tecnico_staysafe_dgs_grpc_PingRequest_descriptor;
+      return pt.tecnico.staysafe.dgs.grpc.DgsOuterClass.internal_static_pt_tecnico_staysafe_dgs_grpc_InitResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return pt.tecnico.staysafe.dgs.grpc.DgsOuterClass.internal_static_pt_tecnico_staysafe_dgs_grpc_PingRequest_fieldAccessorTable
+      return pt.tecnico.staysafe.dgs.grpc.DgsOuterClass.internal_static_pt_tecnico_staysafe_dgs_grpc_InitResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              pt.tecnico.staysafe.dgs.grpc.PingRequest.class, pt.tecnico.staysafe.dgs.grpc.PingRequest.Builder.class);
+              pt.tecnico.staysafe.dgs.grpc.InitResponse.class, pt.tecnico.staysafe.dgs.grpc.InitResponse.Builder.class);
     }
 
-    // Construct using pt.tecnico.staysafe.dgs.grpc.PingRequest.newBuilder()
+    // Construct using pt.tecnico.staysafe.dgs.grpc.InitResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -323,7 +315,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      text_ = "";
+      success_ = "";
 
       return this;
     }
@@ -331,17 +323,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return pt.tecnico.staysafe.dgs.grpc.DgsOuterClass.internal_static_pt_tecnico_staysafe_dgs_grpc_PingRequest_descriptor;
+      return pt.tecnico.staysafe.dgs.grpc.DgsOuterClass.internal_static_pt_tecnico_staysafe_dgs_grpc_InitResponse_descriptor;
     }
 
     @java.lang.Override
-    public pt.tecnico.staysafe.dgs.grpc.PingRequest getDefaultInstanceForType() {
-      return pt.tecnico.staysafe.dgs.grpc.PingRequest.getDefaultInstance();
+    public pt.tecnico.staysafe.dgs.grpc.InitResponse getDefaultInstanceForType() {
+      return pt.tecnico.staysafe.dgs.grpc.InitResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public pt.tecnico.staysafe.dgs.grpc.PingRequest build() {
-      pt.tecnico.staysafe.dgs.grpc.PingRequest result = buildPartial();
+    public pt.tecnico.staysafe.dgs.grpc.InitResponse build() {
+      pt.tecnico.staysafe.dgs.grpc.InitResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -349,9 +341,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public pt.tecnico.staysafe.dgs.grpc.PingRequest buildPartial() {
-      pt.tecnico.staysafe.dgs.grpc.PingRequest result = new pt.tecnico.staysafe.dgs.grpc.PingRequest(this);
-      result.text_ = text_;
+    public pt.tecnico.staysafe.dgs.grpc.InitResponse buildPartial() {
+      pt.tecnico.staysafe.dgs.grpc.InitResponse result = new pt.tecnico.staysafe.dgs.grpc.InitResponse(this);
+      result.success_ = success_;
       onBuilt();
       return result;
     }
@@ -390,18 +382,18 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof pt.tecnico.staysafe.dgs.grpc.PingRequest) {
-        return mergeFrom((pt.tecnico.staysafe.dgs.grpc.PingRequest)other);
+      if (other instanceof pt.tecnico.staysafe.dgs.grpc.InitResponse) {
+        return mergeFrom((pt.tecnico.staysafe.dgs.grpc.InitResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(pt.tecnico.staysafe.dgs.grpc.PingRequest other) {
-      if (other == pt.tecnico.staysafe.dgs.grpc.PingRequest.getDefaultInstance()) return this;
-      if (!other.getText().isEmpty()) {
-        text_ = other.text_;
+    public Builder mergeFrom(pt.tecnico.staysafe.dgs.grpc.InitResponse other) {
+      if (other == pt.tecnico.staysafe.dgs.grpc.InitResponse.getDefaultInstance()) return this;
+      if (!other.getSuccess().isEmpty()) {
+        success_ = other.success_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -419,11 +411,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      pt.tecnico.staysafe.dgs.grpc.PingRequest parsedMessage = null;
+      pt.tecnico.staysafe.dgs.grpc.InitResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (pt.tecnico.staysafe.dgs.grpc.PingRequest) e.getUnfinishedMessage();
+        parsedMessage = (pt.tecnico.staysafe.dgs.grpc.InitResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -433,78 +425,78 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object text_ = "";
+    private java.lang.Object success_ = "";
     /**
-     * <code>string text = 1;</code>
-     * @return The text.
+     * <code>string success = 1;</code>
+     * @return The success.
      */
-    public java.lang.String getText() {
-      java.lang.Object ref = text_;
+    public java.lang.String getSuccess() {
+      java.lang.Object ref = success_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        text_ = s;
+        success_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string text = 1;</code>
-     * @return The bytes for text.
+     * <code>string success = 1;</code>
+     * @return The bytes for success.
      */
     public com.google.protobuf.ByteString
-        getTextBytes() {
-      java.lang.Object ref = text_;
+        getSuccessBytes() {
+      java.lang.Object ref = success_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        text_ = b;
+        success_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string text = 1;</code>
-     * @param value The text to set.
+     * <code>string success = 1;</code>
+     * @param value The success to set.
      * @return This builder for chaining.
      */
-    public Builder setText(
+    public Builder setSuccess(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      text_ = value;
+      success_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string text = 1;</code>
+     * <code>string success = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearText() {
+    public Builder clearSuccess() {
       
-      text_ = getDefaultInstance().getText();
+      success_ = getDefaultInstance().getSuccess();
       onChanged();
       return this;
     }
     /**
-     * <code>string text = 1;</code>
-     * @param value The bytes for text to set.
+     * <code>string success = 1;</code>
+     * @param value The bytes for success to set.
      * @return This builder for chaining.
      */
-    public Builder setTextBytes(
+    public Builder setSuccessBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      text_ = value;
+      success_ = value;
       onChanged();
       return this;
     }
@@ -521,41 +513,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:pt.tecnico.staysafe.dgs.grpc.PingRequest)
+    // @@protoc_insertion_point(builder_scope:pt.tecnico.staysafe.dgs.grpc.InitResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:pt.tecnico.staysafe.dgs.grpc.PingRequest)
-  private static final pt.tecnico.staysafe.dgs.grpc.PingRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:pt.tecnico.staysafe.dgs.grpc.InitResponse)
+  private static final pt.tecnico.staysafe.dgs.grpc.InitResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new pt.tecnico.staysafe.dgs.grpc.PingRequest();
+    DEFAULT_INSTANCE = new pt.tecnico.staysafe.dgs.grpc.InitResponse();
   }
 
-  public static pt.tecnico.staysafe.dgs.grpc.PingRequest getDefaultInstance() {
+  public static pt.tecnico.staysafe.dgs.grpc.InitResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<PingRequest>
-      PARSER = new com.google.protobuf.AbstractParser<PingRequest>() {
+  private static final com.google.protobuf.Parser<InitResponse>
+      PARSER = new com.google.protobuf.AbstractParser<InitResponse>() {
     @java.lang.Override
-    public PingRequest parsePartialFrom(
+    public InitResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new PingRequest(input, extensionRegistry);
+      return new InitResponse(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<PingRequest> parser() {
+  public static com.google.protobuf.Parser<InitResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<PingRequest> getParserForType() {
+  public com.google.protobuf.Parser<InitResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public pt.tecnico.staysafe.dgs.grpc.PingRequest getDefaultInstanceForType() {
+  public pt.tecnico.staysafe.dgs.grpc.InitResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

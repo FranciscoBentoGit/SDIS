@@ -64,7 +64,9 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	    }
 
 	    long id = request.getId();
-	    //verificar id
+	    if (String.valueOf(id).length() != 9) {
+	    	 responseObserver.onError(INVALID_ARGUMENT.withDescription("Id: invalid input id - must have 9 digits!").asRuntimeException());
+	    }
 
 	    com.google.protobuf.Timestamp timeIn = request.getTimeIn();
 	    if (!(timeIn.isInitialized())) {
@@ -97,6 +99,49 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		    responseObserver.onNext(response);
 		    responseObserver.onCompleted();
 	    }
+	}
+
+	@Override
+	public void ctrlInit(InitRequest request, StreamObserver<InitResponse> responseObserver) {
+		String snifferName = request.getSnifferName();
+		if (snifferName == null || snifferName.isBlank()) {
+	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: input cannot be empty!").asRuntimeException());
+	    }
+	    if (snifferName.length() < 5 || snifferName.length() > 30) {
+	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: invalid name!").asRuntimeException());
+		}
+
+	    String address = request.getAddress();
+	    if (address == null || address.isBlank()) {
+	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Address: input cannot be empty!").asRuntimeException());
+	    }
+
+	    String infection = request.getInfection();
+		if (infection == null || infection.isBlank()) {
+	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Infection: input cannot be empty!").asRuntimeException());
+	    }
+
+	    long id = request.getId();
+	    if (String.valueOf(id).length() != 9) {
+	    	 responseObserver.onError(INVALID_ARGUMENT.withDescription("Id: invalid input id - must have 9 digits!").asRuntimeException());
+	    }
+
+	    com.google.protobuf.Timestamp timeIn = request.getTimeIn();
+	    if (!(timeIn.isInitialized())) {
+	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("TimeIn: invalid input time!").asRuntimeException());
+	    }
+
+	    com.google.protobuf.Timestamp timeOut = request.getTimeOut();
+	    if (!(timeOut.isInitialized())) {
+	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("TimeOut: invalid input time!").asRuntimeException());
+	    }
+
+	    else{
+	    	InitResponse response = InitResponse.newBuilder().setSuccess(dService.ctrl_init(snifferName,address,infection,id,timeIn,timeOut)).build();
+		    responseObserver.onNext(response);
+		    responseObserver.onCompleted();
+	    }
+		
 	}
 
 	@Override

@@ -50,10 +50,23 @@ public class DgsServices {
         return "Success to report.";
     }
 
+    public synchronized String ctrl_init(String snifferName, String address, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
+    	String message;
+    	message = sniffer_join(snifferName,address);
+    	if (message.equals("Failed to join sniffer: invalid address for that name.")) {
+    		return "Init: failed to join sniffer_info.";
+    	}
+    	message = report(snifferName,infection,id,timeIn,timeOut);
+    	if (message.equals("Failed to report: invalid name.")) {
+    		return "Init: failed to report.";
+    	}
+    	return "Init success.";
+    }
+
     public synchronized String ctrl_clear() {
     	snifferHash.clear();
     	obsList.removeAll(obsList);
-    	return "All observtions removed successfully.";
+    	return "All observations removed successfully.";
     }
 
 }
