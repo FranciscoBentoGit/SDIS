@@ -86,6 +86,21 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	}
 
 	@Override
+	public void individualInfectionProbability(IndividualProbRequest request, StreamObserver<IndividualProbResponse> responseObserver) {
+
+	    long id = request.getId();
+	    if (String.valueOf(id).length() != 9) {
+	    	 responseObserver.onError(INVALID_ARGUMENT.withDescription("Id: invalid input id - must have 9 digits!").asRuntimeException());
+	    }
+	    
+	    else {
+		    IndividualProbResponse response = IndividualProbResponse.newBuilder().setProb(dService.individual_infection_probability(id)).build();
+		    responseObserver.onNext(response);
+		    responseObserver.onCompleted();
+	    }
+	}
+	
+	@Override
 	public void ctrlPing(PingRequest request, StreamObserver<PingResponse> responseObserver) {
 
 	    String input = request.getText();
@@ -100,6 +115,8 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		    responseObserver.onCompleted();
 	    }
 	}
+
+	
 
 	@Override
 	public void ctrlInit(InitRequest request, StreamObserver<InitResponse> responseObserver) {

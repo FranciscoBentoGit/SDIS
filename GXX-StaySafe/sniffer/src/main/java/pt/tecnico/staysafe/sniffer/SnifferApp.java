@@ -43,8 +43,6 @@ public class SnifferApp {
 			address += args[j];
 			address += " ";
 		}
-		//tirar print
-		System.out.printf("Address: %s%n", address);
 
 		execSniffer(host, port, name, address);
 	}
@@ -188,6 +186,7 @@ public class SnifferApp {
 
 				if ((goSplited.length > 1) && (goSplited[0].equals("single_prob"))) {
 					System.out.printf("Invalid command: do not have permission to execute that command.");
+
 				}
 
 			} while (exit != 1);

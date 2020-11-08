@@ -5,6 +5,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.protobuf.Timestamp;
+import com.google.protobuf.util.Timestamps;
+import com.google.protobuf.Duration;
+
+import java.lang.Math; 
 
 import pt.tecnico.staysafe.dgs.ObservationsData;
 
@@ -50,11 +54,11 @@ public class DgsServices {
         return "Success to report.";
     }
 
-    public synchronized float individual_infection_probability(int id){
+    public synchronized float individual_infection_probability(long id){
         Iterator iter = obsList.iterator();
         int foundID = 0;
         ArrayList<ObservationsData> matchedSniffers = new ArrayList<ObservationsData>();
-        int xValue ;
+        int xValue = 0;
         float probability;
 
         //Verifica se o id se encontra na lista de observaçoes
@@ -82,14 +86,66 @@ public class DgsServices {
                 ObservationsData toCompare = (ObservationsData)iter3.next();
 
                 if ((toCompare.getSnifferName().equals(obs.getSnifferName())) && (toCompare.getId() != obs.getId())  && obs.getInfection().equals("infetado")){
-                    continue;
+                    //Caso 1, não tem interseção
+                    if ((Timestamps.compare(toCompare.getTimeIn(),obs.getTimeIn()) <= 0 ) && (Timestamps.compare(toCompare.getTimeOut(),obs.getTimeIn()) <= 0)){
+                        continue;
+                    }
+                    //Caso 6, não tem interseção
+                    else if ( (Timestamps.compare(obs.getTimeOut(),toCompare.getTimeIn()) <= 0 ) && (Timestamps.compare(obs.getTimeOut(),obs.getTimeOut()) <= 0) ){
+                        continue;
+                    }
+                    //Caso 4, interseção interna
+                    else if ( (Timestamps.compare(obs.getTimeIn(),toCompare.getTimeIn()) <= 0) && (Timestamps.compare(toCompare.getTimeOut(),obs.getTimeOut()) <= 0) ){
+                        int diff = calculateTime(toCompare.getTimeIn(),toCompare.getTimeOut()); //passa o tempo do between(duration) para uma int minutos
+                        xValue = swapValue(xValue,diff);//funçao que recebe diff e ve se o valor da diff é maior do que o valor que esta na variavel xValue, se sim da update
+                        continue;
+                    }
+                    //Caso 2, interseçao esqueda
+                    else if ( (Timestamps.compare(toCompare.getTimeIn(),obs.getTimeIn()) <= 0) && (Timestamps.compare(toCompare.getTimeOut(),obs.getTimeOut()) <= 0) ){
+                        int diff = calculateTime(obs.getTimeIn(),toCompare.getTimeOut());
+                        xValue = swapValue(xValue,diff);
+                        continue;
+                    }
+                    //Caso 3, interseçao externa
+                    else if ( (Timestamps.compare(toCompare.getTimeIn(),obs.getTimeIn()) <= 0) && (Timestamps.compare(obs.getTimeOut(),toCompare.getTimeOut()) <= 0) ){
+                        int diff = calculateTime(obs.getTimeIn(),obs.getTimeOut());
+                        xValue = swapValue(xValue,diff);
+                        continue;
+                    }else {
+                        int diff = calculateTime(toCompare.getTimeIn(),obs.getTimeOut());
+                        xValue = swapValue(xValue,diff);
+                        continue;
+                    }
+
                 }
             }
 
         }
+        probability = calculateProbability(xValue);
 
-        return 0;
+        return probability;
 
+    }
+    public static int calculateTime(com.google.protobuf.Timestamp from,com.google.protobuf.Timestamp to){
+        Duration timeBetween = Timestamps.between(from,to);
+        long seconds = timeBetween.getSeconds();
+        int intSeconds = (int) seconds;
+        int minutes = intSeconds % 60;
+        return minutes;
+    }
+
+    public static int swapValue(int xValue,int diff){
+        if(diff > xValue){
+            return diff;
+        }
+        return xValue;
+    }
+
+    public static float calculateProbability(int xValue){
+        double exponencial = Math.exp(15-xValue);
+        float floatExponencial = (float) exponencial;
+        float probability = (1 / (1 + floatExponencial));
+        return probability;
     }
 
     public synchronized String ctrl_init(String snifferName, String address, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
