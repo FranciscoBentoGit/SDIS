@@ -58,7 +58,7 @@ public class DgsServices {
         Iterator iter = obsList.iterator();
         int foundID = 0;
         ArrayList<ObservationsData> matchedSniffers = new ArrayList<ObservationsData>();
-        int xValue = 0;
+        int xValue = 0, diff = 0;
         float probability;
 
         //Verifica se o id se encontra na lista de observaçoes
@@ -74,7 +74,7 @@ public class DgsServices {
         }
         //Se não encontra o ID, retornamos 2.00 para que posteriormente possamos verificar o valor e lançar o erro de ID nao encontrado
         if(foundID == 0){
-            return 0;
+            return 2;
         }
 
         Iterator iter2 = obsList.iterator();
@@ -96,23 +96,29 @@ public class DgsServices {
                     }
                     //Caso 4, interseção interna
                     else if ( (Timestamps.compare(obs.getTimeIn(),toCompare.getTimeIn()) <= 0) && (Timestamps.compare(toCompare.getTimeOut(),obs.getTimeOut()) <= 0) ){
-                        int diff = calculateTime(toCompare.getTimeIn(),toCompare.getTimeOut()); //passa o tempo do between(duration) para uma int minutos
+                        diff = calculateTime(toCompare.getTimeIn(),toCompare.getTimeOut()); //passa o tempo do between(duration) para uma int minutos
                         xValue = swapValue(xValue,diff);//funçao que recebe diff e ve se o valor da diff é maior do que o valor que esta na variavel xValue, se sim da update
                         continue;
                     }
                     //Caso 2, interseçao esqueda
                     else if ( (Timestamps.compare(toCompare.getTimeIn(),obs.getTimeIn()) <= 0) && (Timestamps.compare(toCompare.getTimeOut(),obs.getTimeOut()) <= 0) ){
-                        int diff = calculateTime(obs.getTimeIn(),toCompare.getTimeOut());
+                        System.out.printf("entrei2%n");
+                        diff = calculateTime(obs.getTimeIn(),toCompare.getTimeOut());
                         xValue = swapValue(xValue,diff);
                         continue;
                     }
+
                     //Caso 3, interseçao externa
                     else if ( (Timestamps.compare(toCompare.getTimeIn(),obs.getTimeIn()) <= 0) && (Timestamps.compare(obs.getTimeOut(),toCompare.getTimeOut()) <= 0) ){
-                        int diff = calculateTime(obs.getTimeIn(),obs.getTimeOut());
+                        System.out.printf("entrei3%n");
+                        diff = calculateTime(obs.getTimeIn(),obs.getTimeOut());
                         xValue = swapValue(xValue,diff);
                         continue;
-                    }else {
-                        int diff = calculateTime(toCompare.getTimeIn(),obs.getTimeOut());
+                    }
+
+                    else {
+                        System.out.printf("entrei4%n");
+                        diff = calculateTime(toCompare.getTimeIn(),obs.getTimeOut());
                         xValue = swapValue(xValue,diff);
                         continue;
                     }
@@ -121,6 +127,8 @@ public class DgsServices {
             }
 
         }
+        System.out.printf("diff: %d%n", diff);
+        System.out.printf("minutos: %d%n", xValue);
         probability = calculateProbability(xValue);
 
         return probability;
@@ -130,7 +138,7 @@ public class DgsServices {
         Duration timeBetween = Timestamps.between(from,to);
         long seconds = timeBetween.getSeconds();
         int intSeconds = (int) seconds;
-        int minutes = intSeconds % 60;
+        int minutes = intSeconds / 60;
         return minutes;
     }
 

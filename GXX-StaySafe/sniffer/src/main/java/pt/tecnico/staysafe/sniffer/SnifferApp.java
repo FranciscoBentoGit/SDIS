@@ -137,7 +137,7 @@ public class SnifferApp {
 						String[] auxInObs = obsSplited[2].split(" ",2);
 						String timestampInObs = auxInObs[0] + "T" + auxInObs[1] + "Z";
 
-						String[] auxOutObs = goSplited[3].split(" ",2);
+						String[] auxOutObs = obsSplited[3].split(" ",2);
 						String timestampOutObs = auxOutObs[0] + "T" + auxOutObs[1] + "Z";
 
 						com.google.protobuf.Timestamp timeInObs = null;

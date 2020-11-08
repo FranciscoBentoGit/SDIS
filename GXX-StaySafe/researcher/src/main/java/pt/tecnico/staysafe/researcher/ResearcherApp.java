@@ -33,27 +33,52 @@ public class ResearcherApp {
 		execResearcher(host, port);
 	}
 
-	private static void execResearcher(String host, int port){
+	private static void execResearcher(String host, int port) {
 		DgsClientApp client = new DgsClientApp();
 		DgsFrontend frontend = new DgsFrontend(host,port);
 		String go;
 
-		try (Scanner scanner = new Scanner(System.in)){
+		try (Scanner scanner = new Scanner(System.in)) {
 			int exit = 0;
 			do {
 				go = scanner.nextLine();
 
-				if (go.equals("") || go.equals("exitResearcher")){
+				if (go.equals("") || go.equals("exitResearcher")) {
 					exit = 1;
 				}
 				String[] goSplited = go.split(" ", 2);
-				if ((goSplited.length == 2) &&( goSplited[0].equals("single_prob"))){
+				if ((goSplited.length == 2) &&( goSplited[0].equals("single_prob"))) {
 					String[] ids = goSplited[1].split(",",4);
-					if ( ids.length == 4){
+
+					if (ids.length == 4){
+						System.out.printf("single_prob: too much arguments, at most 3 id's!");
+						exit = 1;
 						continue;
 					} 
+
+					else {
+						for(int i = 0; i < ids.length; i++) {
+							try {
+								IndividualProbResponse response;
+								response = client.individual_infection_probability(frontend, Long.parseLong(ids[i]));
+								String convResponse = response.toString();
+								String[] splited = convResponse.split(" ", 2);
+								
+								String prob = splited[1].toString();
+								if (prob.equals("2.0\n")) {
+									prob = "0.0";
+								}
+
+								float f = Float.parseFloat(prob);  
+								System.out.printf("%.3f%n",f);
+							} catch (StatusRuntimeException e) {
+								System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+							}
+						}
+					}
 				}
-			}
+
+			} while (exit != 1);
 		}
 
 		

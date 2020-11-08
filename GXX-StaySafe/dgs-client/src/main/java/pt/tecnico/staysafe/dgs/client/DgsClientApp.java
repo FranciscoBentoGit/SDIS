@@ -96,4 +96,11 @@ public class DgsClientApp {
 		return response;
 	}
 
+	public static IndividualProbResponse individual_infection_probability(DgsFrontend frontend, long id) {
+		IndividualProbResponse response;
+		IndividualProbRequest request = IndividualProbRequest.newBuilder().setId(id).build();
+		response = frontend.individual_infection_probability(request);
+		return response;
+	}
+
 }

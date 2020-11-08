@@ -46,4 +46,10 @@ public class DgsFrontend {
 		response = _stub.ctrlClear(request);
 		return response;
 	}
+
+	public IndividualProbResponse individual_infection_probability(IndividualProbRequest request) {
+		IndividualProbResponse response;
+		response = _stub.individualInfectionProbability(request);
+		return response;
+	}
 }
