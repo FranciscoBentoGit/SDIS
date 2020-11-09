@@ -151,6 +151,81 @@ public class DgsServices {
         return probability;
     }
 
+    public synchronized float[] aggregate_infection_probability(String command){
+        ArrayList<Long> nonInfectedId = new ArrayList<Long>();
+        float[] responseMean = new float[2];
+        float[] responsePercentile = new float[3];
+        Iterator iter = obsList.iterator();
+        while (iter.hasNext()){
+            ObservationsData obs = (ObservationsData)iter.next();
+            if (obs.getInfection().equals("nao-infetado")){
+                if(!(nonInfectedId.contains(obs.getId()))){
+                    nonInfectedId.add(obs.getId());
+                }
+            }
+        }
+        ArrayList<Float> nonInfectedProbabilities = new ArrayList<Float>();
+        Iterator iter2 = nonInfectedId.iterator();
+        while (iter2.hasNext()){
+            long id = (long)iter2.next();
+            nonInfectedProbabilities.add(individual_infection_probability(id));
+        }
+        nonInfectedProbabilities.sort(Comparator.naturalOrder());
+        if (command.equals("mean_dev")) {
+            float media = 0 , desvio_padrao;
+            for (int i=0; i < nonInfectedProbabilities.size();i++){
+                media += nonInfectedProbabilities.get(i);
+            }
+            media = media / nonInfectedProbabilities.size();
+            desvio_padrao = calculateSD(nonInfectedProbabilities,media);
+            
+            responseMean[0] = media;
+            responseMean[1] = desvio_padrao;
+            return responseMean;
+
+        }else{
+            float mediana,q1,q3;
+            
+            if((nonInfectedProbabilities.size()%2)==0){
+                //Lista com tamanho par
+                mediana = nonInfectedProbabilities.get(nonInfectedProbabilities.size()/2) + nonInfectedProbabilities.get((nonInfectedProbabilities.size()/2) +1);
+                mediana = mediana / 2;
+            }else{
+                //Lista com tamanho impar
+                int aux = (int) ((nonInfectedProbabilities.size()/2)-0.5);
+                mediana=nonInfectedProbabilities.get(aux);
+            }
+            if((nonInfectedProbabilities.size()%4)==0){
+                q1 = (nonInfectedProbabilities.get((nonInfectedProbabilities.size()/4) -1) + nonInfectedProbabilities.get(nonInfectedProbabilities.size()/4))/2;
+                q3 = (nonInfectedProbabilities.get((nonInfectedProbabilities.size()/(4/3)) - 1) + nonInfectedProbabilities.get(nonInfectedProbabilities.size() / (4/3) ) ) /2;
+            }else{
+                q1 = nonInfectedProbabilities.get(Math.floorDiv(nonInfectedProbabilities.size(),4));
+                q3 = nonInfectedProbabilities.get(Math.floorDiv(nonInfectedProbabilities.size(),4/3));
+
+            }
+            responsePercentile[0] = mediana;
+            responsePercentile[1] = q1;
+            responsePercentile[2] = q3;
+            return responsePercentile;
+
+        }
+
+
+    }
+
+    public synchronized float calculateSD(ArrayList<Float> nonInfectedProbabilities,float media){
+        float sum = 0, standardDeviation=0;
+        int size = nonInfectedProbabilities.size();
+        for (float prob : nonInfectedProbabilities){
+            sum += prob;
+        }
+        for (float prob : nonInfectedProbabilities){
+            standardDeviation +=  Math.pow(prob - media,2);
+        }
+        float aux = (float) standardDeviation;
+        return (float) Math.sqrt(aux/size);
+    }
+
     public synchronized String ctrl_init(String snifferName, String address, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
     	String message;
     	message = sniffer_join(snifferName,address);
