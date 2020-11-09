@@ -67,13 +67,18 @@ public class SnifferApp {
 			do {
 				go = scanner.nextLine();
 
+				String[] checkCardinal = go.split(" ", 2);
+				String[] goSplited = go.split(",", 4);
+
 				if (go.equals("") || go.equals("exitSniffer")) {
 					exit = 1;
 				}
 
-				String[] goSplited = go.split(",", 4);
+				else if (checkCardinal[0].equals("#")) {
+					continue;
+				}
 
-				if ((goSplited.length == 1) && (goSplited[0].equals("getInfo"))) {
+				else if ((goSplited.length == 1) && (goSplited[0].equals("getInfo"))) {
 					try {
 						SnifferInfoResponse responseInfo;
 						responseInfo = client.sniffer_info(frontend, snifferName);
@@ -83,13 +88,18 @@ public class SnifferApp {
 					}
 				}
 
-				if ((goSplited.length == 2) && (goSplited[0].equals("sleep"))) {
+				else if ((goSplited.length == 1) && (goSplited[0].equals("help"))) {
+					String message = client.helpSniffer();
+					System.out.printf("%s%n", message);
+				}
+
+				else if ((goSplited.length == 2) && (goSplited[0].equals("sleep"))) {
 					int sleepTime = Integer.parseInt(goSplited[1]);
 					client.sleep_request(sleepTime);
 				}
 
 				
-				if (goSplited.length == 4) {
+				else if (goSplited.length == 4) {
 					String infection = goSplited[0];
 					if (!(infection.equals("infetado")) && !(infection.equals("nao-infetado"))) {
 						continue;
@@ -176,17 +186,36 @@ public class SnifferApp {
 
 				}
 
-				if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
+				else if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
+					try {
+						PingResponse response;
+						response = client.ctrl_ping(frontend);
+						System.out.printf("%s%n", response);
+					} catch (StatusRuntimeException e) {
+						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+					}	
+				}
+
+				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
+					ClearResponse response;
+					response = client.ctrl_clear(frontend);
+					System.out.printf("%s%n", response);
+				}
+
+				else if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
 					System.out.printf("Invalid command: do not have permission to execute that command.");
 				}
 
-				if ((goSplited.length == 1) && (goSplited[0].equals("percentiles"))) {
+				else if ((goSplited.length == 1) && (goSplited[0].equals("percentiles"))) {
 					System.out.printf("Invalid command: do not have permission to execute that command.");
 				}
 
-				if ((goSplited.length > 1) && (goSplited[0].equals("single_prob"))) {
+				else if ((goSplited.length > 1) && (goSplited[0].equals("single_prob"))) {
 					System.out.printf("Invalid command: do not have permission to execute that command.");
+				}
 
+				else {
+					System.out.printf("Invalid input!%n");
 				}
 
 			} while (exit != 1);

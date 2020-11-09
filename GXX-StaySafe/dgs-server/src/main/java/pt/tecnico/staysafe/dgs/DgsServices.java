@@ -102,7 +102,6 @@ public class DgsServices {
                     }
                     //Caso 2, interseçao esqueda
                     else if ( (Timestamps.compare(toCompare.getTimeIn(),obs.getTimeIn()) <= 0) && (Timestamps.compare(toCompare.getTimeOut(),obs.getTimeOut()) <= 0) ){
-                        System.out.printf("entrei2%n");
                         diff = calculateTime(obs.getTimeIn(),toCompare.getTimeOut());
                         xValue = swapValue(xValue,diff);
                         continue;
@@ -110,14 +109,12 @@ public class DgsServices {
 
                     //Caso 3, interseçao externa
                     else if ( (Timestamps.compare(toCompare.getTimeIn(),obs.getTimeIn()) <= 0) && (Timestamps.compare(obs.getTimeOut(),toCompare.getTimeOut()) <= 0) ){
-                        System.out.printf("entrei3%n");
                         diff = calculateTime(obs.getTimeIn(),obs.getTimeOut());
                         xValue = swapValue(xValue,diff);
                         continue;
                     }
 
                     else {
-                        System.out.printf("entrei4%n");
                         diff = calculateTime(toCompare.getTimeIn(),obs.getTimeOut());
                         xValue = swapValue(xValue,diff);
                         continue;
@@ -127,8 +124,6 @@ public class DgsServices {
             }
 
         }
-        System.out.printf("diff: %d%n", diff);
-        System.out.printf("minutos: %d%n", xValue);
         probability = calculateProbability(xValue);
 
         return probability;

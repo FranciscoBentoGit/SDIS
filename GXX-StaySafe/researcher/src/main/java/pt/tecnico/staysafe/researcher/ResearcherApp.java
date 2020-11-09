@@ -43,11 +43,18 @@ public class ResearcherApp {
 			do {
 				go = scanner.nextLine();
 
+				String[] goSplited = go.split(" ", 2);
+
 				if (go.equals("") || go.equals("exitResearcher")) {
 					exit = 1;
 				}
-				String[] goSplited = go.split(" ", 2);
-				if ((goSplited.length == 2) &&( goSplited[0].equals("single_prob"))) {
+
+				else if ((goSplited.length == 1) && (goSplited[0].equals("help"))) {
+					String message = client.helpResearcher();
+					System.out.printf("%s%n", message);
+				}
+				
+				else if ((goSplited.length == 2) &&( goSplited[0].equals("single_prob"))) {
 					String[] ids = goSplited[1].split(",",4);
 
 					if (ids.length == 4){
@@ -76,6 +83,34 @@ public class ResearcherApp {
 							}
 						}
 					}
+				}
+
+				else if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
+					try {
+						PingResponse response;
+						response = client.ctrl_ping(frontend);
+						System.out.printf("%s%n", response);
+					} catch (StatusRuntimeException e) {
+						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+					}	
+				}
+
+				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
+					ClearResponse response;
+					response = client.ctrl_clear(frontend);
+					System.out.printf("%s%n", response);
+				}
+
+				else if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
+					System.out.printf("Invalid command: do not have permission to execute that command.");
+				}
+
+				else if ((goSplited.length == 1) && (goSplited[0].equals("percentiles"))) {
+					System.out.printf("Invalid command: do not have permission to execute that command.");
+				}
+
+				else {
+					System.out.printf("Invalid input!%n");
 				}
 
 			} while (exit != 1);
