@@ -97,7 +97,7 @@ then
   REPO="$BASEDIR"/repo
 fi
 
-CLASSPATH="$BASEDIR"/etc:"$REPO"/pt/tecnico/staysafe/GXX/journalist/1.0.0-SNAPSHOT/journalist-1.0.0-SNAPSHOT.jar
+CLASSPATH="$BASEDIR"/etc:"$REPO"/pt/tecnico/staysafe/G11/journalist/1.0.0-SNAPSHOT/journalist-1.0.0-SNAPSHOT.jar
 
 ENDORSED_DIR=
 if [ -n "$ENDORSED_DIR" ] ; then

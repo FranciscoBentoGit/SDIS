@@ -20,8 +20,15 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: input cannot be empty!").asRuntimeException());
 	    }
 	    if (name.length() < 5 || name.length() > 30) {
-	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: invalid name!").asRuntimeException());
+	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: invalid name, should contain 5 to 30 characters!").asRuntimeException());
 		}
+		
+		/*String numRegex   = ".[0-9].";
+		String alphaRegex = ".[a-zA-Z].";
+		String specialRegex = (".[!@#$%&*()_+=|<>?{}~].");
+		if (!(name.matches(numRegex) && name.matches(alphaRegex) && (!(name.matches(specialRegex))))) {
+		    responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: invalid name, should be alpha numeric!").asRuntimeException());
+		}*/ //peguntar
 
 	    String address = request.getAddress();
 	    if (address == null || address.isBlank()) {

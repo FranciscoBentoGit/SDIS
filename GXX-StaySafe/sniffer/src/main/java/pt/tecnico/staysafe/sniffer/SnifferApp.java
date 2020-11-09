@@ -59,8 +59,8 @@ public class SnifferApp {
 			System.out.printf("%s%n", responseJoin);
 		} catch (StatusRuntimeException e) {
 			System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+			return;
 		}
-		
 
 		try (Scanner scanner = new Scanner(System.in)) {
 			int exit = 0;
