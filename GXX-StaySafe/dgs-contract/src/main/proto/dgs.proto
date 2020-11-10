@@ -58,6 +58,16 @@ message IndividualProbResponse {
 }
 
 
+//function aggregate_infection_probability
+//
+message AggregateProbRequest {
+	string command = 1;
+}
+
+message AggregateProbResponse {
+	repeated float stat = 1;
+}
+
 //function ctrlPing
 //
 message PingRequest {
@@ -101,6 +111,7 @@ service Dgs {
 	rpc sniffer_info(SnifferInfoRequest) returns (SnifferInfoResponse);
 	rpc report(ReportRequest) returns (ReportResponse);
 	rpc individual_infection_probability(IndividualProbRequest) returns (IndividualProbResponse);
+	rpc aggregate_infection_probability(AggregateProbRequest) returns (AggregateProbResponse);
 	rpc ctrl_ping(PingRequest) returns (PingResponse);
 	rpc ctrl_init(InitRequest) returns (InitResponse);
 	rpc ctrl_clear(ClearRequest) returns (ClearResponse);

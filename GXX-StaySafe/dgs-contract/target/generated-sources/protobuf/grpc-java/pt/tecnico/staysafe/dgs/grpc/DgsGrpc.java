@@ -151,6 +151,37 @@ public final class DgsGrpc {
     return getIndividualInfectionProbabilityMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest,
+      pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse> getAggregateInfectionProbabilityMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "aggregate_infection_probability",
+      requestType = pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest.class,
+      responseType = pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest,
+      pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse> getAggregateInfectionProbabilityMethod() {
+    io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest, pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse> getAggregateInfectionProbabilityMethod;
+    if ((getAggregateInfectionProbabilityMethod = DgsGrpc.getAggregateInfectionProbabilityMethod) == null) {
+      synchronized (DgsGrpc.class) {
+        if ((getAggregateInfectionProbabilityMethod = DgsGrpc.getAggregateInfectionProbabilityMethod) == null) {
+          DgsGrpc.getAggregateInfectionProbabilityMethod = getAggregateInfectionProbabilityMethod =
+              io.grpc.MethodDescriptor.<pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest, pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "aggregate_infection_probability"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DgsMethodDescriptorSupplier("aggregate_infection_probability"))
+              .build();
+        }
+      }
+    }
+    return getAggregateInfectionProbabilityMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.PingRequest,
       pt.tecnico.staysafe.dgs.grpc.PingResponse> getCtrlPingMethod;
 
@@ -322,6 +353,13 @@ public final class DgsGrpc {
 
     /**
      */
+    public void aggregateInfectionProbability(pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getAggregateInfectionProbabilityMethod(), responseObserver);
+    }
+
+    /**
+     */
     public void ctrlPing(pt.tecnico.staysafe.dgs.grpc.PingRequest request,
         io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.PingResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getCtrlPingMethod(), responseObserver);
@@ -371,6 +409,13 @@ public final class DgsGrpc {
                 pt.tecnico.staysafe.dgs.grpc.IndividualProbRequest,
                 pt.tecnico.staysafe.dgs.grpc.IndividualProbResponse>(
                   this, METHODID_INDIVIDUAL_INFECTION_PROBABILITY)))
+          .addMethod(
+            getAggregateInfectionProbabilityMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest,
+                pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse>(
+                  this, METHODID_AGGREGATE_INFECTION_PROBABILITY)))
           .addMethod(
             getCtrlPingMethod(),
             asyncUnaryCall(
@@ -444,6 +489,14 @@ public final class DgsGrpc {
 
     /**
      */
+    public void aggregateInfectionProbability(pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getAggregateInfectionProbabilityMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void ctrlPing(pt.tecnico.staysafe.dgs.grpc.PingRequest request,
         io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.PingResponse> responseObserver) {
       asyncUnaryCall(
@@ -507,6 +560,13 @@ public final class DgsGrpc {
     public pt.tecnico.staysafe.dgs.grpc.IndividualProbResponse individualInfectionProbability(pt.tecnico.staysafe.dgs.grpc.IndividualProbRequest request) {
       return blockingUnaryCall(
           getChannel(), getIndividualInfectionProbabilityMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse aggregateInfectionProbability(pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getAggregateInfectionProbabilityMethod(), getCallOptions(), request);
     }
 
     /**
@@ -579,6 +639,14 @@ public final class DgsGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse> aggregateInfectionProbability(
+        pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getAggregateInfectionProbabilityMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<pt.tecnico.staysafe.dgs.grpc.PingResponse> ctrlPing(
         pt.tecnico.staysafe.dgs.grpc.PingRequest request) {
       return futureUnaryCall(
@@ -606,9 +674,10 @@ public final class DgsGrpc {
   private static final int METHODID_SNIFFER_INFO = 1;
   private static final int METHODID_REPORT = 2;
   private static final int METHODID_INDIVIDUAL_INFECTION_PROBABILITY = 3;
-  private static final int METHODID_CTRL_PING = 4;
-  private static final int METHODID_CTRL_INIT = 5;
-  private static final int METHODID_CTRL_CLEAR = 6;
+  private static final int METHODID_AGGREGATE_INFECTION_PROBABILITY = 4;
+  private static final int METHODID_CTRL_PING = 5;
+  private static final int METHODID_CTRL_INIT = 6;
+  private static final int METHODID_CTRL_CLEAR = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -642,6 +711,10 @@ public final class DgsGrpc {
         case METHODID_INDIVIDUAL_INFECTION_PROBABILITY:
           serviceImpl.individualInfectionProbability((pt.tecnico.staysafe.dgs.grpc.IndividualProbRequest) request,
               (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.IndividualProbResponse>) responseObserver);
+          break;
+        case METHODID_AGGREGATE_INFECTION_PROBABILITY:
+          serviceImpl.aggregateInfectionProbability((pt.tecnico.staysafe.dgs.grpc.AggregateProbRequest) request,
+              (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.AggregateProbResponse>) responseObserver);
           break;
         case METHODID_CTRL_PING:
           serviceImpl.ctrlPing((pt.tecnico.staysafe.dgs.grpc.PingRequest) request,
@@ -720,6 +793,7 @@ public final class DgsGrpc {
               .addMethod(getSnifferInfoMethod())
               .addMethod(getReportMethod())
               .addMethod(getIndividualInfectionProbabilityMethod())
+              .addMethod(getAggregateInfectionProbabilityMethod())
               .addMethod(getCtrlPingMethod())
               .addMethod(getCtrlInitMethod())
               .addMethod(getCtrlClearMethod())

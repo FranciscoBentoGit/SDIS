@@ -151,7 +151,7 @@ public class DgsServices {
         return probability;
     }
 
-    public synchronized float[] aggregate_infection_probability(String command){
+    public synchronized float aggregate_infection_probability(int index, String command){
         ArrayList<Long> nonInfectedId = new ArrayList<Long>();
         float[] responseMean = new float[2];
         float[] responsePercentile = new float[3];
@@ -181,7 +181,7 @@ public class DgsServices {
             
             responseMean[0] = media;
             responseMean[1] = desvio_padrao;
-            return responseMean;
+            return responseMean[index];
 
         }else{
             float mediana,q1,q3;
@@ -206,7 +206,7 @@ public class DgsServices {
             responsePercentile[0] = mediana;
             responsePercentile[1] = q1;
             responsePercentile[2] = q3;
-            return responsePercentile;
+            return responsePercentile[index];
 
         }
 
@@ -214,11 +214,8 @@ public class DgsServices {
     }
 
     public synchronized float calculateSD(ArrayList<Float> nonInfectedProbabilities,float media){
-        float sum = 0, standardDeviation=0;
+        float standardDeviation=0;
         int size = nonInfectedProbabilities.size();
-        for (float prob : nonInfectedProbabilities){
-            sum += prob;
-        }
         for (float prob : nonInfectedProbabilities){
             standardDeviation +=  Math.pow(prob - media,2);
         }

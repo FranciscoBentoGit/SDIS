@@ -4,6 +4,7 @@ import io.grpc.stub.StreamObserver;
 import pt.tecnico.staysafe.dgs.grpc.DgsGrpc;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import com.google.protobuf.Timestamp;
+import java.util.regex.*;
 
 import static io.grpc.Status.INVALID_ARGUMENT;
 
@@ -23,12 +24,12 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: invalid name, should contain 5 to 30 characters!").asRuntimeException());
 		}
 		
-		/*String numRegex   = ".[0-9].";
-		String alphaRegex = ".[a-zA-Z].";
-		String specialRegex = (".[!@#$%&*()_+=|<>?{}~].");
-		if (!(name.matches(numRegex) && name.matches(alphaRegex) && (!(name.matches(specialRegex))))) {
+		String regex = "^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(name);
+		if (!(m.matches())) {
 		    responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: invalid name, should be alpha numeric!").asRuntimeException());
-		}*/ //peguntar
+		}
 
 	    String address = request.getAddress();
 	    if (address == null || address.isBlank()) {
@@ -105,6 +106,26 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		    responseObserver.onNext(response);
 		    responseObserver.onCompleted();
 	    }
+	}
+
+	@Override
+	public void aggregateInfectionProbability(AggregateProbRequest request, StreamObserver<AggregateProbResponse> responseObserver) {
+
+	    String command = request.getCommand();
+		if (command == null || command.isBlank()) {
+	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Command: input cannot be empty!").asRuntimeException());
+		}
+	    
+	    else if (command.equals("mean_dev")){
+		    AggregateProbResponse response = AggregateProbResponse.newBuilder().setStat(0,dService.aggregate_infection_probability(0,command)).setStat(1,dService.aggregate_infection_probability(1,command)).build();
+		    responseObserver.onNext(response);
+		    responseObserver.onCompleted();
+		}
+		else {
+			AggregateProbResponse response = AggregateProbResponse.newBuilder().setStat(0,dService.aggregate_infection_probability(0,command)).setStat(1,dService.aggregate_infection_probability(1,command)).setStat(2,dService.aggregate_infection_probability(2,command)).build();
+		    responseObserver.onNext(response);
+		    responseObserver.onCompleted();
+		}
 	}
 	
 	@Override

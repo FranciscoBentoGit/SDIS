@@ -51,7 +51,7 @@ public class SnifferApp {
 		ArrayList<AddObs> addObs= new ArrayList<AddObs>();
 		DgsClientApp client = new DgsClientApp();
 		DgsFrontend frontend = new DgsFrontend(host,port);
-		String go;
+		String go = "";
 		
 		try {
 			SnifferJoinResponse responseJoin;
@@ -65,13 +65,23 @@ public class SnifferApp {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int exit = 0;
 			do {
-				go = scanner.nextLine();
+				if (!scanner.hasNextLine()) {
+					System.out.println("Done: file already read!");
+					return;
+				}
 
+				go = scanner.nextLine();
+				
 				String[] checkCardinal = go.split(" ", 2);
 				String[] goSplited = go.split(",", 4);
 
-				if (go.equals("") || go.equals("exitSniffer")) {
+				if (go.equals("exitSniffer")) {
 					exit = 1;
+					continue;
+				}
+
+				if (go.equals("")) {
+					continue;
 				}
 
 				else if (checkCardinal[0].equals("#")) {
@@ -126,10 +136,21 @@ public class SnifferApp {
 					AddObs data = new AddObs(infection,id,timeIn,timeOut);
 				    addObs.add(data);
 
-				    String obsGo;
+					String obsGo = "";
+					int aux = 0;
 					do {
 						System.out.printf("---Do not have more observations to report? Press ENTER.%n");
-						obsGo = scanner.nextLine();
+						if (!scanner.hasNextLine()) {
+							obsGo = "exitSniffer";
+							flag = 1;
+							aux = 1;
+							continue;
+						}
+
+						if (!obsGo.equals("exitSniffer")) {
+							obsGo = scanner.nextLine();
+						}
+						
 						if (obsGo.equals("") || obsGo.equals("exitSniffer")) {
 							flag = 1;
 							continue;
@@ -179,6 +200,10 @@ public class SnifferApp {
 					}
 
 					addObs.removeAll(addObs); 
+
+					if (aux == 1) {
+						System.out.println("Done: file already read!");
+					}
 
 					if (obsGo.equals("exitSniffer")) {
 						exit = 1;
