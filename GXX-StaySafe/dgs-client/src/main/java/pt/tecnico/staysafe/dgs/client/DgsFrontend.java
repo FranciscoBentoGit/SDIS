@@ -52,4 +52,10 @@ public class DgsFrontend {
 		response = _stub.individualInfectionProbability(request);
 		return response;
 	}
+
+	public AggregateProbResponse aggregate_infection_probability(AggregateProbRequest request) {
+		AggregateProbResponse response;
+		response = _stub.aggregateInfectionProbability(request);
+		return response;
+	}
 }

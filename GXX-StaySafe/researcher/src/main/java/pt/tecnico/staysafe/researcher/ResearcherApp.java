@@ -73,11 +73,12 @@ public class ResearcherApp {
 								
 								String prob = splited[1].toString();
 								if (prob.equals("2.0\n")) {
-									prob = "0.0";
+									prob = "Id: not found!"; 
+									System.out.printf("%s%n",prob);
+								} else {
+									float f = Float.parseFloat(prob);
+									System.out.printf("%.3f%n",f);
 								}
-
-								float f = Float.parseFloat(prob);  
-								System.out.printf("%.3f%n",f);
 							} catch (StatusRuntimeException e) {
 								System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 							}
@@ -102,11 +103,28 @@ public class ResearcherApp {
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
-					System.out.printf("Invalid command: do not have permission to execute that command.");
+					try {
+						AggregateProbResponse response;
+						String command = goSplited[0];
+						System.out.printf("%s",command);
+						response = client.aggregate_infection_probability(frontend,command);
+						System.out.printf("%s%n", response);
+					} catch (StatusRuntimeException e) {
+						System.out.println("entrei");
+						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+					}	
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("percentiles"))) {
-					System.out.printf("Invalid command: do not have permission to execute that command.");
+					try {
+						AggregateProbResponse response;
+						String command = goSplited[0];
+						response = client.aggregate_infection_probability(frontend,command);
+						System.out.printf("%s%n", response);
+					} catch (StatusRuntimeException e) {
+						System.out.println("entreiPercentiles");
+						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+					}
 				}
 
 				else {

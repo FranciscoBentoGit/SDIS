@@ -121,6 +121,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		    responseObserver.onNext(response);
 		    responseObserver.onCompleted();
 		}
+		
 		else {
 			AggregateProbResponse response = AggregateProbResponse.newBuilder().setStat(0,dService.aggregate_infection_probability(0,command)).setStat(1,dService.aggregate_infection_probability(1,command)).setStat(2,dService.aggregate_infection_probability(2,command)).build();
 		    responseObserver.onNext(response);

@@ -115,6 +115,13 @@ public class DgsClientApp {
 		return response;
 	}
 
+	public static AggregateProbResponse aggregate_infection_probability(DgsFrontend frontend, String command) {
+		AggregateProbResponse response;
+		AggregateProbRequest request = AggregateProbRequest.newBuilder().setCommand(command).build();
+		response = frontend.aggregate_infection_probability(request);
+		return response;
+	}
+
 	public static String helpCtrl() {
 		String ctrlInit = "** init -- nao sei o q faz ainda\n";
 		String ctrlClear = "** clear -- remove all observations and sniffers\n";
