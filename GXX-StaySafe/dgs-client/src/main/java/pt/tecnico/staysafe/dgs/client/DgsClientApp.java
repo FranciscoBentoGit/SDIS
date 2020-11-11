@@ -89,27 +89,32 @@ public class DgsClientApp {
 		ArrayList<String> obs = new ArrayList<String>();
 		ArrayList<ObservationsInit> obsInit = new ArrayList<ObservationsInit>();
 		String[] info = preInfo.split(" ",3);
+		
 		if(info.length != 3){
 			System.out.println("Invalid input!");
 			return;
 		}
+
 		String file = info[0];
 		String snifferName = info[1];
 		String address = info[2];
 		int flag = 0;
-		
 		try {
 			SnifferJoinResponse message;
 			message = sniffer_join(frontend,snifferName,address);
 			System.out.println(message);
-			if (message.equals("Failed to join sniffer: invalid address for that name.")){
+			String compare = message.toString();
+			String[] splited = compare.split(" ",2);
+			String[] splitMarks = splited[1].split("\"",3);
+			if (!(splitMarks[1].equals("Success to join sniffer."))){
 				flag = 1;
-			}
+			} 
+			
 		} catch (StatusRuntimeException e) {
 			flag = 1;
 			System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 		}
-		
+
 		if (flag == 1){
 			return;
 		}

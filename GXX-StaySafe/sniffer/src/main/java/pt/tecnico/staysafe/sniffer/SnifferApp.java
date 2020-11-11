@@ -40,8 +40,14 @@ public class SnifferApp {
 		String name = args[2], address = "";
 
 		for (j = 3; j < i; j++) {
-			address += args[j];
-			address += " ";
+			if ((i-j) == 1) {
+				address += args[j];
+			} else {
+				address += args[j];
+				address += " ";
+			}
+			
+
 		}
 
 		execSniffer(host, port, name, address);
@@ -72,7 +78,7 @@ public class SnifferApp {
 
 				go = scanner.nextLine();
 				
-				String[] checkCardinal = go.split(" ", 2);
+				String[] check = go.split(" ", 2);
 				String[] goSplited = go.split(",", 4);
 
 				if (go.equals("exitSniffer")) {
@@ -84,8 +90,17 @@ public class SnifferApp {
 					continue;
 				}
 
-				else if (checkCardinal[0].equals("#")) {
+				else if (check[0].equals("#")) {
 					continue;
+				}
+
+				else if ((check.length == 2) && (check[0].equals("init"))) {
+					String[] info = check[1].split(" ",3);
+					if (!(info[1].equals(snifferName))) {
+						System.out.printf("Invalid input: cannot init another sniffer, only this one - %s.%n", snifferName);
+					} else{
+						client.aux_ctrl_init(frontend,check[1]);
+					}
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("getInfo"))) {
