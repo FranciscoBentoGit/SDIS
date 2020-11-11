@@ -5,38 +5,28 @@ Distributed Systems 2020-2021, 1st semester project
 
 ## Authors
 
-*(fill-in line below with group identifier e.g. G31; and then delete this line)*  
-**Group GXX**
+ 
+**Group G11**
 
 ### Code identification
 
-In all the source files (including POMs), please replace __GXX__ with your group identifier.  
+In all the source files (including POMs), please replace __G11__ with your group identifier.  
 The group identifier is composed of a G and the gropu number - always with two digits.  
 This change is important for code dependency management, to make sure that your code runs using the correct components and not someone else's.
 
 ### Team members
+ 
 
-*(fill-in table below with team members; and then delete this line)*  
+| Number | Name              | User                                  | Email                                 |
+| -------|-------------------|---------------------------------------|---------------------------------------|
+| 93581  | Francisco Bento   | <https://github.com/FranciscoBentoGit>| <francisco.bento@tecnico.ulisboa.pt>  |
+| 93588  | João Lopes        | <https://github.com/Joao-Pedro-Lopes> | <joaopedrolopes00@tecnico.ulisboa.pt> |
 
-| Number | Name              | User                             | Email                               |
-| -------|-------------------|----------------------------------| ------------------------------------|
-| 11111  | Alice Distributed | <https://github.com/AliceUser>   | <mailto:alice@tecnico.ulisboa.pt>   |
-| 22222  | Bob Systems       | <https://github.com/BobUser>     | <mailto:bob@tecnico.ulisboa.pt>     |
-<!--| 33333  | Charlie Rules     | <https://github.com/CharlieUser> | <mailto:charlie@tecnico.ulisboa.pt> |-->
 
 ### Task leaders
 
-*(fill-in table below with with team members assigned as leader to each task set; and then delete this line)*  
 
-| Task set | To-Do                         | Leader              |
-| ---------|-------------------------------| --------------------|
-| core     | protocol buffers, silo-client | _(whole team)_      |
-| T1       | cam_join, cam_info, eye       | _Alice Distributed_ |
-| T2       | report, spotter               | _Bob Systems_       |
-<!--| T3       | track, trackMatch, trace      | _Charlie Rules_     |-->
-| T3       | test T1                       | _Bob Systems_     |
-| T4       | test T2                       | _Alice Distributed_ |
-<!--| T6       | test T3                       | _Bob Systems_       |-->
+The group has made the choice of not spliting tasks, but instead doing the project side by side and every choice was made by both.
 
 
 ## Getting Started
@@ -79,4 +69,6 @@ The integration tests are skipped because they require the servers to be running
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. 
+We use [SemVer](http://semver.org/) for versioning.
+
+## Main Concept
