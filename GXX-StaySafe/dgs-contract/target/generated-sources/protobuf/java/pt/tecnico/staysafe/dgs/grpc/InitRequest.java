@@ -21,7 +21,6 @@ private static final long serialVersionUID = 0L;
   }
   private InitRequest() {
     snifferName_ = "";
-    address_ = "";
     infection_ = "";
   }
 
@@ -64,21 +63,15 @@ private static final long serialVersionUID = 0L;
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            address_ = s;
-            break;
-          }
-          case 26: {
-            java.lang.String s = input.readStringRequireUtf8();
-
             infection_ = s;
             break;
           }
-          case 32: {
+          case 24: {
 
             id_ = input.readInt64();
             break;
           }
-          case 42: {
+          case 34: {
             com.google.protobuf.Timestamp.Builder subBuilder = null;
             if (timeIn_ != null) {
               subBuilder = timeIn_.toBuilder();
@@ -91,7 +84,7 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
-          case 50: {
+          case 42: {
             com.google.protobuf.Timestamp.Builder subBuilder = null;
             if (timeOut_ != null) {
               subBuilder = timeOut_.toBuilder();
@@ -172,46 +165,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int ADDRESS_FIELD_NUMBER = 2;
-  private volatile java.lang.Object address_;
-  /**
-   * <code>string address = 2;</code>
-   * @return The address.
-   */
-  public java.lang.String getAddress() {
-    java.lang.Object ref = address_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      address_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string address = 2;</code>
-   * @return The bytes for address.
-   */
-  public com.google.protobuf.ByteString
-      getAddressBytes() {
-    java.lang.Object ref = address_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      address_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int INFECTION_FIELD_NUMBER = 3;
+  public static final int INFECTION_FIELD_NUMBER = 2;
   private volatile java.lang.Object infection_;
   /**
-   * <code>string infection = 3;</code>
+   * <code>string infection = 2;</code>
    * @return The infection.
    */
   public java.lang.String getInfection() {
@@ -227,7 +184,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string infection = 3;</code>
+   * <code>string infection = 2;</code>
    * @return The bytes for infection.
    */
   public com.google.protobuf.ByteString
@@ -244,57 +201,57 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int ID_FIELD_NUMBER = 4;
+  public static final int ID_FIELD_NUMBER = 3;
   private long id_;
   /**
-   * <code>int64 id = 4;</code>
+   * <code>int64 id = 3;</code>
    * @return The id.
    */
   public long getId() {
     return id_;
   }
 
-  public static final int TIMEIN_FIELD_NUMBER = 5;
+  public static final int TIMEIN_FIELD_NUMBER = 4;
   private com.google.protobuf.Timestamp timeIn_;
   /**
-   * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
    * @return Whether the timeIn field is set.
    */
   public boolean hasTimeIn() {
     return timeIn_ != null;
   }
   /**
-   * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
    * @return The timeIn.
    */
   public com.google.protobuf.Timestamp getTimeIn() {
     return timeIn_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timeIn_;
   }
   /**
-   * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
    */
   public com.google.protobuf.TimestampOrBuilder getTimeInOrBuilder() {
     return getTimeIn();
   }
 
-  public static final int TIMEOUT_FIELD_NUMBER = 6;
+  public static final int TIMEOUT_FIELD_NUMBER = 5;
   private com.google.protobuf.Timestamp timeOut_;
   /**
-   * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
    * @return Whether the timeOut field is set.
    */
   public boolean hasTimeOut() {
     return timeOut_ != null;
   }
   /**
-   * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
    * @return The timeOut.
    */
   public com.google.protobuf.Timestamp getTimeOut() {
     return timeOut_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timeOut_;
   }
   /**
-   * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
    */
   public com.google.protobuf.TimestampOrBuilder getTimeOutOrBuilder() {
     return getTimeOut();
@@ -317,20 +274,17 @@ private static final long serialVersionUID = 0L;
     if (!getSnifferNameBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, snifferName_);
     }
-    if (!getAddressBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, address_);
-    }
     if (!getInfectionBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, infection_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, infection_);
     }
     if (id_ != 0L) {
-      output.writeInt64(4, id_);
+      output.writeInt64(3, id_);
     }
     if (timeIn_ != null) {
-      output.writeMessage(5, getTimeIn());
+      output.writeMessage(4, getTimeIn());
     }
     if (timeOut_ != null) {
-      output.writeMessage(6, getTimeOut());
+      output.writeMessage(5, getTimeOut());
     }
     unknownFields.writeTo(output);
   }
@@ -344,23 +298,20 @@ private static final long serialVersionUID = 0L;
     if (!getSnifferNameBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, snifferName_);
     }
-    if (!getAddressBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, address_);
-    }
     if (!getInfectionBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, infection_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, infection_);
     }
     if (id_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(4, id_);
+        .computeInt64Size(3, id_);
     }
     if (timeIn_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(5, getTimeIn());
+        .computeMessageSize(4, getTimeIn());
     }
     if (timeOut_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, getTimeOut());
+        .computeMessageSize(5, getTimeOut());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -379,8 +330,6 @@ private static final long serialVersionUID = 0L;
 
     if (!getSnifferName()
         .equals(other.getSnifferName())) return false;
-    if (!getAddress()
-        .equals(other.getAddress())) return false;
     if (!getInfection()
         .equals(other.getInfection())) return false;
     if (getId()
@@ -408,8 +357,6 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + SNIFFERNAME_FIELD_NUMBER;
     hash = (53 * hash) + getSnifferName().hashCode();
-    hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
-    hash = (53 * hash) + getAddress().hashCode();
     hash = (37 * hash) + INFECTION_FIELD_NUMBER;
     hash = (53 * hash) + getInfection().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
@@ -562,8 +509,6 @@ private static final long serialVersionUID = 0L;
       super.clear();
       snifferName_ = "";
 
-      address_ = "";
-
       infection_ = "";
 
       id_ = 0L;
@@ -607,7 +552,6 @@ private static final long serialVersionUID = 0L;
     public pt.tecnico.staysafe.dgs.grpc.InitRequest buildPartial() {
       pt.tecnico.staysafe.dgs.grpc.InitRequest result = new pt.tecnico.staysafe.dgs.grpc.InitRequest(this);
       result.snifferName_ = snifferName_;
-      result.address_ = address_;
       result.infection_ = infection_;
       result.id_ = id_;
       if (timeInBuilder_ == null) {
@@ -670,10 +614,6 @@ private static final long serialVersionUID = 0L;
       if (other == pt.tecnico.staysafe.dgs.grpc.InitRequest.getDefaultInstance()) return this;
       if (!other.getSnifferName().isEmpty()) {
         snifferName_ = other.snifferName_;
-        onChanged();
-      }
-      if (!other.getAddress().isEmpty()) {
-        address_ = other.address_;
         onChanged();
       }
       if (!other.getInfection().isEmpty()) {
@@ -794,85 +734,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object address_ = "";
-    /**
-     * <code>string address = 2;</code>
-     * @return The address.
-     */
-    public java.lang.String getAddress() {
-      java.lang.Object ref = address_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        address_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string address = 2;</code>
-     * @return The bytes for address.
-     */
-    public com.google.protobuf.ByteString
-        getAddressBytes() {
-      java.lang.Object ref = address_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        address_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string address = 2;</code>
-     * @param value The address to set.
-     * @return This builder for chaining.
-     */
-    public Builder setAddress(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      address_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string address = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearAddress() {
-      
-      address_ = getDefaultInstance().getAddress();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string address = 2;</code>
-     * @param value The bytes for address to set.
-     * @return This builder for chaining.
-     */
-    public Builder setAddressBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      address_ = value;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object infection_ = "";
     /**
-     * <code>string infection = 3;</code>
+     * <code>string infection = 2;</code>
      * @return The infection.
      */
     public java.lang.String getInfection() {
@@ -888,7 +752,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string infection = 3;</code>
+     * <code>string infection = 2;</code>
      * @return The bytes for infection.
      */
     public com.google.protobuf.ByteString
@@ -905,7 +769,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string infection = 3;</code>
+     * <code>string infection = 2;</code>
      * @param value The infection to set.
      * @return This builder for chaining.
      */
@@ -920,7 +784,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string infection = 3;</code>
+     * <code>string infection = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearInfection() {
@@ -930,7 +794,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string infection = 3;</code>
+     * <code>string infection = 2;</code>
      * @param value The bytes for infection to set.
      * @return This builder for chaining.
      */
@@ -948,14 +812,14 @@ private static final long serialVersionUID = 0L;
 
     private long id_ ;
     /**
-     * <code>int64 id = 4;</code>
+     * <code>int64 id = 3;</code>
      * @return The id.
      */
     public long getId() {
       return id_;
     }
     /**
-     * <code>int64 id = 4;</code>
+     * <code>int64 id = 3;</code>
      * @param value The id to set.
      * @return This builder for chaining.
      */
@@ -966,7 +830,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>int64 id = 4;</code>
+     * <code>int64 id = 3;</code>
      * @return This builder for chaining.
      */
     public Builder clearId() {
@@ -980,14 +844,14 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timeInBuilder_;
     /**
-     * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      * @return Whether the timeIn field is set.
      */
     public boolean hasTimeIn() {
       return timeInBuilder_ != null || timeIn_ != null;
     }
     /**
-     * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      * @return The timeIn.
      */
     public com.google.protobuf.Timestamp getTimeIn() {
@@ -998,7 +862,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
     public Builder setTimeIn(com.google.protobuf.Timestamp value) {
       if (timeInBuilder_ == null) {
@@ -1014,7 +878,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
     public Builder setTimeIn(
         com.google.protobuf.Timestamp.Builder builderForValue) {
@@ -1028,7 +892,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
     public Builder mergeTimeIn(com.google.protobuf.Timestamp value) {
       if (timeInBuilder_ == null) {
@@ -1046,7 +910,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
     public Builder clearTimeIn() {
       if (timeInBuilder_ == null) {
@@ -1060,7 +924,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
     public com.google.protobuf.Timestamp.Builder getTimeInBuilder() {
       
@@ -1068,7 +932,7 @@ private static final long serialVersionUID = 0L;
       return getTimeInFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
     public com.google.protobuf.TimestampOrBuilder getTimeInOrBuilder() {
       if (timeInBuilder_ != null) {
@@ -1079,7 +943,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+     * <code>.google.protobuf.Timestamp timeIn = 4;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
@@ -1099,14 +963,14 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timeOutBuilder_;
     /**
-     * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
      * @return Whether the timeOut field is set.
      */
     public boolean hasTimeOut() {
       return timeOutBuilder_ != null || timeOut_ != null;
     }
     /**
-     * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
      * @return The timeOut.
      */
     public com.google.protobuf.Timestamp getTimeOut() {
@@ -1117,7 +981,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
      */
     public Builder setTimeOut(com.google.protobuf.Timestamp value) {
       if (timeOutBuilder_ == null) {
@@ -1133,7 +997,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
      */
     public Builder setTimeOut(
         com.google.protobuf.Timestamp.Builder builderForValue) {
@@ -1147,7 +1011,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
      */
     public Builder mergeTimeOut(com.google.protobuf.Timestamp value) {
       if (timeOutBuilder_ == null) {
@@ -1165,7 +1029,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
      */
     public Builder clearTimeOut() {
       if (timeOutBuilder_ == null) {
@@ -1179,7 +1043,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
      */
     public com.google.protobuf.Timestamp.Builder getTimeOutBuilder() {
       
@@ -1187,7 +1051,7 @@ private static final long serialVersionUID = 0L;
       return getTimeOutFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
      */
     public com.google.protobuf.TimestampOrBuilder getTimeOutOrBuilder() {
       if (timeOutBuilder_ != null) {
@@ -1198,7 +1062,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+     * <code>.google.protobuf.Timestamp timeOut = 5;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 

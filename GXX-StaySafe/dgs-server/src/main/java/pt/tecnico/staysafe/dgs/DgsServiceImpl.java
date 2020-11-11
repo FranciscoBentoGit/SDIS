@@ -117,13 +117,13 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		}
 	    
 	    else if (command.equals("mean_dev")){
-		    AggregateProbResponse response = AggregateProbResponse.newBuilder().setStat(0,dService.aggregate_infection_probability(0,command)).setStat(1,dService.aggregate_infection_probability(1,command)).build();
+		    AggregateProbResponse response = AggregateProbResponse.newBuilder().addStat(dService.aggregate_infection_probability(0,command)).addStat(dService.aggregate_infection_probability(1,command)).build();
 		    responseObserver.onNext(response);
 		    responseObserver.onCompleted();
 		}
-		
+
 		else {
-			AggregateProbResponse response = AggregateProbResponse.newBuilder().setStat(0,dService.aggregate_infection_probability(0,command)).setStat(1,dService.aggregate_infection_probability(1,command)).setStat(2,dService.aggregate_infection_probability(2,command)).build();
+			AggregateProbResponse response = AggregateProbResponse.newBuilder().addStat(dService.aggregate_infection_probability(0,command)).addStat(dService.aggregate_infection_probability(1,command)).addStat(dService.aggregate_infection_probability(2,command)).build();
 		    responseObserver.onNext(response);
 		    responseObserver.onCompleted();
 		}
@@ -153,14 +153,6 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		if (snifferName == null || snifferName.isBlank()) {
 	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: input cannot be empty!").asRuntimeException());
 	    }
-	    if (snifferName.length() < 5 || snifferName.length() > 30) {
-	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: invalid name!").asRuntimeException());
-		}
-
-	    String address = request.getAddress();
-	    if (address == null || address.isBlank()) {
-	        responseObserver.onError(INVALID_ARGUMENT.withDescription("Address: input cannot be empty!").asRuntimeException());
-	    }
 
 	    String infection = request.getInfection();
 		if (infection == null || infection.isBlank()) {
@@ -183,7 +175,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	    }
 
 	    else{
-	    	InitResponse response = InitResponse.newBuilder().setSuccess(dService.ctrl_init(snifferName,address,infection,id,timeIn,timeOut)).build();
+	    	InitResponse response = InitResponse.newBuilder().setSuccess(dService.ctrl_init(snifferName,infection,id,timeIn,timeOut)).build();
 		    responseObserver.onNext(response);
 		    responseObserver.onCompleted();
 	    }

@@ -1,8 +1,17 @@
 package pt.tecnico.staysafe.dgs.client;
 
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
 import com.google.protobuf.Timestamp;
+import com.google.protobuf.util.Timestamps;
+
 import io.grpc.StatusRuntimeException;
+import java.text.ParseException;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import pt.tecnico.staysafe.dgs.grpc.DgsGrpc;
 import pt.tecnico.staysafe.dgs.grpc.*;
@@ -43,7 +52,7 @@ public class DgsClientApp {
 					flag = 1;
 				}
 
-				String[] goSplited = go.split(" ", 2);  //init snifferName,address,... -- possivel init
+				String[] goSplited = go.split(" ", 2);  //init file snifferName address -- separa init do restante
 
 				if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
 					try {
@@ -61,7 +70,79 @@ public class DgsClientApp {
 						System.out.printf("%s%n", response);
 				}
 
+				if ((goSplited.length == 2) && (goSplited[0].equals("init"))) {
+					aux_ctrl_init(frontend,goSplited[1]);
+			}
+
 			} while (flag != 1);
+		}
+	}
+
+	public static void aux_ctrl_init(DgsFrontend frontend, String preInfo) {
+		ArrayList<String> obs = new ArrayList<String>();
+		ArrayList<ObservationsInit> obsInit = new ArrayList<ObservationsInit>();
+		String[] info = preInfo.split(" ",3);
+		String file = info[0];
+		String snifferName = info[1];
+		String address = info[2];
+
+		SnifferJoinResponse message;
+		message = sniffer_join(frontend,snifferName,address);
+		System.out.println(message);
+
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			String line = reader.readLine();
+
+			while (line != null) {
+				System.out.println(line); //tirar
+				obs.add(line);
+				//read next line
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Iterator<String> iter = obs.iterator();
+		while (iter.hasNext()) {
+			String toReport = iter.next();
+			String[] splitLine = toReport.split(",",4);
+			
+			String infection = splitLine[0];
+			long id = Long.parseLong(splitLine[1]);
+
+			String[] auxIn = splitLine[2].split(" ",2);
+			String timestampIn = auxIn[0] + "T" + auxIn[1] + "Z";
+
+			String[] auxOut = splitLine[3].split(" ",2);
+			String timestampOut = auxOut[0] + "T" + auxOut[1] + "Z";
+
+			com.google.protobuf.Timestamp timeIn = null;
+			com.google.protobuf.Timestamp timeOut = null;
+			try {
+				timeIn = Timestamps.parse(timestampIn);
+				timeOut = Timestamps.parse(timestampOut);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			ObservationsInit data = new ObservationsInit(snifferName,infection,id,timeIn,timeOut);
+			obsInit.add(data);
+		}	
+
+		Iterator<ObservationsInit> iter1 = obsInit.iterator();
+		while (iter1.hasNext()) {
+			ObservationsInit element = iter1.next();
+			try {
+				InitResponse response;
+				response = ctrl_init(frontend, element.getSnifferName(), element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut());
+				System.out.printf("%s%n", response);
+			} catch (StatusRuntimeException e) {
+				System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+			}
 		}
 	}
 
@@ -69,6 +150,13 @@ public class DgsClientApp {
 		PingResponse response;
 		PingRequest request = PingRequest.newBuilder().setText("friend").build();
 		response = frontend.ctrl_ping(request);
+		return response;
+	}
+
+	public static InitResponse ctrl_init(DgsFrontend frontend, String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
+		InitResponse response;
+		InitRequest request = InitRequest.newBuilder().setSnifferName(snifferName).setInfection(infection).setId(id).setTimeIn(timeIn).setTimeOut(timeOut).build();
+		response = frontend.ctrl_init(request);
 		return response;
 	}
 

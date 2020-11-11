@@ -20,62 +20,50 @@ public interface InitRequestOrBuilder extends
       getSnifferNameBytes();
 
   /**
-   * <code>string address = 2;</code>
-   * @return The address.
-   */
-  java.lang.String getAddress();
-  /**
-   * <code>string address = 2;</code>
-   * @return The bytes for address.
-   */
-  com.google.protobuf.ByteString
-      getAddressBytes();
-
-  /**
-   * <code>string infection = 3;</code>
+   * <code>string infection = 2;</code>
    * @return The infection.
    */
   java.lang.String getInfection();
   /**
-   * <code>string infection = 3;</code>
+   * <code>string infection = 2;</code>
    * @return The bytes for infection.
    */
   com.google.protobuf.ByteString
       getInfectionBytes();
 
   /**
-   * <code>int64 id = 4;</code>
+   * <code>int64 id = 3;</code>
    * @return The id.
    */
   long getId();
 
   /**
-   * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
    * @return Whether the timeIn field is set.
    */
   boolean hasTimeIn();
   /**
-   * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
    * @return The timeIn.
    */
   com.google.protobuf.Timestamp getTimeIn();
   /**
-   * <code>.google.protobuf.Timestamp timeIn = 5;</code>
+   * <code>.google.protobuf.Timestamp timeIn = 4;</code>
    */
   com.google.protobuf.TimestampOrBuilder getTimeInOrBuilder();
 
   /**
-   * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
    * @return Whether the timeOut field is set.
    */
   boolean hasTimeOut();
   /**
-   * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
    * @return The timeOut.
    */
   com.google.protobuf.Timestamp getTimeOut();
   /**
-   * <code>.google.protobuf.Timestamp timeOut = 6;</code>
+   * <code>.google.protobuf.Timestamp timeOut = 5;</code>
    */
   com.google.protobuf.TimestampOrBuilder getTimeOutOrBuilder();
 }

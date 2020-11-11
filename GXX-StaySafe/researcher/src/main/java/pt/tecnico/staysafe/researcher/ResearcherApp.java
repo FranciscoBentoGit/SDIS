@@ -106,11 +106,9 @@ public class ResearcherApp {
 					try {
 						AggregateProbResponse response;
 						String command = goSplited[0];
-						System.out.printf("%s",command);
 						response = client.aggregate_infection_probability(frontend,command);
 						System.out.printf("%s%n", response);
 					} catch (StatusRuntimeException e) {
-						System.out.println("entrei");
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 					}	
 				}
@@ -122,7 +120,6 @@ public class ResearcherApp {
 						response = client.aggregate_infection_probability(frontend,command);
 						System.out.printf("%s%n", response);
 					} catch (StatusRuntimeException e) {
-						System.out.println("entreiPercentiles");
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 					}
 				}

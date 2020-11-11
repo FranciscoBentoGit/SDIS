@@ -3,12 +3,11 @@ package pt.tecnico.staysafe.dgs;
 import java.util.*; 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.lang.Math; 
 
 import com.google.protobuf.Timestamp;
 import com.google.protobuf.util.Timestamps;
 import com.google.protobuf.Duration;
-
-import java.lang.Math; 
 
 import pt.tecnico.staysafe.dgs.ObservationsData;
 
@@ -183,34 +182,31 @@ public class DgsServices {
             responseMean[1] = desvio_padrao;
             return responseMean[index];
 
-        }else{
+        } else {
             float mediana,q1,q3;
             
             if((nonInfectedProbabilities.size()%2)==0){
                 //Lista com tamanho par
-                mediana = nonInfectedProbabilities.get(nonInfectedProbabilities.size()/2) + nonInfectedProbabilities.get((nonInfectedProbabilities.size()/2) +1);
+                mediana = nonInfectedProbabilities.get(nonInfectedProbabilities.size()/2) + nonInfectedProbabilities.get((nonInfectedProbabilities.size()/2) -1);
                 mediana = mediana / 2;
             }else{
                 //Lista com tamanho impar
                 int aux = (int) ((nonInfectedProbabilities.size()/2)-0.5);
                 mediana=nonInfectedProbabilities.get(aux);
             }
-            if((nonInfectedProbabilities.size()%4)==0){
+            if((nonInfectedProbabilities.size()%4) == 0){
                 q1 = (nonInfectedProbabilities.get((nonInfectedProbabilities.size()/4) -1) + nonInfectedProbabilities.get(nonInfectedProbabilities.size()/4))/2;
                 q3 = (nonInfectedProbabilities.get((nonInfectedProbabilities.size()/(4/3)) - 1) + nonInfectedProbabilities.get(nonInfectedProbabilities.size() / (4/3) ) ) /2;
             }else{
-                q1 = nonInfectedProbabilities.get(Math.floorDiv(nonInfectedProbabilities.size(),4));
-                q3 = nonInfectedProbabilities.get(Math.floorDiv(nonInfectedProbabilities.size(),4/3));
+                q1 = nonInfectedProbabilities.get( (int)Math.floor(nonInfectedProbabilities.size()*0.25));
+                q3 = nonInfectedProbabilities.get( (int)(Math.floor(nonInfectedProbabilities.size()*0.75)));
 
             }
             responsePercentile[0] = mediana;
             responsePercentile[1] = q1;
             responsePercentile[2] = q3;
             return responsePercentile[index];
-
         }
-
-
     }
 
     public synchronized float calculateSD(ArrayList<Float> nonInfectedProbabilities,float media){
@@ -223,17 +219,12 @@ public class DgsServices {
         return (float) Math.sqrt(aux/size);
     }
 
-    public synchronized String ctrl_init(String snifferName, String address, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
-    	String message;
-    	message = sniffer_join(snifferName,address);
-    	if (message.equals("Failed to join sniffer: invalid address for that name.")) {
-    		return "Init: failed to join sniffer_info.";
-    	}
-    	message = report(snifferName,infection,id,timeIn,timeOut);
+    public synchronized String ctrl_init(String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
+    	String message = report(snifferName,infection,id,timeIn,timeOut);
     	if (message.equals("Failed to report: invalid name.")) {
-    		return "Init: failed to report.";
+    		return message;
     	}
-    	return "Init success.";
+    	return "Observation: reported successfully.";
     }
 
     public synchronized String ctrl_clear() {

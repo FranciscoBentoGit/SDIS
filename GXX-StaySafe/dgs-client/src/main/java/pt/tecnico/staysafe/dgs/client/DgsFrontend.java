@@ -41,6 +41,12 @@ public class DgsFrontend {
 		return response;
 	}
 
+	public InitResponse ctrl_init(InitRequest request) {
+		InitResponse response;
+		response = _stub.ctrlInit(request);
+		return response;
+	}
+
 	public ClearResponse ctrl_clear(ClearRequest request) {
 		ClearResponse response;
 		response = _stub.ctrlClear(request);

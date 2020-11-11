@@ -68,6 +68,7 @@ message AggregateProbResponse {
 	repeated float stat = 1;
 }
 
+
 //function ctrlPing
 //
 message PingRequest {
@@ -83,11 +84,10 @@ message PingResponse {
 //
 message InitRequest {
 	string snifferName = 1;
-	string address = 2;
-	string infection = 3;
-	int64 id = 4;
-	google.protobuf.Timestamp timeIn = 5;
-	google.protobuf.Timestamp timeOut = 6;
+	string infection = 2;
+	int64 id = 3;
+	google.protobuf.Timestamp timeIn = 4;
+	google.protobuf.Timestamp timeOut = 5;
 
 }
 
@@ -105,6 +105,7 @@ message ClearRequest {
 message ClearResponse {
 	string success = 1;
 }
+
 
 service Dgs {
 	rpc sniffer_join(SnifferJoinRequest) returns (SnifferJoinResponse);
