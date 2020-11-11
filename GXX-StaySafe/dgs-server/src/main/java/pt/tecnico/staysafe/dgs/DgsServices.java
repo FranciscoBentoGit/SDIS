@@ -57,7 +57,7 @@ public class DgsServices {
         Iterator iter = obsList.iterator();
         int foundID = 0;
         ArrayList<ObservationsData> matchedSniffers = new ArrayList<ObservationsData>();
-        int xValue = 0, diff = 0;
+        float xValue = 0, diff = 0;
         float probability;
 
         //Verifica se o id se encontra na lista de observaçoes
@@ -123,27 +123,27 @@ public class DgsServices {
             }
 
         }
+        System.out.printf("%f\n",xValue);
         probability = calculateProbability(xValue);
 
         return probability;
 
     }
-    public static int calculateTime(com.google.protobuf.Timestamp from,com.google.protobuf.Timestamp to){
+    public static float calculateTime(com.google.protobuf.Timestamp from,com.google.protobuf.Timestamp to){
         Duration timeBetween = Timestamps.between(from,to);
         long seconds = timeBetween.getSeconds();
-        int intSeconds = (int) seconds;
-        int minutes = intSeconds / 60;
+        float minutes = seconds / (float)60;
         return minutes;
     }
 
-    public static int swapValue(int xValue,int diff){
+    public static float swapValue(float xValue,float diff){
         if(diff > xValue){
             return diff;
         }
         return xValue;
     }
 
-    public static float calculateProbability(int xValue){
+    public static float calculateProbability(float xValue){
         double exponencial = Math.exp(15-xValue);
         float floatExponencial = (float) exponencial;
         float probability = (1 / (1 + floatExponencial));
@@ -195,8 +195,8 @@ public class DgsServices {
                 mediana=nonInfectedProbabilities.get(aux);
             }
             if((nonInfectedProbabilities.size()%4) == 0){
-                q1 = (nonInfectedProbabilities.get((nonInfectedProbabilities.size()/4) -1) + nonInfectedProbabilities.get(nonInfectedProbabilities.size()/4))/2;
-                q3 = (nonInfectedProbabilities.get((nonInfectedProbabilities.size()/(4/3)) - 1) + nonInfectedProbabilities.get(nonInfectedProbabilities.size() / (4/3) ) ) /2;
+                q1 = (nonInfectedProbabilities.get((int)(nonInfectedProbabilities.size()*0.25) -1) + nonInfectedProbabilities.get((int) (nonInfectedProbabilities.size()*0.25)))/2;
+                q3 = (nonInfectedProbabilities.get((int)(nonInfectedProbabilities.size()*0.75) - 1) + nonInfectedProbabilities.get((int) (nonInfectedProbabilities.size() *0.75 )) ) /2;
             }else{
                 q1 = nonInfectedProbabilities.get( (int)Math.floor(nonInfectedProbabilities.size()*0.25));
                 q3 = nonInfectedProbabilities.get( (int)(Math.floor(nonInfectedProbabilities.size()*0.75)));
