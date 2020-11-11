@@ -48,13 +48,16 @@ public class DgsClientApp {
 		try (Scanner scanner = new Scanner(System.in)) {
 			do {
 				go = scanner.nextLine();
-				if (go.equals("") || go.equals("exitClient")) {
+				String[] goSplited = go.split(" ", 2);  //init file snifferName address -- separa init do restante
+				if (go.equals("exitClient")) {
 					flag = 1;
 				}
+				
+				else if (go.equals("")){
+					continue;
+				}
 
-				String[] goSplited = go.split(" ", 2);  //init file snifferName address -- separa init do restante
-
-				if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
+				else if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
 					try {
 						PingResponse response;
 						response = ctrl_ping(frontend);
@@ -64,15 +67,19 @@ public class DgsClientApp {
 					}	
 				}
 
-				if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
+				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 						ClearResponse response;
 						response = ctrl_clear(frontend);
 						System.out.printf("%s%n", response);
 				}
 
-				if ((goSplited.length == 2) && (goSplited[0].equals("init"))) {
+				else if ((goSplited.length == 2) && (goSplited[0].equals("init"))) {
 					aux_ctrl_init(frontend,goSplited[1]);
-			}
+				}
+				
+				else{
+					System.out.println("Invalid input.");
+				}
 
 			} while (flag != 1);
 		}
@@ -82,13 +89,30 @@ public class DgsClientApp {
 		ArrayList<String> obs = new ArrayList<String>();
 		ArrayList<ObservationsInit> obsInit = new ArrayList<ObservationsInit>();
 		String[] info = preInfo.split(" ",3);
+		if(info.length != 3){
+			System.out.println("Invalid input!");
+			return;
+		}
 		String file = info[0];
 		String snifferName = info[1];
 		String address = info[2];
-
-		SnifferJoinResponse message;
-		message = sniffer_join(frontend,snifferName,address);
-		System.out.println(message);
+		int flag = 0;
+		
+		try {
+			SnifferJoinResponse message;
+			message = sniffer_join(frontend,snifferName,address);
+			System.out.println(message);
+			if (message.equals("Failed to join sniffer: invalid address for that name.")){
+				flag = 1;
+			}
+		} catch (StatusRuntimeException e) {
+			flag = 1;
+			System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+		}
+		
+		if (flag == 1){
+			return;
+		}
 
 		BufferedReader reader;
 		try {
@@ -211,7 +235,7 @@ public class DgsClientApp {
 	}
 
 	public static String helpCtrl() {
-		String ctrlInit = "** init -- nao sei o q faz ainda\n";
+		String ctrlInit = "** init <filePath> <snifferName> <address> -- insert all observations inside the file , associating them with the given sniffer and address\n";
 		String ctrlClear = "** clear -- remove all observations and sniffers\n";
 		String ctrlPing = "** ping -- returns Hello only if the server is alive\n";
 
@@ -223,8 +247,8 @@ public class DgsClientApp {
 	public static String helpSniffer() {
 		String sniffer = "You can do the following commands:\n";
 		String snifferInfo = "** getInfo -- returns the sniffer's address\n";
-		String snifferSleep = "** sleep,[time] --  interrupts the execution for a certain [time]\n";
-		String snifferReport = "** [infetado/nao-infetado],[id],[timeIn],[timeOut] -- submits a report with an observation with the parameters [infection_state],[id],[timeIn],[timeOut]\n";
+		String snifferSleep = "** sleep,<time> --  interrupts the execution for a certain <time>\n";
+		String snifferReport = "** <infetado/nao-infetado>,<id>,<timeIn>,<timeOut> -- submits a report with an observation with the parameters <infection_state>,<id>,<timeIn>,<timeOut>\n";
 
 		String ctrl = helpCtrl();
 
@@ -235,11 +259,25 @@ public class DgsClientApp {
 
 	public static String helpResearcher() {
 		String researcher = "You can do the following commands:\n";
-		String researcherProb = "** single_prob [id],... -- returns the probability of the person related to the id being infected, at most 3 id's at the same time\n";
+		String researcherProb = "** single_prob <id>,... -- returns the probability of the person related to the id being infected, at most 3 id's at the same time\n";
+		String researcherMean = "** mean_dev -- returns the average and standard deviation of the non-infected persons.";
+		String researcherPercentiles = "** percentiles -- returns median, Q1(25% percentile) and Q3(75% percentile) of the non-infected persons.";
 
 		String ctrl = helpCtrl();
 
-		String message = researcher + "\n" + researcherProb + "\n" + ctrl;
+		String message = researcher + "\n" + researcherProb + "\n" + researcherMean + "\n" + researcherPercentiles + "\n" + ctrl;
+
+		return message;
+	}
+	public static String helpJournalist() {
+		String journalist = "You can do the following commands:\n";
+		String journalistMean = "** mean_dev -- returns the average and standard deviation of the non-infected persons.";
+		String journalistPercentiles = "** percentiles -- returns median, Q1(25% percentile) and Q3(75% percentile) of the non-infected persons.";
+
+		String ctrl = helpCtrl();
+
+		String message = journalist + "\n" + journalistMean + "\n" + journalistPercentiles + "\n" + ctrl;
+
 
 		return message;
 	}

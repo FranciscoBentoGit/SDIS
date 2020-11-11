@@ -45,8 +45,12 @@ public class ResearcherApp {
 
 				String[] goSplited = go.split(" ", 2);
 
-				if (go.equals("") || go.equals("exitResearcher")) {
+				if (go.equals("exitResearcher")) {
 					exit = 1;
+				}
+
+				else if (go.equals("")){
+					continue;
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("help"))) {
@@ -84,6 +88,10 @@ public class ResearcherApp {
 							}
 						}
 					}
+				}
+
+				else if ((goSplited.length == 2) && (goSplited[0].equals("init"))) {
+					client.aux_ctrl_init(frontend,goSplited[1]);
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
