@@ -107,7 +107,18 @@ public class ResearcherApp {
 						AggregateProbResponse response;
 						String command = goSplited[0];
 						response = client.aggregate_infection_probability(frontend,command);
-						System.out.printf("%s%n", response);
+
+						String convResponse = response.toString();
+						String[] splited = convResponse.split(" ", 2);
+						String[] splited2 = splited[1].split("\n", 2);
+						String[] splited3 = splited2[1].split(" ", 2);
+						
+						String prob1 = splited2[0].toString();
+						String prob2 = splited3[1].toString();
+						
+						float f1 = Float.parseFloat(prob1);
+						float f2 = Float.parseFloat(prob2);
+						System.out.printf("%.3f%n%.3f%n",f1,f2);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 					}	
@@ -118,7 +129,24 @@ public class ResearcherApp {
 						AggregateProbResponse response;
 						String command = goSplited[0];
 						response = client.aggregate_infection_probability(frontend,command);
-						System.out.printf("%s%n", response);
+
+						String convResponse = response.toString();
+						String[] splited1 = convResponse.split(" ", 2);
+						String[] splited2 = splited1[1].split("\n", 2);
+						String prob1 = splited2[0].toString();
+
+						String[] splited4 =	splited2[1].split(" ", 2);	
+						String[] splited5 =	splited4[1].split("\n", 2);	
+						String prob2 = splited5[0].toString();
+
+						String[] splited7 =	splited5[1].split(" ", 2);
+						String prob3 =	splited7[1].toString();
+						
+						float f1 = Float.parseFloat(prob1);
+						float f2 = Float.parseFloat(prob2);
+						float f3 = Float.parseFloat(prob3);
+
+						System.out.printf("%.3f%n%.3f%n%.3f%n",f1,f2,f3);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 					}
