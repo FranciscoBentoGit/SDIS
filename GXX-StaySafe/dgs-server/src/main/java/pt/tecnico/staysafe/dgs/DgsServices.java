@@ -123,7 +123,6 @@ public class DgsServices {
             }
 
         }
-        System.out.printf("%f\n",xValue);
         probability = calculateProbability(xValue);
 
         return probability;
