@@ -16,12 +16,8 @@ On [data.txt] argument, you will need to type :
 
 ## Utilization Guide
 
-```
-./target/appassembler/bin/sniffer localhost 8080 <snifferName> <address>
-```
 
-
-### Example for client:Sniffer
+### Example for client : Sniffer
 
 
 **First step** : Make sure you are at the main folder of the project, G11-STAYSAFE.
@@ -29,7 +25,7 @@ On [data.txt] argument, you will need to type :
 **Second step** : Proceed to type :
 
 ```
--- mvn install -DskipTests.
+-- mvn install -DskipTests
 ```
 
 **Third step** : Open another terminal and decide which terminal will play the server and sniffer role, getting inside on each terminal in the specific folder.
@@ -43,7 +39,7 @@ On [data.txt] argument, you will need to type :
 **Fifth step** : Initiate sniffer, typing : 
 
 ```
- ./target/appassembler/bin/sniffer localhost 8080 <snifferName> <address> (optional) < <data.txt>   
+ ./target/appassembler/bin/sniffer localhost 8080 <snifferName> <address> (optional) < <pathToFilename.txt>   
 ```
 
 **Sixth step** : If you new, start by typing help to get a feeling of the available commands to this specific client.
@@ -51,8 +47,9 @@ On [data.txt] argument, you will need to type :
 Lets suppose we want to register 2 observations for this sniffer.
 
 **Seventh step** : type :
+
 ```
-    <infectionState>,<citizenId>,<timeOfDetectingEntrance>,<timeOfDetectingExit>.
+    <infectionState>,<citizenId>,<timeOfDetectingEntrance>,<timeOfDetectingExit>
 ```
 
 Example : infetado,123456789,12-11-2000 12:35:43,12-11-2000 13:17:48.
@@ -60,7 +57,7 @@ Example : infetado,123456789,12-11-2000 12:35:43,12-11-2000 13:17:48.
 **Side note** : as soon as you press enter on the first observation, the system will detect that you have entered on "observation mode" and will allow you to register as many observations as you wish, accumulating them until you press Enter or type exitSniffer, printing out the result of every attempt .
 
 
-### Example for client:Journalist
+### Example for client : Journalist
 
 
 **First step** : Make sure you are at the main folder of the project, G11-STAYSAFE.
@@ -93,10 +90,16 @@ Example : infetado,123456789,12-11-2000 12:35:43,12-11-2000 13:17:48.
 
 **Seventh step** : Assuming that you have entered a non existent sniffer or a existent one giving it the right address that he already has, you will register the observations sucessfully.
 
-**Eigth step** : Lets get some statistics about our data, type -- mean_dev to get the mean and standard deviation values for all non-infected citizens, in result line respectfully.
+**Eigth step** : Lets get some statistics about our data, type :
+
+```
+    mean_dev
+```
+ 
+To get the mean and standard deviation values for all non-infected citizens, in result line respectfully.
 
 
-### Example for client:Researcher
+### Example for client : Researcher
 
 
 **First step** : Make sure you are at the main folder of the project, G11-STAYSAFE.
@@ -135,7 +138,7 @@ Example : infetado,123456789,12-11-2000 12:35:43,12-11-2000 13:17:48.
     mean_dev
 ```
 
- to get the mean and standard deviation values for all non-infected citizens, in result line respectfully.
+To get the mean and standard deviation values for all non-infected citizens, in result line respectfully.
 
 **Nineth step** : As you are a researcher, you have some extra permission and so you can get a statistic for a single target. Open a data.text inside /demo folder and look for a specific citizen ID, copy it out and type :
 
