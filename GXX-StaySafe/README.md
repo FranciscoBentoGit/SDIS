@@ -71,4 +71,13 @@ The integration tests are skipped because they require the servers to be running
 
 We use [SemVer](http://semver.org/) for versioning.
 
-## Main Concept
+## Main Concept of the Project
+
+The server has 2 main variables which he operates with : a ConcurrentHashMap to store different sniffers and their respective addresses and CopyOnWriteArrayList that procede to store observations with the type "ObservationsData", a custom class created to contain <snifferName>,<infection>,<id>,<timeIn>,<timeOut>,<timestamp>.
+
+Specific clients, like sniffer,journalist or researcher interact with dgs_server through : specific client calls a certain function from a father client that represents all clients,then he calls the associated function(according to objective) of the frontend ( bridge between dgs_server and father client),which creates the stub to interact with dgs_server, through his implementation.
+
+Each command and usage of each client will be available in the respective README.md folder.
+
+
+

@@ -73,6 +73,11 @@ public class DgsClientApp {
 						System.out.printf("%s%n", response);
 				}
 
+				else if ((goSplited.length == 1) && (goSplited[0].equals("help"))) {
+					String message = helpCtrl();
+					System.out.printf("%s%n", message);
+				}
+
 				else if ((goSplited.length == 2) && (goSplited[0].equals("init"))) {
 					aux_ctrl_init(frontend,goSplited[1]);
 				}

@@ -22,16 +22,16 @@ To generate launch scripts for Windows and Linux
 mvn install
 ```
 
-<!--To run using appassembler plugin on Linux:
+To run using appassembler plugin on Linux:
 
 ```
-./target/appassembler/bin/eye arg0 arg1 arg2
+./target/appassembler/bin/sniffer localhost 8080 <snifferName> <address>
 ```
 
 To run using appassembler plugin on Windows:
 
 ```
-target\appassembler\bin\eye arg0 arg1 arg2 -->
+target\appassembler\bin\sniffer localhost 8080 <snifferName> <address>
 ```
 
 
