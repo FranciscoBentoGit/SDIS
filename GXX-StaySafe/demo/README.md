@@ -14,10 +14,10 @@ On [data.txt] argument, you will need to type :
  < ../demo/<fileName>
 ```
 
-## Utilization Guide
+# Utilization Guide
 
 
-### Example for client : Sniffer
+## Example for client : Sniffer
 
 
 **First step** : Make sure you are at the main folder of the project, G11-STAYSAFE.
@@ -57,7 +57,7 @@ Example : infetado,123456789,12-11-2000 12:35:43,12-11-2000 13:17:48.
 **Side note** : as soon as you press enter on the first observation, the system will detect that you have entered on "observation mode" and will allow you to register as many observations as you wish, accumulating them until you press Enter or type exitSniffer, printing out the result of every attempt .
 
 
-### Example for client : Journalist
+## Example for client : Journalist
 
 
 **First step** : Make sure you are at the main folder of the project, G11-STAYSAFE.
@@ -99,7 +99,7 @@ Example : infetado,123456789,12-11-2000 12:35:43,12-11-2000 13:17:48.
 To get the mean and standard deviation values for all non-infected citizens, in result line respectfully.
 
 
-### Example for client : Researcher
+## Example for client : Researcher
 
 
 **First step** : Make sure you are at the main folder of the project, G11-STAYSAFE.
@@ -156,7 +156,7 @@ This will give you the probability of a specific citizen being infected, 1.00 if
 This will clear all server information about observations, so you can get different statistics.
 
 
-### Example for clientApp
+## Example for clientApp
 
 
 **Note**: You might want to get the server clientApp started for some more operational controls, but for now it gives you the same as running the specific clients
