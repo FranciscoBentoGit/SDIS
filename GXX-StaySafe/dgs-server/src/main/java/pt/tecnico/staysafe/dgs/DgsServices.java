@@ -60,7 +60,7 @@ public class DgsServices {
         float xValue = 0, diff = 0;
         float probability;
 
-        //Verifica se o id se encontra na lista de observaçoes
+        //Verify if is within the observations list
         while (iter.hasNext()){
             ObservationsData obs = (ObservationsData)iter.next();
             if ((obs.getId() == id) && (obs.getInfection().equals("nao-infetado"))){
@@ -71,48 +71,55 @@ public class DgsServices {
                 return 1;
             }
         }
-        //Se não encontra o ID, retornamos 2.00 para que posteriormente possamos verificar o valor e lançar o erro de ID nao encontrado
+        //If it doesn't find the id, it returns 2 so we can catch the error later
         if(foundID == 0){
             return 2;
         }
 
         Iterator iter2 = obsList.iterator();
         while (iter2.hasNext()){
+            //For every observation inside obsList(total list)
             ObservationsData obs = (ObservationsData)iter2.next();
             Iterator iter3 = matchedSniffers.iterator();
 
             while (iter3.hasNext()){
+                //For every observation inside matchedSniffer(observations that contain the id given by argument)
                 ObservationsData toCompare = (ObservationsData)iter3.next();
 
                 if ((toCompare.getSnifferName().equals(obs.getSnifferName())) && (toCompare.getId() != obs.getId())  && obs.getInfection().equals("infetado")){
-                    //Caso 1, não tem interseção
+                    
+                    //Case 1, no intersection
                     if ((Timestamps.compare(toCompare.getTimeIn(),obs.getTimeIn()) <= 0 ) && (Timestamps.compare(toCompare.getTimeOut(),obs.getTimeIn()) <= 0)){
                         continue;
                     }
-                    //Caso 6, não tem interseção
+                    
+                    //Case 6, no intersection
                     else if ( (Timestamps.compare(obs.getTimeOut(),toCompare.getTimeIn()) <= 0 ) && (Timestamps.compare(obs.getTimeOut(),obs.getTimeOut()) <= 0) ){
                         continue;
                     }
-                    //Caso 4, interseção interna
+                    
+                    //Case 4, internal intersection
                     else if ( (Timestamps.compare(obs.getTimeIn(),toCompare.getTimeIn()) <= 0) && (Timestamps.compare(toCompare.getTimeOut(),obs.getTimeOut()) <= 0) ){
-                        diff = calculateTime(toCompare.getTimeIn(),toCompare.getTimeOut()); //passa o tempo do between(duration) para uma int minutos
-                        xValue = swapValue(xValue,diff);//funçao que recebe diff e ve se o valor da diff é maior do que o valor que esta na variavel xValue, se sim da update
+                        diff = calculateTime(toCompare.getTimeIn(),toCompare.getTimeOut()); 
+                        xValue = swapValue(xValue,diff);
                         continue;
                     }
-                    //Caso 2, interseçao esqueda
+                    
+                    //Case 2, left intersection
                     else if ( (Timestamps.compare(toCompare.getTimeIn(),obs.getTimeIn()) <= 0) && (Timestamps.compare(toCompare.getTimeOut(),obs.getTimeOut()) <= 0) ){
                         diff = calculateTime(obs.getTimeIn(),toCompare.getTimeOut());
                         xValue = swapValue(xValue,diff);
                         continue;
                     }
 
-                    //Caso 3, interseçao externa
+                    //Case 3, external intersection
                     else if ( (Timestamps.compare(toCompare.getTimeIn(),obs.getTimeIn()) <= 0) && (Timestamps.compare(obs.getTimeOut(),toCompare.getTimeOut()) <= 0) ){
                         diff = calculateTime(obs.getTimeIn(),obs.getTimeOut());
                         xValue = swapValue(xValue,diff);
                         continue;
                     }
-
+                    
+                    //Case 5, right intersection
                     else {
                         diff = calculateTime(toCompare.getTimeIn(),obs.getTimeOut());
                         xValue = swapValue(xValue,diff);
@@ -128,13 +135,16 @@ public class DgsServices {
         return probability;
 
     }
+    
+    //Function that returns the time of intersection in minutes
     public static float calculateTime(com.google.protobuf.Timestamp from,com.google.protobuf.Timestamp to){
         Duration timeBetween = Timestamps.between(from,to);
         long seconds = timeBetween.getSeconds();
         float minutes = seconds / (float)60;
         return minutes;
     }
-
+    
+    //Function that keeps on updating the biggest xValue for every non-infected citizen
     public static float swapValue(float xValue,float diff){
         if(diff > xValue){
             return diff;
@@ -154,6 +164,8 @@ public class DgsServices {
         float[] responseMean = new float[2];
         float[] responsePercentile = new float[3];
         Iterator iter = obsList.iterator();
+        
+        //Lists the non-infected citizen id's
         while (iter.hasNext()){
             ObservationsData obs = (ObservationsData)iter.next();
             if (obs.getInfection().equals("nao-infetado")){
@@ -164,6 +176,8 @@ public class DgsServices {
         }
         ArrayList<Float> nonInfectedProbabilities = new ArrayList<Float>();
         Iterator iter2 = nonInfectedId.iterator();
+        
+        //For every id, it calculates the probability and lists that probability into nonInfectedProbabilities
         while (iter2.hasNext()){
             long id = (long)iter2.next();
             nonInfectedProbabilities.add(individual_infection_probability(id));
@@ -208,6 +222,7 @@ public class DgsServices {
         }
     }
 
+    //It calcultes the standart deviation for a certain list of probabilites and their median
     public synchronized float calculateSD(ArrayList<Float> nonInfectedProbabilities,float media){
         float standardDeviation=0;
         int size = nonInfectedProbabilities.size();

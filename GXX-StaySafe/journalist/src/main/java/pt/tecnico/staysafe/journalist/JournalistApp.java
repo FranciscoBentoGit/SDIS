@@ -88,6 +88,9 @@ public class JournalistApp {
 						String command = goSplited[0];
 						response = client.aggregate_infection_probability(frontend,command);
 
+						////This convergence is needed as response will return stat : value 1
+						//												              value 2
+						//We must filter in order to get only the respective values
 						String convResponse = response.toString();
 						String[] splited = convResponse.split(" ", 2);
 						String[] splited2 = splited[1].split("\n", 2);
@@ -110,6 +113,10 @@ public class JournalistApp {
 						String command = goSplited[0];
 						response = client.aggregate_infection_probability(frontend,command);
 
+						//Same logic as line 90, mean_dev return stat : value 1
+						//												 value 2
+						//                                               value 3
+						//We must filter in order to get only the respective values
 						String convResponse = response.toString();
 						String[] splited1 = convResponse.split(" ", 2);
 						String[] splited2 = splited1[1].split("\n", 2);

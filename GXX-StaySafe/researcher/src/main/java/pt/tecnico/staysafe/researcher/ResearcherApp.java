@@ -58,6 +58,7 @@ public class ResearcherApp {
 					System.out.printf("%s%n", message);
 				}
 				
+				//ids will try to split by ",", if it reaches length 4 it means you wrote more ids that you should have
 				else if ((goSplited.length == 2) &&( goSplited[0].equals("single_prob"))) {
 					String[] ids = goSplited[1].split(",",4);
 
@@ -72,10 +73,14 @@ public class ResearcherApp {
 							try {
 								IndividualProbResponse response;
 								response = client.individual_infection_probability(frontend, Long.parseLong(ids[i]));
+								
+								//This convergence is needed as response will return prob : value
 								String convResponse = response.toString();
 								String[] splited = convResponse.split(" ", 2);
 								
 								String prob = splited[1].toString();
+								
+								//If the function individual_infection_probability returns 2.0, because it must return a float,it detects it's irrealistic and means id not found
 								if (prob.equals("2.0\n")) {
 									prob = "Id: not found!"; 
 									System.out.printf("%s%n",prob);
@@ -116,6 +121,9 @@ public class ResearcherApp {
 						String command = goSplited[0];
 						response = client.aggregate_infection_probability(frontend,command);
 
+						//Same logic as line 77, mean_dev return stat : value 1
+						//												value 2
+						//We must filter in order to get only the respective values
 						String convResponse = response.toString();
 						String[] splited = convResponse.split(" ", 2);
 						String[] splited2 = splited[1].split("\n", 2);
@@ -138,6 +146,11 @@ public class ResearcherApp {
 						String command = goSplited[0];
 						response = client.aggregate_infection_probability(frontend,command);
 
+						
+						//Same logic as line 124, mean_dev return stat : value 1
+						//												 value 2
+						//                                               value 3
+						//We must filter in order to get only the respective values
 						String convResponse = response.toString();
 						String[] splited1 = convResponse.split(" ", 2);
 						String[] splited2 = splited1[1].split("\n", 2);

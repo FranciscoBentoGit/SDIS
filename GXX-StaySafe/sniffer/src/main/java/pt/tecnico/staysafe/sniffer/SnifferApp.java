@@ -54,7 +54,10 @@ public class SnifferApp {
 	}
 
 	private static void execSniffer(String host, int port, String snifferName, String address) {
+		
+		//This addObs list will contain all observations that an user will try to report in one cycle
 		ArrayList<AddObs> addObs= new ArrayList<AddObs>();
+		
 		DgsClientApp client = new DgsClientApp();
 		DgsFrontend frontend = new DgsFrontend(host,port);
 		String go = "";
@@ -96,6 +99,8 @@ public class SnifferApp {
 
 				else if ((check.length == 2) && (check[0].equals("init"))) {
 					String[] info = check[1].split(" ",3);
+					
+					//If a sniffer tries to init and the given snifferName isnt the same as his, it should fail
 					if (!(info[1].equals(snifferName))) {
 						System.out.printf("Invalid input: cannot init another sniffer, only this one - %s.%n", snifferName);
 					} else{
@@ -104,6 +109,7 @@ public class SnifferApp {
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("getInfo"))) {
+					
 					try {
 						SnifferInfoResponse responseInfo;
 						responseInfo = client.sniffer_info(frontend, snifferName);
@@ -123,14 +129,16 @@ public class SnifferApp {
 					client.sleep_request(sleepTime);
 				}
 
-				
+				//This is called the observation mode, it will keep the code in this loop until the user either presses ENTER or types exitSniffer
 				else if (goSplited.length == 4) {
+					
 					String infection = goSplited[0];
 					if (!(infection.equals("infetado")) && !(infection.equals("nao-infetado"))) {
 						continue;
 					}
 					long id = Long.parseLong(goSplited[1]);
 
+					//To able to insert timeIn and timeOut as Timestamp variables
 					String[] auxIn = goSplited[2].split(" ",2);
 					String timestampIn = auxIn[0] + "T" + auxIn[1] + "Z";
 
@@ -139,6 +147,7 @@ public class SnifferApp {
 
 					com.google.protobuf.Timestamp timeIn = null;
 					com.google.protobuf.Timestamp timeOut = null;
+					
 					try {
 						timeIn = Timestamps.parse(timestampIn);
 						timeOut = Timestamps.parse(timestampOut);
@@ -203,6 +212,7 @@ public class SnifferApp {
 
 					Iterator<AddObs> iter = addObs.iterator();
 
+					//When detects flag == 1, the code knows its time to report every single observation within addObs, one by one
 					while (iter.hasNext()) {
 						AddObs element = iter.next();
 						try {
@@ -214,6 +224,7 @@ public class SnifferApp {
 						}	
 					}
 
+					//You must clear addObs so you can repeat another cicle of observation mode if you wish
 					addObs.removeAll(addObs); 
 
 					if (aux == 1) {

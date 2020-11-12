@@ -90,9 +90,11 @@ public class DgsClientApp {
 		}
 	}
 
+	//Function that helps all clients doing ctrl_init
 	public static void aux_ctrl_init(DgsFrontend frontend, String preInfo) {
 		ArrayList<String> obs = new ArrayList<String>();
 		ArrayList<ObservationsInit> obsInit = new ArrayList<ObservationsInit>();
+		//It splits fileName from snifferName and Address
 		String[] info = preInfo.split(" ",3);
 		
 		if(info.length != 3){
@@ -108,6 +110,8 @@ public class DgsClientApp {
 			SnifferJoinResponse message;
 			message = sniffer_join(frontend,snifferName,address);
 			System.out.println(message);
+			
+			//As message returns sucess : "Some string", we need to split to get the value
 			String compare = message.toString();
 			String[] splited = compare.split(" ",2);
 			String[] splitMarks = splited[1].split("\"",3);
@@ -130,7 +134,6 @@ public class DgsClientApp {
 			String line = reader.readLine();
 
 			while (line != null) {
-				System.out.println(line); //tirar
 				obs.add(line);
 				//read next line
 				line = reader.readLine();
@@ -148,9 +151,9 @@ public class DgsClientApp {
 			String infection = splitLine[0];
 			long id = Long.parseLong(splitLine[1]);
 
+			//To able to insert timeIn and timeOut as Timestamp variables
 			String[] auxIn = splitLine[2].split(" ",2);
 			String timestampIn = auxIn[0] + "T" + auxIn[1] + "Z";
-
 			String[] auxOut = splitLine[3].split(" ",2);
 			String timestampOut = auxOut[0] + "T" + auxOut[1] + "Z";
 

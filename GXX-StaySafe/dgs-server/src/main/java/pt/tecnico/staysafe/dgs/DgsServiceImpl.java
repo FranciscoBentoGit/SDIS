@@ -24,6 +24,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	    	responseObserver.onError(INVALID_ARGUMENT.withDescription("Name: invalid name, should contain 5 to 30 characters!").asRuntimeException());
 		}
 		
+		//In order to filter if a name is alphanumeric(cotains both letters and numbers)
 		String regex = "^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(name);
