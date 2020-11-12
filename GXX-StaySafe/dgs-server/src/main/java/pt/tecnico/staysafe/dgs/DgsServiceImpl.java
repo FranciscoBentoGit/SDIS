@@ -44,6 +44,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onCompleted();
 			}
 		} catch (IllegalStateException ise) {
+			System.out.println("Exception caught!");
 		}
 		
 	}
@@ -62,6 +63,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onCompleted();
 			}  
 		} catch (IllegalStateException ise) {
+			System.out.println("Exception caught!");
 		}
 		
 	}
@@ -100,6 +102,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onCompleted();
 			}
 		} catch (IllegalStateException ise) {
+			System.out.println("Exception caught!");
 		}
 		   
 	}
@@ -118,6 +121,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onCompleted();
 			}
 		} catch (IllegalStateException ise) {
+			System.out.println("Exception caught!");
 		}
 	    
 	}
@@ -143,6 +147,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onCompleted();
 			}
 		} catch (IllegalStateException ise) {
+			System.out.println("Exception caught!");
 		}
 
 	}
@@ -162,6 +167,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onCompleted();
 			}
 		} catch (IllegalStateException ise) {
+			System.out.println("Exception caught!");
 		}
 	    
 	}
@@ -202,6 +208,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onCompleted();
 			}
 		} catch (IllegalStateException ise) {
+			System.out.println("Exception caught!");
 		}
 		
 	}

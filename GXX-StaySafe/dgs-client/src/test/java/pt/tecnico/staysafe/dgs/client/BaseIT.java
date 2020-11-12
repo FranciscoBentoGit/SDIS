@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.google.protobuf.Timestamp;
+
 import pt.tecnico.staysafe.dgs.grpc.*;
 
 
@@ -54,6 +56,17 @@ public class BaseIT {
 
 	protected SnifferInfoRequest buildSnifferInfoRequest(String name) {
 		return SnifferInfoRequest.newBuilder().setName(name).build();
+	}
+	protected ReportRequest buildReportRequest(String snifferName,String infection,long id, Timestamp timeIn,Timestamp timeOut) {
+		return ReportRequest.newBuilder().setName(snifferName).setInfection(infection).setId(id).setTimeIn(timeIn).setTimeOut(timeOut).build();
+	}
+
+	protected IndividualProbRequest buildIndividualProbRequest(long id) {
+		return IndividualProbRequest.newBuilder().setId(id).build();
+	}
+	
+	protected AggregateProbRequest buildAggregateProbRequest(String command) {
+		return AggregateProbRequest.newBuilder().setCommand(command).build();
 	}
 
 	/*protected InitRequest buildInitRequest(String snifferName, String infection, long id, google.protobuf.Timestamp timeIn, google.protobuf.Timestamp timeOut) {
