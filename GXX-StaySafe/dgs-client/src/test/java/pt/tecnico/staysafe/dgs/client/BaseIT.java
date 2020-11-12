@@ -6,11 +6,15 @@ import org.junit.jupiter.api.BeforeAll;
 import java.io.IOException;
 import java.util.Properties;
 
+import pt.tecnico.staysafe.dgs.grpc.*;
+
 
 public class BaseIT {
 
 	private static final String TEST_PROP_FILE = "/test.properties";
 	protected static Properties testProps;
+
+	static DgsFrontend frontend;
 	
 	@BeforeAll
 	public static void oneTimeSetup () throws IOException {
@@ -25,11 +29,35 @@ public class BaseIT {
 			System.out.println(msg);
 			throw e;
 		}
+
+		final String host = testProps.getProperty("server.host");
+		final int port = Integer.parseInt(testProps.getProperty("server.port"));
+		frontend = new DgsFrontend(host, port);
 	}
 	
 	@AfterAll
 	public static void cleanup() {
 		
 	}
+
+	protected PingRequest buildPingRequest(String text) {
+		return PingRequest.newBuilder().setText(text).build();
+	}
+
+	protected ClearRequest buildClearRequest() {
+		return ClearRequest.newBuilder().build();
+	}
+
+	protected SnifferJoinRequest buildSnifferJoinRequest(String name, String address) {
+		return SnifferJoinRequest.newBuilder().setName(name).setAddress(address).build();
+	}
+
+	protected SnifferInfoRequest buildSnifferInfoRequest(String name) {
+		return SnifferInfoRequest.newBuilder().setName(name).build();
+	}
+
+	/*protected InitRequest buildInitRequest(String snifferName, String infection, long id, google.protobuf.Timestamp timeIn, google.protobuf.Timestamp timeOut) {
+		return InitRequest.newBuilder().setSnifferName(snifferName).setInfection(infection).setId(id).setTimeIn(timeIn).setTimeOut(timeOut).build();
+	}*/
 
 }

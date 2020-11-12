@@ -1,2 +1,6 @@
-/home/francisco/SDisGit/GXX-StaySafe/dgs-client/src/test/java/pt/tecnico/staysafe/dgs/client/DgsIT.java
-/home/francisco/SDisGit/GXX-StaySafe/dgs-client/src/test/java/pt/tecnico/staysafe/dgs/client/BaseIT.java
+/home/joao/sdis/SDis/GXX-StaySafe/dgs-client/src/test/java/pt/tecnico/staysafe/dgs/client/SnifferInfoIT.java
+/home/joao/sdis/SDis/GXX-StaySafe/dgs-client/src/test/java/pt/tecnico/staysafe/dgs/client/PingIT.java
+/home/joao/sdis/SDis/GXX-StaySafe/dgs-client/src/test/java/pt/tecnico/staysafe/dgs/client/SnifferJoinIT.java
+/home/joao/sdis/SDis/GXX-StaySafe/dgs-client/src/test/java/pt/tecnico/staysafe/dgs/client/BaseIT.java
+/home/joao/sdis/SDis/GXX-StaySafe/dgs-client/src/test/java/pt/tecnico/staysafe/dgs/client/ClearIT.java
+/home/joao/sdis/SDis/GXX-StaySafe/dgs-client/src/test/java/pt/tecnico/staysafe/dgs/client/DgsIT.java
