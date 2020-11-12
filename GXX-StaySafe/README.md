@@ -77,7 +77,7 @@ The server has 2 main variables which he operates with : a ConcurrentHashMap to 
 
 Specific clients, like sniffer,journalist or researcher interact with dgs_server through : specific client calls a certain function from a father client that represents all clients,then he calls the associated function(according to objective) of the frontend ( bridge between dgs_server and father client),which creates the stub to interact with dgs_server, through his implementation.
 
-Each command and usage of each client will be available in the respective README.md folder.
+Each command and usage of each client will be available in the README.md file from /demo folder.
 
 
 
