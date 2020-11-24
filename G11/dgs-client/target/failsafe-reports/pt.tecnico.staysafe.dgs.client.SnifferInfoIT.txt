@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: pt.tecnico.staysafe.dgs.client.SnifferInfoIT
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.266 s <<< FAILURE! - in pt.tecnico.staysafe.dgs.client.SnifferInfoIT
+pt.tecnico.staysafe.dgs.client.SnifferInfoIT.snifferInfoOKTest  Time elapsed: 0.003 s  <<< ERROR!
+java.lang.NullPointerException
+	at pt.tecnico.staysafe.dgs.client.SnifferInfoIT.setUp(SnifferInfoIT.java:35)
+
+pt.tecnico.staysafe.dgs.client.SnifferInfoIT.diffNameTest  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NullPointerException
+	at pt.tecnico.staysafe.dgs.client.SnifferInfoIT.setUp(SnifferInfoIT.java:35)
+
+pt.tecnico.staysafe.dgs.client.SnifferInfoIT.nameBlankTest  Time elapsed: 0.165 s  <<< ERROR!
+java.lang.NullPointerException
+	at pt.tecnico.staysafe.dgs.client.SnifferInfoIT.setUp(SnifferInfoIT.java:35)
+
