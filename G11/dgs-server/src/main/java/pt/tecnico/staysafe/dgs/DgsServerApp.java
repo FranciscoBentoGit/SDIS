@@ -23,7 +23,9 @@ public class DgsServerApp {
 		final String zooPort = args[1];
 		final String host = args[2];
 		final String port = args[3];
-		final String path = args[4];
+		final String port2 = args[4];
+		final String path = args[5];
+		final String path2 = args[6];
 		final BindableService impl = new DgsServiceImpl();
 		ZKNaming zkNaming = null;
 		
@@ -31,20 +33,30 @@ public class DgsServerApp {
 			zkNaming = new ZKNaming(zooHost, zooPort);
 			// publish
 			zkNaming.rebind(path, host, port);
+			zkNaming.rebind(path2, host, port2);
 
 			int portStr = Integer.parseInt(port);
+			int portStr2 = Integer.parseInt(port2);
 
 			// Create a new server to listen on port
 			Server server = ServerBuilder.forPort(portStr).addService(impl).build();
+			Server server2 = ServerBuilder.forPort(portStr2).addService(impl).build();
 
-			// Start the server
+			// Start the replica 1
 			server.start();
 
 			// Server threads are running in the background.
-			System.out.println("Server started");
+			System.out.println("Replica 1 starting...");
+
+			// Start the replica 2
+			server2.start();
+
+			// Server threads are running in the background.
+			System.out.println("Replica 2 starting...");
 
 			// Do not exit the main thread. Wait until server is terminated.
 			server.awaitTermination();
+			server2.awaitTermination();
 		} catch (ZKNamingException e) {
 			System.out.println("Caught exception with description: " + e.getMessage());
 		} finally {
@@ -52,6 +64,7 @@ public class DgsServerApp {
 				if (zkNaming != null) {
 				// remove
 				zkNaming.unbind(path,host,port);
+				zkNaming.unbind(path2,host,port2);
 				}
 			} catch (ZKNamingException e) {
 				System.out.println("Caught exception with description: " + e.getMessage());

@@ -22,7 +22,7 @@ public class ResearcherApp {
 			return;
 		}
 
-		if (!(args[0].equals("localhost")) || !(args[1].equals("8080"))) {
+		if (!(args[0].equals("localhost")) || !(args[1].equals("2181"))) {
 			System.out.println("Invalid argument(s)!");
 			return;
 		}

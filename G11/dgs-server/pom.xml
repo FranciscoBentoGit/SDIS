@@ -21,11 +21,12 @@
 		<zoo.port>2181</zoo.port>
 		<!-- instance number -->
 		<instance>1</instance>
-
+		<instance2>2</instance2>
 		<server.host>localhost</server.host>
 		<server.port>808${instance}</server.port>
+		<server.port2>808${instance2}</server.port2>
 		<server.path>/grpc/staysafe/dgs/${instance}</server.path>
-
+		<server.path2>/grpc/staysafe/dgs/${instance2}</server.path2>
 	</properties>
 
 	<dependencies>
@@ -85,7 +86,9 @@
 						<argument>${zoo.port}</argument>
 						<argument>${server.host}</argument>
 						<argument>${server.port}</argument>
+						<argument>${server.port2}</argument>
 						<argument>${server.path}</argument>
+						<argument>${server.path2}</argument>
 					</arguments>
 				</configuration>
 			</plugin>

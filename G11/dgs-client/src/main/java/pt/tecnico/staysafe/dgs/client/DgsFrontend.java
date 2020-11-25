@@ -14,15 +14,15 @@ public class DgsFrontend {
 	public DgsFrontend(String zooHost, String zooPort, String path) {
 		try {
 			ZKNaming zkNaming = new ZKNaming(zooHost,zooPort);
-		// lookup
-		ZKRecord record = zkNaming.lookup(path);
-		String target = record.getURI();
-		
-		//final String target = host + ":" + port;
-		final ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
-		
-		DgsGrpc.DgsBlockingStub stub = DgsGrpc.newBlockingStub(channel);
-		_stub = stub;
+			// lookup
+			ZKRecord record = zkNaming.lookup(path);
+			String target = record.getURI();
+			
+			//final String target = host + ":" + port;
+			final ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
+			
+			DgsGrpc.DgsBlockingStub stub = DgsGrpc.newBlockingStub(channel);
+			_stub = stub;
 		} catch (ZKNamingException e) {
 			System.out.println("Caught exception with description: " + e.getMessage());
 		}

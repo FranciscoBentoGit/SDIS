@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: pt.tecnico.staysafe.dgs.client.ClearIT
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in pt.tecnico.staysafe.dgs.client.ClearIT
-pt.tecnico.staysafe.dgs.client.ClearIT.clearOKTest  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.NullPointerException
-	at pt.tecnico.staysafe.dgs.client.ClearIT.clearOKTest(ClearIT.java:42)
-
