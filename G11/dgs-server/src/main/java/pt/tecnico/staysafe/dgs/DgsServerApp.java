@@ -54,6 +54,10 @@ public class DgsServerApp {
 			// Server threads are running in the background.
 			System.out.println("Replica 2 starting...");
 
+			// Creates a frontend for each replica
+			ServersFrontend frontend1 = new ServersFrontend(zkNaming,path);
+			ServersFrontend frontend2 = new ServersFrontend(zkNaming,path2);
+
 			// Do not exit the main thread. Wait until server is terminated.
 			server.awaitTermination();
 			server2.awaitTermination();

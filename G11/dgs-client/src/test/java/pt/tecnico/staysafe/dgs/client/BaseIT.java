@@ -35,7 +35,7 @@ public class BaseIT {
 		final String host = testProps.getProperty("server.host");
 		//final int port = Integer.parseInt(testProps.getProperty("server.port"));
 		final String port = testProps.getProperty("server.port");
-		final String path = testProps.getProperty("server.ptah");
+		final String path = testProps.getProperty("server.path");
 		frontend = new DgsFrontend(host, port, path);
 	}
 	

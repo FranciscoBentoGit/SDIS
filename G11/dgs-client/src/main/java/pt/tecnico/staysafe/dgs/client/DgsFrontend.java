@@ -18,7 +18,6 @@ public class DgsFrontend {
 			ZKRecord record = zkNaming.lookup(path);
 			String target = record.getURI();
 			
-			//final String target = host + ":" + port;
 			final ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
 			
 			DgsGrpc.DgsBlockingStub stub = DgsGrpc.newBlockingStub(channel);
@@ -26,7 +25,6 @@ public class DgsFrontend {
 		} catch (ZKNamingException e) {
 			System.out.println("Caught exception with description: " + e.getMessage());
 		}
-		
 	}
 
 	public SnifferJoinResponse sniffer_join(SnifferJoinRequest request) {
