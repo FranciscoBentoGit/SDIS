@@ -219,4 +219,27 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	    responseObserver.onNext(response);
 	    responseObserver.onCompleted();
 	}
+
+	@Override
+	public void update(UpdateRequest request, StreamObserver<UpdateResponse> responseObserver) {
+		long sequenceNumber = request.getSequenceNumber();
+		UpdateResponse response = UpdateResponse.newBuilder().setSuccess(dService.update(sequenceNumber)).build();
+	    responseObserver.onNext(response);
+	    responseObserver.onCompleted();
+	}
+
+	@Override
+	public long sendUpdate(SendUpdateRequest request, StreamObserver<SendUpdateResponse> responseObserver) {
+		SendUpdateResponse response = SendUpdateResponse.newBuilder().setSequenceNumber(dService.send_update()).build();
+	    responseObserver.onNext(response);
+	    responseObserver.onCompleted();
+	}
+
+	@Override
+	public long incrementSequenceNumber(IncrementSequenceNumberRequest request, StreamObserver<IncrementSequenceNumberResponse> responseObserver) {
+		IncrementSequenceNumberResponse response = IncrementSequenceNumberResponse.newBuilder().setSequenceNumber(dService.increment_sequence_number()).build();
+	    responseObserver.onNext(response);
+	    responseObserver.onCompleted();
+	}
+
 }

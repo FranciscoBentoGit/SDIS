@@ -275,6 +275,99 @@ public final class DgsGrpc {
     return getCtrlClearMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.UpdateRequest,
+      pt.tecnico.staysafe.dgs.grpc.UpdateResponse> getUpdateMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "update",
+      requestType = pt.tecnico.staysafe.dgs.grpc.UpdateRequest.class,
+      responseType = pt.tecnico.staysafe.dgs.grpc.UpdateResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.UpdateRequest,
+      pt.tecnico.staysafe.dgs.grpc.UpdateResponse> getUpdateMethod() {
+    io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.UpdateRequest, pt.tecnico.staysafe.dgs.grpc.UpdateResponse> getUpdateMethod;
+    if ((getUpdateMethod = DgsGrpc.getUpdateMethod) == null) {
+      synchronized (DgsGrpc.class) {
+        if ((getUpdateMethod = DgsGrpc.getUpdateMethod) == null) {
+          DgsGrpc.getUpdateMethod = getUpdateMethod =
+              io.grpc.MethodDescriptor.<pt.tecnico.staysafe.dgs.grpc.UpdateRequest, pt.tecnico.staysafe.dgs.grpc.UpdateResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "update"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.UpdateRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.UpdateResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DgsMethodDescriptorSupplier("update"))
+              .build();
+        }
+      }
+    }
+    return getUpdateMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest,
+      pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse> getSendUpdateMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "send_update",
+      requestType = pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest.class,
+      responseType = pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest,
+      pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse> getSendUpdateMethod() {
+    io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest, pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse> getSendUpdateMethod;
+    if ((getSendUpdateMethod = DgsGrpc.getSendUpdateMethod) == null) {
+      synchronized (DgsGrpc.class) {
+        if ((getSendUpdateMethod = DgsGrpc.getSendUpdateMethod) == null) {
+          DgsGrpc.getSendUpdateMethod = getSendUpdateMethod =
+              io.grpc.MethodDescriptor.<pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest, pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "send_update"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DgsMethodDescriptorSupplier("send_update"))
+              .build();
+        }
+      }
+    }
+    return getSendUpdateMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest,
+      pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse> getIncrementSequenceNumberMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "increment_sequence_number",
+      requestType = pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest.class,
+      responseType = pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest,
+      pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse> getIncrementSequenceNumberMethod() {
+    io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest, pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse> getIncrementSequenceNumberMethod;
+    if ((getIncrementSequenceNumberMethod = DgsGrpc.getIncrementSequenceNumberMethod) == null) {
+      synchronized (DgsGrpc.class) {
+        if ((getIncrementSequenceNumberMethod = DgsGrpc.getIncrementSequenceNumberMethod) == null) {
+          DgsGrpc.getIncrementSequenceNumberMethod = getIncrementSequenceNumberMethod =
+              io.grpc.MethodDescriptor.<pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest, pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "increment_sequence_number"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DgsMethodDescriptorSupplier("increment_sequence_number"))
+              .build();
+        }
+      }
+    }
+    return getIncrementSequenceNumberMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -379,6 +472,27 @@ public final class DgsGrpc {
       asyncUnimplementedUnaryCall(getCtrlClearMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void update(pt.tecnico.staysafe.dgs.grpc.UpdateRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.UpdateResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getUpdateMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void sendUpdate(pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getSendUpdateMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void incrementSequenceNumber(pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getIncrementSequenceNumberMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -437,6 +551,27 @@ public final class DgsGrpc {
                 pt.tecnico.staysafe.dgs.grpc.ClearRequest,
                 pt.tecnico.staysafe.dgs.grpc.ClearResponse>(
                   this, METHODID_CTRL_CLEAR)))
+          .addMethod(
+            getUpdateMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pt.tecnico.staysafe.dgs.grpc.UpdateRequest,
+                pt.tecnico.staysafe.dgs.grpc.UpdateResponse>(
+                  this, METHODID_UPDATE)))
+          .addMethod(
+            getSendUpdateMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest,
+                pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse>(
+                  this, METHODID_SEND_UPDATE)))
+          .addMethod(
+            getIncrementSequenceNumberMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest,
+                pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse>(
+                  this, METHODID_INCREMENT_SEQUENCE_NUMBER)))
           .build();
     }
   }
@@ -518,6 +653,30 @@ public final class DgsGrpc {
       asyncUnaryCall(
           getChannel().newCall(getCtrlClearMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void update(pt.tecnico.staysafe.dgs.grpc.UpdateRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.UpdateResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getUpdateMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void sendUpdate(pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getSendUpdateMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void incrementSequenceNumber(pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getIncrementSequenceNumberMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -588,6 +747,27 @@ public final class DgsGrpc {
     public pt.tecnico.staysafe.dgs.grpc.ClearResponse ctrlClear(pt.tecnico.staysafe.dgs.grpc.ClearRequest request) {
       return blockingUnaryCall(
           getChannel(), getCtrlClearMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public pt.tecnico.staysafe.dgs.grpc.UpdateResponse update(pt.tecnico.staysafe.dgs.grpc.UpdateRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getUpdateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse sendUpdate(pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getSendUpdateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse incrementSequenceNumber(pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getIncrementSequenceNumberMethod(), getCallOptions(), request);
     }
   }
 
@@ -668,6 +848,30 @@ public final class DgsGrpc {
       return futureUnaryCall(
           getChannel().newCall(getCtrlClearMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pt.tecnico.staysafe.dgs.grpc.UpdateResponse> update(
+        pt.tecnico.staysafe.dgs.grpc.UpdateRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getUpdateMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse> sendUpdate(
+        pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getSendUpdateMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse> incrementSequenceNumber(
+        pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getIncrementSequenceNumberMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_SNIFFER_JOIN = 0;
@@ -678,6 +882,9 @@ public final class DgsGrpc {
   private static final int METHODID_CTRL_PING = 5;
   private static final int METHODID_CTRL_INIT = 6;
   private static final int METHODID_CTRL_CLEAR = 7;
+  private static final int METHODID_UPDATE = 8;
+  private static final int METHODID_SEND_UPDATE = 9;
+  private static final int METHODID_INCREMENT_SEQUENCE_NUMBER = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -727,6 +934,18 @@ public final class DgsGrpc {
         case METHODID_CTRL_CLEAR:
           serviceImpl.ctrlClear((pt.tecnico.staysafe.dgs.grpc.ClearRequest) request,
               (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.ClearResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE:
+          serviceImpl.update((pt.tecnico.staysafe.dgs.grpc.UpdateRequest) request,
+              (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.UpdateResponse>) responseObserver);
+          break;
+        case METHODID_SEND_UPDATE:
+          serviceImpl.sendUpdate((pt.tecnico.staysafe.dgs.grpc.SendUpdateRequest) request,
+              (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.SendUpdateResponse>) responseObserver);
+          break;
+        case METHODID_INCREMENT_SEQUENCE_NUMBER:
+          serviceImpl.incrementSequenceNumber((pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberRequest) request,
+              (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.IncrementSequenceNumberResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -797,6 +1016,9 @@ public final class DgsGrpc {
               .addMethod(getCtrlPingMethod())
               .addMethod(getCtrlInitMethod())
               .addMethod(getCtrlClearMethod())
+              .addMethod(getUpdateMethod())
+              .addMethod(getSendUpdateMethod())
+              .addMethod(getIncrementSequenceNumberMethod())
               .build();
         }
       }

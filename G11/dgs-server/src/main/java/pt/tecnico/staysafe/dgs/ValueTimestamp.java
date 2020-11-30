@@ -6,22 +6,23 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class ValueTimestamp {
-    //In case of being an update , it should add the update as(replica,sequence number)
-    private CopyOnWriteArrayList<Long> _vecList;
+    private CopyOnWriteArrayList<Long> _vecList = new CopyOnWriteArrayList<Long> ();
 
     public ValueTimestamp(){
         _vecList = new CopyOnWriteArrayList<Long>();
+        _vecList.add(0,(long) 1);
+        _vecList.add(1,(long) 0);
     }
 
     public CopyOnWriteArrayList<Long> getVecList(){
         return _vecList;
     }
 
-    public void addToVecList(int replicaId, long SN){
-        _vecList.add(replicaId,SN);
+    public void updateSequenceNumber(int replicaId, long SN){
+        _vecList.set(replicaId-1,SN);
     }
 
     public long getReplicaSN(int replicaId){
-        return _vecList.get(replicaId);
+        return _vecList.get(replicaId-1);
     }
 }

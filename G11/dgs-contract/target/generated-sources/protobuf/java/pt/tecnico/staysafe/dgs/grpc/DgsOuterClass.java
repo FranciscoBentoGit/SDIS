@@ -94,6 +94,36 @@ public final class DgsOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_pt_tecnico_staysafe_dgs_grpc_ClearResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pt_tecnico_staysafe_dgs_grpc_SendUpdateRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pt_tecnico_staysafe_dgs_grpc_SendUpdateRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pt_tecnico_staysafe_dgs_grpc_SendUpdateResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pt_tecnico_staysafe_dgs_grpc_SendUpdateResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pt_tecnico_staysafe_dgs_grpc_IncrementSequenceNumberRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pt_tecnico_staysafe_dgs_grpc_IncrementSequenceNumberRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pt_tecnico_staysafe_dgs_grpc_IncrementSequenceNumberResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pt_tecnico_staysafe_dgs_grpc_IncrementSequenceNumberResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -125,30 +155,45 @@ public final class DgsOuterClass {
       "mp\022+\n\007timeOut\030\005 \001(\0132\032.google.protobuf.Ti" +
       "mestamp\"\037\n\014InitResponse\022\017\n\007success\030\001 \001(\t" +
       "\"\016\n\014ClearRequest\" \n\rClearResponse\022\017\n\007suc" +
-      "cess\030\001 \001(\t2\240\007\n\003Dgs\022s\n\014sniffer_join\0220.pt." +
-      "tecnico.staysafe.dgs.grpc.SnifferJoinReq" +
-      "uest\0321.pt.tecnico.staysafe.dgs.grpc.Snif" +
-      "ferJoinResponse\022s\n\014sniffer_info\0220.pt.tec" +
-      "nico.staysafe.dgs.grpc.SnifferInfoReques" +
-      "t\0321.pt.tecnico.staysafe.dgs.grpc.Sniffer" +
-      "InfoResponse\022c\n\006report\022+.pt.tecnico.stay" +
-      "safe.dgs.grpc.ReportRequest\032,.pt.tecnico" +
-      ".staysafe.dgs.grpc.ReportResponse\022\215\001\n in" +
-      "dividual_infection_probability\0223.pt.tecn" +
-      "ico.staysafe.dgs.grpc.IndividualProbRequ" +
-      "est\0324.pt.tecnico.staysafe.dgs.grpc.Indiv" +
-      "idualProbResponse\022\212\001\n\037aggregate_infectio" +
-      "n_probability\0222.pt.tecnico.staysafe.dgs." +
-      "grpc.AggregateProbRequest\0323.pt.tecnico.s" +
-      "taysafe.dgs.grpc.AggregateProbResponse\022b" +
-      "\n\tctrl_ping\022).pt.tecnico.staysafe.dgs.gr" +
-      "pc.PingRequest\032*.pt.tecnico.staysafe.dgs" +
-      ".grpc.PingResponse\022b\n\tctrl_init\022).pt.tec" +
-      "nico.staysafe.dgs.grpc.InitRequest\032*.pt." +
-      "tecnico.staysafe.dgs.grpc.InitResponse\022e" +
-      "\n\nctrl_clear\022*.pt.tecnico.staysafe.dgs.g" +
-      "rpc.ClearRequest\032+.pt.tecnico.staysafe.d" +
-      "gs.grpc.ClearResponseB\002P\001b\006proto3"
+      "cess\030\001 \001(\t\"\'\n\rUpdateRequest\022\026\n\016sequenceN" +
+      "umber\030\001 \001(\003\"!\n\016UpdateResponse\022\017\n\007success" +
+      "\030\001 \001(\t\"\023\n\021SendUpdateRequest\",\n\022SendUpdat" +
+      "eResponse\022\026\n\016sequenceNumber\030\001 \001(\003\" \n\036Inc" +
+      "rementSequenceNumberRequest\"9\n\037Increment" +
+      "SequenceNumberResponse\022\026\n\016sequenceNumber" +
+      "\030\001 \001(\0032\222\n\n\003Dgs\022s\n\014sniffer_join\0220.pt.tecn" +
+      "ico.staysafe.dgs.grpc.SnifferJoinRequest" +
+      "\0321.pt.tecnico.staysafe.dgs.grpc.SnifferJ" +
+      "oinResponse\022s\n\014sniffer_info\0220.pt.tecnico" +
+      ".staysafe.dgs.grpc.SnifferInfoRequest\0321." +
+      "pt.tecnico.staysafe.dgs.grpc.SnifferInfo" +
+      "Response\022c\n\006report\022+.pt.tecnico.staysafe" +
+      ".dgs.grpc.ReportRequest\032,.pt.tecnico.sta" +
+      "ysafe.dgs.grpc.ReportResponse\022\215\001\n indivi" +
+      "dual_infection_probability\0223.pt.tecnico." +
+      "staysafe.dgs.grpc.IndividualProbRequest\032" +
+      "4.pt.tecnico.staysafe.dgs.grpc.Individua" +
+      "lProbResponse\022\212\001\n\037aggregate_infection_pr" +
+      "obability\0222.pt.tecnico.staysafe.dgs.grpc" +
+      ".AggregateProbRequest\0323.pt.tecnico.stays" +
+      "afe.dgs.grpc.AggregateProbResponse\022b\n\tct" +
+      "rl_ping\022).pt.tecnico.staysafe.dgs.grpc.P" +
+      "ingRequest\032*.pt.tecnico.staysafe.dgs.grp" +
+      "c.PingResponse\022b\n\tctrl_init\022).pt.tecnico" +
+      ".staysafe.dgs.grpc.InitRequest\032*.pt.tecn" +
+      "ico.staysafe.dgs.grpc.InitResponse\022e\n\nct" +
+      "rl_clear\022*.pt.tecnico.staysafe.dgs.grpc." +
+      "ClearRequest\032+.pt.tecnico.staysafe.dgs.g" +
+      "rpc.ClearResponse\022c\n\006update\022+.pt.tecnico" +
+      ".staysafe.dgs.grpc.UpdateRequest\032,.pt.te" +
+      "cnico.staysafe.dgs.grpc.UpdateResponse\022p" +
+      "\n\013send_update\022/.pt.tecnico.staysafe.dgs." +
+      "grpc.SendUpdateRequest\0320.pt.tecnico.stay" +
+      "safe.dgs.grpc.SendUpdateResponse\022\230\001\n\031inc" +
+      "rement_sequence_number\022<.pt.tecnico.stay" +
+      "safe.dgs.grpc.IncrementSequenceNumberReq" +
+      "uest\032=.pt.tecnico.staysafe.dgs.grpc.Incr" +
+      "ementSequenceNumberResponseB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -251,6 +296,42 @@ public final class DgsOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pt_tecnico_staysafe_dgs_grpc_ClearResponse_descriptor,
         new java.lang.String[] { "Success", });
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateRequest_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateRequest_descriptor,
+        new java.lang.String[] { "SequenceNumber", });
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateResponse_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateResponse_descriptor,
+        new java.lang.String[] { "Success", });
+    internal_static_pt_tecnico_staysafe_dgs_grpc_SendUpdateRequest_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_pt_tecnico_staysafe_dgs_grpc_SendUpdateRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pt_tecnico_staysafe_dgs_grpc_SendUpdateRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_pt_tecnico_staysafe_dgs_grpc_SendUpdateResponse_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_pt_tecnico_staysafe_dgs_grpc_SendUpdateResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pt_tecnico_staysafe_dgs_grpc_SendUpdateResponse_descriptor,
+        new java.lang.String[] { "SequenceNumber", });
+    internal_static_pt_tecnico_staysafe_dgs_grpc_IncrementSequenceNumberRequest_descriptor =
+      getDescriptor().getMessageTypes().get(20);
+    internal_static_pt_tecnico_staysafe_dgs_grpc_IncrementSequenceNumberRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pt_tecnico_staysafe_dgs_grpc_IncrementSequenceNumberRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_pt_tecnico_staysafe_dgs_grpc_IncrementSequenceNumberResponse_descriptor =
+      getDescriptor().getMessageTypes().get(21);
+    internal_static_pt_tecnico_staysafe_dgs_grpc_IncrementSequenceNumberResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pt_tecnico_staysafe_dgs_grpc_IncrementSequenceNumberResponse_descriptor,
+        new java.lang.String[] { "SequenceNumber", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

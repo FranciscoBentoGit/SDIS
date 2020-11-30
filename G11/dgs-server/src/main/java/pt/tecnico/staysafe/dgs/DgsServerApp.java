@@ -7,11 +7,17 @@ import pt.ulisboa.tecnico.sdis.zk.*;
 
 import java.io.IOException;
 
+import java.util.concurrent.*;
+
 
 public class DgsServerApp {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		System.out.println("StaySafe dgs server");
+		int period1 = 5;
+		int period2 = 10;
+		int initialDelay = 60;
+		
 		
 		// receive and print arguments
 		System.out.printf("Received %d arguments%n", args.length);
@@ -31,6 +37,7 @@ public class DgsServerApp {
 		
 		try {
 			zkNaming = new ZKNaming(zooHost, zooPort);
+			
 			// publish
 			zkNaming.rebind(path, host, port);
 			zkNaming.rebind(path2, host, port2);
@@ -58,6 +65,33 @@ public class DgsServerApp {
 			ServersFrontend frontend1 = new ServersFrontend(zkNaming,path);
 			ServersFrontend frontend2 = new ServersFrontend(zkNaming,path2);
 
+			ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+			Runnable prop1 = new Runnable() {
+				@Override
+				public void run(){
+					System.out.println("Replica 1 initiating update exchange...");
+					frontend1.update(frontend2.sendUpdate());
+				}
+			};
+			Runnable prop2 = new Runnable() {
+				@Override
+				public void run(){
+					System.out.println("Replica 2 initiating update exchange...");
+					frontend2.update(frontend1.sendUpdate());
+
+				}
+			};
+
+			
+			scheduler.scheduleWithFixedDelay(prop1,initialDelay,period1,TimeUnit.SECONDS);
+			scheduler.scheduleWithFixedDelay(prop2,initialDelay,period2,TimeUnit.SECONDS);
+			/*
+				fazendo list do zkNaming
+					identificando o fronted a partir do port da list
+						chamar em funçao do frontend[i].update que exporta as versoes mais recentes
+			*/
+
 			// Do not exit the main thread. Wait until server is terminated.
 			server.awaitTermination();
 			server2.awaitTermination();
@@ -75,5 +109,6 @@ public class DgsServerApp {
 			}
 		}
 	}
+	
 	
 }

@@ -106,6 +106,37 @@ message ClearResponse {
 	string success = 1;
 }
 
+//function update
+//
+message UpdateRequest {
+	int64 sequenceNumber = 1;
+}
+
+message UpdateResponse {
+	string success = 1;
+}
+
+//function SendUpdate
+//
+message SendUpdateRequest {
+	//No arguments needed
+}
+
+message SendUpdateResponse {
+	int64 sequenceNumber = 1;
+}
+
+//function IncrementSequenceNumber
+//
+
+message IncrementSequenceNumberRequest{
+	//No arguments needed
+}
+
+message IncrementSequenceNumberResponse{
+	int64 sequenceNumber = 1;
+}
+
 
 service Dgs {
 	rpc sniffer_join(SnifferJoinRequest) returns (SnifferJoinResponse);
@@ -116,4 +147,7 @@ service Dgs {
 	rpc ctrl_ping(PingRequest) returns (PingResponse);
 	rpc ctrl_init(InitRequest) returns (InitResponse);
 	rpc ctrl_clear(ClearRequest) returns (ClearResponse);
+	rpc update(UpdateRequest) returns (UpdateResponse);
+	rpc send_update(SendUpdateRequest) returns (SendUpdateResponse);
+	rpc increment_sequence_number(IncrementSequenceNumberRequest) returns (IncrementSequenceNumberResponse);
 }
