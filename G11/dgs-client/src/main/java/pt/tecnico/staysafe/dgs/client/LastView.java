@@ -3,17 +3,12 @@ package pt.tecnico.staysafe.dgs.client;
 import pt.tecnico.staysafe.dgs.grpc.*;
 
 public class LastView {
-    private long[] _vector = {0,0};
     private IndividualProbResponse _singleProb;
     private AggregateProbResponse _meanDev;
     private AggregateProbResponse _percentiles;
 
-    public long[] getVector() {
-        return _vector; 
-    }
 
-    public void setSingleProb(long[] v, IndividualProbResponse r) {
-        _vector = v;
+    public void setSingleProb(IndividualProbResponse r) {
         _singleProb = r;
     }
 
@@ -21,8 +16,7 @@ public class LastView {
         return _singleProb; 
     }
 
-    public void setMeanDev(long[] v, AggregateProbResponse r) {
-        _vector = v;
+    public void setMeanDev(AggregateProbResponse r) {
         _meanDev = r;
     }
 
@@ -30,8 +24,7 @@ public class LastView {
         return _meanDev; 
     }
 
-    public void setPercentiles(long[] v, AggregateProbResponse r) {
-        _vector = v;
+    public void setPercentiles (AggregateProbResponse r) {
         _percentiles = r;
     }
 

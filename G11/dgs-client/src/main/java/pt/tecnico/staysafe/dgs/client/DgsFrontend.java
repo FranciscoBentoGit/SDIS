@@ -11,10 +11,13 @@ import pt.ulisboa.tecnico.sdis.zk.*;
 public class DgsFrontend {
 	private DgsGrpc.DgsBlockingStub _stub;
 	private long[] _prevTs;
+	private LastView _lastView;
+	private long[] _possibleRead;
 
 	public DgsFrontend(String zooHost, String zooPort, String path) {
 		try {
 			_prevTs = new long[] {0,0};
+			_possibleRead = new long[] {0,0};
 			ZKNaming zkNaming = new ZKNaming(zooHost,zooPort);
 			// lookup
 			ZKRecord record = zkNaming.lookup(path);
@@ -82,6 +85,7 @@ public class DgsFrontend {
 
 	public IndividualProbResponse individual_infection_probability(IndividualProbRequest request) {
 		IndividualProbResponse response;
+		
 		response = _stub.individualInfectionProbability(request);
 		String convResponse = response.toString();
 		String[] splited1 = convResponse.split(" ", 2);
@@ -94,13 +98,28 @@ public class DgsFrontend {
 
 		String[] splited6 =	splited5[1].split(" ", 2);
 		String ts2 = splited6[1].toString();
+		
+		
+		_possibleRead[0] = (long) Float.parseFloat(ts1);
+		_possibleRead[1] = (long) Float.parseFloat(ts2);
+
+
+		if (_possibleRead[0] !=_prevTs[0] || _possibleRead[1] != _prevTs[1]){
+			// if it is a different read, i need to rely on my backup read
+			return _lastView.getSingleProb();
+		}
+		//if it is a same  read, i can update my backup read
+		_lastView.setSingleProb(response);
+		
 		return response;
 	}
 
 	public AggregateProbResponse aggregate_infection_probability(AggregateProbRequest request) {
 		AggregateProbResponse response;
 		String command = request.getCommand();
+		
 		response = _stub.aggregateInfectionProbability(request);
+		
 		if (command.equals("mean_dev")){
 			String convResponse = response.toString();
 			String[] splited1 = convResponse.split(" ", 2);
@@ -117,14 +136,20 @@ public class DgsFrontend {
 
 			String[] splited9 =	splited8[1].split(" ", 2);
 			String ts2 = splited9[1].toString();
+		
+			_possibleRead[0] = (long) Float.parseFloat(ts1);
+			_possibleRead[1] = (long) Float.parseFloat(ts2);
+
+			if (_possibleRead[0] !=_prevTs[0] || _possibleRead[1] != _prevTs[1]){
+				// if it is a different read, i need to rely on my backup read
+				return _lastView.getMeanDev();
+			}
+			//if it is a same  read, i can update my backup read
+			_lastView.setMeanDev(response);
 			
-			float f1 = Float.parseFloat(prob1);
-			float f2 = Float.parseFloat(prob2);
+			return response;
 
-			_prevTs[0] = (long) Float.parseFloat(ts1);
-			_prevTs[1] = (long) Float.parseFloat(ts2);
-
-		}else{
+		} else{
 			String convResponse = response.toString();
 			String[] splited1 = convResponse.split(" ", 2);
 			String[] splited2 = splited1[1].split("\n", 2);
@@ -144,15 +169,19 @@ public class DgsFrontend {
 
 			String[] splited11 = splited10[1].split(" ", 2);
 			String ts2 = splited11[1].toString();
-			
-			float f1 = Float.parseFloat(prob1);
-			float f2 = Float.parseFloat(prob2);
-			float f3 = Float.parseFloat(prob3);
 
-			_prevTs[0] = (long) Float.parseFloat(ts1);
-			_prevTs[1] = (long) Float.parseFloat(ts2);
+			_possibleRead[0] = (long) Float.parseFloat(ts1);
+			_possibleRead[1] = (long) Float.parseFloat(ts2);
+
+			if (_possibleRead[0] !=_prevTs[0] || _possibleRead[1] != _prevTs[1]){
+				// if it is a different read, i need to rely on my backup read
+				return _lastView.getPercentiles();
+			}
+			//if it is a same  read, i can update my backup read
+			_lastView.setPercentiles(response);
+			
+			return response;
 		}
 		
-		return response;
 	}
 }

@@ -97,7 +97,10 @@ public class SnifferApp {
 		try {
 			SnifferJoinResponse responseJoin;
 			responseJoin = client.sniffer_join(frontend, snifferName, address, replicaId);
-			System.out.printf("%s%n", responseJoin);
+			String auxResponseJoin = responseJoin.getSuccess();
+			String[] splitAuxJoin = auxResponseJoin.split(" - ",2);
+			String newResponseJoin = splitAuxJoin[0] + "\n";
+			System.out.printf("%s%n", newResponseJoin);
 		} catch (StatusRuntimeException e) {
 			System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 			return;
@@ -145,7 +148,10 @@ public class SnifferApp {
 					try {
 						SnifferInfoResponse responseInfo;
 						responseInfo = client.sniffer_info(frontend, snifferName, replicaId);
-						System.out.printf("%s%n", responseInfo);
+						String auxResponseInfo = responseInfo.getNameAddress();
+						String[] splitAuxInfo = auxResponseInfo.split(" - ",2);
+						String newResponseInfo = splitAuxInfo[0] + "\n";
+						System.out.printf("%s%n", newResponseInfo);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 					}
@@ -250,7 +256,10 @@ public class SnifferApp {
 						try {
 							ReportResponse responseReport;
 							responseReport = client.sniffer_report(frontend, snifferName, element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut(), replicaId);
-							System.out.printf("%s%n", responseReport);
+							String auxResponseReport = responseReport.getSuccess();
+							String[] splitAuxReport = auxResponseReport.split(" - ",2);
+							String newResponseReport = splitAuxReport[0] + "\n";
+							System.out.printf("%s%n", newResponseReport);
 						} catch (StatusRuntimeException e) {
 							System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 						}	
@@ -273,7 +282,10 @@ public class SnifferApp {
 					try {
 						PingResponse response;
 						response = client.ctrl_ping(frontend, replicaId);
-						System.out.printf("%s%n", response);
+						String auxResponsePing = response.getText();
+						String[] splitAuxPing = auxResponsePing.split(" - ",2);
+						String newResponsePing = splitAuxPing[0] + "\n";
+						System.out.printf("%s%n", newResponsePing);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 					}	
@@ -282,7 +294,10 @@ public class SnifferApp {
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 					ClearResponse response;
 					response = client.ctrl_clear(frontend, replicaId);
-					System.out.printf("%s%n", response);
+					String auxResponseClear = response.getSuccess();
+					String[] splitAuxClear = auxResponseClear.split(" - ",2);
+					String newResponseClear = splitAuxClear[0] + "\n";
+					System.out.printf("%s%n", newResponseClear);
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {

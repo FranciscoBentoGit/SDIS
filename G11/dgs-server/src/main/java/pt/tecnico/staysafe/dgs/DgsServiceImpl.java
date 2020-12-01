@@ -178,8 +178,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 		} catch (IllegalStateException ise) {
 			System.out.println("Exception caught!");
-		}
-	    
+		}   
 	}
 
 	@Override
