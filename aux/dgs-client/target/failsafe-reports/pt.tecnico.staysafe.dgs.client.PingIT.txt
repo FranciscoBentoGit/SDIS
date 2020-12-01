@@ -1,0 +1,15 @@
+-------------------------------------------------------------------------------
+Test set: pt.tecnico.staysafe.dgs.client.PingIT
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.037 s <<< FAILURE! - in pt.tecnico.staysafe.dgs.client.PingIT
+pt.tecnico.staysafe.dgs.client.PingIT.pingOKTest  Time elapsed: 0.007 s  <<< ERROR!
+java.lang.NullPointerException
+	at pt.tecnico.staysafe.dgs.client.PingIT.pingOKTest(PingIT.java:44)
+
+pt.tecnico.staysafe.dgs.client.PingIT.emptyPingTest  Time elapsed: 0.014 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown ==> expected: <io.grpc.StatusRuntimeException> but was: <java.lang.NullPointerException>
+	at pt.tecnico.staysafe.dgs.client.PingIT.emptyPingTest(PingIT.java:50)
+Caused by: java.lang.NullPointerException
+	at pt.tecnico.staysafe.dgs.client.PingIT.lambda$emptyPingTest$0(PingIT.java:50)
+	at pt.tecnico.staysafe.dgs.client.PingIT.emptyPingTest(PingIT.java:50)
+

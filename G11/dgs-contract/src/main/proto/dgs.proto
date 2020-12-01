@@ -14,6 +14,7 @@ import "google/protobuf/timestamp.proto";
 message SnifferJoinRequest {
 	string name = 1;
 	string address = 2;
+	int32 replicaId = 3;
 }
 
 message SnifferJoinResponse {
@@ -25,6 +26,7 @@ message SnifferJoinResponse {
 //
 message SnifferInfoRequest {
 	string name = 1;
+	int32 replicaId = 2;
 }
 
 message SnifferInfoResponse {
@@ -40,6 +42,7 @@ message ReportRequest {
 	int64 id = 3;
 	google.protobuf.Timestamp timeIn = 4;
 	google.protobuf.Timestamp timeOut = 5;
+	int32 replicaId = 6;
 }
 
 message ReportResponse {
@@ -51,10 +54,11 @@ message ReportResponse {
 //
 message IndividualProbRequest {
 	int64 id = 1;
+	int32 replicaId = 2;
 }
 
 message IndividualProbResponse {
-	float prob = 1;
+	repeated float prob = 1;
 }
 
 
@@ -62,6 +66,7 @@ message IndividualProbResponse {
 //
 message AggregateProbRequest {
 	string command = 1;
+	int32 replicaId = 2;
 }
 
 message AggregateProbResponse {
@@ -73,6 +78,7 @@ message AggregateProbResponse {
 //
 message PingRequest {
 	string text = 1;
+	int32 replicaId = 2;
 }
 
 message PingResponse {
@@ -88,7 +94,7 @@ message InitRequest {
 	int64 id = 3;
 	google.protobuf.Timestamp timeIn = 4;
 	google.protobuf.Timestamp timeOut = 5;
-
+	int32 replicaId = 6;
 }
 
 message InitResponse {
@@ -99,42 +105,11 @@ message InitResponse {
 //function ctrlClear
 //
 message ClearRequest {
-	//No arguments needed
+	int32 replicaId = 1;
 }
 
 message ClearResponse {
 	string success = 1;
-}
-
-//function update
-//
-message UpdateRequest {
-	int64 sequenceNumber = 1;
-}
-
-message UpdateResponse {
-	string success = 1;
-}
-
-//function SendUpdate
-//
-message SendUpdateRequest {
-	//No arguments needed
-}
-
-message SendUpdateResponse {
-	int64 sequenceNumber = 1;
-}
-
-//function IncrementSequenceNumber
-//
-
-message IncrementSequenceNumberRequest{
-	//No arguments needed
-}
-
-message IncrementSequenceNumberResponse{
-	int64 sequenceNumber = 1;
 }
 
 
@@ -147,7 +122,4 @@ service Dgs {
 	rpc ctrl_ping(PingRequest) returns (PingResponse);
 	rpc ctrl_init(InitRequest) returns (InitResponse);
 	rpc ctrl_clear(ClearRequest) returns (ClearResponse);
-	rpc update(UpdateRequest) returns (UpdateResponse);
-	rpc send_update(SendUpdateRequest) returns (SendUpdateResponse);
-	rpc increment_sequence_number(IncrementSequenceNumberRequest) returns (IncrementSequenceNumberResponse);
 }
