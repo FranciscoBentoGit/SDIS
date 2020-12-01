@@ -18,6 +18,7 @@ import pt.tecnico.staysafe.dgs.grpc.*;
 
 
 public class DgsClientApp {
+	private static long[] _prevTs = {0,0};
 	
 	public static void main(String[] args) {
 		System.out.println(DgsClientApp.class.getSimpleName());
@@ -65,7 +66,7 @@ public class DgsClientApp {
 				else if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
 					try {
 						PingResponse response;
-						response = ctrl_ping(frontend, replicaId);
+						response = ctrl_ping(frontend, replicaId, _prevTs[0], _prevTs[1]);
 						System.out.printf("%s%n", response);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
@@ -74,7 +75,7 @@ public class DgsClientApp {
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 						ClearResponse response;
-						response = ctrl_clear(frontend, replicaId);
+						response = ctrl_clear(frontend, replicaId, _prevTs[0], _prevTs[1]);
 						System.out.printf("%s%n", response);
 				}
 
@@ -84,7 +85,7 @@ public class DgsClientApp {
 				}
 
 				else if ((goSplited.length == 2) && (goSplited[0].equals("init"))) {
-					aux_ctrl_init(frontend,goSplited[1], replicaId);
+					aux_ctrl_init(frontend,goSplited[1], replicaId, _prevTs[0], _prevTs[1]);
 				}
 				
 				else{
@@ -96,7 +97,7 @@ public class DgsClientApp {
 	}
 
 	//Function that helps all clients doing ctrl_init
-	public static void aux_ctrl_init(DgsFrontend frontend, String preInfo, int replicaId) {
+	public static void aux_ctrl_init(DgsFrontend frontend, String preInfo, int replicaId, long ts1, long ts2) {
 		ArrayList<String> obs = new ArrayList<String>();
 		ArrayList<ObservationsInit> obsInit = new ArrayList<ObservationsInit>();
 		//It splits fileName from snifferName and Address
@@ -113,7 +114,7 @@ public class DgsClientApp {
 		int flag = 0;
 		try {
 			SnifferJoinResponse message;
-			message = sniffer_join(frontend,snifferName,address, replicaId);
+			message = sniffer_join(frontend,snifferName,address, replicaId, _prevTs[0], _prevTs[1]);
 			System.out.println(message);
 			
 			//As message returns sucess : "Some string", we need to split to get the value
@@ -181,7 +182,7 @@ public class DgsClientApp {
 			ObservationsInit element = iter1.next();
 			try {
 				InitResponse response;
-				response = ctrl_init(frontend, element.getSnifferName(), element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut(), replicaId);
+				response = ctrl_init(frontend, element.getSnifferName(), element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut(), replicaId, _prevTs[0], _prevTs[1]);
 				System.out.printf("%s%n", response);
 			} catch (StatusRuntimeException e) {
 				System.out.println("Caught exception with description: " + e.getStatus().getDescription());
@@ -189,35 +190,35 @@ public class DgsClientApp {
 		}
 	}
 
-	public static PingResponse ctrl_ping(DgsFrontend frontend, int replicaId) {
+	public static PingResponse ctrl_ping(DgsFrontend frontend, int replicaId, long ts1, long ts2) {
 		PingResponse response;
 		PingRequest request = PingRequest.newBuilder().setText("friend").setReplicaId(replicaId).build();
 		response = frontend.ctrl_ping(request);
 		return response;
 	}
 
-	public static InitResponse ctrl_init(DgsFrontend frontend, String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut, int replicaId) {
+	public static InitResponse ctrl_init(DgsFrontend frontend, String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut, int replicaId, long ts1, long ts2) {
 		InitResponse response;
 		InitRequest request = InitRequest.newBuilder().setSnifferName(snifferName).setInfection(infection).setId(id).setTimeIn(timeIn).setTimeOut(timeOut).setReplicaId(replicaId).build();
 		response = frontend.ctrl_init(request);
 		return response;
 	}
 
-	public static ClearResponse ctrl_clear(DgsFrontend frontend, int replicaId) {
+	public static ClearResponse ctrl_clear(DgsFrontend frontend, int replicaId, long ts1, long ts2) {
 		ClearResponse response;
 		ClearRequest request = ClearRequest.newBuilder().setReplicaId(replicaId).build();
 		response = frontend.ctrl_clear(request);
 		return response;
 	}
 	
-	public static SnifferJoinResponse sniffer_join(DgsFrontend frontend, String snifferName, String address, int replicaId) {
+	public static SnifferJoinResponse sniffer_join(DgsFrontend frontend, String snifferName, String address, int replicaId, long ts1, long ts2) {
 		SnifferJoinResponse response;
 		SnifferJoinRequest request = SnifferJoinRequest.newBuilder().setName(snifferName).setAddress(address).setReplicaId(replicaId).build();
 		response = frontend.sniffer_join(request);
 		return response;
 	}
 
-	public static SnifferInfoResponse sniffer_info(DgsFrontend frontend, String snifferName, int replicaId) {
+	public static SnifferInfoResponse sniffer_info(DgsFrontend frontend, String snifferName, int replicaId, long ts1, long ts2) {
 		SnifferInfoResponse response;
 		SnifferInfoRequest request = SnifferInfoRequest.newBuilder().setName(snifferName).setReplicaId(replicaId).build();
 		response = frontend.sniffer_info(request);
@@ -232,21 +233,21 @@ public class DgsClientApp {
 		}
 	}
 
-	public static ReportResponse sniffer_report(DgsFrontend frontend, String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut, int replicaId) {
+	public static ReportResponse sniffer_report(DgsFrontend frontend, String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut, int replicaId, long ts1, long ts2) {
 		ReportResponse response;
 		ReportRequest request = ReportRequest.newBuilder().setName(snifferName).setInfection(infection).setId(id).setTimeIn(timeIn).setTimeOut(timeOut).setReplicaId(replicaId).build();
 		response = frontend.report(request);
 		return response;
 	}
 
-	public static IndividualProbResponse individual_infection_probability(DgsFrontend frontend, long id, int replicaId) {
+	public static IndividualProbResponse individual_infection_probability(DgsFrontend frontend, long id, int replicaId, long ts1, long ts2) {
 		IndividualProbResponse response;
 		IndividualProbRequest request = IndividualProbRequest.newBuilder().setId(id).setReplicaId(replicaId).build();
 		response = frontend.individual_infection_probability(request);
 		return response;
 	}
 
-	public static AggregateProbResponse aggregate_infection_probability(DgsFrontend frontend, String command, int replicaId) {
+	public static AggregateProbResponse aggregate_infection_probability(DgsFrontend frontend, String command, int replicaId, long ts1, long ts2) {
 		AggregateProbResponse response;
 		AggregateProbRequest request = AggregateProbRequest.newBuilder().setCommand(command).setReplicaId(replicaId).build();
 		response = frontend.aggregate_infection_probability(request);

@@ -10,9 +10,11 @@ import pt.ulisboa.tecnico.sdis.zk.*;
 
 public class DgsFrontend {
 	private DgsGrpc.DgsBlockingStub _stub;
+	private long[] _prevTs;
 
 	public DgsFrontend(String zooHost, String zooPort, String path) {
 		try {
+			_prevTs = {0,0};
 			ZKNaming zkNaming = new ZKNaming(zooHost,zooPort);
 			// lookup
 			ZKRecord record = zkNaming.lookup(path);
@@ -30,6 +32,10 @@ public class DgsFrontend {
 	public SnifferJoinResponse sniffer_join(SnifferJoinRequest request) {
 		SnifferJoinResponse response;
 		response = _stub.snifferJoin(request);
+		/*String[] splitJoin = responseJoin.toString().split(" - ", 4);
+		_prevTs[0] = Long.parseLong(splitJoin[1]);
+		_prevTs[1] = Long.parseLong(splitJoin[2]);
+		System.out.printf("%s%n", responseJoin);*/
 		return response;
 	}
 

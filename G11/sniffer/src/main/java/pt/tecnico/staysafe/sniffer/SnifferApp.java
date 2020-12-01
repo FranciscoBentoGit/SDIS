@@ -97,7 +97,7 @@ public class SnifferApp {
 		
 		try {
 			SnifferJoinResponse responseJoin;
-			responseJoin = client.sniffer_join(frontend, snifferName, address, replicaId);
+			responseJoin = client.sniffer_join(frontend, snifferName, address, replicaId, _prevTs[0], _prevTs[1]);
 			String[] splitJoin = responseJoin.toString().split(" - ", 4);
 			_prevTs[0] = Long.parseLong(splitJoin[1]);
 			_prevTs[1] = Long.parseLong(splitJoin[2]);
@@ -140,7 +140,7 @@ public class SnifferApp {
 					if (!(info[1].equals(snifferName))) {
 						System.out.printf("Invalid input: cannot init another sniffer, only this one - %s.%n", snifferName);
 					} else{
-						client.aux_ctrl_init(frontend,check[1], replicaId);
+						client.aux_ctrl_init(frontend,check[1], replicaId, _prevTs[0], _prevTs[1]);
 					}
 				}
 
@@ -148,7 +148,7 @@ public class SnifferApp {
 
 					try {
 						SnifferInfoResponse responseInfo;
-						responseInfo = client.sniffer_info(frontend, snifferName, replicaId);
+						responseInfo = client.sniffer_info(frontend, snifferName, replicaId, _prevTs[0], _prevTs[1]);
 						String[] splitInfo = responseInfo.toString().split(" - ", 4);
 						_prevTs[0] = Long.parseLong(splitInfo[1]);
 						_prevTs[1] = Long.parseLong(splitInfo[2]);
@@ -256,7 +256,7 @@ public class SnifferApp {
 						AddObs element = iter.next();
 						try {
 							ReportResponse responseReport;
-							responseReport = client.sniffer_report(frontend, snifferName, element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut(), replicaId);
+							responseReport = client.sniffer_report(frontend, snifferName, element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut(), replicaId, _prevTs[0], _prevTs[1]);
 							String[] splitReport = responseReport.toString().split(" - ", 4);
 							_prevTs[0] = Long.parseLong(splitReport[1]);
 							_prevTs[1] = Long.parseLong(splitReport[2]);
@@ -282,7 +282,7 @@ public class SnifferApp {
 				else if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
 					try {
 						PingResponse response;
-						response = client.ctrl_ping(frontend, replicaId);
+						response = client.ctrl_ping(frontend, replicaId, _prevTs[0], _prevTs[1]);
 						String[] splitPing= response.toString().split(" - ", 4);
 						_prevTs[0] = Long.parseLong(splitPing[1]);
 						_prevTs[1] = Long.parseLong(splitPing[2]);
@@ -294,7 +294,7 @@ public class SnifferApp {
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 					ClearResponse response;
-					response = client.ctrl_clear(frontend, replicaId);
+					response = client.ctrl_clear(frontend, replicaId, _prevTs[0], _prevTs[1]);
 					String[] splitClear = response.toString().split(" - ", 4);
 					_prevTs[0] = Long.parseLong(splitClear[1]);
 					_prevTs[1] = Long.parseLong(splitClear[2]);

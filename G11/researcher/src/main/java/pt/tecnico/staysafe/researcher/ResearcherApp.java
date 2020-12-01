@@ -94,7 +94,7 @@ public class ResearcherApp {
 						for(int i = 0; i < ids.length; i++) {
 							try {
 								IndividualProbResponse response;
-								response = client.individual_infection_probability(frontend, Long.parseLong(ids[i]),replicaId);
+								response = client.individual_infection_probability(frontend, Long.parseLong(ids[i]),replicaId, _prevTs[0], _prevTs[1]);
 								
 								//This convergence is needed as response will return prob : value
 								String convResponse = response.toString();
@@ -131,13 +131,13 @@ public class ResearcherApp {
 				}
 
 				else if ((goSplited.length == 2) && (goSplited[0].equals("init"))) {
-					client.aux_ctrl_init(frontend,goSplited[1],replicaId);
+					client.aux_ctrl_init(frontend,goSplited[1],replicaId, _prevTs[0], _prevTs[1]);
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
 					try {
 						PingResponse response;
-						response = client.ctrl_ping(frontend,replicaId);
+						response = client.ctrl_ping(frontend,replicaId, _prevTs[0], _prevTs[1]);
 						String[] splitPing= response.toString().split(" - ", 4);
 						_prevTs[0] = Long.parseLong(splitPing[1]);
 						_prevTs[1] = Long.parseLong(splitPing[2]);
@@ -149,7 +149,7 @@ public class ResearcherApp {
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 					ClearResponse response;
-					response = client.ctrl_clear(frontend,replicaId);
+					response = client.ctrl_clear(frontend,replicaId,_prevTs[0], _prevTs[1]);
 					System.out.printf("%s%n", response);
 				}
 
@@ -157,7 +157,7 @@ public class ResearcherApp {
 					try {
 						AggregateProbResponse response;
 						String command = goSplited[0];
-						response = client.aggregate_infection_probability(frontend,command,replicaId);
+						response = client.aggregate_infection_probability(frontend,command,replicaId,_prevTs[0],_prevTs[1]);
 
 						//Same logic as line 77, mean_dev return stat : value 1
 						//												value 2
@@ -197,7 +197,7 @@ public class ResearcherApp {
 					try {
 						AggregateProbResponse response;
 						String command = goSplited[0];
-						response = client.aggregate_infection_probability(frontend,command,replicaId);
+						response = client.aggregate_infection_probability(frontend,command,replicaId,_prevTs[0],_prevTs[1]);
 
 						
 						//Same logic as line 124, mean_dev return stat : value 1

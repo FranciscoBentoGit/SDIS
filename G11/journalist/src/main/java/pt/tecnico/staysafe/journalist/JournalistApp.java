@@ -87,7 +87,7 @@ public class JournalistApp {
 				else if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
 					try {
 						PingResponse response;
-						response = client.ctrl_ping(frontend, replicaId);
+						response = client.ctrl_ping(frontend, replicaId, _prevTs[0], _prevTs[1]);
 						String[] splitPing= response.toString().split(" - ", 4);
 						_prevTs[0] = Long.parseLong(splitPing[1]);
 						_prevTs[1] = Long.parseLong(splitPing[2]);
@@ -98,12 +98,12 @@ public class JournalistApp {
 				}
 
 				else if ((goSplited.length == 2) && (goSplited[0].equals("init"))) {
-					client.aux_ctrl_init(frontend,goSplited[1], replicaId);
+					client.aux_ctrl_init(frontend,goSplited[1], replicaId, _prevTs[0], _prevTs[1]);
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 					ClearResponse response;
-					response = client.ctrl_clear(frontend, replicaId);
+					response = client.ctrl_clear(frontend, replicaId, _prevTs[0], _prevTs[1]);
 					System.out.printf("%s%n", response);
 				}
 
@@ -111,7 +111,7 @@ public class JournalistApp {
 					try {
 						AggregateProbResponse response;
 						String command = goSplited[0];
-						response = client.aggregate_infection_probability(frontend,command,replicaId);
+						response = client.aggregate_infection_probability(frontend,command,replicaId, _prevTs[0], _prevTs[1]);
 
 						////This convergence is needed as response will return stat : value 1
 						//												              value 2
@@ -151,7 +151,7 @@ public class JournalistApp {
 					try {
 						AggregateProbResponse response;
 						String command = goSplited[0];
-						response = client.aggregate_infection_probability(frontend,command,replicaId);
+						response = client.aggregate_infection_probability(frontend,command,replicaId,_prevTs[0], _prevTs[1]);
 
 						//Same logic as line 90, mean_dev return stat : value 1
 						//												 value 2
