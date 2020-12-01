@@ -1,6 +1,5 @@
-pt/tecnico/staysafe/dgs/ObservationsData.class
-pt/tecnico/staysafe/dgs/DgsServiceImpl.class
 pt/tecnico/staysafe/dgs/DgsServerApp.class
+pt/tecnico/staysafe/dgs/DgsServiceImpl.class
+pt/tecnico/staysafe/dgs/ObservationsData.class
 pt/tecnico/staysafe/dgs/DgsServices.class
-pt/tecnico/staysafe/dgs/ValueTimestamp.class
 pt/tecnico/staysafe/dgs/ServersFrontend.class
