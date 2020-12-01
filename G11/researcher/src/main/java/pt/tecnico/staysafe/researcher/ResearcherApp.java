@@ -7,7 +7,6 @@ import java.util.*;
 import io.grpc.StatusRuntimeException;
 
 public class ResearcherApp {
-	private static long[] _prevTs = {0,0};
 	
 	public static void main(String[] args) {
 		System.out.println(ResearcherApp.class.getSimpleName());
@@ -94,7 +93,7 @@ public class ResearcherApp {
 						for(int i = 0; i < ids.length; i++) {
 							try {
 								IndividualProbResponse response;
-								response = client.individual_infection_probability(frontend, Long.parseLong(ids[i]),replicaId, _prevTs[0], _prevTs[1]);
+								response = client.individual_infection_probability(frontend, Long.parseLong(ids[i]),replicaId);
 								
 								//This convergence is needed as response will return prob : value
 								String convResponse = response.toString();
@@ -110,10 +109,6 @@ public class ResearcherApp {
 								String ts2 = splited6[1].toString();
 
 								System.out.printf("%s%n%s%n",ts1,ts2);
-
-								_prevTs[0] = (long) Float.parseFloat(ts1);
-								_prevTs[1] = (long) Float.parseFloat(ts2);
-								System.out.printf("1 - %d%n2 - %d%n",_prevTs[0],_prevTs[1]);
 								
 								//If the function individual_infection_probability returns 2.0, because it must return a float,it detects it's irrealistic and means id not found
 								if (prob.equals("2.0")) {
@@ -131,16 +126,13 @@ public class ResearcherApp {
 				}
 
 				else if ((goSplited.length == 2) && (goSplited[0].equals("init"))) {
-					client.aux_ctrl_init(frontend,goSplited[1],replicaId, _prevTs[0], _prevTs[1]);
+					client.aux_ctrl_init(frontend,goSplited[1],replicaId);
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
 					try {
 						PingResponse response;
-						response = client.ctrl_ping(frontend,replicaId, _prevTs[0], _prevTs[1]);
-						String[] splitPing= response.toString().split(" - ", 4);
-						_prevTs[0] = Long.parseLong(splitPing[1]);
-						_prevTs[1] = Long.parseLong(splitPing[2]);
+						response = client.ctrl_ping(frontend,replicaId);
 						System.out.printf("%s%n", response);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
@@ -149,7 +141,7 @@ public class ResearcherApp {
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 					ClearResponse response;
-					response = client.ctrl_clear(frontend,replicaId,_prevTs[0], _prevTs[1]);
+					response = client.ctrl_clear(frontend,replicaId);
 					System.out.printf("%s%n", response);
 				}
 
@@ -157,7 +149,7 @@ public class ResearcherApp {
 					try {
 						AggregateProbResponse response;
 						String command = goSplited[0];
-						response = client.aggregate_infection_probability(frontend,command,replicaId,_prevTs[0],_prevTs[1]);
+						response = client.aggregate_infection_probability(frontend,command,replicaId);
 
 						//Same logic as line 77, mean_dev return stat : value 1
 						//												value 2
@@ -183,10 +175,6 @@ public class ResearcherApp {
 
 						System.out.printf("%s%n%s%n",ts1,ts2);
 
-						_prevTs[0] = (long) Float.parseFloat(ts1);
-						_prevTs[1] = (long) Float.parseFloat(ts2);
-						System.out.printf("1 - %d%n2 - %d%n",_prevTs[0],_prevTs[1]);
-
 						System.out.printf("%.3f%n%.3f%n",f1,f2);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
@@ -197,7 +185,7 @@ public class ResearcherApp {
 					try {
 						AggregateProbResponse response;
 						String command = goSplited[0];
-						response = client.aggregate_infection_probability(frontend,command,replicaId,_prevTs[0],_prevTs[1]);
+						response = client.aggregate_infection_probability(frontend,command,replicaId);
 
 						
 						//Same logic as line 124, mean_dev return stat : value 1
@@ -229,10 +217,6 @@ public class ResearcherApp {
 						float f3 = Float.parseFloat(prob3);
 
 						System.out.printf("%s%n%s%n",ts1,ts2);
-
-						_prevTs[0] = (long) Float.parseFloat(ts1);
-						_prevTs[1] = (long) Float.parseFloat(ts2);
-						System.out.printf("1 - %d%n2 - %d%n",_prevTs[0],_prevTs[1]);
 
 						System.out.printf("%.3f%n%.3f%n%.3f%n",f1,f2,f3);
 					} catch (StatusRuntimeException e) {

@@ -8,7 +8,6 @@ import java.util.*;
 import io.grpc.StatusRuntimeException;
 
 public class JournalistApp {
-	private static long[] _prevTs = {0,0};
 	
 	public static void main(String[] args) {
 		System.out.println(JournalistApp.class.getSimpleName());
@@ -87,10 +86,7 @@ public class JournalistApp {
 				else if ((goSplited.length == 1) && (goSplited[0].equals("ping"))) {
 					try {
 						PingResponse response;
-						response = client.ctrl_ping(frontend, replicaId, _prevTs[0], _prevTs[1]);
-						String[] splitPing= response.toString().split(" - ", 4);
-						_prevTs[0] = Long.parseLong(splitPing[1]);
-						_prevTs[1] = Long.parseLong(splitPing[2]);
+						response = client.ctrl_ping(frontend, replicaId);
 						System.out.printf("%s%n", response);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
@@ -98,12 +94,12 @@ public class JournalistApp {
 				}
 
 				else if ((goSplited.length == 2) && (goSplited[0].equals("init"))) {
-					client.aux_ctrl_init(frontend,goSplited[1], replicaId, _prevTs[0], _prevTs[1]);
+					client.aux_ctrl_init(frontend,goSplited[1], replicaId);
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 					ClearResponse response;
-					response = client.ctrl_clear(frontend, replicaId, _prevTs[0], _prevTs[1]);
+					response = client.ctrl_clear(frontend, replicaId);
 					System.out.printf("%s%n", response);
 				}
 
@@ -111,7 +107,7 @@ public class JournalistApp {
 					try {
 						AggregateProbResponse response;
 						String command = goSplited[0];
-						response = client.aggregate_infection_probability(frontend,command,replicaId, _prevTs[0], _prevTs[1]);
+						response = client.aggregate_infection_probability(frontend,command,replicaId);
 
 						////This convergence is needed as response will return stat : value 1
 						//												              value 2
@@ -137,10 +133,6 @@ public class JournalistApp {
 
 						System.out.printf("%s%n%s%n",ts1,ts2);
 
-						_prevTs[0] = (long) Float.parseFloat(ts1);
-						_prevTs[1] = (long) Float.parseFloat(ts2);
-						System.out.printf("1 - %d%n2 - %d%n",_prevTs[0],_prevTs[1]);
-
 						System.out.printf("%.3f%n%.3f%n",f1,f2);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
@@ -151,7 +143,7 @@ public class JournalistApp {
 					try {
 						AggregateProbResponse response;
 						String command = goSplited[0];
-						response = client.aggregate_infection_probability(frontend,command,replicaId,_prevTs[0], _prevTs[1]);
+						response = client.aggregate_infection_probability(frontend,command,replicaId);
 
 						//Same logic as line 90, mean_dev return stat : value 1
 						//												 value 2
@@ -183,9 +175,6 @@ public class JournalistApp {
 
 						System.out.printf("%s%n%s%n",ts1,ts2);
 
-						_prevTs[0] = (long) Float.parseFloat(ts1);
-						_prevTs[1] = (long) Float.parseFloat(ts2);
-						System.out.printf("1 - %d%n2 - %d%n",_prevTs[0],_prevTs[1]);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 					}

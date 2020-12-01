@@ -14,7 +14,7 @@ public class DgsFrontend {
 
 	public DgsFrontend(String zooHost, String zooPort, String path) {
 		try {
-			_prevTs = {0,0};
+			_prevTs = new long[] {0,0};
 			ZKNaming zkNaming = new ZKNaming(zooHost,zooPort);
 			// lookup
 			ZKRecord record = zkNaming.lookup(path);
@@ -32,28 +32,36 @@ public class DgsFrontend {
 	public SnifferJoinResponse sniffer_join(SnifferJoinRequest request) {
 		SnifferJoinResponse response;
 		response = _stub.snifferJoin(request);
-		/*String[] splitJoin = responseJoin.toString().split(" - ", 4);
+		String[] splitJoin = response.toString().split(" - ", 4);
 		_prevTs[0] = Long.parseLong(splitJoin[1]);
 		_prevTs[1] = Long.parseLong(splitJoin[2]);
-		System.out.printf("%s%n", responseJoin);*/
 		return response;
 	}
 
 	public SnifferInfoResponse sniffer_info(SnifferInfoRequest request) {
 		SnifferInfoResponse response;
 		response = _stub.snifferInfo(request);
+		String[] splitInfo = response.toString().split(" - ", 4);
+		_prevTs[0] = Long.parseLong(splitInfo[1]);
+		_prevTs[1] = Long.parseLong(splitInfo[2]);
 		return response;
 	}
 
 	public ReportResponse report(ReportRequest request) {
 		ReportResponse response;
 		response = _stub.report(request);
+		String[] splitReport = response.toString().split(" - ", 4);
+		_prevTs[0] = Long.parseLong(splitReport[1]);
+		_prevTs[1] = Long.parseLong(splitReport[2]);
 		return response;
 	}
 
 	public PingResponse ctrl_ping(PingRequest request) {
 		PingResponse response;
 		response = _stub.ctrlPing(request);
+		String[] splitPing= response.toString().split(" - ", 4);
+		_prevTs[0] = Long.parseLong(splitPing[1]);
+		_prevTs[1] = Long.parseLong(splitPing[2]);
 		return response;
 	}
 
@@ -66,18 +74,85 @@ public class DgsFrontend {
 	public ClearResponse ctrl_clear(ClearRequest request) {
 		ClearResponse response;
 		response = _stub.ctrlClear(request);
+		String[] splitClear = response.toString().split(" - ", 4);
+		_prevTs[0] = Long.parseLong(splitClear[1]);
+		_prevTs[1] = Long.parseLong(splitClear[2]);
 		return response;
 	}
 
 	public IndividualProbResponse individual_infection_probability(IndividualProbRequest request) {
 		IndividualProbResponse response;
 		response = _stub.individualInfectionProbability(request);
+		String convResponse = response.toString();
+		String[] splited1 = convResponse.split(" ", 2);
+		String[] splited2 = splited1[1].split("\n", 2);
+		String prob = splited2[0].toString();
+
+		String[] splited4 =	splited2[1].split(" ", 2);	
+		String[] splited5 =	splited4[1].split("\n", 2);	
+		String ts1 = splited5[0].toString();
+
+		String[] splited6 =	splited5[1].split(" ", 2);
+		String ts2 = splited6[1].toString();
 		return response;
 	}
 
 	public AggregateProbResponse aggregate_infection_probability(AggregateProbRequest request) {
 		AggregateProbResponse response;
+		String command = request.getCommand();
 		response = _stub.aggregateInfectionProbability(request);
+		if (command.equals("mean_dev")){
+			String convResponse = response.toString();
+			String[] splited1 = convResponse.split(" ", 2);
+			String[] splited2 = splited1[1].split("\n", 2);
+			String prob1 = splited2[0].toString();
+
+			String[] splited4 =	splited2[1].split(" ", 2);	
+			String[] splited5 =	splited4[1].split("\n", 2);	
+			String prob2 = splited5[0].toString();
+
+			String[] splited7 =	splited5[1].split(" ", 2);
+			String[] splited8 =	splited7[1].split("\n", 2);
+			String ts1 = splited8[0].toString();
+
+			String[] splited9 =	splited8[1].split(" ", 2);
+			String ts2 = splited9[1].toString();
+			
+			float f1 = Float.parseFloat(prob1);
+			float f2 = Float.parseFloat(prob2);
+
+			_prevTs[0] = (long) Float.parseFloat(ts1);
+			_prevTs[1] = (long) Float.parseFloat(ts2);
+
+		}else{
+			String convResponse = response.toString();
+			String[] splited1 = convResponse.split(" ", 2);
+			String[] splited2 = splited1[1].split("\n", 2);
+			String prob1 = splited2[0].toString();
+
+			String[] splited4 =	splited2[1].split(" ", 2);	
+			String[] splited5 =	splited4[1].split("\n", 2);	
+			String prob2 = splited5[0].toString();
+
+			String[] splited7 =	splited5[1].split(" ", 2);
+			String[] splited8 =	splited7[1].split("\n", 2);
+			String prob3 =	splited8[0].toString();
+
+			String[] splited9 =	splited8[1].split(" ", 2);
+			String[] splited10 = splited9[1].split("\n", 2);
+			String ts1 = splited10[0].toString();
+
+			String[] splited11 = splited10[1].split(" ", 2);
+			String ts2 = splited11[1].toString();
+			
+			float f1 = Float.parseFloat(prob1);
+			float f2 = Float.parseFloat(prob2);
+			float f3 = Float.parseFloat(prob3);
+
+			_prevTs[0] = (long) Float.parseFloat(ts1);
+			_prevTs[1] = (long) Float.parseFloat(ts2);
+		}
+		
 		return response;
 	}
 }
