@@ -85,6 +85,7 @@ public class DgsFrontend {
 
 	public IndividualProbResponse individual_infection_probability(IndividualProbRequest request) {
 		IndividualProbResponse response;
+		long replicaId = request.getReplicaId()-1;
 		
 		response = _stub.individualInfectionProbability(request);
 		String convResponse = response.toString();
@@ -104,7 +105,7 @@ public class DgsFrontend {
 		_possibleRead[1] = (long) Float.parseFloat(ts2);
 
 
-		if (_possibleRead[0] != _prevTs[0] || _possibleRead[1] != _prevTs[1]){
+		if (_possibleRead[0] < _prevTs[0] || _possibleRead[1] < _prevTs[1]){
 			// if it is a different read, i need to rely on my backup read
 			return _lastView.getSingleProb();
 		}
@@ -140,7 +141,7 @@ public class DgsFrontend {
 			_possibleRead[0] = (long) Float.parseFloat(ts1);
 			_possibleRead[1] = (long) Float.parseFloat(ts2);
 
-			if (_possibleRead[0] !=_prevTs[0] || _possibleRead[1] != _prevTs[1]){
+			if (_possibleRead[0] < _prevTs[0] || _possibleRead[1] < _prevTs[1]){
 				// if it is a different read, i need to rely on my backup read
 				return _lastView.getMeanDev();
 			}
@@ -173,7 +174,7 @@ public class DgsFrontend {
 			_possibleRead[0] = (long) Float.parseFloat(ts1);
 			_possibleRead[1] = (long) Float.parseFloat(ts2);
 
-			if (_possibleRead[0] !=_prevTs[0] || _possibleRead[1] != _prevTs[1]){
+			if (_possibleRead[0] < _prevTs[0] || _possibleRead[1] < _prevTs[1]){
 				// if it is a different read, i need to rely on my backup read
 				return _lastView.getPercentiles();
 			}
