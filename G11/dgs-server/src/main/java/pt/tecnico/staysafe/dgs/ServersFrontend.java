@@ -9,7 +9,7 @@ import pt.tecnico.staysafe.dgs.grpc.*;
 import pt.ulisboa.tecnico.sdis.zk.*;
 
 public class ServersFrontend {
-	private DgsGrpc.DgsStub _stub;
+	private DgsGrpc.DgsBlockingStub _stub;
 	private int _replicaNumber;
 
 	public ServersFrontend(ZKNaming zkNaming, String path, int id) {
@@ -21,7 +21,7 @@ public class ServersFrontend {
 			String target = record.getURI();
 			
 			final ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();		
-			_stub = DgsGrpc.newStub(channel);
+			_stub = DgsGrpc.newBlockingStub(channel);
 
 		} catch (ZKNamingException e) {
 			System.out.println("Caught exception with description: " + e.getMessage());

@@ -104,7 +104,7 @@ public class DgsFrontend {
 		_possibleRead[1] = (long) Float.parseFloat(ts2);
 
 
-		if (_possibleRead[0] !=_prevTs[0] || _possibleRead[1] != _prevTs[1]){
+		if (_possibleRead[0] != _prevTs[0] || _possibleRead[1] != _prevTs[1]){
 			// if it is a different read, i need to rely on my backup read
 			return _lastView.getSingleProb();
 		}

@@ -13,7 +13,7 @@ import pt.tecnico.staysafe.dgs.ObservationsData;
 
 public class DgsServices {
 	private ConcurrentHashMap<String, String> snifferHash = new ConcurrentHashMap<String, String>();
-	private CopyOnWriteArrayList<ObservationsData> obsList= new CopyOnWriteArrayList<ObservationsData>();
+	private CopyOnWriteArrayList<ObservationsData> obsList = new CopyOnWriteArrayList<ObservationsData>();
     private long[] _valueTs = {0,0};
 
 	public synchronized String sniffer_join(String name, String address, int replicaId) {
