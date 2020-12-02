@@ -124,7 +124,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 			
 			else {
-				IndividualProbResponse response = IndividualProbResponse.newBuilder().addProb(dService.individual_infection_probability(0,id,replicaId)).addProb(dService.individual_infection_probability(1,id,replicaId)).addProb(dService.individual_infection_probability(2,id,replicaId)).build();
+				IndividualProbResponse response = IndividualProbResponse.newBuilder().addProb(dService.individual_infection_probability(0,id,replicaId)).addProb(dService.individual_infection_probability(1,id,replicaId)).addProb(dService.individual_infection_probability(2,id,replicaId)).addProb(dService.individual_infection_probability(3,id,replicaId)).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
@@ -146,13 +146,13 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 			
 			else if (command.equals("mean_dev")){
-				AggregateProbResponse response = AggregateProbResponse.newBuilder().addStat(dService.aggregate_infection_probability(0,command,replicaId)).addStat(dService.aggregate_infection_probability(1,command,replicaId)).addStat(dService.aggregate_infection_probability(2,command,replicaId)).addStat(dService.aggregate_infection_probability(3,command,replicaId)).build();
+				AggregateProbResponse response = AggregateProbResponse.newBuilder().addStat(dService.aggregate_infection_probability(0,command,replicaId)).addStat(dService.aggregate_infection_probability(1,command,replicaId)).addStat(dService.aggregate_infection_probability(2,command,replicaId)).addStat(dService.aggregate_infection_probability(3,command,replicaId)).addStat(dService.aggregate_infection_probability(4,command,replicaId)).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
 
 			else {
-				AggregateProbResponse response = AggregateProbResponse.newBuilder().addStat(dService.aggregate_infection_probability(0,command,replicaId)).addStat(dService.aggregate_infection_probability(1,command,replicaId)).addStat(dService.aggregate_infection_probability(2,command,replicaId)).addStat(dService.aggregate_infection_probability(3,command,replicaId)).addStat(dService.aggregate_infection_probability(4,command,replicaId)).build();
+				AggregateProbResponse response = AggregateProbResponse.newBuilder().addStat(dService.aggregate_infection_probability(0,command,replicaId)).addStat(dService.aggregate_infection_probability(1,command,replicaId)).addStat(dService.aggregate_infection_probability(2,command,replicaId)).addStat(dService.aggregate_infection_probability(3,command,replicaId)).addStat(dService.aggregate_infection_probability(4,command,replicaId)).addStat(dService.aggregate_infection_probability(5,command,replicaId)).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
