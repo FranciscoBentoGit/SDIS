@@ -121,7 +121,7 @@ public class DgsClientApp {
 		try {
 			SnifferJoinResponse message;
 			message = sniffer_join(frontend,snifferName,address, replicaId);
-			System.out.println(message);
+			System.out.println(message.getSuccess());
 			
 			//As message returns sucess : "Some string", we need to split to get the value
 			String compare = message.toString();
@@ -187,9 +187,9 @@ public class DgsClientApp {
 		while (iter1.hasNext()) {
 			ObservationsInit element = iter1.next();
 			try {
-				InitResponse response;
-				response = ctrl_init(frontend, element.getSnifferName(), element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut(), replicaId);
-				System.out.printf("%s%n", response);
+				ReportResponse response;
+				response = sniffer_report(frontend, element.getSnifferName(), element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut(), replicaId);
+				System.out.printf("%s%n", response.getSuccess());
 			} catch (StatusRuntimeException e) {
 				System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 			}
@@ -200,13 +200,6 @@ public class DgsClientApp {
 		PingResponse response;
 		PingRequest request = PingRequest.newBuilder().setText("friend").setReplicaId(replicaId).build();
 		response = frontend.ctrl_ping(request);
-		return response;
-	}
-
-	public static InitResponse ctrl_init(DgsFrontend frontend, String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut, int replicaId) {
-		InitResponse response;
-		InitRequest request = InitRequest.newBuilder().setSnifferName(snifferName).setInfection(infection).setId(id).setTimeIn(timeIn).setTimeOut(timeOut).setReplicaId(replicaId).build();
-		response = frontend.ctrl_init(request);
 		return response;
 	}
 

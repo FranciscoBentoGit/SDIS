@@ -234,13 +234,6 @@ public class DgsServices {
         return (float) Math.sqrt(aux/size);
     }
 
-    public synchronized String ctrl_init(String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
-    	String message = report(snifferName,infection,id,timeIn,timeOut);
-    	if (message.equals("Failed to report: invalid name.")) {
-    		return message;
-    	}
-    	return "Observation: reported successfully.";
-    }
 
     public synchronized String ctrl_clear() {
     	snifferHash.clear();

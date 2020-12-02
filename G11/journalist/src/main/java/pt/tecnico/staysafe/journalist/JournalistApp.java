@@ -114,30 +114,9 @@ public class JournalistApp {
 						AggregateProbResponse response;
 						String command = goSplited[0];
 						response = client.aggregate_infection_probability(frontend,command,replicaId);
-
-						////This convergence is needed as response will return stat : value 1
-						//												              value 2
-						//We must filter in order to get only the respective values
-						String convResponse = response.toString();
-						String[] splited1 = convResponse.split(" ", 2);
-						String[] splited2 = splited1[1].split("\n", 2);
-						String prob1 = splited2[0].toString();
-
-						String[] splited4 =	splited2[1].split(" ", 2);	
-						String[] splited5 =	splited4[1].split("\n", 2);	
-						String prob2 = splited5[0].toString();
-
-						String[] splited7 =	splited5[1].split(" ", 2);
-						String[] splited8 =	splited7[1].split("\n", 2);
-						String ts1 = splited8[0].toString();
-
-						String[] splited9 =	splited8[1].split(" ", 2);
-						String ts2 = splited9[1].toString();
 						
-						float f1 = Float.parseFloat(prob1);
-						float f2 = Float.parseFloat(prob2);
-
-						System.out.printf("%s%n%s%n",ts1,ts2);
+						float f1 = response.getStat(0);
+						float f2 = response.getStat(1);
 
 						System.out.printf("%.3f%n%.3f%n",f1,f2);
 					} catch (StatusRuntimeException e) {
@@ -150,37 +129,12 @@ public class JournalistApp {
 						AggregateProbResponse response;
 						String command = goSplited[0];
 						response = client.aggregate_infection_probability(frontend,command,replicaId);
+					
+						float f1 = response.getStat(0);
+						float f2 = response.getStat(1);
+						float f3 = response.getStat(2);
 
-						//Same logic as line 90, mean_dev return stat : value 1
-						//												 value 2
-						//                                               value 3
-						//We must filter in order to get only the respective values
-						String convResponse = response.toString();
-						String[] splited1 = convResponse.split(" ", 2);
-						String[] splited2 = splited1[1].split("\n", 2);
-						String prob1 = splited2[0].toString();
-
-						String[] splited4 =	splited2[1].split(" ", 2);	
-						String[] splited5 =	splited4[1].split("\n", 2);	
-						String prob2 = splited5[0].toString();
-
-						String[] splited7 =	splited5[1].split(" ", 2);
-						String[] splited8 =	splited7[1].split("\n", 2);
-						String prob3 =	splited8[0].toString();
-
-						String[] splited9 =	splited8[1].split(" ", 2);
-						String[] splited10 = splited9[1].split("\n", 2);
-						String ts1 = splited10[0].toString();
-
-						String[] splited11 = splited10[1].split(" ", 2);
-						String ts2 = splited11[1].toString();
-						
-						float f1 = Float.parseFloat(prob1);
-						float f2 = Float.parseFloat(prob2);
-						float f3 = Float.parseFloat(prob3);
-
-						System.out.printf("%s%n%s%n",ts1,ts2);
-
+						System.out.printf("%.3f%n%.3f%n%.3f%n",f1,f2,f3);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
 					}

@@ -11,8 +11,11 @@ import pt.ulisboa.tecnico.sdis.zk.*;
 public class DgsFrontend {
 	private DgsGrpc.DgsBlockingStub _stub;
 	private long[] _prevTs;
-	private LastView _lastView;
 	private long[] _possibleRead;
+	private IndividualProbResponse _singleProb;
+    private AggregateProbResponse _meanDev;
+    private AggregateProbResponse _percentiles;
+	
 
 	public DgsFrontend(String zooHost, String zooPort, String path) {
 		try {
@@ -94,7 +97,7 @@ public class DgsFrontend {
 
 		if (_possibleRead[0] < _prevTs[0] || _possibleRead[1] < _prevTs[1] || _possibleRead[2] < _prevTs[2]){
 			// if it is a different read, i need to rely on my backup read
-			return _lastView.getSingleProb();
+			return _singleProb;
 		}
 
 		_prevTs[0] = response.getTs(0);
@@ -102,7 +105,7 @@ public class DgsFrontend {
 		_prevTs[2] = response.getTs(2);
 
 		//if it is a same  read, i can update my backup read
-		_lastView.setSingleProb(response);
+		_singleProb = response;
 		
 		return response;
 	}
@@ -120,7 +123,7 @@ public class DgsFrontend {
 
 			if (_possibleRead[0] < _prevTs[0] || _possibleRead[1] < _prevTs[1] || _possibleRead[2] < _prevTs[2]){
 				// if it is a different read, i need to rely on my backup read
-				return _lastView.getMeanDev();
+				return _meanDev;
 			}
 
 			_prevTs[0] = response.getTs(0);
@@ -128,7 +131,7 @@ public class DgsFrontend {
 			_prevTs[2] = response.getTs(2);
 
 			//if it is a same  read, i can update my backup read
-			_lastView.setMeanDev(response);
+			_meanDev = response;
 			
 			return response;
 
@@ -139,7 +142,7 @@ public class DgsFrontend {
 
 			if (_possibleRead[0] < _prevTs[0] || _possibleRead[1] < _prevTs[1] || _possibleRead[2] < _prevTs[2]){
 				// if it is a different read, i need to rely on my backup read
-				return _lastView.getPercentiles();
+				return _percentiles;
 			}
 
 			_prevTs[0] = response.getTs(0);
@@ -147,7 +150,7 @@ public class DgsFrontend {
 			_prevTs[2] = response.getTs(2);
 
 			//if it is a same  read, i can update my backup read
-			_lastView.setPercentiles(response);
+			_percentiles = response;
 			
 			return response;
 		}
