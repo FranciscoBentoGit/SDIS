@@ -8,27 +8,34 @@ import pt.tecnico.staysafe.dgs.grpc.DgsGrpc;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import pt.ulisboa.tecnico.sdis.zk.*;
 
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class ServersFrontend {
-	private DgsGrpc.DgsBlockingStub _stub;
-	private int _replicaNumber;
+    private DgsGrpc.DgsBlockingStub _stub;
+    private int _replicaNumber;
 
-	public ServersFrontend(ZKNaming zkNaming, String path, int id) {
-		try {
-			_replicaNumber = id;
+    public ServersFrontend(ZKNaming zkNaming, String URI) {
+        try {
+            String target = URI;
 
-			//Collection<ZKRecord> collection = listRecords​("grpc/staysafe/dgs");
-			//System.out.printf();
-			
-			// lookup
-			ZKRecord record = zkNaming.lookup(path);
-			String target = record.getURI();
-			
-			final ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();		
-			_stub = DgsGrpc.newBlockingStub(channel);
+            final ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
+            _stub = DgsGrpc.newBlockingStub(channel);
 
-		} catch (ZKNamingException e) {
-			System.out.println("Caught exception with description: " + e.getMessage());
-		}
-	}
+        } catch (ZKNamingException e) {
+            System.out.println("Caught exception with description: " + e.getMessage());
+        }
+    }
 
+    public ReportResponse report(ReportRequest request, int replicaId) {
+        ReportResponse response;
+        response = _stub.report(request);
+        return response;
+    }
+
+    public ClearResponse ctrl_clear(int replicaId) {
+        ClearResponse response;
+        ClearRequest request = ClearRequest.newBuilder().setReplicaId(replicaId).build();
+        response = _stub.ctrlClear(request);
+        return response;
+    }
 }

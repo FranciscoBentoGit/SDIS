@@ -8,7 +8,11 @@ import pt.ulisboa.tecnico.sdis.zk.*;
 import java.io.IOException;
 import io.grpc.StatusRuntimeException;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Executors;
 
 public class DgsServerApp {
 	
@@ -17,10 +21,14 @@ public class DgsServerApp {
 
 		final String zooHost = args[0];
 		final String zooPort = args[1];
-		String host = "localhost";
+		final String parentNode = "/grpc/staysafe/dgs/";
+		final String host = "localhost";
 		String port = null;
 		String path = null;
 		int id = 0;
+		
+		final int initialDelay = 5;
+		final int period = 30;
 
 		System.out.println("Insert the replica number that you want to initialize!");
 
@@ -38,21 +46,21 @@ public class DgsServerApp {
 				if (go.equals("1")) {
 					id = Integer.parseInt(go);
 					port = "808" + go;
-					path = "/grpc/staysafe/dgs/" + go;
+					path = parentNode + go;
 					exit = 1;
 				}
 
 				else if (go.equals("2")) {
 					id = Integer.parseInt(go);
 					port = "808" + go;
-					path = "/grpc/staysafe/dgs/" + go;
+					path = parentNode + go;
 					exit = 1;
 				}
 
 				else if (go.equals("3")) {
 					id = Integer.parseInt(go);
 					port = "808" + go;
-					path = "/grpc/staysafe/dgs/" + go;
+					path = parentNode + go;
 					exit = 1;
 				}
 				
@@ -76,12 +84,14 @@ public class DgsServerApp {
 		System.out.printf("port = %s%n", port);
 		System.out.printf("path = %s%n", path);
 
-		final BindableService impl = new DgsServiceImpl();
+		final DgsServiceImpl impl = new DgsServiceImpl();
 
 		ZKNaming zkNaming = null;
 		
 		try {
 			zkNaming = new ZKNaming(zooHost, zooPort);
+			
+			final ZKNaming zkNamingAux = new ZKNaming(zooHost, zooPort);
 			// publish
 			zkNaming.rebind(path, host, port);
 
@@ -96,8 +106,45 @@ public class DgsServerApp {
 			// Server threads are running in the background.
 			System.out.printf("Replica %d starting...%n", id);
 
-			// Creates a frontend for each replica
-			//ServersFrontend frontend = new ServersFrontend(zkNaming,id);
+			ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+            Runnable propagation = new Runnable() {
+                @Override
+                public void run(){
+					final String parent = "/grpc/staysafe/dgs";
+                    try {
+						Collection<ZKRecord> replicaCollection = zkNamingAux.listRecords(parent);
+
+						for (ZKRecord record : replicaCollection){
+							if (record.getPath() != path) {
+								String[] split = record.getPath().split("/", 5);
+								int instance = Integer.parseInt(split[split.length - 1]);
+
+								System.out.printf("Replica %d initiating update exchange...%n", instance);
+
+								ServersFrontend frontend = new ServersFrontend(zkNaming,record.getURI());
+								
+								CopyOnWriteArrayList<Log> list = impl.getList();
+								Iterator<Log> it = list.iterator();
+								while (it.hasNext()) {
+									Log i = it.next();
+									if (i.getType().equals("clear")) {
+										frontend.ctrl_clear(instance);
+									}
+									if (i.getType().equals("report")) {
+										frontend.report(i.getReport(),instance);
+									}
+								}
+							}
+						}
+					} catch (ZKNamingException e) {
+						System.out.println("Caught exception with description: " + e.getMessage());
+					}
+                }
+            };
+
+            scheduler.scheduleWithFixedDelay(propagation,initialDelay,period,TimeUnit.SECONDS);
+
 
 			// Do not exit the main thread. Wait until server is terminated.
 			server.awaitTermination();

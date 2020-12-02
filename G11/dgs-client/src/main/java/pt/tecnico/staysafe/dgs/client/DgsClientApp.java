@@ -67,9 +67,7 @@ public class DgsClientApp {
 					try {
 						PingResponse response;
 						response = ctrl_ping(frontend, replicaId);
-						String auxResponsePing = response.getText();
-						String[] splitAuxPing = auxResponsePing.split(" - ",2);
-						String newResponsePing = splitAuxPing[0] + "\n";
+						String newResponsePing = response.getText();
 						System.out.printf("%s%n", newResponsePing);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
@@ -79,9 +77,7 @@ public class DgsClientApp {
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 						ClearResponse response;
 						response = ctrl_clear(frontend, replicaId);
-						String auxResponseClear = response.getSuccess();
-						String[] splitAuxClear = auxResponseClear.split(" - ",2);
-						String newResponseClear = splitAuxClear[0] + "\n";
+						String newResponseClear = response.getSuccess();
 						System.out.printf("%s%n", newResponseClear);
 				}
 

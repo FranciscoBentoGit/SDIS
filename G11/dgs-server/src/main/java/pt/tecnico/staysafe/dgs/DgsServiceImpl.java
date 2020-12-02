@@ -5,6 +5,7 @@ import pt.tecnico.staysafe.dgs.grpc.DgsGrpc;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import com.google.protobuf.Timestamp;
 import java.util.regex.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static io.grpc.Status.INVALID_ARGUMENT;
 import java.lang.IllegalStateException;
@@ -14,6 +15,8 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 	private DgsServices dService = new DgsServices();
 	private long[] _valueTs = {0,0,0};
+	private CopyOnWriteArrayList<Log> logList = new CopyOnWriteArrayList<Log>();
+    private Log newLog;
 
 	@Override
 	public void snifferJoin(SnifferJoinRequest request, StreamObserver<SnifferJoinResponse> responseObserver) {
@@ -111,6 +114,8 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				String success = dService.report(name,infection,id,timeIn,timeOut);
 				if (success.equals("Success to report.")) {
 					_valueTs[replicaId - 1]++;
+					newLog = new Log("report",request);
+                    logList.add(newLog);
 				}
 
 				ReportResponse response = ReportResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
@@ -206,10 +211,16 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		String success = dService.ctrl_clear();
 		if (success.equals("All observations removed successfully.")) {
 			_valueTs[replicaId - 1]++;
+			newLog = new Log("clear",null);
+            logList.add(newLog);
 		}
 
 		ClearResponse response = ClearResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 	    responseObserver.onNext(response);
 	    responseObserver.onCompleted();
+	}
+
+	public CopyOnWriteArrayList<Log> getList() {
+		return logList;
 	}
 }
