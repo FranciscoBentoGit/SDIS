@@ -15,6 +15,9 @@ public class ServersFrontend {
 	public ServersFrontend(ZKNaming zkNaming, String path, int id) {
 		try {
 			_replicaNumber = id;
+
+			//Collection<ZKRecord> collection = listRecords​("grpc/staysafe/dgs");
+			//System.out.printf();
 			
 			// lookup
 			ZKRecord record = zkNaming.lookup(path);
@@ -28,17 +31,4 @@ public class ServersFrontend {
 		}
 	}
 
-    /*public PingResponse ctrl_ping(int replicaId) {
-		PingResponse response;
-		PingRequest request = PingRequest.newBuilder().setText("friend").setReplicaId(replicaId).build();
-		response = _stub.ctrlPing(request);
-		return response;
-	}
-
-    public ClearResponse ctrl_clear(int replicaId) {
-		ClearResponse response;
-		ClearRequest request = ClearRequest.newBuilder().setReplicaId(replicaId).build();
-		response = _stub.ctrlClear(request);
-		return response;
-	}*/
 }

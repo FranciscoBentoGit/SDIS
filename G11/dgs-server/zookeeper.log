@@ -9608,3 +9608,274 @@ EndOfStreamException: Unable to read additional data from server sessionid 0x100
 2020-12-02 14:58:17,367 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x10000f7e61b0018, negotiated timeout = 5000
 2020-12-02 14:58:17,490 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x10000f7e61b0018
 2020-12-02 14:58:17,490 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x10000f7e61b0018 closed
+2020-12-02 15:25:03,045 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-02 15:25:03,056 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:host.name=joao-VirtualBox
+2020-12-02 15:25:03,057 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-02 15:25:03,057 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-02 15:25:03,057 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-02 15:25:03,057 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.class.path=/usr/share/maven/boot/plexus-classworlds-2.x.jar
+2020-12-02 15:25:03,058 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-02 15:25:03,058 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-02 15:25:03,058 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.compiler=<NA>
+2020-12-02 15:25:03,058 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.name=Linux
+2020-12-02 15:25:03,058 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.arch=amd64
+2020-12-02 15:25:03,059 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.version=5.4.0-56-generic
+2020-12-02 15:25:03,060 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.name=joao
+2020-12-02 15:25:03,060 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.home=/home/joao
+2020-12-02 15:25:03,060 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.dir=/home/joao/sdis/SDis/G11/dgs-server
+2020-12-02 15:25:03,060 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.free=123MB
+2020-12-02 15:25:03,063 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.max=1992MB
+2020-12-02 15:25:03,063 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.total=152MB
+2020-12-02 15:25:03,067 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@50dfe3fe
+2020-12-02 15:25:03,070 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-02 15:25:03,084 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-02 15:25:03,097 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-02 15:25:03,129 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:03,131 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:03,163 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:04,267 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:04,268 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:04,268 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:05,369 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:05,370 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:05,370 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:06,471 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:06,472 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:06,472 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:07,574 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:07,574 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:07,575 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:08,693 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:08,693 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:08,693 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:09,815 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:09,815 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:09,815 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:10,923 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:10,923 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:10,923 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:12,041 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:12,041 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:12,041 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:13,159 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:13,159 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:13,159 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:14,261 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:14,261 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:14,261 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:15,363 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:15,363 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:15,363 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:16,468 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:16,468 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:16,468 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:17,571 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:17,571 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:17,571 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:18,675 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:18,676 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:18,676 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:19,789 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:19,789 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:19,790 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:20,890 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:20,891 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:20,891 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:21,992 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:21,992 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:21,993 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:23,094 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:23,094 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:23,095 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:24,198 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:24,198 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:24,198 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:25,303 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:25,303 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:25,303 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:26,405 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:26,405 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:26,405 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:27,506 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:27,506 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:27,507 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:52128, server: localhost/127.0.0.1:2181
+2020-12-02 15:25:27,530 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:2181, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+EndOfStreamException: Unable to read additional data from server sessionid 0x0, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-02 15:25:36,457 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-02 15:25:36,460 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:host.name=joao-VirtualBox
+2020-12-02 15:25:36,461 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-02 15:25:36,462 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-02 15:25:36,462 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-02 15:25:36,463 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.class.path=/usr/share/maven/boot/plexus-classworlds-2.x.jar
+2020-12-02 15:25:36,463 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-02 15:25:36,464 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-02 15:25:36,464 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.compiler=<NA>
+2020-12-02 15:25:36,465 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.name=Linux
+2020-12-02 15:25:36,466 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.arch=amd64
+2020-12-02 15:25:36,466 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.version=5.4.0-56-generic
+2020-12-02 15:25:36,466 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.name=joao
+2020-12-02 15:25:36,466 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.home=/home/joao
+2020-12-02 15:25:36,466 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.dir=/home/joao/sdis/SDis/G11/dgs-server
+2020-12-02 15:25:36,466 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.free=92MB
+2020-12-02 15:25:36,467 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.max=1992MB
+2020-12-02 15:25:36,467 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.total=152MB
+2020-12-02 15:25:36,472 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@4d6c8dce
+2020-12-02 15:25:36,477 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-02 15:25:36,482 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-02 15:25:36,488 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-02 15:25:36,504 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:25:36,504 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:25:36,516 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:52130, server: localhost/127.0.0.1:2181
+2020-12-02 15:25:36,534 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x100004e6a6f0000, negotiated timeout = 5000
+2020-12-02 15:25:36,674 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x100004e6a6f0000 closed
+2020-12-02 15:25:36,674 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x100004e6a6f0000
+2020-12-02 15:26:03,550 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-02 15:26:03,553 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:host.name=joao-VirtualBox
+2020-12-02 15:26:03,554 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-02 15:26:03,554 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-02 15:26:03,555 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-02 15:26:03,556 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.class.path=/usr/share/maven/boot/plexus-classworlds-2.x.jar
+2020-12-02 15:26:03,556 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-02 15:26:03,557 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-02 15:26:03,557 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.compiler=<NA>
+2020-12-02 15:26:03,558 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.name=Linux
+2020-12-02 15:26:03,558 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.arch=amd64
+2020-12-02 15:26:03,558 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.version=5.4.0-56-generic
+2020-12-02 15:26:03,559 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.name=joao
+2020-12-02 15:26:03,559 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.home=/home/joao
+2020-12-02 15:26:03,559 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.dir=/home/joao/sdis/SDis/G11/dgs-server
+2020-12-02 15:26:03,559 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.free=124MB
+2020-12-02 15:26:03,560 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.max=1992MB
+2020-12-02 15:26:03,560 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.total=152MB
+2020-12-02 15:26:03,563 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@5f814e38
+2020-12-02 15:26:03,566 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-02 15:26:03,571 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-02 15:26:03,576 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-02 15:26:03,591 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:26:03,591 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:26:03,601 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:52140, server: localhost/127.0.0.1:2181
+2020-12-02 15:26:03,608 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x100004e6a6f0001, negotiated timeout = 5000
+2020-12-02 15:26:03,737 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x100004e6a6f0001 closed
+2020-12-02 15:26:03,737 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x100004e6a6f0001
+2020-12-02 15:26:04,007 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@7c94240e
+2020-12-02 15:26:04,008 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-02 15:26:04,009 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-02 15:26:04,012 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-02 15:26:04,013 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-02 15:26:04,014 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:52142, server: localhost/127.0.0.1:2181
+2020-12-02 15:26:04,017 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x100004e6a6f0002, negotiated timeout = 5000
+2020-12-02 15:26:04,127 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x100004e6a6f0002 closed
+2020-12-02 15:26:04,127 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x100004e6a6f0002

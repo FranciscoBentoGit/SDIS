@@ -100,9 +100,9 @@ public class DgsFrontend {
 			return _singleProb;
 		}
 
-		_prevTs[0] = response.getTs(0);
-		_prevTs[1] = response.getTs(1);
-		_prevTs[2] = response.getTs(2);
+		_prevTs[0] = _possibleRead[0];
+		_prevTs[1] = _possibleRead[1];
+		_prevTs[2] = _possibleRead[2];
 
 		//if it is a same  read, i can update my backup read
 		_singleProb = response;
@@ -126,9 +126,9 @@ public class DgsFrontend {
 				return _meanDev;
 			}
 
-			_prevTs[0] = response.getTs(0);
-			_prevTs[1] = response.getTs(1);
-			_prevTs[2] = response.getTs(2);
+			_prevTs[0] = _possibleRead[0];
+			_prevTs[1] = _possibleRead[1];
+			_prevTs[2] = _possibleRead[2];
 
 			//if it is a same  read, i can update my backup read
 			_meanDev = response;
@@ -145,9 +145,9 @@ public class DgsFrontend {
 				return _percentiles;
 			}
 
-			_prevTs[0] = response.getTs(0);
-			_prevTs[1] = response.getTs(1);
-			_prevTs[2] = response.getTs(2);
+			_prevTs[0] = _possibleRead[0];
+			_prevTs[1] = _possibleRead[1];
+			_prevTs[2] = _possibleRead[2];
 
 			//if it is a same  read, i can update my backup read
 			_percentiles = response;
