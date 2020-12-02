@@ -90,7 +90,7 @@ public class IndividualIT extends BaseIT {
    	@Test
     public void individualOKTest() {
         
-        assertEquals(SUCCESS1, frontend.individual_infection_probability(buildIndividualProbRequest(ID1)).getProb(INDEX0));
+        assertEquals(SUCCESS1, frontend.individual_infection_probability(buildIndividualProbRequest(ID1)));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class IndividualIT extends BaseIT {
     @Test
     public void nonExistentIDTest() {
         
-        assertEquals(SUCCESS2, frontend.individual_infection_probability(buildIndividualProbRequest(ID_NON_EXISTENT)).getProb(INDEX0));
+        assertEquals(SUCCESS2, frontend.individual_infection_probability(buildIndividualProbRequest(ID_NON_EXISTENT)));
     }
 
 }

@@ -8,19 +8,25 @@ public interface IndividualProbResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated float prob = 1;</code>
-   * @return A list containing the prob.
+   * <code>float prob = 1;</code>
+   * @return The prob.
    */
-  java.util.List<java.lang.Float> getProbList();
+  float getProb();
+
   /**
-   * <code>repeated float prob = 1;</code>
-   * @return The count of prob.
+   * <code>repeated int64 ts = 2;</code>
+   * @return A list containing the ts.
    */
-  int getProbCount();
+  java.util.List<java.lang.Long> getTsList();
   /**
-   * <code>repeated float prob = 1;</code>
+   * <code>repeated int64 ts = 2;</code>
+   * @return The count of ts.
+   */
+  int getTsCount();
+  /**
+   * <code>repeated int64 ts = 2;</code>
    * @param index The index of the element to return.
-   * @return The prob at the given index.
+   * @return The ts at the given index.
    */
-  float getProb(int index);
+  long getTs(int index);
 }

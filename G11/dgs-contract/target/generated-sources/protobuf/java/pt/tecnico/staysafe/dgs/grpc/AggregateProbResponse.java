@@ -17,6 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private AggregateProbResponse() {
     stat_ = emptyFloatList();
+    ts_ = emptyLongList();
   }
 
   @java.lang.Override
@@ -71,6 +72,27 @@ private static final long serialVersionUID = 0L;
             input.popLimit(limit);
             break;
           }
+          case 16: {
+            if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              ts_ = newLongList();
+              mutable_bitField0_ |= 0x00000002;
+            }
+            ts_.addLong(input.readInt64());
+            break;
+          }
+          case 18: {
+            int length = input.readRawVarint32();
+            int limit = input.pushLimit(length);
+            if (!((mutable_bitField0_ & 0x00000002) != 0) && input.getBytesUntilLimit() > 0) {
+              ts_ = newLongList();
+              mutable_bitField0_ |= 0x00000002;
+            }
+            while (input.getBytesUntilLimit() > 0) {
+              ts_.addLong(input.readInt64());
+            }
+            input.popLimit(limit);
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -88,6 +110,9 @@ private static final long serialVersionUID = 0L;
     } finally {
       if (((mutable_bitField0_ & 0x00000001) != 0)) {
         stat_.makeImmutable(); // C
+      }
+      if (((mutable_bitField0_ & 0x00000002) != 0)) {
+        ts_.makeImmutable(); // C
       }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
@@ -133,6 +158,33 @@ private static final long serialVersionUID = 0L;
   }
   private int statMemoizedSerializedSize = -1;
 
+  public static final int TS_FIELD_NUMBER = 2;
+  private com.google.protobuf.Internal.LongList ts_;
+  /**
+   * <code>repeated int64 ts = 2;</code>
+   * @return A list containing the ts.
+   */
+  public java.util.List<java.lang.Long>
+      getTsList() {
+    return ts_;
+  }
+  /**
+   * <code>repeated int64 ts = 2;</code>
+   * @return The count of ts.
+   */
+  public int getTsCount() {
+    return ts_.size();
+  }
+  /**
+   * <code>repeated int64 ts = 2;</code>
+   * @param index The index of the element to return.
+   * @return The ts at the given index.
+   */
+  public long getTs(int index) {
+    return ts_.getLong(index);
+  }
+  private int tsMemoizedSerializedSize = -1;
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -155,6 +207,13 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < stat_.size(); i++) {
       output.writeFloatNoTag(stat_.getFloat(i));
     }
+    if (getTsList().size() > 0) {
+      output.writeUInt32NoTag(18);
+      output.writeUInt32NoTag(tsMemoizedSerializedSize);
+    }
+    for (int i = 0; i < ts_.size(); i++) {
+      output.writeInt64NoTag(ts_.getLong(i));
+    }
     unknownFields.writeTo(output);
   }
 
@@ -175,6 +234,20 @@ private static final long serialVersionUID = 0L;
       }
       statMemoizedSerializedSize = dataSize;
     }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < ts_.size(); i++) {
+        dataSize += com.google.protobuf.CodedOutputStream
+          .computeInt64SizeNoTag(ts_.getLong(i));
+      }
+      size += dataSize;
+      if (!getTsList().isEmpty()) {
+        size += 1;
+        size += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(dataSize);
+      }
+      tsMemoizedSerializedSize = dataSize;
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -192,6 +265,8 @@ private static final long serialVersionUID = 0L;
 
     if (!getStatList()
         .equals(other.getStatList())) return false;
+    if (!getTsList()
+        .equals(other.getTsList())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -206,6 +281,10 @@ private static final long serialVersionUID = 0L;
     if (getStatCount() > 0) {
       hash = (37 * hash) + STAT_FIELD_NUMBER;
       hash = (53 * hash) + getStatList().hashCode();
+    }
+    if (getTsCount() > 0) {
+      hash = (37 * hash) + TS_FIELD_NUMBER;
+      hash = (53 * hash) + getTsList().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -342,6 +421,8 @@ private static final long serialVersionUID = 0L;
       super.clear();
       stat_ = emptyFloatList();
       bitField0_ = (bitField0_ & ~0x00000001);
+      ts_ = emptyLongList();
+      bitField0_ = (bitField0_ & ~0x00000002);
       return this;
     }
 
@@ -374,6 +455,11 @@ private static final long serialVersionUID = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
       }
       result.stat_ = stat_;
+      if (((bitField0_ & 0x00000002) != 0)) {
+        ts_.makeImmutable();
+        bitField0_ = (bitField0_ & ~0x00000002);
+      }
+      result.ts_ = ts_;
       onBuilt();
       return result;
     }
@@ -429,6 +515,16 @@ private static final long serialVersionUID = 0L;
         } else {
           ensureStatIsMutable();
           stat_.addAll(other.stat_);
+        }
+        onChanged();
+      }
+      if (!other.ts_.isEmpty()) {
+        if (ts_.isEmpty()) {
+          ts_ = other.ts_;
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          ensureTsIsMutable();
+          ts_.addAll(other.ts_);
         }
         onChanged();
       }
@@ -537,6 +633,85 @@ private static final long serialVersionUID = 0L;
     public Builder clearStat() {
       stat_ = emptyFloatList();
       bitField0_ = (bitField0_ & ~0x00000001);
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.Internal.LongList ts_ = emptyLongList();
+    private void ensureTsIsMutable() {
+      if (!((bitField0_ & 0x00000002) != 0)) {
+        ts_ = mutableCopy(ts_);
+        bitField0_ |= 0x00000002;
+       }
+    }
+    /**
+     * <code>repeated int64 ts = 2;</code>
+     * @return A list containing the ts.
+     */
+    public java.util.List<java.lang.Long>
+        getTsList() {
+      return ((bitField0_ & 0x00000002) != 0) ?
+               java.util.Collections.unmodifiableList(ts_) : ts_;
+    }
+    /**
+     * <code>repeated int64 ts = 2;</code>
+     * @return The count of ts.
+     */
+    public int getTsCount() {
+      return ts_.size();
+    }
+    /**
+     * <code>repeated int64 ts = 2;</code>
+     * @param index The index of the element to return.
+     * @return The ts at the given index.
+     */
+    public long getTs(int index) {
+      return ts_.getLong(index);
+    }
+    /**
+     * <code>repeated int64 ts = 2;</code>
+     * @param index The index to set the value at.
+     * @param value The ts to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTs(
+        int index, long value) {
+      ensureTsIsMutable();
+      ts_.setLong(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated int64 ts = 2;</code>
+     * @param value The ts to add.
+     * @return This builder for chaining.
+     */
+    public Builder addTs(long value) {
+      ensureTsIsMutable();
+      ts_.addLong(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated int64 ts = 2;</code>
+     * @param values The ts to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllTs(
+        java.lang.Iterable<? extends java.lang.Long> values) {
+      ensureTsIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, ts_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated int64 ts = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTs() {
+      ts_ = emptyLongList();
+      bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }

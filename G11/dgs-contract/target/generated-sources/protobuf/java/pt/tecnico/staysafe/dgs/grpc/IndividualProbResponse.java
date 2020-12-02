@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private IndividualProbResponse() {
-    prob_ = emptyFloatList();
+    ts_ = emptyLongList();
   }
 
   @java.lang.Override
@@ -51,22 +51,27 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 13: {
-            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-              prob_ = newFloatList();
-              mutable_bitField0_ |= 0x00000001;
-            }
-            prob_.addFloat(input.readFloat());
+
+            prob_ = input.readFloat();
             break;
           }
-          case 10: {
+          case 16: {
+            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+              ts_ = newLongList();
+              mutable_bitField0_ |= 0x00000001;
+            }
+            ts_.addLong(input.readInt64());
+            break;
+          }
+          case 18: {
             int length = input.readRawVarint32();
             int limit = input.pushLimit(length);
             if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
-              prob_ = newFloatList();
+              ts_ = newLongList();
               mutable_bitField0_ |= 0x00000001;
             }
             while (input.getBytesUntilLimit() > 0) {
-              prob_.addFloat(input.readFloat());
+              ts_.addLong(input.readInt64());
             }
             input.popLimit(limit);
             break;
@@ -87,7 +92,7 @@ private static final long serialVersionUID = 0L;
           e).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000001) != 0)) {
-        prob_.makeImmutable(); // C
+        ts_.makeImmutable(); // C
       }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
@@ -107,31 +112,41 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int PROB_FIELD_NUMBER = 1;
-  private com.google.protobuf.Internal.FloatList prob_;
+  private float prob_;
   /**
-   * <code>repeated float prob = 1;</code>
-   * @return A list containing the prob.
+   * <code>float prob = 1;</code>
+   * @return The prob.
    */
-  public java.util.List<java.lang.Float>
-      getProbList() {
+  public float getProb() {
     return prob_;
   }
+
+  public static final int TS_FIELD_NUMBER = 2;
+  private com.google.protobuf.Internal.LongList ts_;
   /**
-   * <code>repeated float prob = 1;</code>
-   * @return The count of prob.
+   * <code>repeated int64 ts = 2;</code>
+   * @return A list containing the ts.
    */
-  public int getProbCount() {
-    return prob_.size();
+  public java.util.List<java.lang.Long>
+      getTsList() {
+    return ts_;
   }
   /**
-   * <code>repeated float prob = 1;</code>
+   * <code>repeated int64 ts = 2;</code>
+   * @return The count of ts.
+   */
+  public int getTsCount() {
+    return ts_.size();
+  }
+  /**
+   * <code>repeated int64 ts = 2;</code>
    * @param index The index of the element to return.
-   * @return The prob at the given index.
+   * @return The ts at the given index.
    */
-  public float getProb(int index) {
-    return prob_.getFloat(index);
+  public long getTs(int index) {
+    return ts_.getLong(index);
   }
-  private int probMemoizedSerializedSize = -1;
+  private int tsMemoizedSerializedSize = -1;
 
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
@@ -148,12 +163,15 @@ private static final long serialVersionUID = 0L;
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     getSerializedSize();
-    if (getProbList().size() > 0) {
-      output.writeUInt32NoTag(10);
-      output.writeUInt32NoTag(probMemoizedSerializedSize);
+    if (prob_ != 0F) {
+      output.writeFloat(1, prob_);
     }
-    for (int i = 0; i < prob_.size(); i++) {
-      output.writeFloatNoTag(prob_.getFloat(i));
+    if (getTsList().size() > 0) {
+      output.writeUInt32NoTag(18);
+      output.writeUInt32NoTag(tsMemoizedSerializedSize);
+    }
+    for (int i = 0; i < ts_.size(); i++) {
+      output.writeInt64NoTag(ts_.getLong(i));
     }
     unknownFields.writeTo(output);
   }
@@ -164,16 +182,23 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (prob_ != 0F) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeFloatSize(1, prob_);
+    }
     {
       int dataSize = 0;
-      dataSize = 4 * getProbList().size();
+      for (int i = 0; i < ts_.size(); i++) {
+        dataSize += com.google.protobuf.CodedOutputStream
+          .computeInt64SizeNoTag(ts_.getLong(i));
+      }
       size += dataSize;
-      if (!getProbList().isEmpty()) {
+      if (!getTsList().isEmpty()) {
         size += 1;
         size += com.google.protobuf.CodedOutputStream
             .computeInt32SizeNoTag(dataSize);
       }
-      probMemoizedSerializedSize = dataSize;
+      tsMemoizedSerializedSize = dataSize;
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -190,8 +215,11 @@ private static final long serialVersionUID = 0L;
     }
     pt.tecnico.staysafe.dgs.grpc.IndividualProbResponse other = (pt.tecnico.staysafe.dgs.grpc.IndividualProbResponse) obj;
 
-    if (!getProbList()
-        .equals(other.getProbList())) return false;
+    if (java.lang.Float.floatToIntBits(getProb())
+        != java.lang.Float.floatToIntBits(
+            other.getProb())) return false;
+    if (!getTsList()
+        .equals(other.getTsList())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -203,9 +231,12 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (getProbCount() > 0) {
-      hash = (37 * hash) + PROB_FIELD_NUMBER;
-      hash = (53 * hash) + getProbList().hashCode();
+    hash = (37 * hash) + PROB_FIELD_NUMBER;
+    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+        getProb());
+    if (getTsCount() > 0) {
+      hash = (37 * hash) + TS_FIELD_NUMBER;
+      hash = (53 * hash) + getTsList().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -340,7 +371,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      prob_ = emptyFloatList();
+      prob_ = 0F;
+
+      ts_ = emptyLongList();
       bitField0_ = (bitField0_ & ~0x00000001);
       return this;
     }
@@ -369,11 +402,12 @@ private static final long serialVersionUID = 0L;
     public pt.tecnico.staysafe.dgs.grpc.IndividualProbResponse buildPartial() {
       pt.tecnico.staysafe.dgs.grpc.IndividualProbResponse result = new pt.tecnico.staysafe.dgs.grpc.IndividualProbResponse(this);
       int from_bitField0_ = bitField0_;
+      result.prob_ = prob_;
       if (((bitField0_ & 0x00000001) != 0)) {
-        prob_.makeImmutable();
+        ts_.makeImmutable();
         bitField0_ = (bitField0_ & ~0x00000001);
       }
-      result.prob_ = prob_;
+      result.ts_ = ts_;
       onBuilt();
       return result;
     }
@@ -422,13 +456,16 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(pt.tecnico.staysafe.dgs.grpc.IndividualProbResponse other) {
       if (other == pt.tecnico.staysafe.dgs.grpc.IndividualProbResponse.getDefaultInstance()) return this;
-      if (!other.prob_.isEmpty()) {
-        if (prob_.isEmpty()) {
-          prob_ = other.prob_;
+      if (other.getProb() != 0F) {
+        setProb(other.getProb());
+      }
+      if (!other.ts_.isEmpty()) {
+        if (ts_.isEmpty()) {
+          ts_ = other.ts_;
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          ensureProbIsMutable();
-          prob_.addAll(other.prob_);
+          ensureTsIsMutable();
+          ts_.addAll(other.ts_);
         }
         onChanged();
       }
@@ -462,80 +499,110 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private com.google.protobuf.Internal.FloatList prob_ = emptyFloatList();
-    private void ensureProbIsMutable() {
+    private float prob_ ;
+    /**
+     * <code>float prob = 1;</code>
+     * @return The prob.
+     */
+    public float getProb() {
+      return prob_;
+    }
+    /**
+     * <code>float prob = 1;</code>
+     * @param value The prob to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProb(float value) {
+      
+      prob_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>float prob = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearProb() {
+      
+      prob_ = 0F;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.Internal.LongList ts_ = emptyLongList();
+    private void ensureTsIsMutable() {
       if (!((bitField0_ & 0x00000001) != 0)) {
-        prob_ = mutableCopy(prob_);
+        ts_ = mutableCopy(ts_);
         bitField0_ |= 0x00000001;
        }
     }
     /**
-     * <code>repeated float prob = 1;</code>
-     * @return A list containing the prob.
+     * <code>repeated int64 ts = 2;</code>
+     * @return A list containing the ts.
      */
-    public java.util.List<java.lang.Float>
-        getProbList() {
+    public java.util.List<java.lang.Long>
+        getTsList() {
       return ((bitField0_ & 0x00000001) != 0) ?
-               java.util.Collections.unmodifiableList(prob_) : prob_;
+               java.util.Collections.unmodifiableList(ts_) : ts_;
     }
     /**
-     * <code>repeated float prob = 1;</code>
-     * @return The count of prob.
+     * <code>repeated int64 ts = 2;</code>
+     * @return The count of ts.
      */
-    public int getProbCount() {
-      return prob_.size();
+    public int getTsCount() {
+      return ts_.size();
     }
     /**
-     * <code>repeated float prob = 1;</code>
+     * <code>repeated int64 ts = 2;</code>
      * @param index The index of the element to return.
-     * @return The prob at the given index.
+     * @return The ts at the given index.
      */
-    public float getProb(int index) {
-      return prob_.getFloat(index);
+    public long getTs(int index) {
+      return ts_.getLong(index);
     }
     /**
-     * <code>repeated float prob = 1;</code>
+     * <code>repeated int64 ts = 2;</code>
      * @param index The index to set the value at.
-     * @param value The prob to set.
+     * @param value The ts to set.
      * @return This builder for chaining.
      */
-    public Builder setProb(
-        int index, float value) {
-      ensureProbIsMutable();
-      prob_.setFloat(index, value);
+    public Builder setTs(
+        int index, long value) {
+      ensureTsIsMutable();
+      ts_.setLong(index, value);
       onChanged();
       return this;
     }
     /**
-     * <code>repeated float prob = 1;</code>
-     * @param value The prob to add.
+     * <code>repeated int64 ts = 2;</code>
+     * @param value The ts to add.
      * @return This builder for chaining.
      */
-    public Builder addProb(float value) {
-      ensureProbIsMutable();
-      prob_.addFloat(value);
+    public Builder addTs(long value) {
+      ensureTsIsMutable();
+      ts_.addLong(value);
       onChanged();
       return this;
     }
     /**
-     * <code>repeated float prob = 1;</code>
-     * @param values The prob to add.
+     * <code>repeated int64 ts = 2;</code>
+     * @param values The ts to add.
      * @return This builder for chaining.
      */
-    public Builder addAllProb(
-        java.lang.Iterable<? extends java.lang.Float> values) {
-      ensureProbIsMutable();
+    public Builder addAllTs(
+        java.lang.Iterable<? extends java.lang.Long> values) {
+      ensureTsIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
-          values, prob_);
+          values, ts_);
       onChanged();
       return this;
     }
     /**
-     * <code>repeated float prob = 1;</code>
+     * <code>repeated int64 ts = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearProb() {
-      prob_ = emptyFloatList();
+    public Builder clearTs() {
+      ts_ = emptyLongList();
       bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;

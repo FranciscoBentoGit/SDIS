@@ -18,4 +18,21 @@ public interface SnifferJoinResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getSuccessBytes();
+
+  /**
+   * <code>repeated int64 ts = 2;</code>
+   * @return A list containing the ts.
+   */
+  java.util.List<java.lang.Long> getTsList();
+  /**
+   * <code>repeated int64 ts = 2;</code>
+   * @return The count of ts.
+   */
+  int getTsCount();
+  /**
+   * <code>repeated int64 ts = 2;</code>
+   * @param index The index of the element to return.
+   * @return The ts at the given index.
+   */
+  long getTs(int index);
 }

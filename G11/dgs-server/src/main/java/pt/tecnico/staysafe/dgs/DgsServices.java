@@ -14,36 +14,33 @@ import pt.tecnico.staysafe.dgs.ObservationsData;
 public class DgsServices {
 	private ConcurrentHashMap<String, String> snifferHash = new ConcurrentHashMap<String, String>();
 	private CopyOnWriteArrayList<ObservationsData> obsList = new CopyOnWriteArrayList<ObservationsData>();
-    private long[] _valueTs = {0,0,0};
 
-	public synchronized String sniffer_join(String name, String address, int replicaId) {
+	public synchronized String sniffer_join(String name, String address) {
 		if (snifferHash.containsKey(name)) {
 			if (!(snifferHash.get(name).equals(address))) {
-				return "Failed to join sniffer: invalid address for that name." + " - " + String.valueOf(_valueTs[0]) + " - " + String.valueOf(_valueTs[0]) + " - ";
+				return "Failed to join sniffer: invalid address for that name.";
 			} else {
 				snifferHash.put(name, address);
-                _valueTs[replicaId - 1]++;
-				return "Success to join sniffer." + " - " + String.valueOf(_valueTs[0]) + " - " + String.valueOf(_valueTs[1]) + " - " + String.valueOf(_valueTs[2]) + " - ";
+				return "Success to join sniffer.";
 			}
 		}
 		
 		snifferHash.put(name, address);
-        _valueTs[replicaId - 1]++;
-		return "Success to join sniffer." + " - " + String.valueOf(_valueTs[0]) + " - " + String.valueOf(_valueTs[1]) + " - " + String.valueOf(_valueTs[2]) + " - ";
+		return "Success to join sniffer.";
 	}
 
-	public synchronized String sniffer_info(String name, int replicaId) {
+	public synchronized String sniffer_info(String name) {
 		if (!(snifferHash.containsKey(name))) { 
-			return "Failed to find the address: name does not exist." + " - " + String.valueOf(_valueTs[0]) + " - " + String.valueOf(_valueTs[1]) + " - " + String.valueOf(_valueTs[2]) + " - ";
+			return "Failed to find the address: name does not exist.";
 		}
 
 		String address = snifferHash.get(name);
-		return address + " - " + String.valueOf(_valueTs[0]) + " - " + String.valueOf(_valueTs[1]) + " - " + String.valueOf(_valueTs[2]) + " - ";
+		return address;
 	}
 
-    public synchronized String report(String name, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut, int replicaId) {
+    public synchronized String report(String name, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
         if (!(snifferHash.containsKey(name))) {
-            return "Failed to report: invalid name." + " - " + String.valueOf(_valueTs[0]) + " - " + String.valueOf(_valueTs[1]) + " - " + String.valueOf(_valueTs[2]) + " - ";
+            return "Failed to report: invalid name.";
         }
 
         long millis = System.currentTimeMillis();
@@ -52,31 +49,16 @@ public class DgsServices {
         ObservationsData data = new ObservationsData(name,infection,id,timeIn,timeOut,timestamp);
 
         obsList.add(data);
-        _valueTs[replicaId - 1]++;
-        return "Success to report." + " - " + String.valueOf(_valueTs[0]) + " - " + String.valueOf(_valueTs[1]) + " - " + String.valueOf(_valueTs[2]) + " - ";
+
+        return "Success to report.";
     }
 
-    public synchronized float individual_infection_probability(int index, long id, int replicaId){
+    public synchronized float individual_infection_probability(long id){
         Iterator iter = obsList.iterator();
         int foundID = 0;
         ArrayList<ObservationsData> matchedSniffers = new ArrayList<ObservationsData>();
         float xValue = 0, diff = 0;
-        float[] probability = new float[4];
-
-        if (index == 1) {
-            probability[1] = _valueTs[0];
-            return probability[1];
-        }
-
-        if (index == 2) {
-            probability[2] = _valueTs[1];
-            return probability[2];
-        }
-
-        if (index == 3) {
-            probability[3] = _valueTs[2];
-            return probability[3];
-        }
+        float probability;
 
         //Verify if is within the observations list
         while (iter.hasNext()){
@@ -148,9 +130,9 @@ public class DgsServices {
             }
 
         }
-        probability[0] = calculateProbability(xValue);
+        probability = calculateProbability(xValue);
 
-        return probability[0];
+        return probability;
 
     }
     
@@ -177,10 +159,10 @@ public class DgsServices {
         return probability;
     }
 
-    public synchronized float aggregate_infection_probability(int index, String command, int replicaId){
+    public synchronized float aggregate_infection_probability(int index, String command){
         ArrayList<Long> nonInfectedId = new ArrayList<Long>();
-        float[] responseMean = new float[5];
-        float[] responsePercentile = new float[6];
+        float[] responseMean = new float[3];
+        float[] responsePercentile = new float[4];
         Iterator iter = obsList.iterator();
         
         //Lists the non-infected citizen id's
@@ -198,7 +180,7 @@ public class DgsServices {
         //For every id, it calculates the probability and lists that probability into nonInfectedProbabilities
         while (iter2.hasNext()){
             long id = (long)iter2.next();
-            nonInfectedProbabilities.add(individual_infection_probability(0,id,replicaId));
+            nonInfectedProbabilities.add(individual_infection_probability(id));
         }
         nonInfectedProbabilities.sort(Comparator.naturalOrder());
         if (command.equals("mean_dev")) {
@@ -211,9 +193,6 @@ public class DgsServices {
             
             responseMean[0] = media;
             responseMean[1] = desvio_padrao;
-            responseMean[2] = _valueTs[0];
-            responseMean[3] = _valueTs[1];
-            responseMean[4] = _valueTs[2];
             return responseMean[index];
 
         } else {
@@ -240,9 +219,6 @@ public class DgsServices {
             responsePercentile[0] = mediana;
             responsePercentile[1] = q1;
             responsePercentile[2] = q3;
-            responsePercentile[3] = _valueTs[0];
-            responsePercentile[4] = _valueTs[1];
-            responsePercentile[5] = _valueTs[2];
             return responsePercentile[index];
         }
     }
@@ -258,24 +234,23 @@ public class DgsServices {
         return (float) Math.sqrt(aux/size);
     }
 
-    public synchronized String ctrl_init(String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut, int replicaId) {
-    	String message = report(snifferName,infection,id,timeIn,timeOut, replicaId);
+    public synchronized String ctrl_init(String snifferName, String infection, long id, com.google.protobuf.Timestamp timeIn, com.google.protobuf.Timestamp timeOut) {
+    	String message = report(snifferName,infection,id,timeIn,timeOut);
     	if (message.equals("Failed to report: invalid name.")) {
     		return message;
     	}
     	return "Observation: reported successfully.";
     }
 
-    public synchronized String ctrl_clear(int replicaId) {
+    public synchronized String ctrl_clear() {
     	snifferHash.clear();
     	obsList.removeAll(obsList);
-        _valueTs[replicaId - 1]++;
-    	return "All observations removed successfully." + " - " + String.valueOf(_valueTs[0]) + " - " + String.valueOf(_valueTs[1]) + " - " + String.valueOf(_valueTs[2]) + " - ";
+    	return "All observations removed successfully.";
     }
 
-    public synchronized String ctrl_ping(String input, int replicaId) {
+    public synchronized String ctrl_ping(String input) {
     	String output = "Hello " + input + "!";
-    	return output + " - " + String.valueOf(_valueTs[0]) + " - " + String.valueOf(_valueTs[1]) + " - " + String.valueOf(_valueTs[2]) + " - ";
+    	return output;
     }
 
 }

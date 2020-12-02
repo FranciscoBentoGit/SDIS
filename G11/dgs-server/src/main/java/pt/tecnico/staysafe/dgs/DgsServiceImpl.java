@@ -13,6 +13,7 @@ import java.lang.IllegalStateException;
 public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 	private DgsServices dService = new DgsServices();
+	private long[] _valueTs = {0,0,0};
 
 	@Override
 	public void snifferJoin(SnifferJoinRequest request, StreamObserver<SnifferJoinResponse> responseObserver) {
@@ -41,7 +42,11 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 
 			else {
-				SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setSuccess(dService.sniffer_join(name, address,replicaId)).build();
+				String success = dService.sniffer_join(name, address);
+				if (success.equals("Success to join sniffer.")) {
+					_valueTs[replicaId - 1]++;
+				}
+				SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
@@ -62,7 +67,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 
 			else {
-				SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setNameAddress(dService.sniffer_info(name,replicaId)).build();
+				SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setNameAddress(dService.sniffer_info(name)).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}  
@@ -103,7 +108,12 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 
 			else {
-				ReportResponse response = ReportResponse.newBuilder().setSuccess(dService.report(name,infection,id,timeIn,timeOut,replicaId)).build();
+				String success = dService.report(name,infection,id,timeIn,timeOut);
+				if (success.equals("Success to report.")) {
+					_valueTs[replicaId - 1]++;
+				}
+
+				ReportResponse response = ReportResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
@@ -115,7 +125,9 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 	@Override
 	public void individualInfectionProbability(IndividualProbRequest request, StreamObserver<IndividualProbResponse> responseObserver) {
+		System.out.println("entrei - ind");
 		try {
+			System.out.println("entrei - try");
 			int replicaId = request.getReplicaId();
 
 			long id = request.getId();
@@ -124,7 +136,13 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 			
 			else {
-				IndividualProbResponse response = IndividualProbResponse.newBuilder().addProb(dService.individual_infection_probability(0,id,replicaId)).addProb(dService.individual_infection_probability(1,id,replicaId)).addProb(dService.individual_infection_probability(2,id,replicaId)).addProb(dService.individual_infection_probability(3,id,replicaId)).build();
+				System.out.println("entrei - construir");
+				IndividualProbResponse response = IndividualProbResponse.newBuilder().setProb(dService.individual_infection_probability(id)).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
+				System.out.println("entrei - passei");
+				System.out.printf("%f\n",response.getProb());
+				System.out.printf("%d\n",response.getTs(0));
+				System.out.printf("%d\n",response.getTs(1));
+				System.out.printf("%d\n",response.getTs(2));
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
@@ -146,13 +164,13 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 			
 			else if (command.equals("mean_dev")){
-				AggregateProbResponse response = AggregateProbResponse.newBuilder().addStat(dService.aggregate_infection_probability(0,command,replicaId)).addStat(dService.aggregate_infection_probability(1,command,replicaId)).addStat(dService.aggregate_infection_probability(2,command,replicaId)).addStat(dService.aggregate_infection_probability(3,command,replicaId)).addStat(dService.aggregate_infection_probability(4,command,replicaId)).build();
+				AggregateProbResponse response = AggregateProbResponse.newBuilder().addStat(dService.aggregate_infection_probability(0,command)).addStat(dService.aggregate_infection_probability(1,command)).addStat(dService.aggregate_infection_probability(2,command)).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
 
 			else {
-				AggregateProbResponse response = AggregateProbResponse.newBuilder().addStat(dService.aggregate_infection_probability(0,command,replicaId)).addStat(dService.aggregate_infection_probability(1,command,replicaId)).addStat(dService.aggregate_infection_probability(2,command,replicaId)).addStat(dService.aggregate_infection_probability(3,command,replicaId)).addStat(dService.aggregate_infection_probability(4,command,replicaId)).addStat(dService.aggregate_infection_probability(5,command,replicaId)).build();
+				AggregateProbResponse response = AggregateProbResponse.newBuilder().addStat(dService.aggregate_infection_probability(0,command)).addStat(dService.aggregate_infection_probability(1,command)).addStat(dService.aggregate_infection_probability(2,command)).addStat(dService.aggregate_infection_probability(3,command)).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
@@ -172,7 +190,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 			
 			else {
-				PingResponse response = PingResponse.newBuilder().setText(dService.ctrl_ping(input,replicaId)).build();
+				PingResponse response = PingResponse.newBuilder().setText(dService.ctrl_ping(input)).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
@@ -212,7 +230,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 
 			else{
-				InitResponse response = InitResponse.newBuilder().setSuccess(dService.ctrl_init(snifferName,infection,id,timeIn,timeOut,replicaId)).build();
+				InitResponse response = InitResponse.newBuilder().setSuccess(dService.ctrl_init(snifferName,infection,id,timeIn,timeOut)).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
@@ -225,7 +243,13 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	@Override
 	public void ctrlClear(ClearRequest request, StreamObserver<ClearResponse> responseObserver) {
 		int replicaId = request.getReplicaId();
-		ClearResponse response = ClearResponse.newBuilder().setSuccess(dService.ctrl_clear(replicaId)).build();
+
+		String success = dService.ctrl_clear();
+		if (success.equals("All observations removed successfully.")) {
+			_valueTs[replicaId - 1]++;
+		}
+
+		ClearResponse response = ClearResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 	    responseObserver.onNext(response);
 	    responseObserver.onCompleted();
 	}

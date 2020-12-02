@@ -94,29 +94,18 @@ public class ResearcherApp {
 							try {
 								IndividualProbResponse response;
 								response = client.individual_infection_probability(frontend, Long.parseLong(ids[i]),replicaId);
-								
-								//This convergence is needed as response will return prob : value
-								String convResponse = response.toString();
-								String[] splited1 = convResponse.split(" ", 2);
-								String[] splited2 = splited1[1].split("\n", 2);
-								String prob = splited2[0].toString();
 
-								String[] splited4 =	splited2[1].split(" ", 2);	
-								String[] splited5 =	splited4[1].split("\n", 2);	
-								String ts1 = splited5[0].toString();
+								float prob = response.getProb();
 
-								String[] splited6 =	splited5[1].split(" ", 2);
-								String ts2 = splited6[1].toString();
-
-								System.out.printf("%s%n%s%n",ts1,ts2);
+								//System.out.printf("%s%n%s%n",ts1,ts2);
 								
 								//If the function individual_infection_probability returns 2.0, because it must return a float,it detects it's irrealistic and means id not found
-								if (prob.equals("2.0")) {
-									prob = "Id: not found!"; 
-									System.out.printf("%s%n",prob);
+								if (Float.compare(prob,(float)2.0) == 0) {
+									String error = "Id: not found!"; 
+									System.out.printf("%s%n",error);
 								} else {
-									float f = Float.parseFloat(prob);
-									System.out.printf("%.3f%n",f);
+									//float f = Float.parseFloat(prob);
+									System.out.printf("%.3f%n",prob);
 								}
 							} catch (StatusRuntimeException e) {
 								System.out.println("Caught exception with description: " + e.getStatus().getDescription());
@@ -133,9 +122,7 @@ public class ResearcherApp {
 					try {
 						PingResponse response;
 						response = client.ctrl_ping(frontend,replicaId);
-						String auxResponsePing = response.getText();
-						String[] splitAuxPing = auxResponsePing.split(" - ",2);
-						String newResponsePing = splitAuxPing[0] + "\n";
+						String newResponsePing = response.getText();
 						System.out.printf("%s%n", newResponsePing);
 					} catch (StatusRuntimeException e) {
 						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
@@ -145,9 +132,7 @@ public class ResearcherApp {
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 					ClearResponse response;
 					response = client.ctrl_clear(frontend,replicaId);
-					String auxResponseClear = response.getSuccess();
-					String[] splitAuxClear = auxResponseClear.split(" - ",2);
-					String newResponseClear = splitAuxClear[0] + "\n";
+					String newResponseClear = response.getSuccess();
 					System.out.printf("%s%n", newResponseClear);
 				}
 

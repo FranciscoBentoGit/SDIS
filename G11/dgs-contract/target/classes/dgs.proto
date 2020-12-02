@@ -19,6 +19,7 @@ message SnifferJoinRequest {
 
 message SnifferJoinResponse {
 	string success = 1;
+	repeated int64 ts = 2;
 }
 
 
@@ -31,6 +32,7 @@ message SnifferInfoRequest {
 
 message SnifferInfoResponse {
 	string nameAddress = 1;
+	repeated int64 ts = 2;
 }
 
 
@@ -47,6 +49,7 @@ message ReportRequest {
 
 message ReportResponse {
 	string success = 1;
+	repeated int64 ts = 2;
 }
 
 
@@ -58,7 +61,8 @@ message IndividualProbRequest {
 }
 
 message IndividualProbResponse {
-	repeated float prob = 1;
+	float prob = 1;
+	repeated int64 ts = 2;
 }
 
 
@@ -71,6 +75,7 @@ message AggregateProbRequest {
 
 message AggregateProbResponse {
 	repeated float stat = 1;
+	repeated int64 ts = 2;
 }
 
 
@@ -83,6 +88,7 @@ message PingRequest {
 
 message PingResponse {
 	string text = 1;
+	repeated int64 ts = 2;
 }
 
 
@@ -110,6 +116,7 @@ message ClearRequest {
 
 message ClearResponse {
 	string success = 1;
+	repeated int64 ts = 2;
 }
 
 
