@@ -15,15 +15,11 @@ public class ServersFrontend {
     private int _replicaNumber;
 
     public ServersFrontend(ZKNaming zkNaming, String URI) {
-        try {
-            String target = URI;
+        String target = URI;
 
-            final ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
-            _stub = DgsGrpc.newBlockingStub(channel);
+        final ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
+        _stub = DgsGrpc.newBlockingStub(channel);
 
-        } catch (ZKNamingException e) {
-            System.out.println("Caught exception with description: " + e.getMessage());
-        }
     }
 
     public ReportResponse report(ReportRequest request, int replicaId) {

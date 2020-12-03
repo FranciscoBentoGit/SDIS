@@ -14,6 +14,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.Executors;
 
+
 public class DgsServerApp {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
@@ -27,7 +28,7 @@ public class DgsServerApp {
 		String path = null;
 		int id = 0;
 		
-		final int initialDelay = 5;
+		final int initialDelay = 30;
 		final int period = 30;
 
 		System.out.println("Insert the replica number that you want to initialize!");
@@ -83,7 +84,7 @@ public class DgsServerApp {
 		System.out.printf("host = %s%n", host);
 		System.out.printf("port = %s%n", port);
 		System.out.printf("path = %s%n", path);
-
+		
 		final DgsServiceImpl impl = new DgsServiceImpl();
 
 		ZKNaming zkNaming = null;
@@ -91,15 +92,15 @@ public class DgsServerApp {
 		try {
 			zkNaming = new ZKNaming(zooHost, zooPort);
 			
-			final ZKNaming zkNamingAux = new ZKNaming(zooHost, zooPort);
 			// publish
 			zkNaming.rebind(path, host, port);
 
 			int portStr = Integer.parseInt(port);
+			
 
 			// Create a new server to listen on port
 			Server server = ServerBuilder.forPort(portStr).addService(impl).build();
-
+			
 			// Start the replica 1
 			server.start();
 
@@ -108,38 +109,13 @@ public class DgsServerApp {
 
 			ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
+			final Foo foo = new Foo(zkNaming,impl,path);
+
             Runnable propagation = new Runnable() {
                 @Override
                 public void run(){
-					final String parent = "/grpc/staysafe/dgs";
-                    try {
-						Collection<ZKRecord> replicaCollection = zkNamingAux.listRecords(parent);
-
-						for (ZKRecord record : replicaCollection){
-							if (record.getPath() != path) {
-								String[] split = record.getPath().split("/", 5);
-								int instance = Integer.parseInt(split[split.length - 1]);
-
-								System.out.printf("Replica %d initiating update exchange...%n", instance);
-
-								ServersFrontend frontend = new ServersFrontend(zkNaming,record.getURI());
-								
-								CopyOnWriteArrayList<Log> list = impl.getList();
-								Iterator<Log> it = list.iterator();
-								while (it.hasNext()) {
-									Log i = it.next();
-									if (i.getType().equals("clear")) {
-										frontend.ctrl_clear(instance);
-									}
-									if (i.getType().equals("report")) {
-										frontend.report(i.getReport(),instance);
-									}
-								}
-							}
-						}
-					} catch (ZKNamingException e) {
-						System.out.println("Caught exception with description: " + e.getMessage());
-					}
+					foo.tick();
+                    
                 }
             };
 
