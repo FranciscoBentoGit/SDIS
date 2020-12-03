@@ -4,6 +4,7 @@ import io.grpc.BindableService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import pt.ulisboa.tecnico.sdis.zk.*;
+import pt.tecnico.staysafe.dgs.grpc.*;
 
 import java.io.IOException;
 import io.grpc.StatusRuntimeException;
@@ -30,6 +31,7 @@ public class Foo{
 	}
 
 	public void tick(){
+		long[] ts = {0,0,0};
 		try {
 			_replicaCollection = _zkNaming.listRecords(parent);
 			for (ZKRecord record : _replicaCollection){
@@ -42,14 +44,13 @@ public class Foo{
 					ServersFrontend frontend = new ServersFrontend(_zkNaming,record.getURI());
 					
 					//this replica timestamp
-					_valueTs = impl.getValueTs();
+					_valueTs = _impl.getValueTs();
 					
 					//replica to comunicate timestamp
-					long[] ts;
 					UpdateResponse response = frontend.update();
-					ts[0] = reponse.getTs[0];
-					ts[1] = reponse.getTs[1];
-					ts[2] = reponse.getTs[2];
+					ts[0] = response.getTs(0);
+					ts[1] = response.getTs(1);
+					ts[2] = response.getTs(2);
 
 					_list = _impl.getList();
 					Iterator<Log> it = _list.iterator();

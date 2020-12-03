@@ -228,6 +228,10 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		return logList;
 	}
 
+	public long[] getValueTs() {
+		return _valueTs;
+	}
+
 	@Override
 	public void update(UpdateRequest request, StreamObserver<UpdateResponse> responseObserver) {
 		UpdateResponse response = UpdateResponse.newBuilder().addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
