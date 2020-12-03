@@ -15,8 +15,9 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 	private DgsServices dService = new DgsServices();
 	private long[] _valueTs = {0,0,0};
-	private CopyOnWriteArrayList<Log> logList = new CopyOnWriteArrayList<Log>();
-    private Log newLog;
+	private CopyOnWriteArrayList<Operation> _executedList = new CopyOnWriteArrayList<Operation>();
+    private Operation _newOperation;
+    private long _identifier = 0;
 
 	@Override
 	public void snifferJoin(SnifferJoinRequest request, StreamObserver<SnifferJoinResponse> responseObserver) {
@@ -47,10 +48,10 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			else {
 				String success = dService.sniffer_join(name, address);
 				if (success.equals("Success to join sniffer.")) {
+					_identifier = _identifier + (long) 1;
 					_valueTs[replicaId - 1]++;
-					System.out.printf("incrementei JOIN - %d%n", _valueTs[replicaId - 1]);
-					newLog = new Log("join",_valueTs[0],_valueTs[1],_valueTs[2],request,null);
-                    logList.add(newLog);
+					_newOperation = new Operation(_identifier,"join",request,null);
+					_executedList.add(_newOperation);
 				}
 				SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 				responseObserver.onNext(response);
@@ -117,8 +118,9 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				String success = dService.report(name,infection,id,timeIn,timeOut);
 				if (success.equals("Success to report.")) {
 					_valueTs[replicaId - 1]++;
-					newLog = new Log("report",_valueTs[0],_valueTs[1],_valueTs[2],null,request);
-                    logList.add(newLog);
+					_identifier = _identifier + (long) 1;
+					_newOperation = new Operation(_identifier,"report",null,request);
+					_executedList.add(_newOperation);
 				}
 
 				ReportResponse response = ReportResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
@@ -213,10 +215,10 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 		String success = dService.ctrl_clear();
 		if (success.equals("All observations removed successfully.")) {
+			_identifier = _identifier + (long) 1;
 			_valueTs[replicaId - 1]++;
-			System.out.printf("incrementei REPORT - %d%n", _valueTs[replicaId - 1]);
-			newLog = new Log("clear",_valueTs[0],_valueTs[1],_valueTs[2],null,null);
-            logList.add(newLog);
+			_newOperation = new Operation(_identifier,"clear",null,null);
+			_executedList.add(_newOperation);
 		}
 
 		ClearResponse response = ClearResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
@@ -224,18 +226,20 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	    responseObserver.onCompleted();
 	}
 
-	public CopyOnWriteArrayList<Log> getList() {
-		return logList;
-	}
-
-	public long[] getValueTs() {
-		return _valueTs;
-	}
+	
 
 	@Override
 	public void update(UpdateRequest request, StreamObserver<UpdateResponse> responseObserver) {
 		UpdateResponse response = UpdateResponse.newBuilder().addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 		responseObserver.onNext(response);
 	    responseObserver.onCompleted();
+	}
+
+	public long[] getValueTs(){
+        return _valueTs;
+	}
+	
+	public CopyOnWriteArrayList<Operation> getExecutedList() {
+		return _executedList;
 	}
 }

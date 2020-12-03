@@ -3,28 +3,26 @@ package pt.tecnico.staysafe.dgs;
 import java.util.*;
 import pt.tecnico.staysafe.dgs.grpc.*;
 
-public class Log {
+public class Operation {
     private String _type;
-    private long[] _ts = {0,0,0};
     private SnifferJoinRequest _join;
     private ReportRequest _report;
+    private Long _identifier;
 
 
-    Log(String type, long ts1, long ts2, long ts3, SnifferJoinRequest join, ReportRequest report) {
+    Operation(Long identifier,String type, SnifferJoinRequest join, ReportRequest report) {
+        _identifier = identifier;
         _type = type;
-        _ts[0] = ts1;
-        _ts[1] = ts2;
-        _ts[2] = ts3;
         _join = join;
         _report = report;
     }
 
-    public String getType() {
-        return _type;
+    public long getIdentifier() {
+        return _identifier;
     }
 
-    public long[] getTs() {
-        return _ts;
+    public String getType() {
+        return _type;
     }
 
     public SnifferJoinRequest getJoin() {

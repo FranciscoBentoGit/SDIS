@@ -13,19 +13,20 @@ import pt.tecnico.staysafe.dgs.ObservationsData;
 
 public class DgsServices {
 	private ConcurrentHashMap<String, String> snifferHash = new ConcurrentHashMap<String, String>();
-	private CopyOnWriteArrayList<ObservationsData> obsList = new CopyOnWriteArrayList<ObservationsData>();
+    private CopyOnWriteArrayList<ObservationsData> obsList = new CopyOnWriteArrayList<ObservationsData>();
+   
 
 	public synchronized String sniffer_join(String name, String address) {
 		if (snifferHash.containsKey(name)) {
 			if (!(snifferHash.get(name).equals(address))) {
 				return "Failed to join sniffer: invalid address for that name.";
 			} else {
-				snifferHash.put(name, address);
+                snifferHash.put(name, address);
 				return "Success to join sniffer.";
 			}
 		}
 		
-		snifferHash.put(name, address);
+        snifferHash.put(name, address);
 		return "Success to join sniffer.";
 	}
 
@@ -237,7 +238,7 @@ public class DgsServices {
 
     public synchronized String ctrl_clear() {
     	snifferHash.clear();
-    	obsList.removeAll(obsList);
+        obsList.removeAll(obsList);
     	return "All observations removed successfully.";
     }
 
@@ -245,5 +246,6 @@ public class DgsServices {
     	String output = "Hello " + input + "!";
     	return output;
     }
+
 
 }

@@ -20,7 +20,7 @@ public class Foo{
 	private String _path;
 	private String parent = "/grpc/staysafe/dgs";
 	private Collection<ZKRecord> _replicaCollection;
-	private CopyOnWriteArrayList<Log> _list;
+	private CopyOnWriteArrayList<Operation> _list;
 	private DgsServiceImpl _impl;
 	private long[] _valueTs;
 	
@@ -52,10 +52,10 @@ public class Foo{
 					ts[1] = response.getTs(1);
 					ts[2] = response.getTs(2);
 
-					_list = _impl.getList();
-					Iterator<Log> it = _list.iterator();
+					_list = _impl.getExecutedList();
+					Iterator<Operation> it = _list.iterator();
 					while (it.hasNext()) {
-						Log i = it.next();
+						Operation i = it.next();
 
 						if (i.getType().equals("clear")) {
 							/*if (instance == 1) {
