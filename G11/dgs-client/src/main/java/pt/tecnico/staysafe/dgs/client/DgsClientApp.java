@@ -18,7 +18,7 @@ import pt.tecnico.staysafe.dgs.grpc.*;
 
 
 public class DgsClientApp {
-	private static long[] _prevTs = {0,0};
+	
 	
 	public static void main(String[] args) {
 		System.out.println(DgsClientApp.class.getSimpleName());

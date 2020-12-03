@@ -242,4 +242,15 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	public CopyOnWriteArrayList<Operation> getExecutedList() {
 		return _executedList;
 	}
+
+	public void setExecutedList(CopyOnWriteArrayList<Operation> list){
+		_executedList = list;
+		
+	}
+
+	public void cleanExecutedList(long maxPosition){
+		for (long i = 0; i< maxPosition;i++){
+			_executedList.remove(i);
+		}
+	}
 }

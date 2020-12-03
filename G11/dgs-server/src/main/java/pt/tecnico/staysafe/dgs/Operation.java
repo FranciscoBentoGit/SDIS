@@ -17,7 +17,7 @@ public class Operation {
         _report = report;
     }
 
-    public long getIdentifier() {
+    public Long getIdentifier() {
         return _identifier;
     }
 

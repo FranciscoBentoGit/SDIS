@@ -115,7 +115,7 @@ public class DgsServerApp {
                 @Override
                 public void run(){
 					foo.tick();
-                    
+					
                 }
             };
 
