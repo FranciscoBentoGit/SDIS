@@ -119,6 +119,16 @@ message ClearResponse {
 	repeated int64 ts = 2;
 }
 
+//function Update
+//
+message UpdateRequest {
+	//No arguments needed
+}
+
+message UpdateResponse {
+	repeated int64 ts = 1;
+}
+
 
 service Dgs {
 	rpc sniffer_join(SnifferJoinRequest) returns (SnifferJoinResponse);
@@ -127,6 +137,6 @@ service Dgs {
 	rpc individual_infection_probability(IndividualProbRequest) returns (IndividualProbResponse);
 	rpc aggregate_infection_probability(AggregateProbRequest) returns (AggregateProbResponse);
 	rpc ctrl_ping(PingRequest) returns (PingResponse);
-	rpc ctrl_init(InitRequest) returns (InitResponse);
 	rpc ctrl_clear(ClearRequest) returns (ClearResponse);
+	rpc update(UpdateRequest) returns (UpdateResponse);
 }

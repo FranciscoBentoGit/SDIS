@@ -94,6 +94,16 @@ public final class DgsOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_pt_tecnico_staysafe_dgs_grpc_ClearResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -131,30 +141,31 @@ public final class DgsOuterClass {
       "licaId\030\006 \001(\005\"\037\n\014InitResponse\022\017\n\007success\030" +
       "\001 \001(\t\"!\n\014ClearRequest\022\021\n\treplicaId\030\001 \001(\005" +
       "\",\n\rClearResponse\022\017\n\007success\030\001 \001(\t\022\n\n\002ts" +
-      "\030\002 \003(\0032\240\007\n\003Dgs\022s\n\014sniffer_join\0220.pt.tecn" +
-      "ico.staysafe.dgs.grpc.SnifferJoinRequest" +
-      "\0321.pt.tecnico.staysafe.dgs.grpc.SnifferJ" +
-      "oinResponse\022s\n\014sniffer_info\0220.pt.tecnico" +
-      ".staysafe.dgs.grpc.SnifferInfoRequest\0321." +
-      "pt.tecnico.staysafe.dgs.grpc.SnifferInfo" +
-      "Response\022c\n\006report\022+.pt.tecnico.staysafe" +
-      ".dgs.grpc.ReportRequest\032,.pt.tecnico.sta" +
-      "ysafe.dgs.grpc.ReportResponse\022\215\001\n indivi" +
-      "dual_infection_probability\0223.pt.tecnico." +
-      "staysafe.dgs.grpc.IndividualProbRequest\032" +
-      "4.pt.tecnico.staysafe.dgs.grpc.Individua" +
-      "lProbResponse\022\212\001\n\037aggregate_infection_pr" +
-      "obability\0222.pt.tecnico.staysafe.dgs.grpc" +
-      ".AggregateProbRequest\0323.pt.tecnico.stays" +
-      "afe.dgs.grpc.AggregateProbResponse\022b\n\tct" +
-      "rl_ping\022).pt.tecnico.staysafe.dgs.grpc.P" +
-      "ingRequest\032*.pt.tecnico.staysafe.dgs.grp" +
-      "c.PingResponse\022b\n\tctrl_init\022).pt.tecnico" +
-      ".staysafe.dgs.grpc.InitRequest\032*.pt.tecn" +
-      "ico.staysafe.dgs.grpc.InitResponse\022e\n\nct" +
-      "rl_clear\022*.pt.tecnico.staysafe.dgs.grpc." +
-      "ClearRequest\032+.pt.tecnico.staysafe.dgs.g" +
-      "rpc.ClearResponseB\002P\001b\006proto3"
+      "\030\002 \003(\003\"\017\n\rUpdateRequest\"\034\n\016UpdateRespons" +
+      "e\022\n\n\002ts\030\001 \003(\0032\241\007\n\003Dgs\022s\n\014sniffer_join\0220." +
+      "pt.tecnico.staysafe.dgs.grpc.SnifferJoin" +
+      "Request\0321.pt.tecnico.staysafe.dgs.grpc.S" +
+      "nifferJoinResponse\022s\n\014sniffer_info\0220.pt." +
+      "tecnico.staysafe.dgs.grpc.SnifferInfoReq" +
+      "uest\0321.pt.tecnico.staysafe.dgs.grpc.Snif" +
+      "ferInfoResponse\022c\n\006report\022+.pt.tecnico.s" +
+      "taysafe.dgs.grpc.ReportRequest\032,.pt.tecn" +
+      "ico.staysafe.dgs.grpc.ReportResponse\022\215\001\n" +
+      " individual_infection_probability\0223.pt.t" +
+      "ecnico.staysafe.dgs.grpc.IndividualProbR" +
+      "equest\0324.pt.tecnico.staysafe.dgs.grpc.In" +
+      "dividualProbResponse\022\212\001\n\037aggregate_infec" +
+      "tion_probability\0222.pt.tecnico.staysafe.d" +
+      "gs.grpc.AggregateProbRequest\0323.pt.tecnic" +
+      "o.staysafe.dgs.grpc.AggregateProbRespons" +
+      "e\022b\n\tctrl_ping\022).pt.tecnico.staysafe.dgs" +
+      ".grpc.PingRequest\032*.pt.tecnico.staysafe." +
+      "dgs.grpc.PingResponse\022e\n\nctrl_clear\022*.pt" +
+      ".tecnico.staysafe.dgs.grpc.ClearRequest\032" +
+      "+.pt.tecnico.staysafe.dgs.grpc.ClearResp" +
+      "onse\022c\n\006update\022+.pt.tecnico.staysafe.dgs" +
+      ".grpc.UpdateRequest\032,.pt.tecnico.staysaf" +
+      "e.dgs.grpc.UpdateResponseB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -257,6 +268,18 @@ public final class DgsOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pt_tecnico_staysafe_dgs_grpc_ClearResponse_descriptor,
         new java.lang.String[] { "Success", "Ts", });
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateRequest_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateResponse_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pt_tecnico_staysafe_dgs_grpc_UpdateResponse_descriptor,
+        new java.lang.String[] { "Ts", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

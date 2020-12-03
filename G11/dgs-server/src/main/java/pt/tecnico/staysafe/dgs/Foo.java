@@ -21,12 +21,12 @@ public class Foo{
 	private Collection<ZKRecord> _replicaCollection;
 	private CopyOnWriteArrayList<Log> _list;
 	private DgsServiceImpl _impl;
+	private long[] _valueTs;
 	
-	public Foo(ZKNaming zkNaming,DgsServiceImpl impl,String path){
+	public Foo(ZKNaming zkNaming, DgsServiceImpl impl, String path){
 		_zkNaming = zkNaming;
 		_impl = impl;
 		_path = path;
-	
 	}
 
 	public void tick(){
@@ -41,15 +41,46 @@ public class Foo{
 
 					ServersFrontend frontend = new ServersFrontend(_zkNaming,record.getURI());
 					
+					//this replica timestamp
+					_valueTs = impl.getValueTs();
+					
+					//replica to comunicate timestamp
+					long[] ts;
+					UpdateResponse response = frontend.update();
+					ts[0] = reponse.getTs[0];
+					ts[1] = reponse.getTs[1];
+					ts[2] = reponse.getTs[2];
+
 					_list = _impl.getList();
 					Iterator<Log> it = _list.iterator();
 					while (it.hasNext()) {
 						Log i = it.next();
+
 						if (i.getType().equals("clear")) {
-							frontend.ctrl_clear(instance);
+							/*if (instance == 1) {
+								while (_valueTs[1] != ts[1] && _valueTs[2] != ts[2]) {
+									//wait till it gets the same
+								}
+								frontend.ctrl_clear(instance);		
+							}
+							if (instance == 2) {
+								while (_valueTs[0] != ts[0] && _valueTs[2] != ts[2]) {
+									//wait till it gets the same
+								}
+								frontend.ctrl_clear(instance);		
+							}
+							if (instance == 3) {
+								while (_valueTs[0] != ts[0] && _valueTs[1] != ts[1]) {
+									//wait till it gets the same
+								}
+								frontend.ctrl_clear(instance);		
+							}*/
+						}
+						if (i.getType().equals("join")) {
+							frontend.sniffer_join(i.getJoin());
 						}
 						if (i.getType().equals("report")) {
-							frontend.report(i.getReport(),instance);
+							frontend.report(i.getReport());
 						}
 					}
 				}

@@ -22,7 +22,20 @@ public class ServersFrontend {
 
     }
 
-    public ReportResponse report(ReportRequest request, int replicaId) {
+    public UpdateResponse update() {
+		UpdateResponse response;
+        UpdateRequest request = UpdateRequest.getDefaultInstance();;
+		response = _stub.update(request);
+		return response;
+	}
+
+    public SnifferJoinResponse sniffer_join(SnifferJoinRequest request) {
+		SnifferJoinResponse response;
+		response = _stub.snifferJoin(request);
+		return response;
+	}
+
+    public ReportResponse report(ReportRequest request) {
         ReportResponse response;
         response = _stub.report(request);
         return response;
