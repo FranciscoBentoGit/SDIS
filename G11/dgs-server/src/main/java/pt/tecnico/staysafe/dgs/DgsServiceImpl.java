@@ -7,6 +7,8 @@ import com.google.protobuf.Timestamp;
 import java.util.regex.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import java.util.*;
+
 import static io.grpc.Status.INVALID_ARGUMENT;
 import java.lang.IllegalStateException;
 
@@ -14,8 +16,10 @@ import java.lang.IllegalStateException;
 public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 	private DgsServices dService = new DgsServices();
+	private long[] _auxTs = {0,0,0};
 	private long[] _valueTs = {0,0,0};
 	private CopyOnWriteArrayList<Operation> _executedList = new CopyOnWriteArrayList<Operation>();
+	private CopyOnWriteArrayList<Operation> _logList = new CopyOnWriteArrayList<Operation>();
     private Operation _newOperation;
     private long _identifier = 0;
 
@@ -44,14 +48,35 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			if (address == null || address.isBlank()) {
 				responseObserver.onError(INVALID_ARGUMENT.withDescription("Address: input cannot be empty!").asRuntimeException());
 			}
+			
+			
 
 			else {
+				_identifier = _identifier + (long) 1;
+				_newOperation = new Operation(_identifier,"join",request,null);
+				if(_executedList.size() != 0){
+					Iterator<Operation> it = _executedList.iterator();
+					while (it.hasNext()) {
+						Operation i = it.next();
+						if(i.getType().equals("join")){
+							if (i.getJoin().equals(_newOperation)){
+								return;
+							}
+						}
+						
+					}
+				}
+				
+				
 				String success = dService.sniffer_join(name, address);
 				if (success.equals("Success to join sniffer.")) {
-					_identifier = _identifier + (long) 1;
+					
 					_valueTs[replicaId - 1]++;
+					//_auxTs[replicaId - 1]++;
+					
 					_newOperation = new Operation(_identifier,"join",request,null);
 					_executedList.add(_newOperation);
+					_logList.add(_newOperation);
 				}
 				SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 				responseObserver.onNext(response);
@@ -114,13 +139,33 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onError(INVALID_ARGUMENT.withDescription("TimeOut: invalid input time!").asRuntimeException());
 			}
 
+			
+
 			else {
+				_identifier = _identifier + (long) 1;
+				_newOperation = new Operation(_identifier,"report",null,request);
+				if(_executedList.size() != 0){
+					Iterator<Operation> it = _executedList.iterator();
+					while (it.hasNext()) {
+						Operation i = it.next();
+						if (i.getType().equals("report")){
+							if ((i.getReport().getName().equals(_newOperation.getReport().getName())) && (i.getReport().getInfection() == _newOperation.getReport().getName()) && (i.getReport().getTimeIn().equals(_newOperation.getReport().getTimeIn())) && (i.getReport().getTimeOut().equals(_newOperation.getReport().getTimeOut())) ){
+								return;
+							}
+						}
+						
+					}
+				}
+				
+
 				String success = dService.report(name,infection,id,timeIn,timeOut);
 				if (success.equals("Success to report.")) {
 					_valueTs[replicaId - 1]++;
-					_identifier = _identifier + (long) 1;
+					//_auxTs[replicaId - 1]++;
+					
 					_newOperation = new Operation(_identifier,"report",null,request);
 					_executedList.add(_newOperation);
+					_logList.add(_newOperation);
 				}
 
 				ReportResponse response = ReportResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
@@ -217,6 +262,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 		if (success.equals("All observations removed successfully.")) {
 			_identifier = _identifier + (long) 1;
 			_valueTs[replicaId - 1]++;
+			//_auxTs[replicaId - 1]++;
 			_newOperation = new Operation(_identifier,"clear",null,null);
 			_executedList.add(_newOperation);
 		}
@@ -238,13 +284,26 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	public long[] getValueTs(){
         return _valueTs;
 	}
+
+	public long[] getAuxTs(){
+        return _auxTs;
+	}
 	
 	public CopyOnWriteArrayList<Operation> getExecutedList() {
 		return _executedList;
 	}
 
+	public CopyOnWriteArrayList<Operation> getLogList() {
+		return _logList;
+	}
+
 	public void setExecutedList(CopyOnWriteArrayList<Operation> list){
 		_executedList = list;
+		
+	}
+
+	public void setLogList(CopyOnWriteArrayList<Operation> list){
+		_logList = list;
 		
 	}
 

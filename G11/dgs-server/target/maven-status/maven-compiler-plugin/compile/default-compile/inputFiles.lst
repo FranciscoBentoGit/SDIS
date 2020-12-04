@@ -1,7 +1,7 @@
-/home/joao/sdis/SDis/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/DgsServices.java
-/home/joao/sdis/SDis/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/DgsServerApp.java
-/home/joao/sdis/SDis/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/Foo.java
-/home/joao/sdis/SDis/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/DgsServiceImpl.java
-/home/joao/sdis/SDis/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/ServersFrontend.java
-/home/joao/sdis/SDis/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/Operation.java
-/home/joao/sdis/SDis/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/ObservationsData.java
+/home/francisco/SDisGit/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/DgsServiceImpl.java
+/home/francisco/SDisGit/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/ServersFrontend.java
+/home/francisco/SDisGit/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/ObservationsData.java
+/home/francisco/SDisGit/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/DgsServerApp.java
+/home/francisco/SDisGit/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/DgsServices.java
+/home/francisco/SDisGit/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/Operation.java
+/home/francisco/SDisGit/G11/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/Foo.java
