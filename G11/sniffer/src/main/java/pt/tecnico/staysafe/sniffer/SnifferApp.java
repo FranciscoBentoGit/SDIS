@@ -54,7 +54,7 @@ public class SnifferApp {
 		try {
 			int pos = count-1;
 			int pathInt = Integer.parseInt(aux[pos]);
-			if (pathInt < 0 || pathInt > 2) {
+			if (pathInt < 0 || pathInt > 3) {
 				System.out.println("Invalid argument: invalid replica number.");
 				return;
 			}
@@ -71,7 +71,7 @@ public class SnifferApp {
 		} catch (NumberFormatException e) {
 			System.out.println("Number of replica to contact not given, one will be generated.");
 			Random rand = new Random();
-			int pathInt = rand.nextInt(2) + 1;
+			int pathInt = rand.nextInt(3) + 1;
 			System.out.printf("%d%n", pathInt);
 			instance = String.valueOf(pathInt);
 		}

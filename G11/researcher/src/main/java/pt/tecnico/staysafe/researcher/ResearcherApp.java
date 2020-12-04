@@ -33,7 +33,7 @@ public class ResearcherApp {
 
 		if (args.length == 3) {
 			int pathInt = Integer.parseInt(args[2]);
-			if (pathInt < 0 || pathInt > 2) {
+			if (pathInt < 0 || pathInt > 3) {
 				System.out.println("Invalid argument: invalid replica number.");
 				return;
 			}
@@ -42,7 +42,7 @@ public class ResearcherApp {
 
 		if (args.length == 2) {
 			Random rand = new Random();
-			int pathInt = rand.nextInt(2) + 1;
+			int pathInt = rand.nextInt(3) + 1;
 			instance = String.valueOf(pathInt);
 		}
 
