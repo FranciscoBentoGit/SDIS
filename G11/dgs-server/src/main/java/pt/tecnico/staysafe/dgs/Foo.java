@@ -35,9 +35,9 @@ public class Foo{
 
 		//this replica timestamp
 		_valueTs = _impl.getValueTs();
-		System.out.printf("%d%n", _valueTs[0]);
-		System.out.printf("%d%n", _valueTs[1]);
-		System.out.printf("%d%n", _valueTs[2]);
+		System.out.printf("nossa 0 - %d%n", _valueTs[0]);
+		System.out.printf("nossa 1 - %d%n", _valueTs[1]);
+		System.out.printf("nossa 2 - %d%n", _valueTs[2]);
 		String[] myPath = _path.split("/", 5);
 		int myInstance = Integer.parseInt(myPath[myPath.length - 1]);
 		try {
@@ -51,21 +51,21 @@ public class Foo{
 					System.out.printf("Replica %d initiating update exchange...%n", instance);
 
 					ServersFrontend frontend = new ServersFrontend(_zkNaming,record.getURI());
+
+					//replica to comunicate timestamp
+					UpdateResponse response = frontend.update();
+					ts[0] = response.getTs(0);
+					ts[1] = response.getTs(1);
+					ts[2] = response.getTs(2);
+					System.out.printf("contacto 0 - %d%n", ts[0]);
+					System.out.printf("contacto 1 - %d%n", ts[1]);
+					System.out.printf("contacto 2 - %d%n", ts[2]);
 					
 					//get all operations done on this replica
 					_list = _impl.getExecutedList();
 					Iterator<Operation> it = _list.iterator();
 					while (it.hasNext()) {
 						Operation i = it.next();
-						
-						//replica to comunicate timestamp
-						UpdateResponse response = frontend.update();
-						ts[0] = response.getTs(0);
-						ts[1] = response.getTs(1);
-						ts[2] = response.getTs(2);
-						System.out.printf("%d%n", ts[0]);
-						System.out.printf("%d%n", ts[1]);
-						System.out.printf("%d%n", ts[2]);
 
 						if (i.getType().equals("clear")) {
 							if (instance == 1) {
@@ -88,14 +88,18 @@ public class Foo{
 							}
 						}
 						if (i.getType().equals("join")) {
-							if(_valueTs[myInstance-1] > ts[myInstance-1]){
-								frontend.sniffer_join(i.getJoin());
+							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
+								if (i.getIdentifier() > ts[myInstance-1]) {
+									frontend.sniffer_join(i.getJoin());
+								}
 							}
 						
 						}
 						if (i.getType().equals("report")) {
-							if(_valueTs[myInstance-1] > ts[myInstance-1]){
-								frontend.report(i.getReport());
+							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
+								if (i.getIdentifier() > ts[myInstance-1]) {
+									frontend.report(i.getReport());
+								}
 							}
 							
 						}
