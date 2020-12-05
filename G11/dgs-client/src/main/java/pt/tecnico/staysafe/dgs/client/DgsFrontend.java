@@ -41,6 +41,7 @@ public class DgsFrontend {
 		_prevTs[0] = response.getTs(0);
 		_prevTs[1] = response.getTs(1);
 		_prevTs[2] = response.getTs(2);
+		System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
 		return response;
 	}
 
@@ -50,6 +51,7 @@ public class DgsFrontend {
 		_prevTs[0] = response.getTs(0);
 		_prevTs[1] = response.getTs(1);
 		_prevTs[2] = response.getTs(2);
+		System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
 		return response;
 	}
 
@@ -59,6 +61,7 @@ public class DgsFrontend {
 		_prevTs[0] = response.getTs(0);
 		_prevTs[1] = response.getTs(1);
 		_prevTs[2] = response.getTs(2);
+		System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
 		return response;
 	}
 
@@ -68,6 +71,7 @@ public class DgsFrontend {
 		_prevTs[0] = response.getTs(0);
 		_prevTs[1] = response.getTs(1);
 		_prevTs[2] = response.getTs(2);
+		System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
 		return response;
 	}
 
@@ -77,6 +81,7 @@ public class DgsFrontend {
 		_prevTs[0] = response.getTs(0);
 		_prevTs[1] = response.getTs(1);
 		_prevTs[2] = response.getTs(2);
+		System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
 		return response;
 	}
 
@@ -85,20 +90,23 @@ public class DgsFrontend {
 		
 		response = _stub.individualInfectionProbability(request);
 		
+		//This is the timestamp returned by the function, we need to evaluate if it is updated or not
 		_possibleRead[0] = response.getTs(0);
 		_possibleRead[1] = response.getTs(1);
 		_possibleRead[2] = response.getTs(2);
 
+
+		// If it is a different read, we need to rely on the backup read
 		if (_possibleRead[0] < _prevTs[0] || _possibleRead[1] < _prevTs[1] || _possibleRead[2] < _prevTs[2]){
-			// if it is a different read, i need to rely on my backup read
+			System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
 			return _singleProb;
 		}
 
+		//If it is a same  read, we can update the backup read
 		_prevTs[0] = _possibleRead[0];
 		_prevTs[1] = _possibleRead[1];
 		_prevTs[2] = _possibleRead[2];
-
-		//if it is a same  read, i can update my backup read
+		System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
 		_singleProb = response;
 		
 		return response;
@@ -110,40 +118,44 @@ public class DgsFrontend {
 		
 		response = _stub.aggregateInfectionProbability(request);
 		
+		//This is the timestamp returned by the function, we need to evaluate if it is updated or not
 		if (command.equals("mean_dev")){
 			_possibleRead[0] = response.getTs(0);
 			_possibleRead[1] = response.getTs(1);
 			_possibleRead[2] = response.getTs(2);
-
+			
 			if (_possibleRead[0] < _prevTs[0] || _possibleRead[1] < _prevTs[1] || _possibleRead[2] < _prevTs[2]){
-				// if it is a different read, i need to rely on my backup read
+				System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
 				return _meanDev;
 			}
 
+			//If it is a same  read, we can update the backup read
 			_prevTs[0] = _possibleRead[0];
 			_prevTs[1] = _possibleRead[1];
 			_prevTs[2] = _possibleRead[2];
-
-			//if it is a same  read, i can update my backup read
+			System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
 			_meanDev = response;
 			
 			return response;
 
 		} else{
+			//This is the timestamp returned by the function, we need to evaluate if it is updated or not
 			_possibleRead[0] = response.getTs(0);
 			_possibleRead[1] = response.getTs(1);
 			_possibleRead[2] = response.getTs(2);
 
+
+			// If it is a different read, we need to rely on the backup read
 			if (_possibleRead[0] < _prevTs[0] || _possibleRead[1] < _prevTs[1] || _possibleRead[2] < _prevTs[2]){
-				// if it is a different read, i need to rely on my backup read
+				System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
 				return _percentiles;
 			}
 
+			//If it is a same  read, we can update the backup read
 			_prevTs[0] = _possibleRead[0];
 			_prevTs[1] = _possibleRead[1];
 			_prevTs[2] = _possibleRead[2];
-
-			//if it is a same  read, i can update my backup read
+			System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);			
 			_percentiles = response;
 			
 			return response;

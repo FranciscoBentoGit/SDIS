@@ -32,6 +32,8 @@ public class JournalistApp {
 		String port = args[1];
 		String path = "", instance = "";
 
+
+		//If receives a third argument, it connects to the specific replica manager
 		if (args.length == 3) {
 			int pathInt = Integer.parseInt(args[2]);
 			if (pathInt < 0 || pathInt > 3) {
@@ -41,6 +43,7 @@ public class JournalistApp {
 			instance = args[2];
 		}
 
+		//If no third argument is given, it connects to a random replica manager
 		if (args.length == 2) {
 			Random rand = new Random();
 			int pathInt = rand.nextInt(3) + 1;
@@ -48,13 +51,14 @@ public class JournalistApp {
 		}
 
 		path = "/grpc/staysafe/dgs/" + instance;
-		System.out.printf("%s%n", path);
 
 		int replicaId = Integer.parseInt(instance);
+
+		System.out.printf("Contacting replica %d at localhost:808%s...%n",replicaId,instance);
 		
-		execJournalist(host, port, path, replicaId);
+		execJournalist(host, port, path, replicaId,instance);
 	}
-	private static void execJournalist(String host, String port, String path, int replicaId){
+	private static void execJournalist(String host, String port, String path, int replicaId,String instance){
 		DgsClientApp client = new DgsClientApp();
 		DgsFrontend frontend = new DgsFrontend(host, port, path);
 		String go;
@@ -87,12 +91,11 @@ public class JournalistApp {
 					try {
 						PingResponse response;
 						response = client.ctrl_ping(frontend, replicaId);
-						String auxResponsePing = response.getText();
-						String[] splitAuxPing = auxResponsePing.split(" - ",2);
-						String newResponsePing = splitAuxPing[0] + "\n";
-						System.out.printf("%s%n", newResponsePing);
+						String newResponsePing = response.getText();
+						System.out.printf("%s%n%n", newResponsePing);
 					} catch (StatusRuntimeException e) {
-						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 					}	
 				}
 
@@ -103,10 +106,8 @@ public class JournalistApp {
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
 					ClearResponse response;
 					response = client.ctrl_clear(frontend, replicaId);
-					String auxResponseClear = response.getSuccess();
-					String[] splitAuxClear = auxResponseClear.split(" - ",2);
-					String newResponseClear = splitAuxClear[0] + "\n";
-					System.out.printf("%s%n", newResponseClear);
+					String newResponseClear = response.getSuccess();
+					System.out.printf("%s%n%n", newResponseClear);
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
@@ -118,9 +119,10 @@ public class JournalistApp {
 						float f1 = response.getStat(0);
 						float f2 = response.getStat(1);
 
-						System.out.printf("%.3f%n%.3f%n",f1,f2);
+						System.out.printf("%.3f%n%.3f%n%n",f1,f2);
 					} catch (StatusRuntimeException e) {
-						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 					}	
 				}
 
@@ -134,14 +136,15 @@ public class JournalistApp {
 						float f2 = response.getStat(1);
 						float f3 = response.getStat(2);
 
-						System.out.printf("%.3f%n%.3f%n%.3f%n",f1,f2,f3);
+						System.out.printf("%.3f%n%.3f%n%.3f%n%n",f1,f2,f3);
 					} catch (StatusRuntimeException e) {
-						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 					}
 				}
 
 				else {
-					System.out.printf("Invalid input!%n");
+					System.out.printf("Invalid input!%n%n");
 				}
 
 			} while (exit != 1);

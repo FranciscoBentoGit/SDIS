@@ -16,11 +16,13 @@ import java.lang.IllegalStateException;
 public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 	private DgsServices dService = new DgsServices();
-	private long[] _auxTs = {0,0,0};
 	private long[] _valueTs = {0,0,0};
+
+	//All updates operations are saved in the log list and when the become stable they are added to executed list
 	private CopyOnWriteArrayList<Operation> _executedList = new CopyOnWriteArrayList<Operation>();
 	private CopyOnWriteArrayList<Operation> _logList = new CopyOnWriteArrayList<Operation>();
-    private Operation _newOperation;
+   
+	private Operation _newOperation;
     private long _identifier = 0;
 
 	@Override
@@ -49,15 +51,23 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onError(INVALID_ARGUMENT.withDescription("Address: input cannot be empty!").asRuntimeException());
 			}
 			
+			//Since we got 3 replica managers running side by side,we need to able to easily propagate new entries into each replica manager
 			else {
+
+
+				//Identifier is used to count how many operations have been done so far.
+				//newOperation creates a new object Operation and represents a update message that will change the state of the replica managers
 				_identifier = _identifier + (long) 1;
 				_newOperation = new Operation(_identifier,"join",request,null,null);
 				
+				//If the list of executed operations is empty, it should be able to add a new update without problems
 				if(_executedList.size() != 0){
 					Iterator<Operation> it = _executedList.iterator();
 					while (it.hasNext()) {
 						Operation i = it.next();
 						if(i.getType().equals("join")){
+
+							//If it receives a report with the same description in every field, it should be detected as duplicate and just ignored
 							if (i.getJoin().getName().equals(_newOperation.getJoin().getName()) && i.getJoin().getAddress().equals(_newOperation.getJoin().getAddress())) {
 								SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setSuccess("Success to join sniffer.").addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 								responseObserver.onNext(response);
@@ -70,8 +80,12 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				
 				String success = dService.sniffer_join(name, address);
 				if (success.equals("Success to join sniffer.")) {
+					
+					//In case of success, the value on the Timestamp for this replica needs to be updated
 					_valueTs[replicaId - 1]++;				
 					_newOperation = new Operation(_identifier,"join",request,null,null);
+					
+					//The update message needs to be added to both executed and log list
 					_executedList.add(_newOperation);
 					_logList.add(_newOperation);
 				}
@@ -136,15 +150,24 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onError(INVALID_ARGUMENT.withDescription("TimeOut: invalid input time!").asRuntimeException());
 			}
 
+			//Since we got 3 replica managers running side by side,we need to able to easily propagate new entries into each replica manager
 			else {
+
+				//Identifier is used to count how many operations have been done so far.
+				//newOperation creates a new object Operation and represents a update message that will change the state of the replica managers
 				_identifier = _identifier + (long) 1;
 				_newOperation = new Operation(_identifier,"report",null,request,null);
+				
+				//If the list of executed operations is empty, it should be able to add a new update without problems
 				if(_executedList.size() != 0){
 					Iterator<Operation> it = _executedList.iterator();
 					while (it.hasNext()) {
 						Operation i = it.next();
 						if (i.getType().equals("report")) {
+							
+							//If it receives a report with the same description in every field, it should be detected as duplicate and just ignored
 							if ((i.getReport().getName().equals(_newOperation.getReport().getName())) && (i.getReport().getInfection().equals(_newOperation.getReport().getInfection())) && (Long.compare(i.getReport().getId(),_newOperation.getReport().getId()) == 0) && (dService.calculateTime(i.getReport().getTimeIn(), _newOperation.getReport().getTimeIn()) == 0) && (dService.calculateTime(i.getReport().getTimeOut(), _newOperation.getReport().getTimeOut()) == 0)) {
+								
 								ReportResponse response = ReportResponse.newBuilder().setSuccess("Repeated report.").addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 								responseObserver.onNext(response);
 								responseObserver.onCompleted();
@@ -156,8 +179,12 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 				String success = dService.report(name,infection,id,timeIn,timeOut);
 				if (success.equals("Success to report.")) {
+					
+					//In case of success, the value on the Timestamp for this replica needs to be updated
 					_valueTs[replicaId - 1]++;					
 					_newOperation = new Operation(_identifier,"report",null,request,null);
+					
+					//The update message needs to be added to both executed and log list
 					_executedList.add(_newOperation);
 					_logList.add(_newOperation);
 				}
@@ -244,14 +271,18 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	public void ctrlClear(ClearRequest request, StreamObserver<ClearResponse> responseObserver) {
 		int replicaId = request.getReplicaId();
 
+		//In case of success, the value on the Timestamp for this replica needs to be updated
 		_identifier = _identifier + (long) 1;
 		_newOperation = new Operation(_identifier,"clear",null,null,request);	
 
+		//Because clear messages cant be differenciated from one to another, we need to compare the value of the identifier
 		if(_executedList.size() != 0) {
 			Iterator<Operation> it = _executedList.iterator();
 			while (it.hasNext()) {
 				Operation i = it.next();
 				if(i.getType().equals("clear")) {
+
+					//If it is the the same clear, the command should not be done and the identifier value should be adjusted again
 					if ((i.getIdentifier() + (long) 1) == _newOperation.getIdentifier()) {
 						ClearResponse response = ClearResponse.newBuilder().setSuccess("Already cleared.").addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
 						responseObserver.onNext(response);
@@ -265,9 +296,15 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 		String success = dService.ctrl_clear();
 		if (success.equals("All observations removed successfully.")) {		
+			
+			//In case of success, the value on the Timestamp for this replica needs to be updated
 			_valueTs[replicaId - 1]++;
+			
+			//If the clear turns out success, we need to clear the executed list and then add the clear operation
 			_executedList.clear();
 			_executedList.add(_newOperation);
+			
+			//If the clear turns out success, we need to clear the log list and then add the clear operation
 			_logList.clear();
 			_logList.add(_newOperation);
 		}
@@ -278,7 +315,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	}
 
 	
-
+	//This update function helps to get the vectorial timestamp from the replica manager that is about to get updated by propagation
 	@Override
 	public void update(UpdateRequest request, StreamObserver<UpdateResponse> responseObserver) {
 		UpdateResponse response = UpdateResponse.newBuilder().addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();

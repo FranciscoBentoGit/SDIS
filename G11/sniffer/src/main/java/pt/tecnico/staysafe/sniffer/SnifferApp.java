@@ -23,7 +23,8 @@ public class SnifferApp {
 			System.out.printf("arg[%d] = %s%n", i, args[i]);
 		}
 
-		// check arguments - 8 e numero minimo supondo q rua tem no min 1 arg e andar tambem
+		
+		// 8 arguments is the minimum taking in consideration that street and floor take atleast 1 arguments each
 		if (args.length < 8) {
 			System.out.println("Argument(s) missing!");
 			System.out.printf("Usage: java %s host port%n", SnifferApp.class.getName());
@@ -72,20 +73,20 @@ public class SnifferApp {
 			System.out.println("Number of replica to contact not given, one will be generated.");
 			Random rand = new Random();
 			int pathInt = rand.nextInt(3) + 1;
-			System.out.printf("%d%n", pathInt);
 			instance = String.valueOf(pathInt);
 		}
 
 		path = "/grpc/staysafe/dgs/" + instance;
-		System.out.printf("%s%n", path);
-		System.out.printf("%s%n", address);
+		
 
 		int replicaId = Integer.parseInt(instance);
 
-		execSniffer(host, port, path, name, address, replicaId);
+		System.out.printf("Contacting replica %d at localhost:808%s...%n",replicaId,instance);
+
+		execSniffer(host, port, path, name, address, replicaId,instance);
 	}
 
-	private static void execSniffer(String host, String port, String path, String snifferName, String address, int replicaId) {
+	private static void execSniffer(String host, String port, String path, String snifferName, String address, int replicaId,String instance) {
 		
 		//This addObs list will contain all observations that an user will try to report in one cycle
 		ArrayList<AddObs> addObs= new ArrayList<AddObs>();
@@ -98,9 +99,10 @@ public class SnifferApp {
 			SnifferJoinResponse responseJoin;
 			responseJoin = client.sniffer_join(frontend, snifferName, address, replicaId);
 			String newResponseJoin = responseJoin.getSuccess();
-			System.out.printf("%s%n", newResponseJoin);
+			System.out.printf("%s%n%n", newResponseJoin);
 		} catch (StatusRuntimeException e) {
-			System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+			System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+			System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 			return;
 		}
 
@@ -135,7 +137,7 @@ public class SnifferApp {
 					
 					//If a sniffer tries to init and the given snifferName isnt the same as his, it should fail
 					if (!(info[1].equals(snifferName))) {
-						System.out.printf("Invalid input: cannot init another sniffer, only this one - %s.%n", snifferName);
+						System.out.printf("Invalid input: cannot init another sniffer, only this one - %s.%n%n", snifferName);
 					} else{
 						client.aux_ctrl_init(frontend,check[1], replicaId);
 					}
@@ -147,15 +149,16 @@ public class SnifferApp {
 						SnifferInfoResponse responseInfo;
 						responseInfo = client.sniffer_info(frontend, snifferName, replicaId);
 						String newResponseInfo = responseInfo.getNameAddress();
-						System.out.printf("%s%n", newResponseInfo);
+						System.out.printf("%s%n%n", newResponseInfo);
 					} catch (StatusRuntimeException e) {
-						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 					}
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("help"))) {
 					String message = client.helpSniffer();
-					System.out.printf("%s%n", message);
+					System.out.printf("%s%n%n", message);
 				}
 
 				else if ((goSplited.length == 2) && (goSplited[0].equals("sleep"))) {
@@ -253,9 +256,10 @@ public class SnifferApp {
 							ReportResponse responseReport;
 							responseReport = client.sniffer_report(frontend, snifferName, element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut(), replicaId);
 							String newResponseReport = responseReport.getSuccess();
-							System.out.printf("%s%n", newResponseReport);
+							System.out.printf("%s%n%n", newResponseReport);
 						} catch (StatusRuntimeException e) {
-							System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+							System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+							System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 						}	
 					}
 
@@ -277,9 +281,10 @@ public class SnifferApp {
 						PingResponse response;
 						response = client.ctrl_ping(frontend, replicaId);
 						String newResponsePing = response.getText();
-						System.out.printf("%s%n", newResponsePing);
+						System.out.printf("%s%n%n", newResponsePing);
 					} catch (StatusRuntimeException e) {
-						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 					}	
 				}
 
@@ -287,23 +292,23 @@ public class SnifferApp {
 					ClearResponse response;
 					response = client.ctrl_clear(frontend, replicaId);
 					String newResponseClear = response.getSuccess();
-					System.out.printf("%s%n", newResponseClear);
+					System.out.printf("%s%n%n", newResponseClear);
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
-					System.out.printf("Invalid command: do not have permission to execute that command.");
+					System.out.printf("Invalid command: do not have permission to execute that command.%n");
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("percentiles"))) {
-					System.out.printf("Invalid command: do not have permission to execute that command.");
+					System.out.printf("Invalid command: do not have permission to execute that command.%n");
 				}
 
 				else if ((goSplited.length > 1) && (goSplited[0].equals("single_prob"))) {
-					System.out.printf("Invalid command: do not have permission to execute that command.");
+					System.out.printf("Invalid command: do not have permission to execute that command.%n");
 				}
 
 				else {
-					System.out.printf("Invalid input!%n");
+					System.out.printf("Invalid input!%n%n");
 				}
 
 			} while (exit != 1);

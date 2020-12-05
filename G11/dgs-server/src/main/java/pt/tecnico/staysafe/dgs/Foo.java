@@ -33,27 +33,36 @@ public class Foo{
 	public void tick(){
 		long[] ts = {0,0,0};
 
-		//this replica timestamp
+		//This replica timestamp
 		_valueTs = _impl.getValueTs();
 		System.out.printf("nossa 0 - %d%n", _valueTs[0]);
 		System.out.printf("nossa 1 - %d%n", _valueTs[1]);
 		System.out.printf("nossa 2 - %d%n", _valueTs[2]);
+		
 		String[] myPath = _path.split("/", 5);
 		int myInstance = Integer.parseInt(myPath[myPath.length - 1]);
 		try {
+			//Gets the list of replica managers of this zookeeper
 			_replicaCollection = _zkNaming.listRecords(parent);
 			
+			//For every record on that list
 			for (ZKRecord record : _replicaCollection){
+				
+				//If it finds a replica that is not herself
 				if (!record.getPath().equals(_path)) {
 					String[] split = record.getPath().split("/", 5);
+					
+					//Other replica timestamp
 					int instance = Integer.parseInt(split[split.length - 1]);
 
 					System.out.printf("Replica %d initiating update exchange...%n", instance);
 
+					//Creates a communication channel between this replica and the replica selected from the for cicle
 					ServersFrontend frontend = new ServersFrontend(_zkNaming,record.getURI());
 
-					//replica to comunicate timestamp
+					//Function to get timestamp from the other replica
 					UpdateResponse response = frontend.update();
+					
 					ts[0] = response.getTs(0);
 					ts[1] = response.getTs(1);
 					ts[2] = response.getTs(2);
@@ -61,31 +70,43 @@ public class Foo{
 					System.out.printf("contacto 1 - %d%n", ts[1]);
 					System.out.printf("contacto 2 - %d%n", ts[2]);
 					
-					//get all operations done on this replica
+					//For each operation done in this replica
 					_list = _impl.getLogList();
 					Iterator<Operation> it = _list.iterator();
 					while (it.hasNext()) {
 						Operation i = it.next();
 
+						//If the update message is a clear
 						if (i.getType().equals("clear")) {
+							//If value of [this replica] column is bigger than the others column
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
+								//If the operation identifier is bigger than the latest version of the other replica
 								if (i.getIdentifier() > ts[myInstance-1]) {
+									//Its fine to propagate the update message
 									frontend.ctrl_clear(myInstance);
 								}
 							}
 							
 						}
+						//If the update message is a join
 						if (i.getType().equals("join")) {
+							//If value of [this replica] column is bigger than the others column
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
+								//If the operation identifier is bigger than the latest version of the other replica
 								if (i.getIdentifier() > ts[myInstance-1]) {
+									//Its fine to propagate the update message
 									frontend.sniffer_join(i.getJoin());
 								}
 							}
 
 						}
+						//If the update message is a join
 						if (i.getType().equals("report")) {
+							//If value of [this replica] column is bigger than the others column
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
+								//If the operation identifier is bigger than the latest version of the other replica
 								if (i.getIdentifier() > ts[myInstance-1]) {
+									//Its fine to propagate the update message
 									frontend.report(i.getReport());
 								}
 							}

@@ -31,6 +31,7 @@ public class ResearcherApp {
 		String port = args[1];
 		String path = "", instance = "";
 
+		//If receives a third argument, it connects to the specific replica manager
 		if (args.length == 3) {
 			int pathInt = Integer.parseInt(args[2]);
 			if (pathInt < 0 || pathInt > 3) {
@@ -40,6 +41,7 @@ public class ResearcherApp {
 			instance = args[2];
 		}
 
+		//If no third argument is given, it connects to a random replica manager
 		if (args.length == 2) {
 			Random rand = new Random();
 			int pathInt = rand.nextInt(3) + 1;
@@ -47,14 +49,14 @@ public class ResearcherApp {
 		}
 
 		path = "/grpc/staysafe/dgs/" + instance;
-		System.out.printf("%s%n", path);
 		
 		int replicaId = Integer.parseInt(instance);
+		System.out.printf("Contacting replica %d at localhost:808%s...%n",replicaId,instance);
 
-		execResearcher(host, port, path, replicaId);
+		execResearcher(host, port, path, replicaId,instance);
 	}
 
-	private static void execResearcher(String host, String port, String path, int replicaId) {
+	private static void execResearcher(String host, String port, String path, int replicaId,String instance) {
 		DgsClientApp client = new DgsClientApp();
 		DgsFrontend frontend = new DgsFrontend(host, port, path);
 		String go;
@@ -84,7 +86,7 @@ public class ResearcherApp {
 					String[] ids = goSplited[1].split(",",4);
 
 					if (ids.length == 4){
-						System.out.printf("single_prob: too much arguments, at most 3 id's!");
+						System.out.printf("single_prob: too much arguments, at most 3 id's!%n");
 						exit = 1;
 						continue;
 					} 
@@ -97,18 +99,17 @@ public class ResearcherApp {
 
 								float prob = response.getProb();
 
-								//System.out.printf("%s%n%s%n",ts1,ts2);
-								
 								//If the function individual_infection_probability returns 2.0, because it must return a float,it detects it's irrealistic and means id not found
 								if (Float.compare(prob,(float)2.0) == 0) {
 									String error = "Id: not found!"; 
-									System.out.printf("%s%n",error);
+									System.out.printf("%s%n%n",error);
 								} else {
 									//float f = Float.parseFloat(prob);
-									System.out.printf("%.3f%n",prob);
+									System.out.printf("%.3f%n%n",prob);
 								}
 							} catch (StatusRuntimeException e) {
-								System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+								System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+								System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 							}
 						}
 					}
@@ -123,9 +124,10 @@ public class ResearcherApp {
 						PingResponse response;
 						response = client.ctrl_ping(frontend,replicaId);
 						String newResponsePing = response.getText();
-						System.out.printf("%s%n", newResponsePing);
+						System.out.printf("%s%n%n", newResponsePing);
 					} catch (StatusRuntimeException e) {
-						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 					}	
 				}
 
@@ -133,7 +135,7 @@ public class ResearcherApp {
 					ClearResponse response;
 					response = client.ctrl_clear(frontend,replicaId);
 					String newResponseClear = response.getSuccess();
-					System.out.printf("%s%n", newResponseClear);
+					System.out.printf("%s%n%n", newResponseClear);
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
@@ -145,9 +147,10 @@ public class ResearcherApp {
 						float f1 = response.getStat(0);
 						float f2 = response.getStat(1);
 
-						System.out.printf("%.3f%n%.3f%n",f1,f2);
+						System.out.printf("%.3f%n%.3f%n%n",f1,f2);
 					} catch (StatusRuntimeException e) {
-						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 					}	
 				}
 
@@ -161,14 +164,15 @@ public class ResearcherApp {
 						float f2 = response.getStat(1);
 						float f3 = response.getStat(2);
 
-						System.out.printf("%.3f%n%.3f%n%.3f%n",f1,f2,f3);
+						System.out.printf("%.3f%n%.3f%n%.3f%n%n",f1,f2,f3);
 					} catch (StatusRuntimeException e) {
-						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
 					}
 				}
 
 				else {
-					System.out.printf("Invalid input!%n");
+					System.out.printf("Invalid input!%n%n");
 				}
 
 			} while (exit != 1);

@@ -106,8 +106,14 @@ public class DgsServerApp {
 			// Server threads are running in the background.
 			System.out.printf("Replica %d starting...%n", id);
 
+
+			//Service that will create a new ThreadPool, with 1 new Thread.
+			//This thread will be used to run the propagation function created
+			//so each replica manager can update others. Default value is 30 secs
+			//but it can be easily changed by the variable initialDelay and period
 			ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
+			//Custom class created to be able to pass changing values into the Runnable function
 			final Foo foo = new Foo(zkNaming,impl,path);
 
             Runnable propagation = new Runnable() {
@@ -117,6 +123,8 @@ public class DgsServerApp {
                 }
             };
 
+
+			//Fixing the schedule to be every 30 seconds
             scheduler.scheduleWithFixedDelay(propagation,initialDelay,period,TimeUnit.SECONDS);
 
 			// Do not exit the main thread. Wait until server is terminated.
