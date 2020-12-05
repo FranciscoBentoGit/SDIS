@@ -4,20 +4,22 @@ import java.util.*;
 import pt.tecnico.staysafe.dgs.grpc.*;
 
 public class Operation {
+
+    private long _identifier;
     private String _type;
     private SnifferJoinRequest _join;
     private ReportRequest _report;
-    private Long _identifier;
+    private ClearRequest _clear;
 
-
-    Operation(Long identifier,String type, SnifferJoinRequest join, ReportRequest report) {
+    Operation(long identifier, String type, SnifferJoinRequest join, ReportRequest report, ClearRequest clear) {
         _identifier = identifier;
         _type = type;
         _join = join;
         _report = report;
+        _clear = clear;
     }
 
-    public Long getIdentifier() {
+    public long getIdentifier() {
         return _identifier;
     }
 
@@ -31,5 +33,9 @@ public class Operation {
 
     public ReportRequest getReport() {
         return _report;
+    }
+
+    public ClearRequest getClear() {
+        return _clear;
     }
 }

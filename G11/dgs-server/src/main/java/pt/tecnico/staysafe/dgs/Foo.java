@@ -62,30 +62,18 @@ public class Foo{
 					System.out.printf("contacto 2 - %d%n", ts[2]);
 					
 					//get all operations done on this replica
-					_list = _impl.getExecutedList();
+					_list = _impl.getLogList();
 					Iterator<Operation> it = _list.iterator();
 					while (it.hasNext()) {
 						Operation i = it.next();
 
 						if (i.getType().equals("clear")) {
-							if (instance == 1) {
-								while (_valueTs[1] != ts[1] && _valueTs[2] != ts[2]) {
-									//wait till it gets the same
+							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
+								if (i.getIdentifier() > ts[myInstance-1]) {
+									frontend.ctrl_clear(myInstance);
 								}
-								frontend.ctrl_clear(instance);		
 							}
-							if (instance == 2) {
-								while (_valueTs[0] != ts[0] && _valueTs[2] != ts[2]) {
-									//wait till it gets the same
-								}
-								frontend.ctrl_clear(instance);		
-							}
-							if (instance == 3) {
-								while (_valueTs[0] != ts[0] && _valueTs[1] != ts[1]) {
-									//wait till it gets the same
-								}
-								frontend.ctrl_clear(instance);		
-							}
+							
 						}
 						if (i.getType().equals("join")) {
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
@@ -93,7 +81,7 @@ public class Foo{
 									frontend.sniffer_join(i.getJoin());
 								}
 							}
-						
+
 						}
 						if (i.getType().equals("report")) {
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
@@ -101,7 +89,6 @@ public class Foo{
 									frontend.report(i.getReport());
 								}
 							}
-							
 						}
 					}
 				}

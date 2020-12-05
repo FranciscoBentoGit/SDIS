@@ -119,12 +119,7 @@ public class DgsClientApp {
 			message = sniffer_join(frontend,snifferName,address, replicaId);
 			System.out.println(message.getSuccess());
 			
-			//As message returns sucess : "Some string", we need to split to get the value
-			String compare = message.toString();
-			String[] splited = compare.split(" ",2);
-			String[] splitMarks = splited[1].split("\"",3);
-			String[] splitTs = splitMarks[1].split(" - ",3);
-			if (!(splitTs[0].equals("Success to join sniffer."))){
+			if (!(message.getSuccess().equals("Success to join sniffer."))) {
 				flag = 1;
 			} 
 			

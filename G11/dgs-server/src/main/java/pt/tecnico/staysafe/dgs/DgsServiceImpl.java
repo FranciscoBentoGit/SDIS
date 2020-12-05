@@ -49,32 +49,29 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onError(INVALID_ARGUMENT.withDescription("Address: input cannot be empty!").asRuntimeException());
 			}
 			
-			
-
 			else {
 				_identifier = _identifier + (long) 1;
-				_newOperation = new Operation(_identifier,"join",request,null);
+				_newOperation = new Operation(_identifier,"join",request,null,null);
+				
 				if(_executedList.size() != 0){
 					Iterator<Operation> it = _executedList.iterator();
 					while (it.hasNext()) {
 						Operation i = it.next();
 						if(i.getType().equals("join")){
-							if (i.getJoin().equals(_newOperation)){
+							if (i.getJoin().getName().equals(_newOperation.getJoin().getName()) && i.getJoin().getAddress().equals(_newOperation.getJoin().getAddress())) {
+								SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setSuccess("Success to join sniffer.").addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
+								responseObserver.onNext(response);
+								responseObserver.onCompleted();
 								return;
 							}
-						}
-						
+						}	
 					}
 				}
 				
-				
 				String success = dService.sniffer_join(name, address);
 				if (success.equals("Success to join sniffer.")) {
-					
-					_valueTs[replicaId - 1]++;
-					//_auxTs[replicaId - 1]++;
-					
-					_newOperation = new Operation(_identifier,"join",request,null);
+					_valueTs[replicaId - 1]++;				
+					_newOperation = new Operation(_identifier,"join",request,null,null);
 					_executedList.add(_newOperation);
 					_logList.add(_newOperation);
 				}
@@ -139,31 +136,28 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 				responseObserver.onError(INVALID_ARGUMENT.withDescription("TimeOut: invalid input time!").asRuntimeException());
 			}
 
-			
-
 			else {
 				_identifier = _identifier + (long) 1;
-				_newOperation = new Operation(_identifier,"report",null,request);
+				_newOperation = new Operation(_identifier,"report",null,request,null);
 				if(_executedList.size() != 0){
 					Iterator<Operation> it = _executedList.iterator();
 					while (it.hasNext()) {
 						Operation i = it.next();
-						if (i.getType().equals("report")){
-							if ((i.getReport().getName().equals(_newOperation.getReport().getName())) && (i.getReport().getInfection() == _newOperation.getReport().getName()) && (i.getReport().getTimeIn().equals(_newOperation.getReport().getTimeIn())) && (i.getReport().getTimeOut().equals(_newOperation.getReport().getTimeOut())) ){
+						if (i.getType().equals("report")) {
+							if ((i.getReport().getName().equals(_newOperation.getReport().getName())) && (i.getReport().getInfection().equals(_newOperation.getReport().getInfection())) && (Long.compare(i.getReport().getId(),_newOperation.getReport().getId()) == 0) && (dService.calculateTime(i.getReport().getTimeIn(), _newOperation.getReport().getTimeIn()) == 0) && (dService.calculateTime(i.getReport().getTimeOut(), _newOperation.getReport().getTimeOut()) == 0)) {
+								ReportResponse response = ReportResponse.newBuilder().setSuccess("Repeated report.").addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
+								responseObserver.onNext(response);
+								responseObserver.onCompleted();
 								return;
 							}
 						}
-						
 					}
 				}
-				
 
 				String success = dService.report(name,infection,id,timeIn,timeOut);
 				if (success.equals("Success to report.")) {
-					_valueTs[replicaId - 1]++;
-					//_auxTs[replicaId - 1]++;
-					
-					_newOperation = new Operation(_identifier,"report",null,request);
+					_valueTs[replicaId - 1]++;					
+					_newOperation = new Operation(_identifier,"report",null,request,null);
 					_executedList.add(_newOperation);
 					_logList.add(_newOperation);
 				}
@@ -180,9 +174,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 	@Override
 	public void individualInfectionProbability(IndividualProbRequest request, StreamObserver<IndividualProbResponse> responseObserver) {
-		System.out.println("entrei - ind");
 		try {
-			System.out.println("entrei - try");
 			int replicaId = request.getReplicaId();
 
 			long id = request.getId();
@@ -191,13 +183,7 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			}
 			
 			else {
-				System.out.println("entrei - construir");
 				IndividualProbResponse response = IndividualProbResponse.newBuilder().setProb(dService.individual_infection_probability(id)).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
-				System.out.println("entrei - passei");
-				System.out.printf("%f\n",response.getProb());
-				System.out.printf("%d\n",response.getTs(0));
-				System.out.printf("%d\n",response.getTs(1));
-				System.out.printf("%d\n",response.getTs(2));
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
@@ -258,13 +244,32 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	public void ctrlClear(ClearRequest request, StreamObserver<ClearResponse> responseObserver) {
 		int replicaId = request.getReplicaId();
 
+		_identifier = _identifier + (long) 1;
+		_newOperation = new Operation(_identifier,"clear",null,null,request);	
+
+		if(_executedList.size() != 0) {
+			Iterator<Operation> it = _executedList.iterator();
+			while (it.hasNext()) {
+				Operation i = it.next();
+				if(i.getType().equals("clear")) {
+					if ((i.getIdentifier() + (long) 1) == _newOperation.getIdentifier()) {
+						ClearResponse response = ClearResponse.newBuilder().setSuccess("Already cleared.").addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
+						responseObserver.onNext(response);
+						responseObserver.onCompleted();
+						_identifier = _identifier - (long) 1;
+						return;
+					}
+				}	
+			}
+		}
+
 		String success = dService.ctrl_clear();
-		if (success.equals("All observations removed successfully.")) {
-			_identifier = _identifier + (long) 1;
+		if (success.equals("All observations removed successfully.")) {		
 			_valueTs[replicaId - 1]++;
-			//_auxTs[replicaId - 1]++;
-			_newOperation = new Operation(_identifier,"clear",null,null);
+			_executedList.clear();
 			_executedList.add(_newOperation);
+			_logList.clear();
+			_logList.add(_newOperation);
 		}
 
 		ClearResponse response = ClearResponse.newBuilder().setSuccess(success).addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
@@ -285,31 +290,8 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
         return _valueTs;
 	}
 
-	public long[] getAuxTs(){
-        return _auxTs;
-	}
-	
-	public CopyOnWriteArrayList<Operation> getExecutedList() {
-		return _executedList;
-	}
-
 	public CopyOnWriteArrayList<Operation> getLogList() {
 		return _logList;
 	}
 
-	public void setExecutedList(CopyOnWriteArrayList<Operation> list){
-		_executedList = list;
-		
-	}
-
-	public void setLogList(CopyOnWriteArrayList<Operation> list){
-		_logList = list;
-		
-	}
-
-	public void cleanExecutedList(long maxPosition){
-		for (long i = 0; i< maxPosition;i++){
-			_executedList.remove(i);
-		}
-	}
 }

@@ -31,7 +31,7 @@ public class DgsServerApp {
 		final int initialDelay = 30;
 		final int period = 30;
 
-		System.out.println("Insert the replica number that you want to initialize!");
+		System.out.println("Insert the replica number that you want to initialize(1, 2 or 3)!");
 
 		try (Scanner scanner = new Scanner(System.in)) {
 			String go;
@@ -96,7 +96,6 @@ public class DgsServerApp {
 			zkNaming.rebind(path, host, port);
 
 			int portStr = Integer.parseInt(port);
-			
 
 			// Create a new server to listen on port
 			Server server = ServerBuilder.forPort(portStr).addService(impl).build();
@@ -114,13 +113,11 @@ public class DgsServerApp {
             Runnable propagation = new Runnable() {
                 @Override
                 public void run(){
-					foo.tick();
-					
+					foo.tick();	
                 }
             };
 
             scheduler.scheduleWithFixedDelay(propagation,initialDelay,period,TimeUnit.SECONDS);
-
 
 			// Do not exit the main thread. Wait until server is terminated.
 			server.awaitTermination();
@@ -132,7 +129,6 @@ public class DgsServerApp {
 				if (zkNaming != null) {
 				// remove
 				zkNaming.unbind(path,host,port);
-				//zkNaming.unbind(path2,host,port2);
 				}
 			} catch (ZKNamingException e) {
 				System.out.println("Caught exception with description: " + e.getMessage());

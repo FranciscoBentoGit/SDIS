@@ -1,7 +1,7 @@
 pt/tecnico/staysafe/dgs/Foo.class
-pt/tecnico/staysafe/dgs/ObservationsData.class
-pt/tecnico/staysafe/dgs/DgsServiceImpl.class
 pt/tecnico/staysafe/dgs/DgsServerApp.class
+pt/tecnico/staysafe/dgs/DgsServiceImpl.class
+pt/tecnico/staysafe/dgs/ObservationsData.class
 pt/tecnico/staysafe/dgs/DgsServices.class
 pt/tecnico/staysafe/dgs/DgsServerApp$1.class
 pt/tecnico/staysafe/dgs/Operation.class
