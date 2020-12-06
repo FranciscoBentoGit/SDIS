@@ -46,29 +46,29 @@ Note: our group has not been able to get links for commits since we worked on a 
 In order to answer to **weak consistency, client only needs to contact one replica to be able to do an update, periodic propagation and consistency between reads on the same client**,
 we decided to implement a **gossip protocol version with a consensus update, needing 2f+1 replica managers to handle faults** .
 Client chooses which of 3 replica managers to contact (1,2 or 3) and if one is not given, client will contact a random one.
-After choosing the replica the client is free to do any operation(between the boundaries designed for each client), in case of an update message,**this will be done immediately localy(contacting replica manager)** and after **some time (propagation function is running every 30 secs) the remaining replicas will be on the same state if the update message is successful**.
-**Consistency between reads** is guarenteed by having a **previous timestamp for each client( defined on frontend)** and when a response from a reading message arrives, the **previous timestamp will be compared with the received timestamp**, the awnser selected will be selected between the **previous message stored(lastest read for that function) if the receiving timestamp is lower than the previous one** or the awnser will be the **response that replica manager returned and backup read will be updated**.
+After choosing the replica the client is free to do any operation(between the boundaries designed for each client), in case of an update message, **this will be done immediately localy(contacting replica manager)** and after **some time (propagation function is running every 30 secs) the remaining replicas will be on the same state if the update message is successful**.
+**Consistency between reads** is guarenteed by having a **previous timestamp for each client(defined on frontend)** and when a response from a reading message arrives, the **previous timestamp will be compared with the received timestamp**, the awnser selected will be selected between the **previous message stored(lastest read for that function) if the receiving timestamp is lower than the previous one** or the awnser will be the **response that replica manager returned and backup read will be updated**.
 
-To explain how the propagation works, lets start with Foo.java and why the class was created.
-In order to pass values into an annonymous runnable, the variables needed to be final(values cannot change). That implied **creating a Foo object, passing by the zkNaming, impl and path**, so we can later on use them on the function **tick()**,defined in Foo.java.
+To explain how the propagation works, lets start with **Foo.java** and why the class was created.
+In order to pass values into an annonymous runnable, the variables needed to be final(values cannot change). That implied **creating a Foo object, passing by the zkNaming, impl and path**, so we can later on use them on the function **tick()**, defined in **Foo.java**.
 Tick() uses the following important attributes :
 
-1. parent - defines the path for parentNode.
+1. **parent** - Defines the path for parentNode.
 
-2. replicaCollection - with the receiving zkNaming object, we are able to get which nodes does the parentNode own.
+2. **replicaCollection** - With the receiving zkNaming object, we are able to get which nodes does the parentNode own.
 
-3. list - List of operations(update messages) from the replica we are working on.
+3. **list** - List of operations(update messages) from the replica we are working on.
 
-4. impl - Each implementation now contains ExecutedList, LogList and valueTimestamp, being different for every relica manager.
+4. **impl** - Each implementation now contains ExecutedList, LogList and valueTimestamp, being different for every relica manager.
 
-5. valueTs - This replica timestamp.
+5. **valueTs** - This replica timestamp.
 
-6. path -This replica path
+6. **path** -This replica path
 
 Taking this into consideration, tick() starts by **getting the timestamp from who called the function**. Then it **splits his path and runs all zkNaming record list to get all existent nodes**.
-For **every nodes path that differs from his own**, he creates a **communication channel(creating an ServersFrontend object) with him and asks him what's his current timestamp**( function update() defined in Servers Frontend).
+For **every nodes path that differs from his own**, he creates a **communication channel(creating an ServersFrontend object) with him and asks him what's his current timestamp**(function update() defined in Servers Frontend).
 Now it **iterates all over his logList(containing Operations objects, that carry operation identifier, request type,and the request itself)** and for every operation that is valid, which requires this **value timestamp being bigger than the others replica timestamp** and the **operation identifier being bigger than the value timestamp columns that corresponds to this replica ts(replica1,replica2,replica3)**, it calls the required DgsServiceImpl function taking the **request as an argument** (JoinRequest/ReportRquest/ClearRequest).
-Into DgsServiceImpl class, for every update function(join,report and clear), we compare this **request properties with all executed so far, to detect duplicate updates**.If the request is not duplicate,**value timestamp is increased by one on the replicaId column**, a **new operation is created and added to both lists, executed and log list**.
+Into DgsServiceImpl class, for every update function(join,report and clear), we compare this **request properties with all executed so far, to detect duplicate updates**. If the request is not duplicate, **value timestamp is increased by one on the replicaId column**, a **new operation is created and added to both lists, executed and log list**.
 With the specific case of clear(), first we need to **clear both lists before adding a new clear operation**.
 
 ## Implementation options 
