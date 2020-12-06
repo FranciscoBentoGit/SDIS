@@ -317,7 +317,7 @@ public class DgsClientApp {
 			}
 		}
 
-		//Found an alive replica, starts comunication
+		//Found an alive replica and announce the new comunication channel
 		System.out.printf("Contacting now with replica %d at localhost:808%s...%n%n", replicaId, instance);
 		return frontend;
 	}
@@ -337,7 +337,7 @@ public class DgsClientApp {
 			try {
 				System.out.printf("Trying to contact replica %d at localhost:808%s...%n", replicaId, instance);
 				SnifferInfoResponse responseInfo;
-				responseInfo = client.sniffer_info(frontend, snifferName, replicaId);
+				responseInfo = sniffer_info(frontend, snifferName, replicaId);
 				String newResponseInfo = responseInfo.getNameAddress();
 				System.out.printf("%s%n%n", newResponseInfo);
 				catched = 0;
@@ -346,7 +346,94 @@ public class DgsClientApp {
 			}
 		}
 
-		//Found an alive replica, starts comunication
+		//Found an alive replica and announce the new comunication channel
+		System.out.printf("Contacting now with replica %d at localhost:808%s...%n%n", replicaId, instance);
+		return frontend;
+	}
+
+	public DgsFrontend changeReport(String host, String port, String snifferName, String address, String infection, long id, com.google.protobuf.Timestamp timeIn,  com.google.protobuf.Timestamp timeOut) {
+		int catched = 1;
+		DgsFrontend frontend = null;
+		int replicaId = 0;
+		String instance = null;
+		while (catched == 1) {
+			//Generates a random replica comunication channel, to tolerate the fault
+			Random rand = new Random();
+			replicaId = rand.nextInt(3) + 1;
+			instance = String.valueOf(replicaId);
+			String path = "/grpc/staysafe/dgs/" + instance;
+			frontend = new DgsFrontend(host, port, path);
+			try {
+				System.out.printf("Trying to contact replica %d at localhost:808%s...%n", replicaId, instance);
+				ReportResponse responseReport;
+				responseReport = sniffer_report(frontend, snifferName, infection, id, timeIn, timeOut, replicaId);
+				String newResponseReport = responseReport.getSuccess();
+				System.out.printf("%s%n%n", newResponseReport);
+				catched = 0;
+			} catch (StatusRuntimeException e2) {
+				//do nothing
+			}
+		}
+
+		//Found an alive replica and announce the new comunication channel
+		System.out.printf("Contacting now with replica %d at localhost:808%s...%n%n", replicaId, instance);
+		return frontend;
+	}
+
+	public DgsFrontend changePing(String host, String port) {
+		int catched = 1;
+		DgsFrontend frontend = null;
+		int replicaId = 0;
+		String instance = null;
+		while (catched == 1) {
+			//Generates a random replica comunication channel, to tolerate the fault
+			Random rand = new Random();
+			replicaId = rand.nextInt(3) + 1;
+			instance = String.valueOf(replicaId);
+			String path = "/grpc/staysafe/dgs/" + instance;
+			frontend = new DgsFrontend(host, port, path);
+			try {
+				System.out.printf("Trying to contact replica %d at localhost:808%s...%n", replicaId, instance);
+				PingResponse response;
+				response = ctrl_ping(frontend, replicaId);
+				String newResponsePing = response.getText();
+				System.out.printf("%s%n%n", newResponsePing);
+				catched = 0;
+			} catch (StatusRuntimeException e2) {
+				//do nothing
+			}
+		}
+
+		//Found an alive replica and announce the new comunication channel
+		System.out.printf("Contacting now with replica %d at localhost:808%s...%n%n", replicaId, instance);
+		return frontend;
+	}
+
+	public DgsFrontend changeClear(String host, String port) {
+		int catched = 1;
+		DgsFrontend frontend = null;
+		int replicaId = 0;
+		String instance = null;
+		while (catched == 1) {
+			//Generates a random replica comunication channel, to tolerate the fault
+			Random rand = new Random();
+			replicaId = rand.nextInt(3) + 1;
+			instance = String.valueOf(replicaId);
+			String path = "/grpc/staysafe/dgs/" + instance;
+			frontend = new DgsFrontend(host, port, path);
+			try {
+				System.out.printf("Trying to contact replica %d at localhost:808%s...%n", replicaId, instance);
+				ClearResponse response;
+				response = ctrl_clear(frontend, replicaId);
+				String newResponseClear = response.getSuccess();
+				System.out.printf("%s%n%n", newResponseClear);
+				catched = 0;
+			} catch (StatusRuntimeException e2) {
+				//do nothing
+			}
+		}
+
+		//Found an alive replica and announce the new comunication channel
 		System.out.printf("Contacting now with replica %d at localhost:808%s...%n%n", replicaId, instance);
 		return frontend;
 	}

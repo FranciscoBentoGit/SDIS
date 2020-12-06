@@ -29,6 +29,9 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	public void snifferJoin(SnifferJoinRequest request, StreamObserver<SnifferJoinResponse> responseObserver) {
 		try {
 			int replicaId = request.getReplicaId();
+			if (replicaId < 0 || replicaId > 3) {
+				responseObserver.onError(INVALID_ARGUMENT.withDescription("ReplicaId: it must be 1, 2 or 3!").asRuntimeException());
+			}
 
 			String name = request.getName();
 			if (name == null || name.isBlank()) {
@@ -53,7 +56,6 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 			
 			//Since we got 3 replica managers running side by side,we need to able to easily propagate new entries into each replica manager
 			else {
-
 
 				//Identifier is used to count how many operations have been done so far.
 				//newOperation creates a new object Operation and represents a update message that will change the state of the replica managers
@@ -103,6 +105,9 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	public void snifferInfo(SnifferInfoRequest request, StreamObserver<SnifferInfoResponse> responseObserver) {
 		try {
 			int replicaId = request.getReplicaId();
+			if (replicaId < 0 || replicaId > 3) {
+				responseObserver.onError(INVALID_ARGUMENT.withDescription("ReplicaId: it must be 1, 2 or 3!").asRuntimeException());
+			}
 
 			String name = request.getName();
 			if (name == null || name.isBlank()) {
@@ -124,6 +129,9 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	public void report(ReportRequest request, StreamObserver<ReportResponse> responseObserver) {
 		try {
 			int replicaId = request.getReplicaId();
+			if (replicaId < 0 || replicaId > 3) {
+				responseObserver.onError(INVALID_ARGUMENT.withDescription("ReplicaId: it must be 1, 2 or 3!").asRuntimeException());
+			}
 
 			String name = request.getName();
 			if (name == null || name.isBlank()) {
@@ -203,6 +211,9 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	public void individualInfectionProbability(IndividualProbRequest request, StreamObserver<IndividualProbResponse> responseObserver) {
 		try {
 			int replicaId = request.getReplicaId();
+			if (replicaId < 0 || replicaId > 3) {
+				responseObserver.onError(INVALID_ARGUMENT.withDescription("ReplicaId: it must be 1, 2 or 3!").asRuntimeException());
+			}
 
 			long id = request.getId();
 			if (String.valueOf(id).length() != 9) {
@@ -225,6 +236,9 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 
 		try {
 			int replicaId = request.getReplicaId();
+			if (replicaId < 0 || replicaId > 3) {
+				responseObserver.onError(INVALID_ARGUMENT.withDescription("ReplicaId: it must be 1, 2 or 3!").asRuntimeException());
+			}
 
 			String command = request.getCommand();
 			if (command == null || command.isBlank()) {
@@ -252,6 +266,10 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	public void ctrlPing(PingRequest request, StreamObserver<PingResponse> responseObserver) {
 		try {
 			int replicaId = request.getReplicaId();
+			if (replicaId < 0 || replicaId > 3) {
+				responseObserver.onError(INVALID_ARGUMENT.withDescription("ReplicaId: it must be 1, 2 or 3!").asRuntimeException());
+			}
+
 			String input = request.getText();
 			if (input == null || input.isBlank()) {
 				responseObserver.onError(INVALID_ARGUMENT.withDescription("Input cannot be empty!").asRuntimeException());
@@ -270,6 +288,9 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	@Override
 	public void ctrlClear(ClearRequest request, StreamObserver<ClearResponse> responseObserver) {
 		int replicaId = request.getReplicaId();
+		if (replicaId < 0 || replicaId > 3) {
+			responseObserver.onError(INVALID_ARGUMENT.withDescription("ReplicaId: it must be 1, 2 or 3!").asRuntimeException());
+		}
 
 		//In case of success, the value on the Timestamp for this replica needs to be updated
 		_identifier = _identifier + (long) 1;

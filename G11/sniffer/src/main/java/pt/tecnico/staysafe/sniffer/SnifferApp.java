@@ -147,7 +147,6 @@ public class SnifferApp {
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("getInfo"))) {
-
 					try {
 						SnifferInfoResponse responseInfo;
 						responseInfo = client.sniffer_info(frontend, snifferName, replicaId);
@@ -156,6 +155,9 @@ public class SnifferApp {
 					} catch (StatusRuntimeException e) {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+						if (e.getStatus().getDescription().equals("io exception")) {
+							frontend = client.changeInfo(host, port, snifferName, address);
+						}
 					}
 				}
 
@@ -263,6 +265,9 @@ public class SnifferApp {
 						} catch (StatusRuntimeException e) {
 							System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 							System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+							if (e.getStatus().getDescription().equals("io exception")) {
+								frontend = client.changeReport(host, port, snifferName, address, element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut());
+							}
 						}	
 					}
 
@@ -288,14 +293,25 @@ public class SnifferApp {
 					} catch (StatusRuntimeException e) {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+						if (e.getStatus().getDescription().equals("io exception")) {
+							frontend = client.changePing(host, port);
+						}
 					}	
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
-					ClearResponse response;
-					response = client.ctrl_clear(frontend, replicaId);
-					String newResponseClear = response.getSuccess();
-					System.out.printf("%s%n%n", newResponseClear);
+					try {
+						ClearResponse response;
+						response = client.ctrl_clear(frontend, replicaId);
+						String newResponseClear = response.getSuccess();
+						System.out.printf("%s%n%n", newResponseClear);
+					} catch (StatusRuntimeException e) {
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+						if (e.getStatus().getDescription().equals("io exception")) {
+							frontend = client.changeClear(host, port);
+						}
+					}
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
