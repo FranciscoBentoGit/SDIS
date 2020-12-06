@@ -52,7 +52,7 @@ A message should appear staying server started if all went alright.
 **6 step** : Get inside the G11/sniffer folder and type (you can choose to which replica to connect, if not given it will be random) : 
 
 ```
- ./target/appassembler/bin/sniffer localhost 2181 <snifferName> <address> (optional) < <pathToFilename.txt> <replicaId to contact>
+ ./target/appassembler/bin/sniffer localhost 2181 <snifferName> <address> <replicaId to contact>(optional) < <pathToFilename.txt>(optional)
 ```
 
 **7 step** : If you new, start by typing help to get a feeling of the available commands to this specific client.
@@ -65,7 +65,7 @@ Lets suppose we want to register 2 observations for this sniffer.
     <infectionState>,<citizenId>,<timeOfDetectingEntrance>,<timeOfDetectingExit>
 ```
 
-Example : infetado,123456789,12-11-2000 12:35:43,12-11-2000 13:17:48.
+Example : infetado,123456789,2000-11-12 12:35:43,2000-11-12 13:17:48.
 
 **Side note** : as soon as you press enter on the first observation, the system will detect that you have entered on "observation mode" and will allow you to register as many observations as you wish, accumulating them until you press Enter or type exitSniffer, printing out the result of every attempt .
 
@@ -93,7 +93,7 @@ Example : infetado,123456789,12-11-2000 12:35:43,12-11-2000 13:17:48.
 **6 step** : On Journalist terminal ,get inside the G11/journalist folder and type (you can choose to which replica to connect, if not given it will be random) : 
 
 ```
-    ./target/appassembler/bin/journalist localhost 2181
+    ./target/appassembler/bin/journalist localhost 2181 <replicaId to contact>(optional)
 ```
 
 **7 step** : Either you already did the sniffer guide and you have got a small data to work with within the server or you want register some observations to a specific sniffer and maybe not initialized yet. In order to go for the second option, type :
@@ -137,7 +137,7 @@ To get the mean and standard deviation values for all non-infected citizens, in 
 **6 step** : On Researcher terminal ,get inside the G11/researcher folder and type (you can choose to which replica to connect, if not given it will be random) : 
 
 ```
-    ./target/appassembler/bin/researcher localhost 2181
+    ./target/appassembler/bin/researcher localhost 2181 <replicaId to contact>(optional)
 ```
 
 **7 step** : Either you already did the sniffer guide and you have got a small data to work with within the server or you want register some observations to a specific sniffer and maybe not initialized yet. In order to go for the second option, type :
@@ -195,7 +195,9 @@ This will clear all server information about observations, so you can get differ
 **3 step** : Now observe the messages that pop up on the sniffer terminal.It should be something like this (in this scenario assume that sniffer joined initially replica 1 and X meaning the number of update messages done so far):
 
 Caught exception with description: io exception when trying to contact replica 1 at localhost:8081
+
 Trying to contact replica 2 at localhost:8082...
+
 Frontend received answer with TS{X,0,0}
 
 **Note**: in this case the join operation was already done, so the number of operation was not increased, that's why we dont see the Frontend with TS{X,1,0}.
