@@ -18,8 +18,8 @@ Distributed Systems 2020-2021, 1st semester project
 | 93581  | Francisco Bento   | <https://github.com/FranciscoBentoGit>| <francisco.bento@tecnico.ulisboa.pt>  |
 | 93588  | João Lopes        | <https://github.com/Joao-Pedro-Lopes> | <joaopedrolopes00@tecnico.ulisboa.pt> |
 
-![](https://avatars2.githubusercontent.com/u/71926361?s=460&u=d492ef164d3c4372029fb291e8a62ba9f1df782a&v=4 | heigth=150)
-![](https://avatars1.githubusercontent.com/u/56592131?s=460&u=6d4865457f240460a9587622c1b1a286f6fd12d8&v=4 | heigth=150) 
+![alt text](https://avatars2.githubusercontent.com/u/71926361?s=460&u=d492ef164d3c4372029fb291e8a62ba9f1df782a&v=4 | heigth=150)
+![alt text](https://avatars1.githubusercontent.com/u/56592131?s=460&u=6d4865457f240460a9587622c1b1a286f6fd12d8&v=4 | heigth=150) 
 
 
 ## First part improvements
