@@ -114,7 +114,7 @@ public class DgsServerApp {
 			ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
 			//Custom class created to be able to pass changing values into the Runnable function
-			final Foo foo = new Foo(zkNaming,impl,path);
+			final Foo foo = new Foo(zkNaming,impl,path,zooHost,zooPort);
 
             Runnable propagation = new Runnable() {
                 @Override

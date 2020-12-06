@@ -192,7 +192,7 @@ This will clear all server information about observations, so you can get differ
 ```
     kill -9 <PID>
 ``` 
-**3 step** : Now observe the messages that pop up on the sniffer terminal.It should be something like this (in this scenario assume that sniffer joined initially replica 1 and X meaning the number of update messages done so far):
+**3 step** : Now observe the messages that pop up on the sniffer terminal. It should be something like this (in this scenario assume that sniffer joined initially replica 1 and X meaning the number of update messages done so far):
 
 Caught exception with description: io exception when trying to contact replica 1 at localhost:8081
 

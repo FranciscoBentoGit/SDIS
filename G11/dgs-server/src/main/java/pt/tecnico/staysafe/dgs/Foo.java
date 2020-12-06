@@ -18,16 +18,20 @@ import java.util.concurrent.Executors;
 public class Foo{
 	private ZKNaming _zkNaming;
 	private String _path;
+	private String _zooHost;
+	private String _zooPort;
 	private String parent = "/grpc/staysafe/dgs";
 	private Collection<ZKRecord> _replicaCollection;
 	private CopyOnWriteArrayList<Operation> _list;
 	private DgsServiceImpl _impl;
 	private long[] _valueTs;
 	
-	public Foo(ZKNaming zkNaming, DgsServiceImpl impl, String path){
+	public Foo(ZKNaming zkNaming, DgsServiceImpl impl, String path, String zooHost, String zooPort){
 		_zkNaming = zkNaming;
 		_impl = impl;
 		_path = path;
+		_zooHost = zooHost;
+		_zooPort = zooPort;
 	}
 
 	public void tick(){
@@ -47,7 +51,7 @@ public class Foo{
 			
 			//For every record on that list
 			for (ZKRecord record : _replicaCollection){
-				
+				int flag = 0;
 				//If it finds a replica that is not herself
 				if (!record.getPath().equals(_path)) {
 					String[] split = record.getPath().split("/", 5);
@@ -60,6 +64,31 @@ public class Foo{
 					//Creates a communication channel between this replica and the replica selected from the for cicle
 					ServersFrontend frontend = new ServersFrontend(_zkNaming,record.getURI());
 
+					try {
+						frontend.ctrl_ping(myInstance);
+					} catch (StatusRuntimeException e) {
+						if (e.getStatus().getDescription().equals("io exception")) {
+							int catched = 1;
+							while (catched == 1) {
+								Random rand = new Random();
+								int replicaId = rand.nextInt(3) + 1;
+								String aux = String.valueOf(replicaId);
+								String path = "/grpc/staysafe/dgs/" + aux;
+								ZKRecord record2 = _zkNaming.lookup(path);
+								String target = record2.getURI();
+								ServersFrontend frontend2 = new ServersFrontend(_zkNaming, target);
+								try {
+									UnbindRequest request = UnbindRequest.newBuilder().setHost(_zooHost).setPort(_zooPort).setPath(record.getPath()).build();
+									frontend2.unbind(request);
+									catched = 0;
+								} catch (StatusRuntimeException e2) {
+									//do nothing
+								}
+							}
+							continue;
+						}
+					}
+					
 					//Function to get timestamp from the other replica
 					UpdateResponse response = frontend.update();
 					

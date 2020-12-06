@@ -22,10 +22,23 @@ public class ServersFrontend {
 
     }
 
+    public UnbindResponse unbind(UnbindRequest request) {
+		UnbindResponse response;
+		response = _stub.unbind(request);
+		return response;
+	}
+
     public UpdateResponse update() {
 		UpdateResponse response;
         UpdateRequest request = UpdateRequest.getDefaultInstance();;
 		response = _stub.update(request);
+		return response;
+	}
+
+    public PingResponse ctrl_ping(int replicaId) {
+		PingResponse response;
+        PingRequest request = PingRequest.newBuilder().setText("friend").setReplicaId(replicaId).build();
+		response = _stub.ctrlPing(request);
 		return response;
 	}
 
