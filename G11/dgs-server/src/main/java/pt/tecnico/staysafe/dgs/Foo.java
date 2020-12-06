@@ -76,37 +76,33 @@ public class Foo{
 					while (it.hasNext()) {
 						Operation i = it.next();
 
-						//If the update message is a clear
 						if (i.getType().equals("clear")) {
 							//If value of [this replica] column is bigger than the others column
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
 								//If the operation identifier is bigger than the latest version of the other replica
 								if (i.getIdentifier() > ts[myInstance-1]) {
-									//Its fine to propagate the update message
 									frontend.ctrl_clear(myInstance);
 								}
 							}
 							
 						}
-						//If the update message is a join
+
 						if (i.getType().equals("join")) {
 							//If value of [this replica] column is bigger than the others column
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
 								//If the operation identifier is bigger than the latest version of the other replica
 								if (i.getIdentifier() > ts[myInstance-1]) {
-									//Its fine to propagate the update message
 									frontend.sniffer_join(i.getJoin());
 								}
 							}
 
 						}
-						//If the update message is a join
+
 						if (i.getType().equals("report")) {
 							//If value of [this replica] column is bigger than the others column
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
 								//If the operation identifier is bigger than the latest version of the other replica
 								if (i.getIdentifier() > ts[myInstance-1]) {
-									//Its fine to propagate the update message
 									frontend.report(i.getReport());
 								}
 							}

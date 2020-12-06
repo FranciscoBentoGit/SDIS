@@ -15,12 +15,15 @@ public class DgsFrontend {
 	private IndividualProbResponse _singleProb;
     private AggregateProbResponse _meanDev;
     private AggregateProbResponse _percentiles;
+	private String _path;
 	
 
 	public DgsFrontend(String zooHost, String zooPort, String path) {
 		try {
 			_prevTs = new long[] {0,0,0};
 			_possibleRead = new long[] {0,0,0};
+			_path = path;
+
 			ZKNaming zkNaming = new ZKNaming(zooHost,zooPort);
 			// lookup
 			ZKRecord record = zkNaming.lookup(path);
@@ -33,6 +36,18 @@ public class DgsFrontend {
 		} catch (ZKNamingException e) {
 			System.out.println("Caught exception with description: " + e.getMessage());
 		}
+	}
+
+	public int getReplicaId() {
+		String[] split = _path.split("/", 5);
+		int replicaId = Integer.parseInt(split[split.length -1]);
+		return replicaId;
+	}
+
+	public UnbindResponse unbind(UnbindRequest request) {
+		UnbindResponse response;
+		response = _stub.unbind(request);
+		return response;
 	}
 
 	public SnifferJoinResponse sniffer_join(SnifferJoinRequest request) {

@@ -165,7 +165,12 @@ public class DgsServices {
         float[] responseMean = new float[3];
         float[] responsePercentile = new float[4];
         Iterator iter = obsList.iterator();
-        
+
+        //In case of obsList is empty, percentiles or mean_dev cannot be executed
+        if (!iter.hasNext()) {
+            return 3;
+        }
+
         //Lists the non-infected citizen id's
         while (iter.hasNext()){
             ObservationsData obs = (ObservationsData)iter.next();
@@ -199,19 +204,19 @@ public class DgsServices {
         } else {
             float mediana,q1,q3;
             
-            if((nonInfectedProbabilities.size()%2)==0){
+            if((nonInfectedProbabilities.size()%2)==0) {
                 //Lista com tamanho par
                 mediana = nonInfectedProbabilities.get(nonInfectedProbabilities.size()/2) + nonInfectedProbabilities.get((nonInfectedProbabilities.size()/2) -1);
                 mediana = mediana / 2;
-            }else{
+            } else {
                 //Lista com tamanho impar
                 int aux = (int) ((nonInfectedProbabilities.size()/2)-0.5);
                 mediana=nonInfectedProbabilities.get(aux);
             }
-            if((nonInfectedProbabilities.size()%4) == 0){
+            if((nonInfectedProbabilities.size()%4) == 0) {
                 q1 = (nonInfectedProbabilities.get((int)(nonInfectedProbabilities.size()*0.25) -1) + nonInfectedProbabilities.get((int) (nonInfectedProbabilities.size()*0.25)))/2;
                 q3 = (nonInfectedProbabilities.get((int)(nonInfectedProbabilities.size()*0.75) - 1) + nonInfectedProbabilities.get((int) (nonInfectedProbabilities.size() *0.75 )) ) /2;
-            }else{
+            } else {
                 q1 = nonInfectedProbabilities.get( (int)Math.floor(nonInfectedProbabilities.size()*0.25));
                 q3 = nonInfectedProbabilities.get( (int)(Math.floor(nonInfectedProbabilities.size()*0.75)));
 

@@ -94,19 +94,10 @@ public class SnifferApp {
 		DgsFrontend frontend = new DgsFrontend(host, port, path);
 		String go = "";
 		
-		try {
-			SnifferJoinResponse responseJoin;
-			responseJoin = client.sniffer_join(frontend, snifferName, address, replicaId);
-			String newResponseJoin = responseJoin.getSuccess();
-			System.out.printf("%s%n%n", newResponseJoin);
-		} catch (StatusRuntimeException e) {
-			System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
-			System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
-			if (e.getStatus().getDescription().equals("io exception")) {
-				frontend = client.changeJoin(host, port, snifferName, address);
-            } else {
-				return;
-			}
+		//Auxiliar function that call rpc SnifferJoin
+		frontend = join(host, port, path, snifferName, address, replicaId, instance, client, frontend);
+		if (frontend == null) {
+			return;
 		}
 
 		try (Scanner scanner = new Scanner(System.in)) {
@@ -154,9 +145,20 @@ public class SnifferApp {
 						System.out.printf("%s%n%n", newResponseInfo);
 					} catch (StatusRuntimeException e) {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
-						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
 							frontend = client.changeInfo(host, port, snifferName, address);
+							//Send information through new channel, so the dead replica gets unbided
+							client.server_unbind(frontend, host, port, path);
+
+							//changes replicaId to the new one
+							replicaId = frontend.getReplicaId();
+
+							//Auxiliar function that call rpc SnifferJoin
+							frontend = join(host, port, path, snifferName, address, replicaId, instance, client, frontend);
+							if (frontend == null) {
+								return;
+							}
 						}
 					}
 				}
@@ -264,9 +266,20 @@ public class SnifferApp {
 							System.out.printf("%s%n%n", newResponseReport);
 						} catch (StatusRuntimeException e) {
 							System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
-							System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+							System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 							if (e.getStatus().getDescription().equals("io exception")) {
 								frontend = client.changeReport(host, port, snifferName, address, element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut());
+								//Send information through new channel, so the dead replica gets unbided
+								client.server_unbind(frontend, host, port, path);
+
+								//changes replicaId to the new one
+								replicaId = frontend.getReplicaId();
+
+								//Auxiliar function that call rpc SnifferJoin
+								frontend = join(host, port, path, snifferName, address, replicaId, instance, client, frontend);
+								if (frontend == null) {
+									return;
+								}
 							}
 						}	
 					}
@@ -292,9 +305,20 @@ public class SnifferApp {
 						System.out.printf("%s%n%n", newResponsePing);
 					} catch (StatusRuntimeException e) {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
-						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
 							frontend = client.changePing(host, port);
+							//Send information through new channel, so the dead replica gets unbided
+							client.server_unbind(frontend, host, port, path);
+							
+							//changes replicaId to the new one
+							replicaId = frontend.getReplicaId();
+
+							//Auxiliar function that call rpc SnifferJoin
+							frontend = join(host, port, path, snifferName, address, replicaId, instance, client, frontend);
+							if (frontend == null) {
+								return;
+							}
 						}
 					}	
 				}
@@ -307,9 +331,20 @@ public class SnifferApp {
 						System.out.printf("%s%n%n", newResponseClear);
 					} catch (StatusRuntimeException e) {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
-						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
 							frontend = client.changeClear(host, port);
+							//Send information through new channel, so the dead replica gets unbided
+							client.server_unbind(frontend, host, port, path);
+							
+							//changes replicaId to the new one
+							replicaId = frontend.getReplicaId();
+							
+							//Auxiliar function that call rpc SnifferJoin
+							frontend = join(host, port, path, snifferName, address, replicaId, instance, client, frontend);
+							if (frontend == null) {
+								return;
+							}
 						}
 					}
 				}
@@ -332,6 +367,27 @@ public class SnifferApp {
 
 			} while (exit != 1);
 		}
+	}
+
+	public static DgsFrontend join(String host, String port, String path, String snifferName, String address, int replicaId, String instance, DgsClientApp client, DgsFrontend frontend) {
+		try {
+			SnifferJoinResponse responseJoin;
+			responseJoin = client.sniffer_join(frontend, snifferName, address, replicaId);
+			String newResponseJoin = responseJoin.getSuccess();
+			System.out.printf("%s%n%n", newResponseJoin);
+			return frontend;
+		} catch (StatusRuntimeException e) {
+			System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+			System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
+			if (e.getStatus().getDescription().equals("io exception")) {
+				frontend = client.changeJoin(host, port, snifferName, address);
+				//Send information through new channel, so the dead replica gets unbided
+				client.server_unbind(frontend, host, port, path);
+            } else {
+				return null;
+			}
+		}
+		return frontend;
 	}
 
 }

@@ -275,6 +275,37 @@ public final class DgsGrpc {
     return getUpdateMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.UnbindRequest,
+      pt.tecnico.staysafe.dgs.grpc.UnbindResponse> getUnbindMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "unbind",
+      requestType = pt.tecnico.staysafe.dgs.grpc.UnbindRequest.class,
+      responseType = pt.tecnico.staysafe.dgs.grpc.UnbindResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.UnbindRequest,
+      pt.tecnico.staysafe.dgs.grpc.UnbindResponse> getUnbindMethod() {
+    io.grpc.MethodDescriptor<pt.tecnico.staysafe.dgs.grpc.UnbindRequest, pt.tecnico.staysafe.dgs.grpc.UnbindResponse> getUnbindMethod;
+    if ((getUnbindMethod = DgsGrpc.getUnbindMethod) == null) {
+      synchronized (DgsGrpc.class) {
+        if ((getUnbindMethod = DgsGrpc.getUnbindMethod) == null) {
+          DgsGrpc.getUnbindMethod = getUnbindMethod =
+              io.grpc.MethodDescriptor.<pt.tecnico.staysafe.dgs.grpc.UnbindRequest, pt.tecnico.staysafe.dgs.grpc.UnbindResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "unbind"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.UnbindRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pt.tecnico.staysafe.dgs.grpc.UnbindResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DgsMethodDescriptorSupplier("unbind"))
+              .build();
+        }
+      }
+    }
+    return getUnbindMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -379,6 +410,13 @@ public final class DgsGrpc {
       asyncUnimplementedUnaryCall(getUpdateMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void unbind(pt.tecnico.staysafe.dgs.grpc.UnbindRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.UnbindResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getUnbindMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -437,6 +475,13 @@ public final class DgsGrpc {
                 pt.tecnico.staysafe.dgs.grpc.UpdateRequest,
                 pt.tecnico.staysafe.dgs.grpc.UpdateResponse>(
                   this, METHODID_UPDATE)))
+          .addMethod(
+            getUnbindMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pt.tecnico.staysafe.dgs.grpc.UnbindRequest,
+                pt.tecnico.staysafe.dgs.grpc.UnbindResponse>(
+                  this, METHODID_UNBIND)))
           .build();
     }
   }
@@ -518,6 +563,14 @@ public final class DgsGrpc {
       asyncUnaryCall(
           getChannel().newCall(getUpdateMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void unbind(pt.tecnico.staysafe.dgs.grpc.UnbindRequest request,
+        io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.UnbindResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getUnbindMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -588,6 +641,13 @@ public final class DgsGrpc {
     public pt.tecnico.staysafe.dgs.grpc.UpdateResponse update(pt.tecnico.staysafe.dgs.grpc.UpdateRequest request) {
       return blockingUnaryCall(
           getChannel(), getUpdateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public pt.tecnico.staysafe.dgs.grpc.UnbindResponse unbind(pt.tecnico.staysafe.dgs.grpc.UnbindRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getUnbindMethod(), getCallOptions(), request);
     }
   }
 
@@ -668,6 +728,14 @@ public final class DgsGrpc {
       return futureUnaryCall(
           getChannel().newCall(getUpdateMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pt.tecnico.staysafe.dgs.grpc.UnbindResponse> unbind(
+        pt.tecnico.staysafe.dgs.grpc.UnbindRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getUnbindMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_SNIFFER_JOIN = 0;
@@ -678,6 +746,7 @@ public final class DgsGrpc {
   private static final int METHODID_CTRL_PING = 5;
   private static final int METHODID_CTRL_CLEAR = 6;
   private static final int METHODID_UPDATE = 7;
+  private static final int METHODID_UNBIND = 8;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -727,6 +796,10 @@ public final class DgsGrpc {
         case METHODID_UPDATE:
           serviceImpl.update((pt.tecnico.staysafe.dgs.grpc.UpdateRequest) request,
               (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.UpdateResponse>) responseObserver);
+          break;
+        case METHODID_UNBIND:
+          serviceImpl.unbind((pt.tecnico.staysafe.dgs.grpc.UnbindRequest) request,
+              (io.grpc.stub.StreamObserver<pt.tecnico.staysafe.dgs.grpc.UnbindResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -797,6 +870,7 @@ public final class DgsGrpc {
               .addMethod(getCtrlPingMethod())
               .addMethod(getCtrlClearMethod())
               .addMethod(getUpdateMethod())
+              .addMethod(getUnbindMethod())
               .build();
         }
       }

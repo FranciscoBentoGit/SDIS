@@ -1,8 +1,11 @@
+/home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/UnbindResponseOrBuilder.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/IndividualProbRequestOrBuilder.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/ClearRequestOrBuilder.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/InitResponseOrBuilder.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/InitRequestOrBuilder.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/UpdateResponse.java
+/home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/UnbindRequestOrBuilder.java
+/home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/UnbindResponse.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/ReportResponseOrBuilder.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/SnifferInfoResponse.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/ClearRequest.java
@@ -29,6 +32,7 @@
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/SnifferJoinResponseOrBuilder.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/PingResponseOrBuilder.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/PingResponse.java
+/home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/UnbindRequest.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/IndividualProbRequest.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/SnifferJoinRequest.java
 /home/joao/sdis/SDis/G11/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/SnifferInfoRequest.java

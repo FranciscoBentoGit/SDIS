@@ -1,5 +1,6 @@
 pt/tecnico/staysafe/dgs/grpc/AggregateProbResponse$1.class
 pt/tecnico/staysafe/dgs/grpc/ReportResponse.class
+pt/tecnico/staysafe/dgs/grpc/UnbindResponse$1.class
 pt/tecnico/staysafe/dgs/grpc/DgsGrpc$3.class
 pt/tecnico/staysafe/dgs/grpc/SnifferJoinResponseOrBuilder.class
 pt/tecnico/staysafe/dgs/grpc/SnifferJoinResponse$1.class
@@ -18,12 +19,15 @@ pt/tecnico/staysafe/dgs/grpc/DgsGrpc$DgsStub.class
 pt/tecnico/staysafe/dgs/grpc/UpdateRequest.class
 pt/tecnico/staysafe/dgs/grpc/DgsGrpc$DgsMethodDescriptorSupplier.class
 pt/tecnico/staysafe/dgs/grpc/DgsGrpc.class
+pt/tecnico/staysafe/dgs/grpc/UnbindResponse$Builder.class
 pt/tecnico/staysafe/dgs/grpc/AggregateProbRequest$Builder.class
 pt/tecnico/staysafe/dgs/grpc/SnifferJoinRequest.class
+pt/tecnico/staysafe/dgs/grpc/UnbindRequest.class
 pt/tecnico/staysafe/dgs/grpc/DgsGrpc$DgsImplBase.class
 pt/tecnico/staysafe/dgs/grpc/SnifferInfoResponse$1.class
 pt/tecnico/staysafe/dgs/grpc/SnifferInfoRequest$1.class
 pt/tecnico/staysafe/dgs/grpc/PingRequest$1.class
+pt/tecnico/staysafe/dgs/grpc/UnbindRequestOrBuilder.class
 pt/tecnico/staysafe/dgs/grpc/SnifferJoinRequest$Builder.class
 pt/tecnico/staysafe/dgs/grpc/PingRequest.class
 pt/tecnico/staysafe/dgs/grpc/SnifferInfoResponse$Builder.class
@@ -34,6 +38,7 @@ pt/tecnico/staysafe/dgs/grpc/InitResponse.class
 pt/tecnico/staysafe/dgs/grpc/ClearResponse.class
 pt/tecnico/staysafe/dgs/grpc/DgsOuterClass.class
 pt/tecnico/staysafe/dgs/grpc/SnifferInfoRequestOrBuilder.class
+pt/tecnico/staysafe/dgs/grpc/UnbindRequest$Builder.class
 pt/tecnico/staysafe/dgs/grpc/InitRequest$1.class
 pt/tecnico/staysafe/dgs/grpc/UpdateResponse$Builder.class
 pt/tecnico/staysafe/dgs/grpc/InitResponseOrBuilder.class
@@ -46,7 +51,9 @@ pt/tecnico/staysafe/dgs/grpc/DgsGrpc$1.class
 pt/tecnico/staysafe/dgs/grpc/InitResponse$1.class
 pt/tecnico/staysafe/dgs/grpc/DgsGrpc$DgsBlockingStub.class
 pt/tecnico/staysafe/dgs/grpc/PingRequestOrBuilder.class
+pt/tecnico/staysafe/dgs/grpc/UnbindResponse.class
 pt/tecnico/staysafe/dgs/grpc/AggregateProbRequestOrBuilder.class
+pt/tecnico/staysafe/dgs/grpc/UnbindRequest$1.class
 pt/tecnico/staysafe/dgs/grpc/InitResponse$Builder.class
 pt/tecnico/staysafe/dgs/grpc/SnifferInfoResponse.class
 pt/tecnico/staysafe/dgs/grpc/SnifferJoinRequest$1.class
@@ -80,6 +87,7 @@ pt/tecnico/staysafe/dgs/grpc/SnifferInfoRequest$Builder.class
 pt/tecnico/staysafe/dgs/grpc/UpdateResponse.class
 pt/tecnico/staysafe/dgs/grpc/ClearRequest$Builder.class
 pt/tecnico/staysafe/dgs/grpc/PingResponseOrBuilder.class
+pt/tecnico/staysafe/dgs/grpc/UnbindResponseOrBuilder.class
 pt/tecnico/staysafe/dgs/grpc/DgsGrpc$MethodHandlers.class
 pt/tecnico/staysafe/dgs/grpc/ClearResponse$1.class
 pt/tecnico/staysafe/dgs/grpc/IndividualProbResponse$Builder.class

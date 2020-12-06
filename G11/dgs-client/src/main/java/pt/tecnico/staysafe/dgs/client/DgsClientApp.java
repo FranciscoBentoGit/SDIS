@@ -45,10 +45,10 @@ public class DgsClientApp {
 		String instance = split[split.length - 1];
 		int replicaId = Integer.parseInt(instance);
 
-		execClient(host, port, path, replicaId);
+		execClient(host, port, path, replicaId, instance);
 	}
 
-	private static void execClient(String host, String port, String path, int replicaId) {
+	private static void execClient(String host, String port, String path, int replicaId, String instance) {
 		DgsFrontend frontend = new DgsFrontend(host, port, path);
 		String go;
 		int flag = 0;
@@ -69,17 +69,39 @@ public class DgsClientApp {
 						PingResponse response;
 						response = ctrl_ping(frontend, replicaId);
 						String newResponsePing = response.getText();
-						System.out.printf("%s%n", newResponsePing);
+						System.out.printf("%s%n%n", newResponsePing);
 					} catch (StatusRuntimeException e) {
-						System.out.println("Caught exception with description: " + e.getStatus().getDescription());
-					}	
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
+						if (e.getStatus().getDescription().equals("io exception")) {
+							frontend = changePing(host, port);
+							//Send information through new channel, so the dead replica gets unbided
+							server_unbind(frontend, host, port, path);
+							
+							//changes replicaId to the new one
+							replicaId = frontend.getReplicaId();
+						}
+					}
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
-						ClearResponse response;
-						response = ctrl_clear(frontend, replicaId);
-						String newResponseClear = response.getSuccess();
-						System.out.printf("%s%n", newResponseClear);
+					try {
+					ClearResponse response;
+					response = ctrl_clear(frontend, replicaId);
+					String newResponseClear = response.getSuccess();
+					System.out.printf("%s%n%n", newResponseClear);
+					} catch (StatusRuntimeException e) {
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
+						if (e.getStatus().getDescription().equals("io exception")) {
+							frontend = changeClear(host, port);
+							//Send information through new channel, so the dead replica gets unbided
+							server_unbind(frontend, host, port, path);
+							
+							//changes replicaId to the new one
+							replicaId = frontend.getReplicaId();
+						}
+					}
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("help"))) {
@@ -245,6 +267,13 @@ public class DgsClientApp {
 		return response;
 	}
 
+	public static UnbindResponse server_unbind(DgsFrontend frontend, String host, String port, String path) {
+		UnbindResponse response;
+		UnbindRequest request = UnbindRequest.newBuilder().setHost(host).setPort(port).setPath(path).build();
+		response = frontend.unbind(request);
+		return response;
+	}
+
 	public static String helpCtrl() {
 		String ctrlInit = "** init <filePath> <snifferName> <address> -- insert all observations inside the file , associating them with the given sniffer and address.\n";
 		String ctrlClear = "** clear -- remove all observations and sniffers.\n";
@@ -293,7 +322,7 @@ public class DgsClientApp {
 		return message;
 	}
 
-	public DgsFrontend changeJoin(String host, String port, String snifferName, String address) {
+	public static DgsFrontend changeJoin(String host, String port, String snifferName, String address) {
 		int catched = 1;
 		DgsFrontend frontend = null;
 		int replicaId = 0;
@@ -322,7 +351,7 @@ public class DgsClientApp {
 		return frontend;
 	}
 
-	public DgsFrontend changeInfo(String host, String port, String snifferName, String address) {
+	public static DgsFrontend changeInfo(String host, String port, String snifferName, String address) {
 		int catched = 1;
 		DgsFrontend frontend = null;
 		int replicaId = 0;
@@ -351,7 +380,7 @@ public class DgsClientApp {
 		return frontend;
 	}
 
-	public DgsFrontend changeReport(String host, String port, String snifferName, String address, String infection, long id, com.google.protobuf.Timestamp timeIn,  com.google.protobuf.Timestamp timeOut) {
+	public static DgsFrontend changeReport(String host, String port, String snifferName, String address, String infection, long id, com.google.protobuf.Timestamp timeIn,  com.google.protobuf.Timestamp timeOut) {
 		int catched = 1;
 		DgsFrontend frontend = null;
 		int replicaId = 0;
@@ -380,7 +409,7 @@ public class DgsClientApp {
 		return frontend;
 	}
 
-	public DgsFrontend changePing(String host, String port) {
+	public static DgsFrontend changePing(String host, String port) {
 		int catched = 1;
 		DgsFrontend frontend = null;
 		int replicaId = 0;
@@ -409,7 +438,7 @@ public class DgsClientApp {
 		return frontend;
 	}
 
-	public DgsFrontend changeClear(String host, String port) {
+	public static DgsFrontend changeClear(String host, String port) {
 		int catched = 1;
 		DgsFrontend frontend = null;
 		int replicaId = 0;
@@ -427,6 +456,117 @@ public class DgsClientApp {
 				response = ctrl_clear(frontend, replicaId);
 				String newResponseClear = response.getSuccess();
 				System.out.printf("%s%n%n", newResponseClear);
+				catched = 0;
+			} catch (StatusRuntimeException e2) {
+				//do nothing
+			}
+		}
+
+		//Found an alive replica and announce the new comunication channel
+		System.out.printf("Contacting now with replica %d at localhost:808%s...%n%n", replicaId, instance);
+		return frontend;
+	}
+
+	public static DgsFrontend changeSingle(String host, String port, String[] ids) {
+		int catched = 1;
+		DgsFrontend frontend = null;
+		int replicaId = 0;
+		String instance = null;
+		while (catched == 1) {
+			//Generates a random replica comunication channel, to tolerate the fault
+			Random rand = new Random();
+			replicaId = rand.nextInt(3) + 1;
+			instance = String.valueOf(replicaId);
+			String path = "/grpc/staysafe/dgs/" + instance;
+			frontend = new DgsFrontend(host, port, path);
+			for(int i = 0; i < ids.length; i++) {
+				try {
+					IndividualProbResponse response;
+					response = individual_infection_probability(frontend, Long.parseLong(ids[i]),replicaId);
+
+					float prob = response.getProb();
+
+					//If the function individual_infection_probability returns 2.0, because it must return a float,it detects it's irrealistic and means id not found
+					if (Float.compare(prob,(float)2.0) == 0) {
+						String error = "Id: not found!"; 
+						System.out.printf("%s%n%n",error);
+					} else {
+						System.out.printf("%.3f%n%n",prob);
+					}
+					catched = 0;
+				} catch (StatusRuntimeException e2) {
+					//do nothing
+				}
+			}
+		}
+
+		//Found an alive replica and announce the new comunication channel
+		System.out.printf("Contacting now with replica %d at localhost:808%s...%n%n", replicaId, instance);
+		return frontend;
+	}
+
+	public static DgsFrontend changeMean(String host, String port, String command) {
+		int catched = 1;
+		DgsFrontend frontend = null;
+		int replicaId = 0;
+		String instance = null;
+		while (catched == 1) {
+			//Generates a random replica comunication channel, to tolerate the fault
+			Random rand = new Random();
+			replicaId = rand.nextInt(3) + 1;
+			instance = String.valueOf(replicaId);
+			String path = "/grpc/staysafe/dgs/" + instance;
+			frontend = new DgsFrontend(host, port, path);
+			try {
+				AggregateProbResponse response;
+				response = aggregate_infection_probability(frontend,command,replicaId);
+				
+				float f1 = response.getStat(0);
+				float f2 = response.getStat(1);
+
+				if ((Float.compare(f1,(float)3.0) == 0) && (Float.compare(f2,(float)3.0) == 0)) {
+					String error = "Empty: no observations found"; 
+					System.out.printf("%s%n%n",error);
+				} else {
+					System.out.printf("%.3f%n%.3f%n%.3f%n%n",f1,f2);
+				}
+				catched = 0;
+			} catch (StatusRuntimeException e2) {
+				//do nothing
+			}
+		}
+
+		//Found an alive replica and announce the new comunication channel
+		System.out.printf("Contacting now with replica %d at localhost:808%s...%n%n", replicaId, instance);
+		return frontend;
+	}
+
+	public static DgsFrontend changePercentiles(String host, String port, String command) {
+		int catched = 1;
+		DgsFrontend frontend = null;
+		int replicaId = 0;
+		String instance = null;
+		while (catched == 1) {
+			//Generates a random replica comunication channel, to tolerate the fault
+			Random rand = new Random();
+			replicaId = rand.nextInt(3) + 1;
+			instance = String.valueOf(replicaId);
+			String path = "/grpc/staysafe/dgs/" + instance;
+			frontend = new DgsFrontend(host, port, path);
+			try {
+				AggregateProbResponse response;
+				response = aggregate_infection_probability(frontend,command,replicaId);
+				
+				float f1 = response.getStat(0);
+				float f2 = response.getStat(1);
+				float f3 = response.getStat(2);
+
+				if ((Float.compare(f1,(float)3.0) == 0) && (Float.compare(f2,(float)3.0) == 0) && (Float.compare(f3,(float)3.0) == 0)) {
+					String error = "Empty: no observations found"; 
+					System.out.printf("%s%n%n",error);
+				} else {
+					System.out.printf("%.3f%n%.3f%n%.3f%n%n",f1,f2,f3);
+				}
 				catched = 0;
 			} catch (StatusRuntimeException e2) {
 				//do nothing

@@ -30,6 +30,7 @@ Note: our group has not been able to get links for commits since we worked on a 
 1. Replaced the way we split the answer in order to get responses with more than 1 field, now we take advantage of the fuctions created by protobuf for each response.(This can be seen in individual and aggregate probabilities on both journalistApp and researcherApp).
 2. ReplicaId is now passed by every client function.
 3. Exceptions being caught now have more information.
+4. Fixed an issue when trying to get probabilities if there is no data in the replica manager.
 
 
 

@@ -4,6 +4,8 @@ import io.grpc.stub.StreamObserver;
 import pt.tecnico.staysafe.dgs.grpc.DgsGrpc;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import com.google.protobuf.Timestamp;
+import pt.ulisboa.tecnico.sdis.zk.*;
+
 import java.util.regex.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -340,6 +342,20 @@ public class DgsServiceImpl extends DgsGrpc.DgsImplBase {
 	@Override
 	public void update(UpdateRequest request, StreamObserver<UpdateResponse> responseObserver) {
 		UpdateResponse response = UpdateResponse.newBuilder().addTs(_valueTs[0]).addTs(_valueTs[1]).addTs(_valueTs[2]).build();
+		responseObserver.onNext(response);
+	    responseObserver.onCompleted();
+	}
+
+	@Override
+	public void unbind(UnbindRequest request, StreamObserver<UnbindResponse> responseObserver) {
+		try {
+			ZKNaming zkNaming = new ZKNaming(request.getHost(), request.getPort());
+			// remove
+			zkNaming.unbind(request.getPath(),request.getHost(),request.getPort());
+		} catch (ZKNamingException e) {
+			System.out.println("Caught exception with description: " + e.getMessage());
+		}
+		UnbindResponse response = UnbindResponse.newBuilder().setUnbinded("").build();
 		responseObserver.onNext(response);
 	    responseObserver.onCompleted();
 	}

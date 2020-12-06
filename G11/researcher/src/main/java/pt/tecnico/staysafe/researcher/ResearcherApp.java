@@ -53,10 +53,10 @@ public class ResearcherApp {
 		int replicaId = Integer.parseInt(instance);
 		System.out.printf("Contacting replica %d at localhost:808%s...%n",replicaId,instance);
 
-		execResearcher(host, port, path, replicaId,instance);
+		execResearcher(host, port, path, replicaId, instance);
 	}
 
-	private static void execResearcher(String host, String port, String path, int replicaId,String instance) {
+	private static void execResearcher(String host, String port, String path, int replicaId, String instance) {
 		DgsClientApp client = new DgsClientApp();
 		DgsFrontend frontend = new DgsFrontend(host, port, path);
 		String go;
@@ -104,12 +104,19 @@ public class ResearcherApp {
 									String error = "Id: not found!"; 
 									System.out.printf("%s%n%n",error);
 								} else {
-									//float f = Float.parseFloat(prob);
 									System.out.printf("%.3f%n%n",prob);
 								}
 							} catch (StatusRuntimeException e) {
 								System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
-								System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+								System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
+								if (e.getStatus().getDescription().equals("io exception")) {
+									frontend = client.changeSingle(host, port, ids);
+									//Send information through new channel, so the dead replica gets unbided
+									client.server_unbind(frontend, host, port, path);
+									
+									//changes replicaId to the new one
+									replicaId = frontend.getReplicaId();
+								}
 							}
 						}
 					}
@@ -127,47 +134,96 @@ public class ResearcherApp {
 						System.out.printf("%s%n%n", newResponsePing);
 					} catch (StatusRuntimeException e) {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
-						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
+						if (e.getStatus().getDescription().equals("io exception")) {
+							frontend = client.changePing(host, port);
+							//Send information through new channel, so the dead replica gets unbided
+							client.server_unbind(frontend, host, port, path);
+							
+							//changes replicaId to the new one
+							replicaId = frontend.getReplicaId();
+						}
 					}	
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("clear"))) {
-					ClearResponse response;
-					response = client.ctrl_clear(frontend,replicaId);
-					String newResponseClear = response.getSuccess();
-					System.out.printf("%s%n%n", newResponseClear);
+					try {
+						ClearResponse response;
+						response = client.ctrl_clear(frontend, replicaId);
+						String newResponseClear = response.getSuccess();
+						System.out.printf("%s%n%n", newResponseClear);
+					} catch (StatusRuntimeException e) {
+						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
+						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
+						if (e.getStatus().getDescription().equals("io exception")) {
+							frontend = client.changeClear(host, port);
+							//Send information through new channel, so the dead replica gets unbided
+							client.server_unbind(frontend, host, port, path);
+							
+							//changes replicaId to the new one
+							replicaId = frontend.getReplicaId();
+						}
+					}
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
+					String command = null;
 					try {
 						AggregateProbResponse response;
-						String command = goSplited[0];
+						command = goSplited[0];
 						response = client.aggregate_infection_probability(frontend,command,replicaId);
 						
 						float f1 = response.getStat(0);
 						float f2 = response.getStat(1);
 
-						System.out.printf("%.3f%n%.3f%n%n",f1,f2);
+						if ((Float.compare(f1,(float)3.0) == 0) && (Float.compare(f2,(float)3.0) == 0)) {
+							String error = "Empty: no observations found"; 
+							System.out.printf("%s%n%n",error);
+						} else {
+							System.out.printf("%.3f%n%.3f%n%.3f%n%n",f1,f2);
+						}
 					} catch (StatusRuntimeException e) {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
-						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+						System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
+						if (e.getStatus().getDescription().equals("io exception")) {
+							frontend = client.changeMean(host, port, command);
+							//Send information through new channel, so the dead replica gets unbided
+							client.server_unbind(frontend, host, port, path);
+							
+							//changes replicaId to the new one
+							replicaId = frontend.getReplicaId();
+						}
 					}	
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("percentiles"))) {
+					String command = null;
 					try {
 						AggregateProbResponse response;
-						String command = goSplited[0];
+						command = goSplited[0];
 						response = client.aggregate_infection_probability(frontend,command,replicaId);
 						
 						float f1 = response.getStat(0);
 						float f2 = response.getStat(1);
 						float f3 = response.getStat(2);
 
-						System.out.printf("%.3f%n%.3f%n%.3f%n%n",f1,f2,f3);
+						if ((Float.compare(f1,(float)3.0) == 0) && (Float.compare(f2,(float)3.0) == 0) && (Float.compare(f3,(float)3.0) == 0)) {
+							String error = "Empty: no observations found"; 
+							System.out.printf("%s%n%n",error);
+						} else {
+							System.out.printf("%.3f%n%.3f%n%.3f%n%n",f1,f2,f3);
+						}
 					} catch (StatusRuntimeException e) {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
-						System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
+						System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
+						if (e.getStatus().getDescription().equals("io exception")) {
+							frontend = client.changePercentiles(host, port, command);
+							//Send information through new channel, so the dead replica gets unbided
+							client.server_unbind(frontend, host, port, path);
+							
+							//changes replicaId to the new one
+							replicaId = frontend.getReplicaId();
+						}
 					}
 				}
 

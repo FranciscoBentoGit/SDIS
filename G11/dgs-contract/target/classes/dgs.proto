@@ -129,6 +129,18 @@ message UpdateResponse {
 	repeated int64 ts = 1;
 }
 
+//function Unbind
+//
+message UnbindRequest {
+	string host = 1;
+	string port = 2;
+	string path = 3;
+}
+
+message UnbindResponse {
+	string unbinded = 1;
+}
+
 
 service Dgs {
 	rpc sniffer_join(SnifferJoinRequest) returns (SnifferJoinResponse);
@@ -139,4 +151,5 @@ service Dgs {
 	rpc ctrl_ping(PingRequest) returns (PingResponse);
 	rpc ctrl_clear(ClearRequest) returns (ClearResponse);
 	rpc update(UpdateRequest) returns (UpdateResponse);
+	rpc unbind(UnbindRequest) returns (UnbindResponse);
 }
