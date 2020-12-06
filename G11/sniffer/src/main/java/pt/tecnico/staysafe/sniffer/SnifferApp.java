@@ -78,15 +78,14 @@ public class SnifferApp {
 
 		path = "/grpc/staysafe/dgs/" + instance;
 		
-
 		int replicaId = Integer.parseInt(instance);
 
-		System.out.printf("Contacting replica %d at localhost:808%s...%n",replicaId,instance);
+		System.out.printf("Contacting replica %d at localhost:808%s...%n", replicaId, instance);
 
-		execSniffer(host, port, path, name, address, replicaId,instance);
+		execSniffer(host, port, path, name, address, replicaId, instance);
 	}
 
-	private static void execSniffer(String host, String port, String path, String snifferName, String address, int replicaId,String instance) {
+	private static void execSniffer(String host, String port, String path, String snifferName, String address, int replicaId, String instance) {
 		
 		//This addObs list will contain all observations that an user will try to report in one cycle
 		ArrayList<AddObs> addObs= new ArrayList<AddObs>();
@@ -102,8 +101,12 @@ public class SnifferApp {
 			System.out.printf("%s%n%n", newResponseJoin);
 		} catch (StatusRuntimeException e) {
 			System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
-			System.out.printf(" when trying to contact replica %d at localhost:808%s",replicaId,instance);
-			return;
+			System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
+			if (e.getStatus().getDescription().equals("io exception")) {
+				frontend = client.changeJoin(host, port, snifferName, address);
+            } else {
+				return;
+			}
 		}
 
 		try (Scanner scanner = new Scanner(System.in)) {

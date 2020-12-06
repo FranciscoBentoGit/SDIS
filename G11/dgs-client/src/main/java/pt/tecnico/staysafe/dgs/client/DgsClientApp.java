@@ -9,6 +9,7 @@ import com.google.protobuf.util.Timestamps;
 import io.grpc.StatusRuntimeException;
 import java.text.ParseException;
 
+import java.util.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -290,5 +291,63 @@ public class DgsClientApp {
 
 
 		return message;
+	}
+
+	public DgsFrontend changeJoin(String host, String port, String snifferName, String address) {
+		int catched = 1;
+		DgsFrontend frontend = null;
+		int replicaId = 0;
+		String instance = null;
+		while (catched == 1) {
+			//Generates a random replica comunication channel, to tolerate the fault
+			Random rand = new Random();
+			replicaId = rand.nextInt(3) + 1;
+			instance = String.valueOf(replicaId);
+			String path = "/grpc/staysafe/dgs/" + instance;
+			frontend = new DgsFrontend(host, port, path);
+			try {
+				System.out.printf("Trying to contact replica %d at localhost:808%s...%n", replicaId, instance);
+				SnifferJoinResponse responseJoin;
+				responseJoin = sniffer_join(frontend, snifferName, address, replicaId);
+				String newResponseJoin = responseJoin.getSuccess();
+				System.out.printf("%s%n%n", newResponseJoin);
+				catched = 0;
+			} catch (StatusRuntimeException e2) {
+				//do nothing
+			}
+		}
+
+		//Found an alive replica, starts comunication
+		System.out.printf("Contacting now with replica %d at localhost:808%s...%n%n", replicaId, instance);
+		return frontend;
+	}
+
+	public DgsFrontend changeInfo(String host, String port, String snifferName, String address) {
+		int catched = 1;
+		DgsFrontend frontend = null;
+		int replicaId = 0;
+		String instance = null;
+		while (catched == 1) {
+			//Generates a random replica comunication channel, to tolerate the fault
+			Random rand = new Random();
+			replicaId = rand.nextInt(3) + 1;
+			instance = String.valueOf(replicaId);
+			String path = "/grpc/staysafe/dgs/" + instance;
+			frontend = new DgsFrontend(host, port, path);
+			try {
+				System.out.printf("Trying to contact replica %d at localhost:808%s...%n", replicaId, instance);
+				SnifferInfoResponse responseInfo;
+				responseInfo = client.sniffer_info(frontend, snifferName, replicaId);
+				String newResponseInfo = responseInfo.getNameAddress();
+				System.out.printf("%s%n%n", newResponseInfo);
+				catched = 0;
+			} catch (StatusRuntimeException e2) {
+				//do nothing
+			}
+		}
+
+		//Found an alive replica, starts comunication
+		System.out.printf("Contacting now with replica %d at localhost:808%s...%n%n", replicaId, instance);
+		return frontend;
 	}
 }
