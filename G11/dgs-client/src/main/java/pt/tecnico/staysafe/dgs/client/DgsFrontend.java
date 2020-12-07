@@ -8,11 +8,13 @@ import pt.tecnico.staysafe.dgs.grpc.DgsGrpc;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import pt.ulisboa.tecnico.sdis.zk.*;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 public class DgsFrontend {
 	private DgsGrpc.DgsBlockingStub _stub;
 	private long[] _prevTs;
 	private long[] _possibleRead;
-	private IndividualProbResponse _singleProb;
+	private ConcurrentHashMap<Long,IndividualProbResponse> _singleProb = new ConcurrentHashMap<Long,IndividualProbResponse>();
     private AggregateProbResponse _meanDev;
     private AggregateProbResponse _percentiles;
 	private String _path;
@@ -42,6 +44,38 @@ public class DgsFrontend {
 		String[] split = _path.split("/", 5);
 		int replicaId = Integer.parseInt(split[split.length -1]);
 		return replicaId;
+	}
+
+	public long[] getOldTs() {
+		return _prevTs;
+	}
+
+	public void setTs(long[] oldTs) {
+		_prevTs = oldTs;
+	}
+
+	public ConcurrentHashMap<Long,IndividualProbResponse> getSingleProb() {
+		return _singleProb;
+	}
+
+	public void setSingleProb(ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb) {
+		_singleProb = oldSingleProb;
+	}
+
+	public AggregateProbResponse getMeanDev() {
+		return _meanDev;
+	}
+
+	public void setMeanDev(AggregateProbResponse oldMeanDev) {
+		_meanDev = oldMeanDev;
+	}
+
+	public AggregateProbResponse getPercentiles() {
+		return _percentiles;
+	}
+
+	public void setPercentiles(AggregateProbResponse oldPercentiles) {
+		_percentiles = oldPercentiles;
 	}
 
 	public UnbindResponse unbind(UnbindRequest request) {
@@ -102,6 +136,8 @@ public class DgsFrontend {
 
 	public IndividualProbResponse individual_infection_probability(IndividualProbRequest request) {
 		IndividualProbResponse response;
+
+		long id = request.getId();
 		
 		response = _stub.individualInfectionProbability(request);
 		
@@ -114,7 +150,7 @@ public class DgsFrontend {
 		// If it is a different read, we need to rely on the backup read
 		if (_possibleRead[0] < _prevTs[0] || _possibleRead[1] < _prevTs[1] || _possibleRead[2] < _prevTs[2]){
 			System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
-			return _singleProb;
+			return _singleProb.get(id);
 		}
 
 		//If it is a same  read, we can update the backup read
@@ -122,7 +158,7 @@ public class DgsFrontend {
 		_prevTs[1] = _possibleRead[1];
 		_prevTs[2] = _possibleRead[2];
 		System.out.printf("Frontend received answer with TS{%d,%d,%d}%n",_prevTs[0],_prevTs[1],_prevTs[2]);
-		_singleProb = response;
+		_singleProb.put(id,response);
 		
 		return response;
 	}

@@ -534,3 +534,304 @@ java.net.ConnectException: Connection refused
 2020-12-01 21:13:06,625 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.free=110MB
 2020-12-01 21:13:06,627 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.max=1992MB
 2020-12-01 21:13:06,627 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.total=126MB
+2020-12-07 15:33:50,939 [myid:] - INFO  [main:Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-07 15:33:50,947 [myid:] - INFO  [main:Environment@98] - Client environment:host.name=joao-VirtualBox
+2020-12-07 15:33:50,948 [myid:] - INFO  [main:Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-07 15:33:50,949 [myid:] - INFO  [main:Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-07 15:33:50,950 [myid:] - INFO  [main:Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-07 15:33:50,951 [myid:] - INFO  [main:Environment@98] - Client environment:java.class.path=/home/joao/sdis/SDis/G11/dgs-client/target/test-classes:/home/joao/sdis/SDis/G11/dgs-client/target/dgs-client-1.0.0-SNAPSHOT.jar:/home/joao/sdis/SDis/G11/dgs-contract/target/dgs-contract-1.0.0-SNAPSHOT.jar:/home/joao/.m2/repository/io/grpc/grpc-protobuf/1.28.0/grpc-protobuf-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-api/1.28.0/grpc-api-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-context/1.28.0/grpc-context-1.28.0.jar:/home/joao/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/joao/.m2/repository/org/codehaus/mojo/animal-sniffer-annotations/1.18/animal-sniffer-annotations-1.18.jar:/home/joao/.m2/repository/com/google/protobuf/protobuf-java/3.11.0/protobuf-java-3.11.0.jar:/home/joao/.m2/repository/com/google/guava/guava/28.1-android/guava-28.1-android.jar:/home/joao/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/home/joao/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/joao/.m2/repository/org/checkerframework/checker-compat-qual/2.5.5/checker-compat-qual-2.5.5.jar:/home/joao/.m2/repository/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar:/home/joao/.m2/repository/com/google/api/grpc/proto-google-common-protos/1.17.0/proto-google-common-protos-1.17.0.jar:/home/joao/.m2/repository/io/grpc/grpc-protobuf-lite/1.28.0/grpc-protobuf-lite-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-stub/1.28.0/grpc-stub-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-netty-shaded/1.28.0/grpc-netty-shaded-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-core/1.28.0/grpc-core-1.28.0.jar:/home/joao/.m2/repository/com/google/android/annotations/4.1.1.4/annotations-4.1.1.4.jar:/home/joao/.m2/repository/io/perfmark/perfmark-api/0.19.0/perfmark-api-0.19.0.jar:/home/joao/.m2/repository/io/grpc/grpc-testing/1.28.0/grpc-testing-1.28.0.jar:/home/joao/.m2/repository/junit/junit/4.12/junit-4.12.jar:/home/joao/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/joao/.m2/repository/io/opencensus/opencensus-api/0.24.0/opencensus-api-0.24.0.jar:/home/joao/.m2/repository/com/google/protobuf/protobuf-java-util/3.11.4/protobuf-java-util-3.11.4.jar:/home/joao/.m2/repository/com/google/errorprone/error_prone_annotations/2.3.4/error_prone_annotations-2.3.4.jar:/home/joao/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar:/home/joao/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/home/joao/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.0/junit-jupiter-api-5.6.0.jar:/home/joao/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/joao/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/joao/.m2/repository/org/junit/platform/junit-platform-commons/1.6.0/junit-platform-commons-1.6.0.jar:/home/joao/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.0/junit-jupiter-engine-5.6.0.jar:/home/joao/.m2/repository/org/junit/platform/junit-platform-engine/1.6.0/junit-platform-engine-1.6.0.jar:/home/joao/.m2/repository/pt/ulisboa/tecnico/sdis/zk-naming/1.0.3/zk-naming-1.0.3.jar:/home/joao/.m2/repository/org/apache/zookeeper/zookeeper/3.6.0/zookeeper-3.6.0.jar:/home/joao/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar:/home/joao/.m2/repository/org/apache/zookeeper/zookeeper-jute/3.6.0/zookeeper-jute-3.6.0.jar:/home/joao/.m2/repository/org/apache/yetus/audience-annotations/0.5.0/audience-annotations-0.5.0.jar:/home/joao/.m2/repository/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-transport-native-epoll/4.1.45.Final/netty-transport-native-epoll-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.45.Final/netty-transport-native-unix-common-4.1.45.Final.jar:/home/joao/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:/home/joao/.m2/repository/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.jar:/home/joao/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:
+2020-12-07 15:33:50,953 [myid:] - INFO  [main:Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-07 15:33:50,954 [myid:] - INFO  [main:Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-07 15:33:50,954 [myid:] - INFO  [main:Environment@98] - Client environment:java.compiler=<NA>
+2020-12-07 15:33:50,955 [myid:] - INFO  [main:Environment@98] - Client environment:os.name=Linux
+2020-12-07 15:33:50,956 [myid:] - INFO  [main:Environment@98] - Client environment:os.arch=amd64
+2020-12-07 15:33:50,957 [myid:] - INFO  [main:Environment@98] - Client environment:os.version=5.4.0-56-generic
+2020-12-07 15:33:50,957 [myid:] - INFO  [main:Environment@98] - Client environment:user.name=joao
+2020-12-07 15:33:50,957 [myid:] - INFO  [main:Environment@98] - Client environment:user.home=/home/joao
+2020-12-07 15:33:50,957 [myid:] - INFO  [main:Environment@98] - Client environment:user.dir=/home/joao/sdis/SDis/G11/dgs-client
+2020-12-07 15:33:50,957 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.free=120MB
+2020-12-07 15:33:50,958 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.max=1992MB
+2020-12-07 15:33:50,959 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.total=126MB
+2020-12-07 15:33:50,963 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@131ef10
+2020-12-07 15:33:50,966 [myid:] - INFO  [main:X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-07 15:33:50,971 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 15:33:50,976 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 15:33:50,992 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 15:33:50,993 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 15:33:51,000 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48338, server: localhost/127.0.0.1:2181
+2020-12-07 15:33:51,008 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0032, negotiated timeout = 5000
+2020-12-07 15:33:51,025 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb0032.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb0032, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 15:33:51,129 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0032
+2020-12-07 15:33:51,129 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0032 closed
+2020-12-07 15:33:51,832 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@54a67a45
+2020-12-07 15:33:51,832 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 15:33:51,837 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 15:33:51,842 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 15:33:51,843 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 15:33:51,844 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48342, server: localhost/127.0.0.1:2181
+2020-12-07 15:33:51,847 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0033, negotiated timeout = 5000
+2020-12-07 15:33:51,878 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb0033.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb0033, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 15:33:51,985 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0033 closed
+2020-12-07 15:33:51,985 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0033
+2020-12-07 15:33:52,390 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@3fb6cf60
+2020-12-07 15:33:52,391 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 15:33:52,392 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 15:33:52,393 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 15:33:52,393 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 15:33:52,394 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48346, server: localhost/127.0.0.1:2181
+2020-12-07 15:33:52,396 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0034, negotiated timeout = 5000
+2020-12-07 15:33:52,403 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb0034.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb0034, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 15:33:52,504 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0034 closed
+2020-12-07 15:33:52,505 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0034
+2020-12-07 15:33:52,599 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@68fa0ba8
+2020-12-07 15:33:52,600 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 15:33:52,601 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 15:33:52,606 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 15:33:52,606 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 15:33:52,606 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48350, server: localhost/127.0.0.1:2181
+2020-12-07 15:33:52,609 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0035, negotiated timeout = 5000
+2020-12-07 15:33:52,616 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb0035.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb0035, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 15:33:52,722 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0035 closed
+2020-12-07 15:33:52,722 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0035
+2020-12-07 15:33:52,762 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@3a0d172f
+2020-12-07 15:33:52,763 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 15:33:52,763 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 15:33:52,769 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 15:33:52,769 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 15:33:52,769 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48354, server: localhost/127.0.0.1:2181
+2020-12-07 15:33:52,773 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0036, negotiated timeout = 5000
+2020-12-07 15:33:52,787 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb0036.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb0036, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 15:33:52,892 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0036 closed
+2020-12-07 15:33:52,892 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0036
+2020-12-07 15:33:52,947 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@33aeca0b
+2020-12-07 15:33:52,949 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 15:33:52,950 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 15:33:52,954 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 15:33:52,955 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 15:33:52,955 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48358, server: localhost/127.0.0.1:2181
+2020-12-07 15:33:52,959 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0037, negotiated timeout = 5000
+2020-12-07 15:33:52,969 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb0037.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb0037, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 15:33:53,078 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0037 closed
+2020-12-07 15:33:53,078 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0037
+2020-12-07 15:33:53,121 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@765f05af
+2020-12-07 15:33:53,126 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 15:33:53,127 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 15:33:53,128 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 15:33:53,128 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 15:33:53,129 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48362, server: localhost/127.0.0.1:2181
+2020-12-07 15:33:53,132 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0038, negotiated timeout = 5000
+2020-12-07 15:33:53,241 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0038
+2020-12-07 15:33:53,241 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0038 closed
+2020-12-07 16:46:08,753 [myid:] - INFO  [main:Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-07 16:46:08,757 [myid:] - INFO  [main:Environment@98] - Client environment:host.name=joao-VirtualBox
+2020-12-07 16:46:08,758 [myid:] - INFO  [main:Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-07 16:46:08,759 [myid:] - INFO  [main:Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-07 16:46:08,760 [myid:] - INFO  [main:Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-07 16:46:08,761 [myid:] - INFO  [main:Environment@98] - Client environment:java.class.path=/home/joao/sdis/SDis/G11/dgs-client/target/test-classes:/home/joao/sdis/SDis/G11/dgs-client/target/dgs-client-1.0.0-SNAPSHOT.jar:/home/joao/sdis/SDis/G11/dgs-contract/target/dgs-contract-1.0.0-SNAPSHOT.jar:/home/joao/.m2/repository/io/grpc/grpc-protobuf/1.28.0/grpc-protobuf-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-api/1.28.0/grpc-api-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-context/1.28.0/grpc-context-1.28.0.jar:/home/joao/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/joao/.m2/repository/org/codehaus/mojo/animal-sniffer-annotations/1.18/animal-sniffer-annotations-1.18.jar:/home/joao/.m2/repository/com/google/protobuf/protobuf-java/3.11.0/protobuf-java-3.11.0.jar:/home/joao/.m2/repository/com/google/guava/guava/28.1-android/guava-28.1-android.jar:/home/joao/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/home/joao/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/joao/.m2/repository/org/checkerframework/checker-compat-qual/2.5.5/checker-compat-qual-2.5.5.jar:/home/joao/.m2/repository/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar:/home/joao/.m2/repository/com/google/api/grpc/proto-google-common-protos/1.17.0/proto-google-common-protos-1.17.0.jar:/home/joao/.m2/repository/io/grpc/grpc-protobuf-lite/1.28.0/grpc-protobuf-lite-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-stub/1.28.0/grpc-stub-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-netty-shaded/1.28.0/grpc-netty-shaded-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-core/1.28.0/grpc-core-1.28.0.jar:/home/joao/.m2/repository/com/google/android/annotations/4.1.1.4/annotations-4.1.1.4.jar:/home/joao/.m2/repository/io/perfmark/perfmark-api/0.19.0/perfmark-api-0.19.0.jar:/home/joao/.m2/repository/io/grpc/grpc-testing/1.28.0/grpc-testing-1.28.0.jar:/home/joao/.m2/repository/junit/junit/4.12/junit-4.12.jar:/home/joao/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/joao/.m2/repository/io/opencensus/opencensus-api/0.24.0/opencensus-api-0.24.0.jar:/home/joao/.m2/repository/com/google/protobuf/protobuf-java-util/3.11.4/protobuf-java-util-3.11.4.jar:/home/joao/.m2/repository/com/google/errorprone/error_prone_annotations/2.3.4/error_prone_annotations-2.3.4.jar:/home/joao/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar:/home/joao/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/home/joao/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.0/junit-jupiter-api-5.6.0.jar:/home/joao/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/joao/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/joao/.m2/repository/org/junit/platform/junit-platform-commons/1.6.0/junit-platform-commons-1.6.0.jar:/home/joao/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.0/junit-jupiter-engine-5.6.0.jar:/home/joao/.m2/repository/org/junit/platform/junit-platform-engine/1.6.0/junit-platform-engine-1.6.0.jar:/home/joao/.m2/repository/pt/ulisboa/tecnico/sdis/zk-naming/1.0.3/zk-naming-1.0.3.jar:/home/joao/.m2/repository/org/apache/zookeeper/zookeeper/3.6.0/zookeeper-3.6.0.jar:/home/joao/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar:/home/joao/.m2/repository/org/apache/zookeeper/zookeeper-jute/3.6.0/zookeeper-jute-3.6.0.jar:/home/joao/.m2/repository/org/apache/yetus/audience-annotations/0.5.0/audience-annotations-0.5.0.jar:/home/joao/.m2/repository/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-transport-native-epoll/4.1.45.Final/netty-transport-native-epoll-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.45.Final/netty-transport-native-unix-common-4.1.45.Final.jar:/home/joao/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:/home/joao/.m2/repository/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.jar:/home/joao/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:
+2020-12-07 16:46:08,763 [myid:] - INFO  [main:Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-07 16:46:08,764 [myid:] - INFO  [main:Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-07 16:46:08,764 [myid:] - INFO  [main:Environment@98] - Client environment:java.compiler=<NA>
+2020-12-07 16:46:08,765 [myid:] - INFO  [main:Environment@98] - Client environment:os.name=Linux
+2020-12-07 16:46:08,766 [myid:] - INFO  [main:Environment@98] - Client environment:os.arch=amd64
+2020-12-07 16:46:08,766 [myid:] - INFO  [main:Environment@98] - Client environment:os.version=5.4.0-56-generic
+2020-12-07 16:46:08,767 [myid:] - INFO  [main:Environment@98] - Client environment:user.name=joao
+2020-12-07 16:46:08,768 [myid:] - INFO  [main:Environment@98] - Client environment:user.home=/home/joao
+2020-12-07 16:46:08,769 [myid:] - INFO  [main:Environment@98] - Client environment:user.dir=/home/joao/sdis/SDis/G11/dgs-client
+2020-12-07 16:46:08,770 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.free=110MB
+2020-12-07 16:46:08,772 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.max=1992MB
+2020-12-07 16:46:08,772 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.total=126MB
+2020-12-07 16:46:08,777 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@131ef10
+2020-12-07 16:46:08,781 [myid:] - INFO  [main:X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-07 16:46:08,787 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:46:08,792 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:46:08,817 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:46:08,818 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:46:08,825 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48898, server: localhost/127.0.0.1:2181
+2020-12-07 16:46:08,830 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0065, negotiated timeout = 5000
+2020-12-07 16:46:08,951 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0065 closed
+2020-12-07 16:46:08,952 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0065
+2020-12-07 16:46:09,604 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@5c10f1c3
+2020-12-07 16:46:09,606 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:46:09,607 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:46:09,609 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:46:09,609 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:46:09,610 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48902, server: localhost/127.0.0.1:2181
+2020-12-07 16:46:09,612 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0066, negotiated timeout = 5000
+2020-12-07 16:46:09,726 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0066 closed
+2020-12-07 16:46:09,727 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0066
+2020-12-07 16:46:09,893 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@1c3146bc
+2020-12-07 16:46:09,894 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:46:09,894 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:46:09,904 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:46:09,904 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:46:09,904 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48906, server: localhost/127.0.0.1:2181
+2020-12-07 16:46:09,908 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0067, negotiated timeout = 5000
+2020-12-07 16:46:09,914 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb0067.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb0067, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 16:46:10,020 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0067 closed
+2020-12-07 16:46:10,020 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0067
+2020-12-07 16:46:10,126 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@25bc0606
+2020-12-07 16:46:10,128 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:46:10,129 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:46:10,138 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:46:10,138 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:46:10,141 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48910, server: localhost/127.0.0.1:2181
+2020-12-07 16:46:10,144 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0068, negotiated timeout = 5000
+2020-12-07 16:46:10,248 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0068 closed
+2020-12-07 16:46:10,250 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0068
+2020-12-07 16:46:10,420 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@1623134f
+2020-12-07 16:46:10,421 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:46:10,424 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:46:10,427 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:46:10,427 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:46:10,428 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48914, server: localhost/127.0.0.1:2181
+2020-12-07 16:46:10,432 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0069, negotiated timeout = 5000
+2020-12-07 16:46:10,541 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0069 closed
+2020-12-07 16:46:10,541 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0069
+2020-12-07 16:46:10,632 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@51e8e6e6
+2020-12-07 16:46:10,633 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:46:10,634 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:46:10,637 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:46:10,637 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:46:10,638 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48918, server: localhost/127.0.0.1:2181
+2020-12-07 16:46:10,640 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb006a, negotiated timeout = 5000
+2020-12-07 16:46:10,752 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb006a closed
+2020-12-07 16:46:10,753 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb006a
+2020-12-07 16:46:10,807 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@2756c0a7
+2020-12-07 16:46:10,814 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:46:10,814 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:46:10,823 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:46:10,823 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:46:10,824 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48922, server: localhost/127.0.0.1:2181
+2020-12-07 16:46:10,826 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb006b, negotiated timeout = 5000
+2020-12-07 16:46:10,833 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb006b.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb006b, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 16:46:10,944 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb006b
+2020-12-07 16:46:10,944 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb006b closed
+2020-12-07 16:48:50,847 [myid:] - INFO  [main:Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-07 16:48:50,852 [myid:] - INFO  [main:Environment@98] - Client environment:host.name=joao-VirtualBox
+2020-12-07 16:48:50,853 [myid:] - INFO  [main:Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-07 16:48:50,854 [myid:] - INFO  [main:Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-07 16:48:50,855 [myid:] - INFO  [main:Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-07 16:48:50,857 [myid:] - INFO  [main:Environment@98] - Client environment:java.class.path=/home/joao/sdis/SDis/G11/dgs-client/target/test-classes:/home/joao/sdis/SDis/G11/dgs-client/target/dgs-client-1.0.0-SNAPSHOT.jar:/home/joao/sdis/SDis/G11/dgs-contract/target/dgs-contract-1.0.0-SNAPSHOT.jar:/home/joao/.m2/repository/io/grpc/grpc-protobuf/1.28.0/grpc-protobuf-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-api/1.28.0/grpc-api-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-context/1.28.0/grpc-context-1.28.0.jar:/home/joao/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/joao/.m2/repository/org/codehaus/mojo/animal-sniffer-annotations/1.18/animal-sniffer-annotations-1.18.jar:/home/joao/.m2/repository/com/google/protobuf/protobuf-java/3.11.0/protobuf-java-3.11.0.jar:/home/joao/.m2/repository/com/google/guava/guava/28.1-android/guava-28.1-android.jar:/home/joao/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/home/joao/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/joao/.m2/repository/org/checkerframework/checker-compat-qual/2.5.5/checker-compat-qual-2.5.5.jar:/home/joao/.m2/repository/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar:/home/joao/.m2/repository/com/google/api/grpc/proto-google-common-protos/1.17.0/proto-google-common-protos-1.17.0.jar:/home/joao/.m2/repository/io/grpc/grpc-protobuf-lite/1.28.0/grpc-protobuf-lite-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-stub/1.28.0/grpc-stub-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-netty-shaded/1.28.0/grpc-netty-shaded-1.28.0.jar:/home/joao/.m2/repository/io/grpc/grpc-core/1.28.0/grpc-core-1.28.0.jar:/home/joao/.m2/repository/com/google/android/annotations/4.1.1.4/annotations-4.1.1.4.jar:/home/joao/.m2/repository/io/perfmark/perfmark-api/0.19.0/perfmark-api-0.19.0.jar:/home/joao/.m2/repository/io/grpc/grpc-testing/1.28.0/grpc-testing-1.28.0.jar:/home/joao/.m2/repository/junit/junit/4.12/junit-4.12.jar:/home/joao/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/joao/.m2/repository/io/opencensus/opencensus-api/0.24.0/opencensus-api-0.24.0.jar:/home/joao/.m2/repository/com/google/protobuf/protobuf-java-util/3.11.4/protobuf-java-util-3.11.4.jar:/home/joao/.m2/repository/com/google/errorprone/error_prone_annotations/2.3.4/error_prone_annotations-2.3.4.jar:/home/joao/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar:/home/joao/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/home/joao/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.0/junit-jupiter-api-5.6.0.jar:/home/joao/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/joao/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/joao/.m2/repository/org/junit/platform/junit-platform-commons/1.6.0/junit-platform-commons-1.6.0.jar:/home/joao/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.0/junit-jupiter-engine-5.6.0.jar:/home/joao/.m2/repository/org/junit/platform/junit-platform-engine/1.6.0/junit-platform-engine-1.6.0.jar:/home/joao/.m2/repository/pt/ulisboa/tecnico/sdis/zk-naming/1.0.3/zk-naming-1.0.3.jar:/home/joao/.m2/repository/org/apache/zookeeper/zookeeper/3.6.0/zookeeper-3.6.0.jar:/home/joao/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar:/home/joao/.m2/repository/org/apache/zookeeper/zookeeper-jute/3.6.0/zookeeper-jute-3.6.0.jar:/home/joao/.m2/repository/org/apache/yetus/audience-annotations/0.5.0/audience-annotations-0.5.0.jar:/home/joao/.m2/repository/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-transport-native-epoll/4.1.45.Final/netty-transport-native-epoll-4.1.45.Final.jar:/home/joao/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.45.Final/netty-transport-native-unix-common-4.1.45.Final.jar:/home/joao/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:/home/joao/.m2/repository/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.jar:/home/joao/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:
+2020-12-07 16:48:50,858 [myid:] - INFO  [main:Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-07 16:48:50,859 [myid:] - INFO  [main:Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-07 16:48:50,859 [myid:] - INFO  [main:Environment@98] - Client environment:java.compiler=<NA>
+2020-12-07 16:48:50,860 [myid:] - INFO  [main:Environment@98] - Client environment:os.name=Linux
+2020-12-07 16:48:50,860 [myid:] - INFO  [main:Environment@98] - Client environment:os.arch=amd64
+2020-12-07 16:48:50,860 [myid:] - INFO  [main:Environment@98] - Client environment:os.version=5.4.0-56-generic
+2020-12-07 16:48:50,861 [myid:] - INFO  [main:Environment@98] - Client environment:user.name=joao
+2020-12-07 16:48:50,861 [myid:] - INFO  [main:Environment@98] - Client environment:user.home=/home/joao
+2020-12-07 16:48:50,861 [myid:] - INFO  [main:Environment@98] - Client environment:user.dir=/home/joao/sdis/SDis/G11/dgs-client
+2020-12-07 16:48:50,861 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.free=111MB
+2020-12-07 16:48:50,863 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.max=1992MB
+2020-12-07 16:48:50,863 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.total=126MB
+2020-12-07 16:48:50,867 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@131ef10
+2020-12-07 16:48:50,871 [myid:] - INFO  [main:X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-07 16:48:50,876 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:48:50,882 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:48:50,917 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:48:50,918 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:48:50,926 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48948, server: localhost/127.0.0.1:2181
+2020-12-07 16:48:50,933 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0072, negotiated timeout = 5000
+2020-12-07 16:48:51,076 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0072
+2020-12-07 16:48:51,076 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0072 closed
+2020-12-07 16:48:51,789 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@2a79d4b1
+2020-12-07 16:48:51,789 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:48:51,789 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:48:51,821 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:48:51,822 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:48:51,822 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48952, server: localhost/127.0.0.1:2181
+2020-12-07 16:48:51,826 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0073, negotiated timeout = 5000
+2020-12-07 16:48:51,839 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb0073.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb0073, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 16:48:51,944 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0073 closed
+2020-12-07 16:48:51,944 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0073
+2020-12-07 16:48:52,116 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@32811494
+2020-12-07 16:48:52,119 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:48:52,120 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:48:52,134 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:48:52,136 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:48:52,137 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48956, server: localhost/127.0.0.1:2181
+2020-12-07 16:48:52,140 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0074, negotiated timeout = 5000
+2020-12-07 16:48:52,250 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0074 closed
+2020-12-07 16:48:52,250 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0074
+2020-12-07 16:48:52,370 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@7c098bb3
+2020-12-07 16:48:52,371 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:48:52,372 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:48:52,377 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:48:52,377 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:48:52,377 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48960, server: localhost/127.0.0.1:2181
+2020-12-07 16:48:52,380 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0075, negotiated timeout = 5000
+2020-12-07 16:48:52,390 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb0075.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb0075, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 16:48:52,492 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0075 closed
+2020-12-07 16:48:52,492 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0075
+2020-12-07 16:48:52,611 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@7c541c15
+2020-12-07 16:48:52,611 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:48:52,612 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:48:52,616 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:48:52,616 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:48:52,617 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48964, server: localhost/127.0.0.1:2181
+2020-12-07 16:48:52,620 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0076, negotiated timeout = 5000
+2020-12-07 16:48:52,625 [myid:localhost:2181] - WARN  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x1000001a3cb0076.
+EndOfStreamException: Unable to read additional data from server sessionid 0x1000001a3cb0076, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-07 16:48:52,736 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0076 closed
+2020-12-07 16:48:52,736 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0076
+2020-12-07 16:48:52,761 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@57459491
+2020-12-07 16:48:52,763 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:48:52,764 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:48:52,767 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:48:52,767 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:48:52,767 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48968, server: localhost/127.0.0.1:2181
+2020-12-07 16:48:52,770 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0077, negotiated timeout = 5000
+2020-12-07 16:48:52,877 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0077 closed
+2020-12-07 16:48:52,877 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0077
+2020-12-07 16:48:52,941 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@36f48b4
+2020-12-07 16:48:52,942 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-07 16:48:52,942 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-07 16:48:52,944 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-07 16:48:52,944 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-07 16:48:52,945 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:48972, server: localhost/127.0.0.1:2181
+2020-12-07 16:48:52,948 [myid:localhost:2181] - INFO  [main-SendThread(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x1000001a3cb0078, negotiated timeout = 5000
+2020-12-07 16:48:53,054 [myid:] - INFO  [main:ZooKeeper@1618] - Session: 0x1000001a3cb0078 closed
+2020-12-07 16:48:53,056 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x1000001a3cb0078

@@ -10,6 +10,7 @@ import io.grpc.StatusRuntimeException;
 import java.text.ParseException;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -74,7 +75,19 @@ public class DgsClientApp {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
+							
+							long[] oldTs = frontend.getOldTs();
+							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
+							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
+							AggregateProbResponse oldPercentiles = frontend.getPercentiles();
+							
 							frontend = changePing(host, port);
+
+							frontend.setTs(oldTs);
+							frontend.setSingleProb(oldSingleProb);
+							frontend.setMeanDev(oldMeanDev);
+							frontend.setPercentiles(oldPercentiles);
+
 							//Send information through new channel, so the dead replica gets unbided
 							server_unbind(frontend, host, port, path);
 							
@@ -93,8 +106,20 @@ public class DgsClientApp {
 					} catch (StatusRuntimeException e) {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
-						if (e.getStatus().getDescription().equals("io exception")) {
+						if (e.getStatus().getDescription().equals("io exception")) {	
+							
+							long[] oldTs = frontend.getOldTs();
+							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
+							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
+							AggregateProbResponse oldPercentiles = frontend.getPercentiles();
+							
 							frontend = changeClear(host, port);
+
+							frontend.setTs(oldTs);
+							frontend.setSingleProb(oldSingleProb);
+							frontend.setMeanDev(oldMeanDev);
+							frontend.setPercentiles(oldPercentiles);
+
 							//Send information through new channel, so the dead replica gets unbided
 							server_unbind(frontend, host, port, path);
 							
@@ -479,7 +504,7 @@ public class DgsClientApp {
 			instance = String.valueOf(replicaId);
 			String path = "/grpc/staysafe/dgs/" + instance;
 			frontend = new DgsFrontend(host, port, path);
-			for(int i = 0; i < ids.length; i++) {
+			for (int i = 0; i < ids.length; i++) {
 				try {
 					IndividualProbResponse response;
 					response = individual_infection_probability(frontend, Long.parseLong(ids[i]),replicaId);

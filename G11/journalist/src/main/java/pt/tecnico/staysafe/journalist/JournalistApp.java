@@ -5,6 +5,7 @@ import pt.tecnico.staysafe.dgs.client.*;
 import pt.tecnico.staysafe.dgs.grpc.*;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import io.grpc.StatusRuntimeException;
 
 public class JournalistApp {
@@ -97,7 +98,19 @@ public class JournalistApp {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
+							
+							long[] oldTs = frontend.getOldTs();
+							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
+							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
+							AggregateProbResponse oldPercentiles = frontend.getPercentiles();
+							
 							frontend = client.changePing(host, port);
+
+							frontend.setTs(oldTs);
+							frontend.setSingleProb(oldSingleProb);
+							frontend.setMeanDev(oldMeanDev);
+							frontend.setPercentiles(oldPercentiles);
+
 							//Send information through new channel, so the dead replica gets unbided
 							client.server_unbind(frontend, host, port, path);
 							
@@ -121,7 +134,19 @@ public class JournalistApp {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
+							
+							long[] oldTs = frontend.getOldTs();
+							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
+							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
+							AggregateProbResponse oldPercentiles = frontend.getPercentiles();
+							
 							frontend = client.changeClear(host, port);
+
+							frontend.setTs(oldTs);
+							frontend.setSingleProb(oldSingleProb);
+							frontend.setMeanDev(oldMeanDev);
+							frontend.setPercentiles(oldPercentiles);
+
 							//Send information through new channel, so the dead replica gets unbided
 							client.server_unbind(frontend, host, port, path);
 							
@@ -151,7 +176,19 @@ public class JournalistApp {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
+							
+							long[] oldTs = frontend.getOldTs();
+							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
+							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
+							AggregateProbResponse oldPercentiles = frontend.getPercentiles();
+							
 							frontend = client.changeMean(host, port, command);
+
+							frontend.setTs(oldTs);
+							frontend.setSingleProb(oldSingleProb);
+							frontend.setMeanDev(oldMeanDev);
+							frontend.setPercentiles(oldPercentiles);
+
 							//Send information through new channel, so the dead replica gets unbided
 							client.server_unbind(frontend, host, port, path);
 							
@@ -182,7 +219,19 @@ public class JournalistApp {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
+							
+							long[] oldTs = frontend.getOldTs();
+							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
+							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
+							AggregateProbResponse oldPercentiles = frontend.getPercentiles();
+							
 							frontend = client.changePercentiles(host, port, command);
+
+							frontend.setTs(oldTs);
+							frontend.setSingleProb(oldSingleProb);
+							frontend.setMeanDev(oldMeanDev);
+							frontend.setPercentiles(oldPercentiles);
+
 							//Send information through new channel, so the dead replica gets unbided
 							client.server_unbind(frontend, host, port, path);
 							

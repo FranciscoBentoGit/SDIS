@@ -9,6 +9,7 @@ import pt.tecnico.staysafe.sniffer.AddObs;
 import java.util.*;
 import io.grpc.StatusRuntimeException;
 import java.text.ParseException;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SnifferApp {
 
@@ -146,8 +147,19 @@ public class SnifferApp {
 					} catch (StatusRuntimeException e) {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
-						if (e.getStatus().getDescription().equals("io exception")) {
-							frontend = client.changeInfo(host, port, snifferName, address);
+						if (e.getStatus().getDescription().equals("io exception")) {							
+							long[] oldTs = frontend.getOldTs();
+							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
+							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
+							AggregateProbResponse oldPercentiles = frontend.getPercentiles();
+							
+							frontend = client.changeInfo(host, port, snifferName, address);	
+							
+							frontend.setTs(oldTs);
+							frontend.setSingleProb(oldSingleProb);
+							frontend.setMeanDev(oldMeanDev);
+							frontend.setPercentiles(oldPercentiles);
+							
 							//Send information through new channel, so the dead replica gets unbided
 							client.server_unbind(frontend, host, port, path);
 
@@ -268,7 +280,19 @@ public class SnifferApp {
 							System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 							System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 							if (e.getStatus().getDescription().equals("io exception")) {
+								
+								long[] oldTs = frontend.getOldTs();
+								ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
+								AggregateProbResponse oldMeanDev = frontend.getMeanDev();
+								AggregateProbResponse oldPercentiles = frontend.getPercentiles();
+								
 								frontend = client.changeReport(host, port, snifferName, address, element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut());
+
+								frontend.setTs(oldTs);
+								frontend.setSingleProb(oldSingleProb);
+								frontend.setMeanDev(oldMeanDev);
+								frontend.setPercentiles(oldPercentiles);
+								
 								//Send information through new channel, so the dead replica gets unbided
 								client.server_unbind(frontend, host, port, path);
 
@@ -307,7 +331,19 @@ public class SnifferApp {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
+							
+							long[] oldTs = frontend.getOldTs();
+							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
+							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
+							AggregateProbResponse oldPercentiles = frontend.getPercentiles();
+							
 							frontend = client.changePing(host, port);
+
+							frontend.setTs(oldTs);
+							frontend.setSingleProb(oldSingleProb);
+							frontend.setMeanDev(oldMeanDev);
+							frontend.setPercentiles(oldPercentiles);
+							
 							//Send information through new channel, so the dead replica gets unbided
 							client.server_unbind(frontend, host, port, path);
 							
@@ -333,7 +369,19 @@ public class SnifferApp {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
+							
+							long[] oldTs = frontend.getOldTs();
+							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
+							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
+							AggregateProbResponse oldPercentiles = frontend.getPercentiles();
+							
 							frontend = client.changeClear(host, port);
+
+							frontend.setTs(oldTs);
+							frontend.setSingleProb(oldSingleProb);
+							frontend.setMeanDev(oldMeanDev);
+							frontend.setPercentiles(oldPercentiles);
+							
 							//Send information through new channel, so the dead replica gets unbided
 							client.server_unbind(frontend, host, port, path);
 							

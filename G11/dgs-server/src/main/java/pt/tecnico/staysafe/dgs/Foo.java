@@ -109,9 +109,9 @@ public class Foo{
 							//If value of [this replica] column is bigger than the others column
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
 								//If the operation identifier is bigger than the latest version of the other replica
-								if (i.getIdentifier() > ts[myInstance-1]) {
+								//if (i.getIdentifier() > ts[myInstance-1]) {
 									frontend.ctrl_clear(myInstance);
-								}
+								//}
 							}
 							
 						}
@@ -120,9 +120,9 @@ public class Foo{
 							//If value of [this replica] column is bigger than the others column
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
 								//If the operation identifier is bigger than the latest version of the other replica
-								if (i.getIdentifier() > ts[myInstance-1]) {
+								//if (i.getIdentifier() > ts[myInstance-1]) {
 									frontend.sniffer_join(i.getJoin());
-								}
+								//}
 							}
 
 						}
@@ -131,9 +131,9 @@ public class Foo{
 							//If value of [this replica] column is bigger than the others column
 							if(_valueTs[myInstance-1] > ts[myInstance-1]) {
 								//If the operation identifier is bigger than the latest version of the other replica
-								if (i.getIdentifier() > ts[myInstance-1]) {
+								//if (i.getIdentifier() > ts[myInstance-1]) {
 									frontend.report(i.getReport());
-								}
+								//}
 							}
 						}
 					}

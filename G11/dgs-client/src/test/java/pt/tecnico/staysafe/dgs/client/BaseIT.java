@@ -32,11 +32,11 @@ public class BaseIT {
 			throw e;
 		}
 
-		final String host = testProps.getProperty("server.host");
+		//final String host = testProps.getProperty("server.host");
 		//final int port = Integer.parseInt(testProps.getProperty("server.port"));
-		final String port = testProps.getProperty("server.port");
-		final String path = "/grpc/staysafe/dgs/1";
-		frontend = new DgsFrontend(host, port, path);
+		//final String port = testProps.getProperty("server.port");
+		//final String path = "/grpc/staysafe/dgs/1";
+		frontend = new DgsFrontend("localhost", "2181", "/grpc/staysafe/dgs/1");
 	}
 	
 	@AfterAll
@@ -45,30 +45,30 @@ public class BaseIT {
 	}
 
 	protected PingRequest buildPingRequest(String text) {
-		return PingRequest.newBuilder().setText(text).build();
+		return PingRequest.newBuilder().setText(text).setReplicaId(1).build();
 	}
 
 	protected ClearRequest buildClearRequest() {
-		return ClearRequest.newBuilder().build();
+		return ClearRequest.newBuilder().setReplicaId(1).build();
 	}
 
 	protected SnifferJoinRequest buildSnifferJoinRequest(String name, String address) {
-		return SnifferJoinRequest.newBuilder().setName(name).setAddress(address).build();
+		return SnifferJoinRequest.newBuilder().setName(name).setAddress(address).setReplicaId(1).build();
 	}
 
 	protected SnifferInfoRequest buildSnifferInfoRequest(String name) {
-		return SnifferInfoRequest.newBuilder().setName(name).build();
+		return SnifferInfoRequest.newBuilder().setName(name).setReplicaId(1).build();
 	}
 	protected ReportRequest buildReportRequest(String snifferName,String infection,long id, Timestamp timeIn,Timestamp timeOut) {
-		return ReportRequest.newBuilder().setName(snifferName).setInfection(infection).setId(id).setTimeIn(timeIn).setTimeOut(timeOut).build();
+		return ReportRequest.newBuilder().setName(snifferName).setInfection(infection).setId(id).setTimeIn(timeIn).setTimeOut(timeOut).setReplicaId(1).build();
 	}
 
 	protected IndividualProbRequest buildIndividualProbRequest(long id) {
-		return IndividualProbRequest.newBuilder().setId(id).build();
+		return IndividualProbRequest.newBuilder().setId(id).setReplicaId(1).build();
 	}
 	
 	protected AggregateProbRequest buildAggregateProbRequest(String command) {
-		return AggregateProbRequest.newBuilder().setCommand(command).build();
+		return AggregateProbRequest.newBuilder().setCommand(command).setReplicaId(1).build();
 	}
 
 	/*protected InitRequest buildInitRequest(String snifferName, String infection, long id, google.protobuf.Timestamp timeIn, google.protobuf.Timestamp timeOut) {
