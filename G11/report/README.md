@@ -36,10 +36,14 @@ Note: our group has not been able to get links for commits since we worked on a 
 
 ## Fault tolerance model
 
-
+This program tolerates only silent faults and no byzantine faults. Briefly, when any server ends in a brutal way, the program redirescts that server replica clients to another alive replica. 
+We considered as silent faults the excution of command kill -9 <pid> to test this implementation.
 
 ## Solution for fault tolerance
 
+Before any propagation (made every 30 seconds), a replica manager will ask for a heartbeat from every replica that will propagate to (done by a PingRequest). In case of inactivity (silent fault), the same will launch an "io exception" that will be handled by the propagating replica.
+When this "io exception" is received, this replica sends a request to another alive replica to unbind the dead replica, so propagation just stays between alive replicas.
+From the client view, when he does a request and gets an "io exception", he will see that the program will redirect to another alive replica, randomly, and will keep his requests that were lost by the dead replica manager.
 
 
 ## Replication protocol
