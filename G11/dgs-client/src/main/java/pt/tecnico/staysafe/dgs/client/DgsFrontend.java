@@ -40,44 +40,6 @@ public class DgsFrontend {
 		}
 	}
 
-	public int getReplicaId() {
-		String[] split = _path.split("/", 5);
-		int replicaId = Integer.parseInt(split[split.length -1]);
-		return replicaId;
-	}
-
-	public long[] getOldTs() {
-		return _prevTs;
-	}
-
-	public void setTs(long[] oldTs) {
-		_prevTs = oldTs;
-	}
-
-	public ConcurrentHashMap<Long,IndividualProbResponse> getSingleProb() {
-		return _singleProb;
-	}
-
-	public void setSingleProb(ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb) {
-		_singleProb = oldSingleProb;
-	}
-
-	public AggregateProbResponse getMeanDev() {
-		return _meanDev;
-	}
-
-	public void setMeanDev(AggregateProbResponse oldMeanDev) {
-		_meanDev = oldMeanDev;
-	}
-
-	public AggregateProbResponse getPercentiles() {
-		return _percentiles;
-	}
-
-	public void setPercentiles(AggregateProbResponse oldPercentiles) {
-		_percentiles = oldPercentiles;
-	}
-
 	public UnbindResponse unbind(UnbindRequest request) {
 		UnbindResponse response;
 		response = _stub.unbind(request);
@@ -211,6 +173,43 @@ public class DgsFrontend {
 			
 			return response;
 		}
-		
+	}
+
+	public int getReplicaId() {
+		String[] split = _path.split("/", 5);
+		int replicaId = Integer.parseInt(split[split.length -1]);
+		return replicaId;
+	}
+
+	public long[] getOldTs() {
+		return _prevTs;
+	}
+
+	public void setTs(long[] oldTs) {
+		_prevTs = oldTs;
+	}
+
+	public ConcurrentHashMap<Long,IndividualProbResponse> getSingleProb() {
+		return _singleProb;
+	}
+
+	public void setSingleProb(ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb) {
+		_singleProb = oldSingleProb;
+	}
+
+	public AggregateProbResponse getMeanDev() {
+		return _meanDev;
+	}
+
+	public void setMeanDev(AggregateProbResponse oldMeanDev) {
+		_meanDev = oldMeanDev;
+	}
+
+	public AggregateProbResponse getPercentiles() {
+		return _percentiles;
+	}
+
+	public void setPercentiles(AggregateProbResponse oldPercentiles) {
+		_percentiles = oldPercentiles;
 	}
 }

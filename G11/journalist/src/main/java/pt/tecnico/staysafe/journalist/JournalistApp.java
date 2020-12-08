@@ -99,6 +99,7 @@ public class JournalistApp {
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
 							
+							//Before changing the frontend variable, make a backup to guarantee consistency
 							long[] oldTs = frontend.getOldTs();
 							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
 							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
@@ -106,6 +107,7 @@ public class JournalistApp {
 							
 							frontend = client.changePing(host, port);
 
+							//Update the new frontend variables with the previous backup
 							frontend.setTs(oldTs);
 							frontend.setSingleProb(oldSingleProb);
 							frontend.setMeanDev(oldMeanDev);
@@ -135,6 +137,7 @@ public class JournalistApp {
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
 							
+							//Before changing the frontend variable, make a backup to guarantee consistency
 							long[] oldTs = frontend.getOldTs();
 							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
 							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
@@ -142,6 +145,7 @@ public class JournalistApp {
 							
 							frontend = client.changeClear(host, port);
 
+							//Update the new frontend variables with the previous backup
 							frontend.setTs(oldTs);
 							frontend.setSingleProb(oldSingleProb);
 							frontend.setMeanDev(oldMeanDev);
@@ -177,6 +181,7 @@ public class JournalistApp {
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
 							
+							//Before changing the frontend variable, make a backup to guarantee consistency
 							long[] oldTs = frontend.getOldTs();
 							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
 							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
@@ -184,6 +189,7 @@ public class JournalistApp {
 							
 							frontend = client.changeMean(host, port, command);
 
+							//Update the new frontend variables with the previous backup
 							frontend.setTs(oldTs);
 							frontend.setSingleProb(oldSingleProb);
 							frontend.setMeanDev(oldMeanDev);
@@ -220,6 +226,7 @@ public class JournalistApp {
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n", replicaId, instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
 							
+							//Before changing the frontend variable, make a backup to guarantee consistency
 							long[] oldTs = frontend.getOldTs();
 							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
 							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
@@ -227,6 +234,7 @@ public class JournalistApp {
 							
 							frontend = client.changePercentiles(host, port, command);
 
+							//Update the new frontend variables with the previous backup
 							frontend.setTs(oldTs);
 							frontend.setSingleProb(oldSingleProb);
 							frontend.setMeanDev(oldMeanDev);

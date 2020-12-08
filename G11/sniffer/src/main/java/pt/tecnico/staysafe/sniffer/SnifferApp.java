@@ -148,6 +148,8 @@ public class SnifferApp {
 						System.out.printf("Caught exception with description: " + e.getStatus().getDescription());
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {							
+							
+							//Before changing the frontend variable, make a backup to guarantee consistency
 							long[] oldTs = frontend.getOldTs();
 							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
 							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
@@ -155,6 +157,7 @@ public class SnifferApp {
 							
 							frontend = client.changeInfo(host, port, snifferName, address);	
 							
+							//Update the new frontend variables with the previous backup
 							frontend.setTs(oldTs);
 							frontend.setSingleProb(oldSingleProb);
 							frontend.setMeanDev(oldMeanDev);
@@ -281,6 +284,7 @@ public class SnifferApp {
 							System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 							if (e.getStatus().getDescription().equals("io exception")) {
 								
+								//Before changing the frontend variable, make a backup to guarantee consistency
 								long[] oldTs = frontend.getOldTs();
 								ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
 								AggregateProbResponse oldMeanDev = frontend.getMeanDev();
@@ -288,6 +292,7 @@ public class SnifferApp {
 								
 								frontend = client.changeReport(host, port, snifferName, address, element.getInfection(), element.getId(), element.getTimeIn(), element.getTimeOut());
 
+								//Update the new frontend variables with the previous backup
 								frontend.setTs(oldTs);
 								frontend.setSingleProb(oldSingleProb);
 								frontend.setMeanDev(oldMeanDev);
@@ -332,6 +337,7 @@ public class SnifferApp {
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
 							
+							//Before changing the frontend variable, make a backup to guarantee consistency
 							long[] oldTs = frontend.getOldTs();
 							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
 							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
@@ -339,6 +345,7 @@ public class SnifferApp {
 							
 							frontend = client.changePing(host, port);
 
+							//Update the new frontend variables with the previous backup
 							frontend.setTs(oldTs);
 							frontend.setSingleProb(oldSingleProb);
 							frontend.setMeanDev(oldMeanDev);
@@ -370,6 +377,7 @@ public class SnifferApp {
 						System.out.printf(" when trying to contact replica %d at localhost:808%s%n",replicaId,instance);
 						if (e.getStatus().getDescription().equals("io exception")) {
 							
+							//Before changing the frontend variable, make a backup to guarantee consistency
 							long[] oldTs = frontend.getOldTs();
 							ConcurrentHashMap<Long,IndividualProbResponse> oldSingleProb = frontend.getSingleProb();
 							AggregateProbResponse oldMeanDev = frontend.getMeanDev();
@@ -377,6 +385,7 @@ public class SnifferApp {
 							
 							frontend = client.changeClear(host, port);
 
+							//Update the new frontend variables with the previous backup
 							frontend.setTs(oldTs);
 							frontend.setSingleProb(oldSingleProb);
 							frontend.setMeanDev(oldMeanDev);
@@ -398,15 +407,15 @@ public class SnifferApp {
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("mean_dev"))) {
-					System.out.printf("Invalid command: do not have permission to execute that command.%n");
+					System.out.printf("Invalid command: do not have permission to execute that command.%n%n");
 				}
 
 				else if ((goSplited.length == 1) && (goSplited[0].equals("percentiles"))) {
-					System.out.printf("Invalid command: do not have permission to execute that command.%n");
+					System.out.printf("Invalid command: do not have permission to execute that command.%n%n");
 				}
 
 				else if ((goSplited.length > 1) && (goSplited[0].equals("single_prob"))) {
-					System.out.printf("Invalid command: do not have permission to execute that command.%n");
+					System.out.printf("Invalid command: do not have permission to execute that command.%n%n");
 				}
 
 				else {

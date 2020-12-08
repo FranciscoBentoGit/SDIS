@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ClearIT extends BaseIT {
 	
 	// static members
-	private static final String SUCCESS = "All observations removed successfully.";	
+	private static final String SUCCESS = "All observations removed successfully.";
 	
 	// one-time initialization and clean-up
 	@BeforeAll

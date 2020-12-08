@@ -180,24 +180,22 @@ This will clear all server information about observations, so you can get differ
 
 **3 step** : Close the researcher connection to replica 2 and now do it for replica 3. Compare stat results with the ones from the previous step. They should be the same.
 
-**4 step** : Try to clear on of these clients and pay attention to timestamps transmitted.Timestamp will be increased because it's an update operation but if you try stats again they wont work because all 3 replicas have been cleared.
+**4 step** : Close the researcher connection to replica 3 and now do it for replica 2. Try to do ctrl_init function and observe that repeated commands are not executed and propagated, along side the timestamp not being increased.
 
-**5 step** : Finally, make init on the client terminal, you will see that the timestamp will be increased by 8(1 join + 7 reports) and on the next propagation both 3 replicas will all their timestamps increased by 8 and all with the same data.
+**5 step** : Close the sniffer connection with replica 1 and now do it for replica 3. Try to report a new observation and check that the timestamp will be increased and that operation along with the timestamp will be propagated. 
 
 ## Example of a fault tolerance
 
 **1 step** : Do the sniffer guide.
 
-**2 step** : Now kill the replica manager which the sniffer joined. To be able to do this,  discover the Process ID and open a new Terminal and type :
+**2 step** : Kill the replica manager which the sniffer joined, as soon as propagation is done. To be able to do this,  discover the Process ID and open a new Terminal and type :
 ```
     kill -9 <PID>
 ``` 
-**3 step** : Now observe the messages that pop up on the sniffer terminal. It should be something like this (in this scenario assume that sniffer joined initially replica 1 and X meaning the number of update messages done so far):
+**3 step** : Try to do the command getInfo and observe the messages that pop up on the sniffer terminal. It should be something like this (in this scenario assume that sniffer joined initially replica 1 and X meaning the number of update messages done so far):
 
 Caught exception with description: io exception when trying to contact replica 1 at localhost:8081
 
-Trying to contact replica 2 at localhost:8082...
+Trying to contact replica ? at localhost:808?... (? because changing to another replica is done randomly)
 
-Frontend received answer with TS{X,0,0}
-
-**Note**: in this case the join operation was already done, so the number of operation was not increased, that's why we dont see the Frontend with TS{X,1,0}.
+Frontend received answer with TS{X,?,?} (one ? should be 0)
