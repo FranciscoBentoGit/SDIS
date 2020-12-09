@@ -42,7 +42,7 @@ We considered as silent faults the excution of command kill -9 <pid> to test thi
 
 ## Solution for fault tolerance
 
-<img src="solution_fault_tolerance.jpg" alt="alt text" height="150">
+<img src="solution_fault_tolerance.jpg" alt="alt text" height="300">
 
 Before any propagation (made every 30 seconds), **a replica manager will ask for a heartbeat from every replica that will propagate to (done by a PingRequest)**. In case of inactivity (silent fault), the same will launch an "io exception" that will be handled by the propagating replica.
 
