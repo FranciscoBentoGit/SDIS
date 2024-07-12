@@ -1,2 +1,2 @@
 # SDIS
-SDis Lecture
+Distributed Systems
